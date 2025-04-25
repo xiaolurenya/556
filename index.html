@@ -96,7 +96,7 @@
                         <div :class="show_engine_box?'show':'hide'" class="engine-box" @blur='hideEngineBox(30)' tabindex="0" hidefocus="true" v-show="show_engine_box === true">
                             <div class="engine" v-for="engine,id in getEngines()" @click="settings.searchEngine.selected = id;hideEngineBox()">
                                 <div class="icon" :style="{backgroundImage:'url('+engine.icon+')',backgroundColor:engine.mainColor}"></div>
-                                <div class="name" >{{engine.name}}</div>
+                                <div class="name">{{engine.name}}</div>
                             </div>
                             <div class="engine not_show" v-for="i in 4"></div>
                         </div>
@@ -110,7 +110,7 @@
                             <div class="show-more"></div>
                         </div>
                         <!-- 搜索框主体 -->
-                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"  oninput="showAdvice()" />
+                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)" oninput="showAdvice()" />
                         <!-- 搜索按钮 -->
                         <div class="search-btn" @click="search()"></div>
                     </div>
@@ -142,8 +142,6 @@
 </body>
 <footer>
     <script>
-        // 正确的密码，需要替换为实际密码
-        const correctPassword = 'a1234567';
         const passwordModal = document.getElementById('password-modal');
         const originalContent = document.getElementById('original-content');
         const passwordInput = document.getElementById('password-input');
@@ -162,10 +160,15 @@
             }
         }
 
-        passwordSubmit.addEventListener('click', function() {
+        passwordSubmit.addEventListener('click', function () {
             console.log('点击了提交按钮');
+            // 这里应该是从服务端获取密码验证逻辑，现在简单模拟一个正确密码对比
+            // 实际应用中需要替换为服务端验证
+            const correctPasswordHash = 'a1234567'; // 替换为实际的密码哈希值
             const inputPassword = passwordInput.value;
-            if (inputPassword === correctPassword) {
+            const inputPasswordHash = hashFunction(inputPassword); // 替换为实际的哈希函数
+
+            if (inputPasswordHash === correctPasswordHash) {
                 console.log('密码正确');
                 passwordModal.style.display = 'none';
                 originalContent.style.display = 'block';
@@ -178,6 +181,17 @@
                 alert('密码错误，请重试！');
             }
         });
+
+        // 简单的哈希函数示例，实际应用中需要使用更安全的哈希算法
+        function hashFunction(str) {
+            let hash = 0;
+            for (let i = 0; i < str.length; i++) {
+                const char = str.charCodeAt(i);
+                hash = ((hash << 5) - hash) + char;
+                hash = hash & hash; // Convert to 32bit integer
+            }
+            return hash.toString();
+        }
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
