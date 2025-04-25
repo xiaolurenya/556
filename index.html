@@ -83,22 +83,21 @@
                 <div class="head-image" :style="{backgroundImage: 'url(' + settings.headImage + ')'}"></div>
             </div>
             <div class="main-container">
-
                 <div class="center-container">
                     <!-- 搜索框部分 -->
                     <div class="search-box" v-if="settings.searchEngine">
                         <!-- 搜索建议框 -->
                         <div class="advice_box" v-if="advices.length > 0">
                             <div :class="index === advice_selected? 'selected' : ''" class="advice_item"
-                                @mouseenter="advice_selected = index" v-for="advice, index in advices"
+                                @mouseenter="advice_selected = index" v-for="(advice, index) in advices"
                                 @click="advice_clicked(index)">
                                 {{advice}}
                             </div>
                         </div>
                         <!-- 选择搜索引擎 -->
-                        <div :class="show_engine_box? 'show' : 'hide'" class="engine-box" @blur='hideEngineBox(30)'
+                        <div :class="show_engine_box? 'show' : 'hide'" class="engine-box" @blur="hideEngineBox(30)"
                             tabindex="0" hidefocus="true" v-show="show_engine_box === true">
-                            <div class="engine" v-for="engine, id in getEngines()"
+                            <div class="engine" v-for="(engine, id) in getEngines()"
                                 @click="settings.searchEngine.selected = id; hideEngineBox()">
                                 <div class="icon" :style="{backgroundImage: 'url(' + engine.icon + ')', backgroundColor: engine.mainColor}"></div>
                                 <div class="name">{{engine.name}}</div>
@@ -108,8 +107,7 @@
                         <!-- 搜索框左侧图标 -->
                         <div class="search-engins" :style="{backgroundColor: getSelectedEngine().mainColor}"
                             @click="show_engine_box? hideEngineBox() : showEngineBox()">
-                            <!-- @click="show_engine_box?hideEngineBox():showEngineBox()"> -->
-                            <div class="selected-icon" :style="{backgroundImage: 'url(' + getSelectedEngine().icon + ')'}""></div>
+                            <div class="selected-icon" :style="{backgroundImage: 'url(' + getSelectedEngine().icon + ')'}"></div>
                             <div class="engine-name" :style="{color: getSelectedEngine().textColor}">
                                 {{getSelectedEngine().name}}
                             </div>
@@ -123,9 +121,9 @@
                     </div>
                     <!-- 网站列表部分 -->
                     <div class="sites-container">
-                        <div class="second-kind" v-for="kind_val, kind_name, _ in sitesData">
+                        <div class="second-kind" v-for="(kind_val, kind_name) in sitesData">
                             <div class="kind-name">
-                                <div class="icon" :style="{backgroundImage: 'url(' + kind_val.icon + ')'}""></div>
+                                <div class="icon" :style="{backgroundImage: 'url(' + kind_val.icon + ')'}"></div>
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
@@ -142,15 +140,12 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
-</body>
-<footer>
     <script>
         // 禁止 F12 键
         document.addEventListener('keydown', function (e) {
-            if (e.key === "F12") {
+            if (e.key === 'F12') {
                 e.preventDefault();
             }
         });
@@ -202,6 +197,6 @@
     <script src="./js/jquery.lazyload.min.js"></script>
     <script src="./js/utils.js"></script>
     <script src="./js/index.js"></script>
-</footer>
+</body>
 
 </html>
