@@ -136,31 +136,31 @@
                 "name": "家园",
                 "icon": "./assets/siteIcons/producthunt.png",
                 "url": "hhttps://hdhome.org/",
-                "describe": "发现新鲜有趣的产品"
+                "describe": "家园"
             },
             {
                 "name": "我堡",
                 "icon": "./assets/siteIcons/NEXT.png",
                 "url": "https://ourbits.club/",
-                "describe": "不错过任何一个新产品"
+                "describe": "我堡"
             },
             {
                 "name": "馒头",
                 "icon": "./assets/siteIcons/sspai.png",
                 "url": "https://kp.m-team.cc/",
-                "describe": "高品质数字消费指南"
+                "describe": "馒头"
             },
             {
                 "name": "人人",
                 "icon": "./assets/siteIcons/liqi.png",
                 "url": "https://audiences.me/",
-                "describe": "创造者和他们的工具"
+                "describe": "人人"
             },
             {
                 "name": "彩虹岛",
                 "icon": "./assets/siteIcons/today.png",
                 "url": "https://ptchdbits.co",
-                "describe": "为身边的新产品喝彩"
+                "describe": "彩虹岛"
             }
         ]
     },
@@ -171,73 +171,72 @@
                 "name": "麒麟",
                 "icon": "./assets/siteIcons/Pttrns.png",
                 "url": "https://www.hdkyl.in/",
-                "describe": "Check out the finest collection of design patterns, resources, mobile apps and inspiration"
+                "describe": "麒麟"
             },
             {
                 "name": "末日",
                 "icon": "./assets/siteIcons/CollectUI.png",
                 "url": "https://www.agsvpt.com/",
-                "describe": "Daily inspiration collected from daily ui archive and beyond."
+                "describe": "末日."
             },
             {
                 "name": "海胆",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://www.haidan.video/",
-                "describe": "APP界面截图参考"
+                "describe": "海胆"
             },
             {
                 "name": "聆音",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pt.soulvoice.club/",
-                "describe": "APP界面截图参考"
+                "describe": "聆音"
             },
             {
                 "name": "学校",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pt.btschool.club/",
-                "describe": "APP界面截图参考"
+                "describe": "学校"
             },
             {
                 "name": "高清时间",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://hdtime.org/",
-                "describe": "APP界面截图参考"
+                "describe": "高清时间"
             },
             {
                 "name": "雨",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://raingfh.top/",
-                "describe": "APP界面截图参考"
+                "describe": "雨"
             },     
             {
                 "name": "织梦",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://zmpt.cc/",
-                "describe": "APP界面截图参考"
+                "describe": "织梦"
             },     
             {
                 "name": "象岛",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://ptvicomo.net/",
-                "describe": "APP界面截图参考"
+                "describe": "象岛"
             },
               {
                 "name": "青蛙",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://www.qingwapt.com/",
-                "describe": "APP界面截图参考"
+                "describe": "青蛙"
             },
             {
                 "name": "熊猫",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pandapt.net/",
-                "describe": "APP界面截图参考"
+                "describe": "熊猫"
             },
             {
                 "name": "carpt",
-                "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://carpt.net/",
-                "describe": "APP界面截图参考"
+                "describe": "carpt"
             },
             {
                 "name": "红豆fans",
