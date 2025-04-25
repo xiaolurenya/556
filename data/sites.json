@@ -244,6 +244,54 @@
                 "icon": "./assets/siteIcons/AndroidNiceties.png",
                 "url": "https://hdfans.org/",
                 "describe": "A collection of screenshots encompassing some of the most beautiful looking Android apps."
+            },
+            {
+                "name": "MXD",
+                "icon": "./assets/siteIcons/mxd.png",
+                "url": "http://mxd.tencent.com/",
+                "describe": "腾讯MIG无线互联网事业群设计团队"
+            },
+            {
+                "name": "Aliued",
+                "icon": "./assets/siteIcons/aliued.png",
+                "url": "http://www.aliued.com/",
+                "describe": "阿里巴巴国际UED团队"
+            },
+            {
+                "name": "U一点",
+                "icon": "./assets/siteIcons/aliuedcn.png",
+                "url": "http://www.aliued.cn/",
+                "describe": "阿里巴巴（中国站）用户体验设计部博客U一点设计 UED团队"
+            },
+            {
+                "name": "网易uedc",
+                "icon": "./assets/siteIcons/uedc.png",
+                "url": "http://uedc.163.com/",
+                "describe": "网易用户体验设计中心（User Experience Design Center）"
+            },
+            {
+                "name": "百度用户体验中心",
+                "icon": "./assets/siteIcons/uedbaidu.png",
+                "url": "http://ued.baidu.com/",
+                "describe": "百度用户体验中心"
+            },
+            {
+                "name": "京东设计中心",
+                "icon": "./assets/siteIcons/jdc.png",
+                "url": "http://jdc.jd.com/",
+                "describe": "京东设计中心"
+            },
+            {
+                "name": "百度企业产品用户体验中心",
+                "icon": "./assets/siteIcons/euxbaidu.png",
+                "url": "http://eux.baidu.com/",
+                "describe": "百度企业产品用户体验中心"
+            },
+            {
+                "name": "携程设计委员会",
+                "icon": "./assets/siteIcons/ctrip.png",
+                "url": "http://ued.ctrip.com/",
+                "describe": "携程设计委员会-Ctrip Design Committee"
             }
         ]
     }
