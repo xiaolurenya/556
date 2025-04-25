@@ -77,7 +77,7 @@
                 "name": "github",
                 "icon": "./assets/siteIcons/leiphone.png",
                 "url": "https://github.com/",
-                "describe": "人工智能和智能硬件领域的互联网科技媒体"
+                "describe": "github"
             },
             {
                 "name": "Stirling PDF",
@@ -89,13 +89,13 @@
                 "name": "Cloudflare",
                 "icon": "./assets/siteIcons/36kr.png",
                 "url": "https://dash.cloudflare.com",
-                "describe": "创业资讯、科技新闻"
+                "describe": "Cloudflare"
             },
             {
                 "name": "奇",
                 "icon": "./assets/siteIcons/digitaling.png",
                 "url": "https://xn--clouds-o43k.com/",
-                "describe": "数字媒体及职业招聘网站"
+                "describe": "梯子"
             },
             {
                 "name": "花海iIPTV",
@@ -169,7 +169,7 @@
         "data": [
             {
                 "name": "麒麟",
-                "icon": "./assets/siteIcons/Pttrns.png",
+               "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://www.hdkyl.in/",
                 "describe": "麒麟"
             },
@@ -235,14 +235,15 @@
             },
             {
                 "name": "carpt",
+                "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://carpt.net/",
                 "describe": "carpt"
             },
             {
                 "name": "红豆fans",
-                "icon": "./assets/siteIcons/AndroidNiceties.png",
+                "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://hdfans.org/",
-                "describe": "A collection of screenshots encompassing some of the most beautiful looking Android apps."           
+                "describe": "红豆."           
             }
         ]
     }
