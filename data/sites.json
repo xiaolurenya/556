@@ -32,7 +32,6 @@
                 "url": "http://igmp.vip:2332/zj/li0580.m3u",
                 "describe": "M3u8"
             }
-
         ]
     },
     "私人内网": {
@@ -114,7 +113,7 @@
                 "name": "51Tala",
                 "icon": "./assets/siteIcons/iyunying.png",
                 "url": "https://51tala.com/",
-                "describe": "每日看世界。"
+                "describe": "每日看世界"
             },
             {
                 "name": "IPTV总外订阅",
@@ -186,25 +185,25 @@
                 "url": "https://www.haidan.video/",
                 "describe": "APP界面截图参考"
             },
-               {
+            {
                 "name": "聆音",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pt.soulvoice.club/",
                 "describe": "APP界面截图参考"
             },
-               {
+            {
                 "name": "学校",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pt.btschool.club/",
                 "describe": "APP界面截图参考"
             },
-               {
+            {
                 "name": "高清时间",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://hdtime.org/",
                 "describe": "APP界面截图参考"
             },
-                  {
+            {
                 "name": "雨",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://raingfh.top/",
@@ -228,13 +227,13 @@
                 "url": "https://www.qingwapt.com/",
                 "describe": "APP界面截图参考"
             },
-              {
+            {
                 "name": "熊猫",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://pandapt.net/",
                 "describe": "APP界面截图参考"
             },
-              {
+            {
                 "name": "carpt",
                 "icon": "./assets/siteIcons/uiuigreat.png",
                 "url": "https://carpt.net/",
@@ -244,7 +243,7 @@
                 "name": "红豆fans",
                 "icon": "./assets/siteIcons/AndroidNiceties.png",
                 "url": "https://hdfans.org/",
-                "describe": "A collection of screenshots encompassing some of the most beautiful looking Android apps.",
+                "describe": "A collection of screenshots encompassing some of the most beautiful looking Android apps."
             }
         ]
     }
