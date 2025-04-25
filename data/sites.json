@@ -1,52 +1,52 @@
 {
-    "常用推荐": {
-        "icon": "",
-        "data": [
+    "自用网页"输入：
+        "图标":"",
+        "数据": 输入的文本为空，没有可用来翻译的内容。
             {
-                "name": "233博客",
-                "icon": "./assets/icon.ico",
-                "url": "https://233i.cn/",
-                "describe": "本站作者常年拖更的博客"
-            },
+                "名字": "MoviePilot",
+                "图标": "./assets/icon.ico",
+                "网址": "http://li0580.top:3000",
+                "描述": "外网"
+            }，
             {
-                "name": "Dribbble",
-                "icon": "./assets/siteIcons/dribbble.png",
-                "url": "https://dribbble.com/",
-                "describe": "全球UI设计师作品分享平台。"
-            },
-            {
-                "name": "Behance",
-                "icon": "./assets/siteIcons/behance.png",
-                "url": "https://behance.net/",
-                "describe": "Adobe旗下的设计师交流平台，来自世界各地的设计师在这里分享自己的作品。"
-            },
-            {
-                "name": "UI中国",
-                "icon": "./assets/siteIcons/uicn.png",
-                "url": "http://www.ui.cn/",
-                "describe": "图形交互与界面设计交流、作品展示、学习平台。"
-            },
-            {
-                "name": "站酷",
-                "icon": "./assets/siteIcons/zcool.png",
-                "url": "http://www.zcool.com.cn/",
-                "describe": "中国人气设计师互动平台"
-            },
-            {
-                "name": "Pinterest",
-                "icon": "./assets/siteIcons/pinterest.png",
-                "url": "https://www.pinterest.com/",
-                "describe": "全球美图收藏采集站"
-            },
-            {
-                "name": "花瓣",
-                "icon": "./assets/siteIcons/huaban.png",
-                "url": "http://huaban.com/",
-                "describe": "收集灵感,保存有用的素材"
-            },
-            {
-                "name": "Medium",
-                "icon": "./assets/siteIcons/medium.png",
+                "名字": "Dribbble",
+                
+                "url": "https://dribbble.com/","网址": "https://dribbble.com/",
+                "描述": "全球UI设计师作品分享平台。""描述": "全球UI设计师作品分享平台。"
+            输入：},},
+            输入：  {
+                "名字"："Behance"，"名字"："Behance"，
+                "图标":"./资产/网站图标/behance.png","图标": "./资产/网站图标/behance.png",
+                "网址": "https://behance.net/","网址": "https://behance.net/",
+                "描述": "Adobe旗下的设计师交流平台，来自世界各地的设计师在这里分享自己的作品。""描述": "Adobe旗下的设计师交流平台，来自世界各地的设计师在这里分享自己的作品。"
+            },},
+            输入：  {
+                "名称": "UI中国","名称": "UI中国",
+                "图标": "./资产/网站图标/uicn.png","图标": "./资产/网站图标/uicn.png",
+                "网址": "http://www.ui.cn/","网址": "http://www.ui.cn/",
+                "描述": "图形交互与界面设计交流、作品展示、学习平台。""描述": "图形交互与界面设计交流、作品展示、学习平台。"
+            },},
+            输入：  {
+                "名称"："站酷"，"名称"："站酷"，
+                "图标"："./资产/网站图标/zcool.png","icon": "./资产/网站图标/anzhong.png",
+                "url": "http://www.zcool.com.cn/","网址": "http://www.zcool.com.cn/",
+                "描述": "中国人气设计师互动平台""描述": "中国人气设计师互动平台"
+            },},
+            输入：  {
+                "名称"："Pinterest"，"名称"："Pinterest"，
+                "图标":"./资产/网站图标/pinterest.png","图标": "./资产/网站图标/pinterest.png",
+                "网址": "https://www.pinterest.com/","网址": "https://www.pinterest.com/",
+                "描述": "全球美图收藏采集站""描述": "全球美图收藏采集站"
+            },},
+            输入：  {
+                "名字"："花瓣"，"名字"："花瓣"，
+                "图标":"./资产/网站图标/华板.png","图标": "./资产/网站图标/华板.png",
+                "url": "http://huaban.com/","url": "http://huaban.com/",
+                "描述": "收集灵感,保存有用的素材""describe": "收集灵感,保存有用的素材"
+            },},
+            输入：{
+                "name": "中等","name": "Medium",
+                "icon": "./assets/siteIcons/medium.png","icon": "./assets/siteIcons/medium.png",
                 "url": "https://medium.com/",
                 "describe": "高质量设计文章"
             },
