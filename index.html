@@ -11,46 +11,47 @@
 </head>
 
 <body>
+    <!-- 密码输入模态框 -->
     <div id="password-modal" style="display: none;">
         <div class="modal-content">
             <h2>请输入密码</h2>
-            <input type="password" id="a1234567" placeholder="密码">
+            <input type="password" id="password-input" placeholder="密码">
             <button id="password-submit">提交</button>
         </div>
     </div>
+    <!-- 应用主内容区域 -->
     <div id="app" style="display: none;">
         <div class="left-nav">
             <div class="head-image" :style="{backgroundImage:'url('+settings.headImage+')'}"></div>
         </div>
         <div class="main-container">
-
             <div class="center-container">
                 <!-- 搜索框部分 -->
                 <div class="search-box" v-if="settings.searchEngine">
                     <!-- 搜索建议框 -->
                     <div class="advice_box" v-if="advices.length>0">
                         <div :class="index === advice_selected?'selected':''" class="advice_item" @mouseenter="advice_selected = index" v-for="advice,index in advices" @click="advice_clicked(index)">
-                            {{advice}}</div>
+                            {{advice}}
+                        </div>
                     </div>
                     <!-- 选择搜索引擎 -->
                     <div :class="show_engine_box?'show':'hide'" class="engine-box" @blur='hideEngineBox(30)' tabindex="0" hidefocus="true" v-show="show_engine_box === true">
                         <div class="engine" v-for="engine,id in getEngines()" @click="settings.searchEngine.selected = id;hideEngineBox()">
                             <div class="icon" :style="{backgroundImage:'url('+engine.icon+')',backgroundColor:engine.mainColor}"></div>
-                            <div class="name" >{{engine.name}}</div>
+                            <div class="name">{{engine.name}}</div>
                         </div>
                         <div class="engine not_show" v-for="i in 4"></div>
                     </div>
                     <!-- 搜索框左侧图标 -->
-                    <div class="search-engins" :style="{backgroundColor:getSelectedEngine().mainColor}"
-                        @click="show_engine_box?hideEngineBox():showEngineBox()">
-                        <!-- @click="show_engine_box?hideEngineBox():showEngineBox()"> -->
+                    <div class="search-engins" :style="{backgroundColor:getSelectedEngine().mainColor}" @click="show_engine_box?hideEngineBox():showEngineBox()">
                         <div class="selected-icon" :style="{backgroundImage:'url('+getSelectedEngine().icon+')'}"></div>
                         <div class="engine-name" :style="{color:getSelectedEngine().textColor}">
-                            {{getSelectedEngine().name}}</div>
+                            {{getSelectedEngine().name}}
+                        </div>
                         <div class="show-more"></div>
                     </div>
                     <!-- 搜索框主体 -->
-                    <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"  oninput="showAdvice()" />
+                    <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)" oninput="showAdvice()" />
                     <!-- 搜索按钮 -->
                     <div class="search-btn" @click="search()"></div>
                 </div>
@@ -63,8 +64,7 @@
                         </div>
                         <div class="sites-box">
                             <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
-                                <div class="icon" :data-original="site_val.icon">
-                                </div>
+                                <div class="icon" :data-original="site_val.icon"></div>
                                 <div class="info">
                                     <div class="name">{{site_val.name}}</div>
                                     <div class="describe">{{site_val.describe}}</div>
@@ -76,25 +76,36 @@
                 </div>
             </div>
         </div>
-
     </div>
 </body>
 <footer>
     <script>
-        const correctPassword = 'a1234567'; // 替换为你的实际密码
+        // 正确的密码，需替换为实际密码
+        const correctPassword = 'your_password';
+        // 获取密码模态框元素
         const passwordModal = document.getElementById('password-modal');
+        // 获取应用主内容区域元素
         const app = document.getElementById('app');
+        // 获取密码输入框元素
         const passwordInput = document.getElementById('password-input');
+        // 获取密码提交按钮元素
         const passwordSubmit = document.getElementById('password-submit');
 
+        // 显示密码模态框
         passwordModal.style.display = 'block';
 
-        passwordSubmit.addEventListener('click', function() {
+        // 为密码提交按钮添加点击事件监听器
+        passwordSubmit.addEventListener('click', function () {
+            // 获取用户输入的密码
             const inputPassword = passwordInput.value;
+            // 验证密码是否正确
             if (inputPassword === correctPassword) {
+                // 密码正确，隐藏密码模态框
                 passwordModal.style.display = 'none';
+                // 显示应用主内容区域
                 app.style.display = 'block';
             } else {
+                // 密码错误，弹出提示框
                 alert('密码错误，请重试！');
             }
         });
