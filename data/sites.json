@@ -56,6 +56,12 @@
                 "url": "http://192.168.2.225:8000/v/login",
                 "describe": "飞牛影视"
             },
+             {
+                "name": "LibreTV",
+                "icon": "./assets/siteIcons/ziticangku.png",
+                "url": "https://libretv-3x4.pages.dev/",
+                "describe": "LibreTV"
+            },
             {
                 "name": "Alist",
                 "icon": "./assets/siteIcons/eleduck.png",
