@@ -67,7 +67,7 @@
                 "icon": "./assets/siteIcons/gtn9.png",
                 "url": "http://igmp.vip:2332/zj/0201.m3u",
                 "describe": "M3u8"
-            },
+            }
         ]
     },
     "社区工具": {
@@ -129,7 +129,7 @@
             }
         ]
     },
-    "PT十二大": {
+   "PT十二大": {
         "icon": "",
         "data": [
             {
