@@ -11,7 +11,14 @@
 </head>
 
 <body>
-    <div id="app">
+    <div id="password-modal" style="display: none;">
+        <div class="modal-content">
+            <h2>请输入密码</h2>
+            <input type="password" id="password-input" placeholder="密码">
+            <button id="password-submit">提交</button>
+        </div>
+    </div>
+    <div id="app" style="display: none;">
         <div class="left-nav">
             <div class="head-image" :style="{backgroundImage:'url('+settings.headImage+')'}"></div>
         </div>
@@ -73,6 +80,25 @@
     </div>
 </body>
 <footer>
+    <script>
+        const correctPassword = 'a1234567'; // 替换为你的实际密码
+        const passwordModal = document.getElementById('password-modal');
+        const app = document.getElementById('app');
+        const passwordInput = document.getElementById('password-input');
+        const passwordSubmit = document.getElementById('password-submit');
+
+        passwordModal.style.display = 'block';
+
+        passwordSubmit.addEventListener('click', function() {
+            const inputPassword = passwordInput.value;
+            if (inputPassword === correctPassword) {
+                passwordModal.style.display = 'none';
+                app.style.display = 'block';
+            } else {
+                alert('密码错误，请重试！');
+            }
+        });
+    </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/jquery.lazyload.min.js"></script>
@@ -81,3 +107,4 @@
 </footer>
 
 </html>
+    
