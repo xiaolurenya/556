@@ -109,7 +109,7 @@
                                 {{getSelectedEngine().name}}</div>
                             <div class="show-more"></div>
                         </div>
-                        <!-- 搜索框主体 -->
+                        
                         <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"  oninput="showAdvice()" />
                         <!-- 搜索按钮 -->
                         <div class="search-btn" @click="search()"></div>
@@ -127,30 +127,30 @@
                                     </div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
-                                        <div class="describe">{{site_val.describe}}</div>
-                                    </div>
-                                </div>
-                                <div class="site-box not_show" v-for="i in 10"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        < div  class = "describe" > {{site_val.describe}} </ div >
+                                    </ div >
+                                </ div >
+                                < div  class = "site-box not_show"  v-for = "i in 10" > </ div >
+                            </ div >
+                        </ div >
+                    </ div >
+                </ div >
+            </ div >
 
-        </div>
-    </div>
-</body>
-<footer>
-    <script>
+        </ div >
+    </ div >
+</ body >
+< footer >
+    < script >
         // 正确的密码，需要替换为实际密码
-        const correctPassword = 'a1234567';
-        const passwordModal = document.getElementById('password-modal');
-        const originalContent = document.getElementById('original-content');
-        const passwordInput = document.getElementById('password-input');
-        const passwordSubmit = document.getElementById('password-submit');
+        const  correctPassword = 'a1234567' ;
+        常量 密码模态框 = 文档.通过ID获取元素('密码模态框');
+        常量 原始内容 = 文档.通过ID获取元素('原始内容');
+        常量 密码输入文档获取元素ById（'password-input'）
+        常量 密码提交document.getElementById('password-submit')
 
         // 检查localStorage中是否有有效的密码记录
-        const savedPassword = localStorage.getItem('savedPassword');
+        常量 保存的密码 = 本地存储.获取项('保存的密码');
         const savedExpiry = localStorage.getItem('passwordExpiry');
         const now = new Date().getTime();
 
@@ -167,19 +167,19 @@
                 passwordModal.style.display = 'none';
                 originalContent.style.display = 'block';
                 // 保存密码和过期时间
-                const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30天
-                localStorage.setItem('savedPassword', correctPassword);
-                localStorage.setItem('passwordExpiry', expiry.toString());
-            } else {
-                alert('密码错误，请重试！');
+                const  expiry = new  Date ( ) . getTime ( ) + 30 * 24 * 60 * 60 * 1000 ; // 30天
+                localStorage . setItem ( 'savedPassword' , correctPassword ) ;
+                localStorage . setItem ( 'passwordExpiry' , expiry . toString ( ) ) ;
+            }  else  {
+                alert ( '密码错误，请重试！' ) ;
             }
         });
-    </script>
-    <script src="./js/vue3.js"></script>
+    </脚本>
+    <script src"./js/vue3.js"</script>
     <script src="./js/jquery.min.js"></script>
     <script src="./js/jquery.lazyload.min.js"></script>
     <script src="./js/utils.js"></script>
-    <script src="./js/index.js"></script>
-</footer>
+    < script  src = "./js/index.js" > </ script >
+</ 页脚 >
 
 </html>
