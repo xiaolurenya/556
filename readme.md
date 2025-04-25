@@ -76,3 +76,5 @@ function bilibili_advice(keyword, callback) {
 
 ### 其他
 代码写的比较仓促,欢迎提新功能
+增加了密码验证(F12调试过程中会显示密码)
+增加了反调试这是f12和右键。调试提醒。
