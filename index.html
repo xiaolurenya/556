@@ -143,16 +143,18 @@
         </div>
     </div>
     <script>
-        // 禁止 F12 键
+        // 禁止 F12 键并给出提示
         document.addEventListener('keydown', function (e) {
             if (e.key === 'F12') {
                 e.preventDefault();
+                alert('禁止使用 F12 进行调试！');
             }
         });
 
-        // 禁止鼠标右键
+        // 禁止鼠标右键并给出提示
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
+            alert('禁止使用鼠标右键进行调试！');
         });
 
         // 正确的密码，需要替换为实际密码
