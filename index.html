@@ -164,9 +164,9 @@
             console.log('点击了提交按钮');
             // 这里应该是从服务端获取密码验证逻辑，现在简单模拟一个正确密码对比
             // 实际应用中需要替换为服务端验证
-            const correctPasswordHash = 'a1234567'; // 替换为实际的密码哈希值
+            const correctPasswordHash = '9626c7444717aab7a3bbdd509bcafa35a7491e9478d421b38e539a621f695edd'; // 替换为实际的密码哈希值
             const inputPassword = passwordInput.value;
-            const inputPasswordHash = hashFunction(inputPassword); // 替换为实际的哈希函数
+            const inputPasswordHash = 9626c7444717aab7a3bbdd509bcafa35a7491e9478d421b38e539a621f695edd(inputPassword); // 替换为实际的哈希函数
 
             if (inputPasswordHash === correctPasswordHash) {
                 console.log('密码正确');
