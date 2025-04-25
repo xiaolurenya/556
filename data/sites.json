@@ -1,108 +1,61 @@
 {
-    "常用推荐": {
+    "飞牛外网": {
         "icon": "",
         "data": [
             {
                 "name": "MoviePilot",
                 "icon": "./assets/icon.ico",
                 "url": "http://li0580.top:3000",
-                "describe": "MoviePilot（外网）"
+                "describe": "MoviePilot"
             },
             {
                 "name": "飞牛OS",
                 "icon": "./assets/siteIcons/dribbble.png",
                 "url": "http://li0580.top:8000",
-                "describe": "飞牛OS(外网)。"
+                "describe": "飞牛OS"
             },
             {
                 "name": "飞牛影视",
                 "icon": "./assets/siteIcons/behance.png",
                 "url": "http://li0580.top:8000/v/login/",
-                "describe": "飞牛影视（外网）。"
+                "describe": "飞牛影视"
             },
             {
-                "name": "UI中国",
+                "name": "Alist",
                 "icon": "./assets/siteIcons/uicn.png",
-                "url": "http://www.ui.cn/",
-                "describe": "图形交互与界面设计交流、作品展示、学习平台。"
-            },
-            {
-                "name": "站酷",
-                "icon": "./assets/siteIcons/zcool.png",
-                "url": "http://www.zcool.com.cn/",
-                "describe": "中国人气设计师互动平台"
-            },
-            {
-                "name": "Pinterest",
-                "icon": "./assets/siteIcons/pinterest.png",
-                "url": "https://www.pinterest.com/",
-                "describe": "全球美图收藏采集站"
-            },
-            {
-                "name": "花瓣",
-                "icon": "./assets/siteIcons/huaban.png",
-                "url": "http://huaban.com/",
-                "describe": "收集灵感,保存有用的素材"
-            },
-            {
-                "name": "Medium",
-                "icon": "./assets/siteIcons/medium.png",
-                "url": "https://medium.com/",
-                "describe": "高质量设计文章"
-            },
-            {
-                "name": "优设",
-                "icon": "./assets/siteIcons/uisdc.png",
-                "url": "http://www.uisdc.com/",
-                "describe": "设计师交流学习平台"
-            },
-            {
-                "name": "Producthunt",
-                "icon": "./assets/siteIcons/producthunt.png",
-                "url": "https://www.producthunt.com/",
-                "describe": "发现新鲜有趣的产品"
-            },
-            {
-                "name": "Youtube",
-                "icon": "./assets/siteIcons/youtube.png",
-                "url": "https://www.youtube.com/",
-                "describe": "全球最大的学习分享平台"
-            },
-            {
-                "name": "Google",
-                "icon": "./assets/siteIcons/google.png",
-                "url": "https://www.google.com/",
-                "describe": "全球最大的UI学习分享平台"
+                "url": "http://li0580.top:5244",
+                "describe": "Alist"
             }
+
         ]
     },
-    "推荐": {
+    "飞牛内网": {
         "icon": "",
         "data": [
            
             {
-                "name": "咕噜素材",
+                "name": "MoviePilot",
                 "icon": "./assets/siteIcons/gulusucai.png",
-                "url": "https://www.gulusucai.com/",
-                "describe": "质量很高的设计素材网站（推荐）"
+                "url": "http://192.168.2.225:3000/",
+                "describe": "MoviePilot"
             },
             {
-                "name": "设计周刊",
+                "name": "飞牛OS",
                 "icon": "./assets/siteIcons/shejizhoukan.png",
-                "url": "https://www.shejizhoukan.com/",
-                "describe": "最新设计资讯（每天更新）"
+                "url": "http://192.168.2.225:8000",
+                "describe": "飞牛OS"
             },
             {
-                "name": "字体仓库",
+                "name": "飞牛影视",
                 "icon": "./assets/siteIcons/ziticangku.png",
-                "url": "https://www.ziticangku.com/",
-                "describe": "最全的免费商用字体库"
+                "url": "http://192.168.2.225:8000/v/login",
+                "describe": "飞牛影视"
             },
             {
-                "name": "电鸭社区",
+                "name": "Alist",
                 "icon": "./assets/siteIcons/eleduck.png",
-                "url": "https://eleduck.com/",
-                "describe": "国内最早的远程工作社区，也是互联网工作者们的聚集地，非常适合设计开发小伙伴关注"
+                "url": "http://192.168.2.225:5244",
+                "describe": "Alist"
             }
         ]
     },
