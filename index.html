@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,7 +80,7 @@
     <div id="original-content" style="display: none;">
         <div id="app">
             <div class="left-nav">
-                <div class="head-image" :style="{backgroundImage:'url('+settings.headImage+')'}"></div>
+                <div class="head-image" :style="{backgroundImage: 'url(' + settings.headImage + ')'}"></div>
             </div>
             <div class="main-container">
 
@@ -89,43 +88,49 @@
                     <!-- 搜索框部分 -->
                     <div class="search-box" v-if="settings.searchEngine">
                         <!-- 搜索建议框 -->
-                        <div class="advice_box" v-if="advices.length>0">
-                            <div :class="index === advice_selected?'selected':''" class="advice_item" @mouseenter="advice_selected = index" v-for="advice,index in advices" @click="advice_clicked(index)">
-                                {{advice}}</div>
+                        <div class="advice_box" v-if="advices.length > 0">
+                            <div :class="index === advice_selected? 'selected' : ''" class="advice_item"
+                                @mouseenter="advice_selected = index" v-for="advice, index in advices"
+                                @click="advice_clicked(index)">
+                                {{advice}}
+                            </div>
                         </div>
                         <!-- 选择搜索引擎 -->
-                        <div :class="show_engine_box?'show':'hide'" class="engine-box" @blur='hideEngineBox(30)' tabindex="0" hidefocus="true" v-show="show_engine_box === true">
-                            <div class="engine" v-for="engine,id in getEngines()" @click="settings.searchEngine.selected = id;hideEngineBox()">
-                                <div class="icon" :style="{backgroundImage:'url('+engine.icon+')',backgroundColor:engine.mainColor}"></div>
-                                <div class="name" >{{engine.name}}</div>
+                        <div :class="show_engine_box? 'show' : 'hide'" class="engine-box" @blur='hideEngineBox(30)'
+                            tabindex="0" hidefocus="true" v-show="show_engine_box === true">
+                            <div class="engine" v-for="engine, id in getEngines()"
+                                @click="settings.searchEngine.selected = id; hideEngineBox()">
+                                <div class="icon" :style="{backgroundImage: 'url(' + engine.icon + ')', backgroundColor: engine.mainColor}"></div>
+                                <div class="name">{{engine.name}}</div>
                             </div>
                             <div class="engine not_show" v-for="i in 4"></div>
                         </div>
                         <!-- 搜索框左侧图标 -->
-                        <div class="search-engins" :style="{backgroundColor:getSelectedEngine().mainColor}"
-                            @click="show_engine_box?hideEngineBox():showEngineBox()">
+                        <div class="search-engins" :style="{backgroundColor: getSelectedEngine().mainColor}"
+                            @click="show_engine_box? hideEngineBox() : showEngineBox()">
                             <!-- @click="show_engine_box?hideEngineBox():showEngineBox()"> -->
-                            <div class="selected-icon" :style="{backgroundImage:'url('+getSelectedEngine().icon+')'}"></div>
-                            <div class="engine-name" :style="{color:getSelectedEngine().textColor}">
-                                {{getSelectedEngine().name}}</div>
+                            <div class="selected-icon" :style="{backgroundImage: 'url(' + getSelectedEngine().icon + ')'}""></div>
+                            <div class="engine-name" :style="{color: getSelectedEngine().textColor}">
+                                {{getSelectedEngine().name}}
+                            </div>
                             <div class="show-more"></div>
                         </div>
                         <!-- 搜索框主体 -->
-                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"  oninput="showAdvice()" />
+                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"
+                            oninput="showAdvice()" />
                         <!-- 搜索按钮 -->
                         <div class="search-btn" @click="search()"></div>
                     </div>
                     <!-- 网站列表部分 -->
                     <div class="sites-container">
-                        <div class="second-kind" v-for="kind_val,kind_name,_ in sitesData">
+                        <div class="second-kind" v-for="kind_val, kind_name, _ in sitesData">
                             <div class="kind-name">
-                                <div class="icon" :style="{backgroundImage:'url('+kind_val.icon+')'}"></div>
+                                <div class="icon" :style="{backgroundImage: 'url(' + kind_val.icon + ')'}""></div>
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
                                 <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
-                                    <div class="icon" :data-original="site_val.icon">
-                                    </div>
+                                    <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
                                         <div class="describe">{{site_val.describe}}</div>
@@ -143,6 +148,18 @@
 </body>
 <footer>
     <script>
+        // 禁止 F12 键
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "F12") {
+                e.preventDefault();
+            }
+        });
+
+        // 禁止鼠标右键
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
         // 正确的密码，需要替换为实际密码
         const correctPassword = 'a1234567';
         const passwordModal = document.getElementById('password-modal');
@@ -150,7 +167,7 @@
         const passwordInput = document.getElementById('password-input');
         const passwordSubmit = document.getElementById('password-submit');
 
-        // 检查localStorage中是否有有效的密码记录
+        // 检查 localStorage 中是否有有效的密码记录
         const savedPassword = localStorage.getItem('savedPassword');
         const savedExpiry = localStorage.getItem('passwordExpiry');
         const now = new Date().getTime();
@@ -163,7 +180,7 @@
             }
         }
 
-        passwordSubmit.addEventListener('click', function() {
+        passwordSubmit.addEventListener('click', function () {
             console.log('点击了提交按钮');
             const inputPassword = passwordInput.value;
             if (inputPassword === correctPassword) {
@@ -171,7 +188,7 @@
                 passwordModal.style.display = 'none';
                 originalContent.style.display = 'block';
                 // 保存密码和过期时间
-                const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30天
+                const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 天
                 localStorage.setItem('savedPassword', correctPassword);
                 localStorage.setItem('passwordExpiry', expiry.toString());
             } else {
