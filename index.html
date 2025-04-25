@@ -96,7 +96,7 @@
                         <div :class="show_engine_box?'show':'hide'" class="engine-box" @blur='hideEngineBox(30)' tabindex="0" hidefocus="true" v-show="show_engine_box === true">
                             <div class="engine" v-for="engine,id in getEngines()" @click="settings.searchEngine.selected = id;hideEngineBox()">
                                 <div class="icon" :style="{backgroundImage:'url('+engine.icon+')',backgroundColor:engine.mainColor}"></div>
-                                <div class="name">{{engine.name}}</div>
+                                <div class="name" >{{engine.name}}</div>
                             </div>
                             <div class="engine not_show" v-for="i in 4"></div>
                         </div>
@@ -110,7 +110,7 @@
                             <div class="show-more"></div>
                         </div>
                         <!-- 搜索框主体 -->
-                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)" oninput="showAdvice()" />
+                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"  oninput="showAdvice()" />
                         <!-- 搜索按钮 -->
                         <div class="search-btn" @click="search()"></div>
                     </div>
@@ -141,57 +141,85 @@
     </div>
 </body>
 <footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
+        // 加密密钥，实际应用中需要妥善保管
+        const secretKey = CryptoJS.enc.Utf8.parse("your_secret_key_1234567890");
+        const iv = CryptoJS.enc.Utf8.parse("your_iv_key_1234567890");
+
+        // 加密函数
+        function encryptPassword(password) {
+            return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(password), secretKey, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            }).toString();
+        }
+
+        // 解密函数
+        function decryptPassword(encryptedPassword) {
+            const decrypted = CryptoJS.AES.decrypt(encryptedPassword, secretKey, {
+                iv: iv,
+                mode: CryptoJS.mode.CBC,
+                padding: CryptoJS.pad.Pkcs7
+            });
+            return decrypted.toString(CryptoJS.enc.Utf8);
+        }
+
         const passwordModal = document.getElementById('password-modal');
         const originalContent = document.getElementById('original-content');
         const passwordInput = document.getElementById('password-input');
         const passwordSubmit = document.getElementById('password-submit');
 
-        // 检查localStorage中是否有有效的验证状态记录
-        const isVerified = localStorage.getItem('isVerified');
-        const savedExpiry = localStorage.getItem('verificationExpiry');
+        // 检查localStorage中是否有有效的密码记录
+        const savedEncryptedPassword = localStorage.getItem('savedPassword');
+        const savedExpiry = localStorage.getItem('passwordExpiry');
         const now = new Date().getTime();
 
-        if (isVerified && savedExpiry && now < parseInt(savedExpiry)) {
-            if (isVerified === 'true') {
-                console.log('使用本地存储的验证状态，跳过验证');
-                passwordModal.style.display = 'none';
-                originalContent.style.display = 'block';
+        let correctEncryptedPassword;
+        try {
+            // 假设正确密码在实际应用中从服务端获取并加密存储，这里模拟加密
+            const correctPassword = 'a1234567';
+            correctEncryptedPassword = encryptPassword(correctPassword);
+        } catch (error) {
+            console.error("加密过程出错:", error);
+        }
+
+        if (savedEncryptedPassword && savedExpiry && now < parseInt(savedExpiry)) {
+            try {
+                const decryptedSavedPassword = decryptPassword(savedEncryptedPassword);
+                if (decryptedSavedPassword === decryptPassword(correctEncryptedPassword)) {
+                    console.log('使用本地存储的密码，跳过验证');
+                    passwordModal.style.display = 'none';
+                    originalContent.style.display = 'block';
+                }
+            } catch (error) {
+                console.error("解密过程出错:", error);
             }
         }
 
         passwordSubmit.addEventListener('click', function () {
             console.log('点击了提交按钮');
-            // 这里应该是从服务端获取密码验证逻辑，现在简单模拟一个正确密码对比
-            // 实际应用中需要替换为服务端验证
-            const correctPasswordHash = '9626c7444717aab7a3bbdd509bcafa35a7491e9478d421b38e539a621f695edd'; // 替换为实际的密码哈希值
             const inputPassword = passwordInput.value;
-            const inputPasswordHash = 9626c7444717aab7a3bbdd509bcafa35a7491e9478d421b38e539a621f695edd(inputPassword); // 替换为实际的哈希函数
+            const inputEncryptedPassword = encryptPassword(inputPassword);
 
-            if (inputPasswordHash === correctPasswordHash) {
-                console.log('密码正确');
-                passwordModal.style.display = 'none';
-                originalContent.style.display = 'block';
-                // 保存验证状态和过期时间
-                const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30天
-                localStorage.setItem('isVerified', 'true');
-                localStorage.setItem('verificationExpiry', expiry.toString());
-            } else {
-                console.log('密码错误');
-                alert('密码错误，请重试！');
+            try {
+                if (decryptPassword(inputEncryptedPassword) === decryptPassword(correctEncryptedPassword)) {
+                    console.log('密码正确');
+                    passwordModal.style.display = 'none';
+                    originalContent.style.display = 'block';
+                    // 保存加密后的密码和过期时间
+                    const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30天
+                    localStorage.setItem('savedPassword', inputEncryptedPassword);
+                    localStorage.setItem('passwordExpiry', expiry.toString());
+                } else {
+                    console.log('密码错误');
+                    alert('密码错误，请重试！');
+                }
+            } catch (error) {
+                console.error("密码验证过程出错:", error);
             }
         });
-
-        // 简单的哈希函数示例，实际应用中需要使用更安全的哈希算法
-        function hashFunction(str) {
-            let hash = 0;
-            for (let i = 0; i < str.length; i++) {
-                const char = str.charCodeAt(i);
-                hash = ((hash << 5) - hash) + char;
-                hash = hash & hash; // Convert to 32bit integer
-            }
-            return hash.toString();
-        }
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
