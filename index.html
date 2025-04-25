@@ -143,27 +143,23 @@
 <footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     <script>
-        // 加密密钥，实际应用中需要妥善保管
-        const secretKey = CryptoJS.enc.Utf8.parse("your_secret_key_1234567890");
-        const iv = CryptoJS.enc.Utf8.parse("your_iv_key_1234567890");
+        // 加密密钥，实际应用中请妥善保管
+        const secretKey = CryptoJS.enc.Utf8.parse("your-secret-key-123456");
 
         // 加密函数
         function encryptPassword(password) {
-            return CryptoJS.AES.encrypt(CryptoJS.enc.Utf8.parse(password), secretKey, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
+            return CryptoJS.AES.encrypt(password, secretKey, {
+                mode: CryptoJS.mode.ECB,
                 padding: CryptoJS.pad.Pkcs7
             }).toString();
         }
 
         // 解密函数
-        function decryptPassword(encryptedPassword) {
-            const decrypted = CryptoJS.AES.decrypt(encryptedPassword, secretKey, {
-                iv: iv,
-                mode: CryptoJS.mode.CBC,
+        function decryptPassword(ciphertext) {
+            return CryptoJS.AES.decrypt(ciphertext, secretKey, {
+                mode: CryptoJS.mode.ECB,
                 padding: CryptoJS.pad.Pkcs7
-            });
-            return decrypted.toString(CryptoJS.enc.Utf8);
+            }).toString(CryptoJS.enc.Utf8);
         }
 
         const passwordModal = document.getElementById('password-modal');
@@ -171,19 +167,13 @@
         const passwordInput = document.getElementById('password-input');
         const passwordSubmit = document.getElementById('password-submit');
 
+        // 假设正确的加密密码（实际应用中应通过安全方式获取和存储）
+        const correctEncryptedPassword = encryptPassword('a1234567');
+
         // 检查localStorage中是否有有效的密码记录
         const savedEncryptedPassword = localStorage.getItem('savedPassword');
         const savedExpiry = localStorage.getItem('passwordExpiry');
         const now = new Date().getTime();
-
-        let correctEncryptedPassword;
-        try {
-            // 假设正确密码在实际应用中从服务端获取并加密存储，这里模拟加密
-            const correctPassword = 'a1234567';
-            correctEncryptedPassword = encryptPassword(correctPassword);
-        } catch (error) {
-            console.error("加密过程出错:", error);
-        }
 
         if (savedEncryptedPassword && savedExpiry && now < parseInt(savedExpiry)) {
             try {
@@ -194,7 +184,7 @@
                     originalContent.style.display = 'block';
                 }
             } catch (error) {
-                console.error("解密过程出错:", error);
+                console.error("解密错误:", error);
             }
         }
 
@@ -217,7 +207,7 @@
                     alert('密码错误，请重试！');
                 }
             } catch (error) {
-                console.error("密码验证过程出错:", error);
+                console.error("密码验证错误:", error);
             }
         });
     </script>
