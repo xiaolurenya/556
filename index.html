@@ -6,22 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自用导航</title>
     <style>
-        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
-        @keyframes colorfulAnimation {
+        /* 定义流光自动变色动画 */
+        @keyframes streamingLight {
             0% {
-                background-color: #0088ff;
-            }
-            25% {
-                background-color: #00ff88;
-            }
-            50% {
-                background-color: #ff0088;
-            }
-            75% {
-                background-color: #8800ff;
+                background-position: 0 0;
             }
             100% {
-                background-color: #0088ff;
+                background-position: 200% 0;
             }
         }
 
@@ -59,18 +50,6 @@
             }
         }
 
-        /* 新增背景粒子动画 */
-        @keyframes particleAnimation {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(100px, -100px);
-                opacity: 0;
-            }
-        }
-
         body {
             font-family: "Roboto", sans-serif;
             background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
@@ -79,40 +58,34 @@
             background-attachment: fixed;
             color: #444;
             margin: 0;
-            position: relative;
-        }
-
-        /* 背景粒子样式 */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="5" fill="rgba(255,255,255,0.3)" /></svg>');
-            background-size: 20px 20px;
-            animation: particleAnimation 10s linear infinite;
         }
 
         h1 {
             text-align: center;
-            color: #0056b3;
             padding: 10px 0;
             margin: 0;
             font-size: 80px;
-            animation: colorfulAnimation 10s infinite linear, fadeIn 1s ease-out;
             /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(10px);
+            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: streamingLight 3s linear infinite, fadeIn 1s ease-out;
         }
 
         p {
             text-align: center;
             font-size: 16px;
             margin: 10px 0;
+            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: streamingLight 3s linear infinite;
         }
 
        .search-box {
@@ -140,13 +113,11 @@
        .search-box button {
             padding: 10px 15px;
             border: none;
-            background-color: #007bff;
             color: white;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            animation: colorfulAnimation 10s infinite linear;
         }
 
        .search-box button:hover {
@@ -159,7 +130,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.05);
+            background-color: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(10px);
             max-width: 90%;
             animation: slideIn 1s ease-out;
@@ -171,7 +142,12 @@
        .category h2 {
             font-size: 18px;
             margin-bottom: 15px;
-            color: #007bff;
+            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: streamingLight 3s linear infinite;
         }
 
        .link-container {
@@ -183,20 +159,22 @@
         a {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.5s ease;
-            animation: colorfulAnimation 10s infinite linear;
+            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: streamingLight 3s linear infinite;
         }
 
         a:hover {
-            background-color: #218838;
-            transform: translateY(-12px); /* 鼠标选中动画幅度加大 */
+            transform: translateY(-12px);
             box-shadow: 0 15px 18px rgba(0, 0, 0, 0.2);
-            animation: scaleText 0.3s ease forwards; /* 鼠标悬停文字放大动画 */
+            animation: scaleText 0.3s ease forwards;
         }
 
        .debug-warning {
@@ -209,16 +187,6 @@
             border-radius: 5px;
             font-size: 12px;
             display: none;
-        }
-
-       .weather-info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         @media (max-width: 768px) {
@@ -338,7 +306,6 @@
     </div>
     <div class="main-content">
         <h1>自用导航</h1>
-        <div class="weather-info" id="weatherInfo"></div>
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="搜索一下 就知道了...">
             <select id="searchEngine">
@@ -461,6 +428,22 @@
         const mainContent = document.querySelector('.main-content');
         const debugWarning = document.getElementById('debugWarning');
 
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function applyRandomColors() {
+            const elements = document.querySelectorAll('h1, p, .category h2, a');
+            elements.forEach((element) => {
+                element.style.backgroundColor = getRandomColor();
+            });
+        }
+
         function checkPassword() {
             const inputPassword = passwordInput.value;
             if (inputPassword === correctPassword) {
@@ -472,6 +455,7 @@
                     verified: true,
                     expiration: expirationDate.getTime()
                 }));
+                applyRandomColors();
             } else {
                 alert('密码错误，请重新输入！');
             }
@@ -484,6 +468,7 @@
             if (verified && now < expiration) {
                 passwordModal.style.display = 'none';
                 mainContent.style.display = 'block';
+                applyRandomColors();
             }
         }
 
@@ -514,5 +499,4 @@
     </script>
 </body>
 
-</html>
-    
+</html>    
