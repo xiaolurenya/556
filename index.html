@@ -29,7 +29,7 @@
         body {
             font-family: "Roboto", sans-serif;
             /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
-            background-image: url('https://source.unsplash.com/random/1600x900/?nature');
+            background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -414,3 +414,74 @@
         // 检查本地存储中的密码验证状态
         const storedData = localStorage.getItem('passwordVerified');
         if (storedData) {
+            const { verified, expiration } = JSON.parse(storedData);
+            const currentTime = new Date().getTime();
+            if (verified && currentTime < expiration) {
+                passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        }
+
+        // 禁止鼠标右键
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止 F12 调试
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                const debugWarning = document.getElementById('debugWarning');
+                debugWarning.style.display = 'block';
+                setTimeout(() => {
+                    debugWarning.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const searchEngine = document.getElementById('searchEngine').value;
+            if (searchInput) {
+                const searchUrl = searchEngine + encodeURIComponent(searchInput);
+                window.open(searchUrl, '_blank');
+            } else {
+                alert('请输入搜索关键词！');
+            }
+        }
+
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const apiKey = 'your_api_key'; // 请替换为你自己的心知天气 API Key
+                    const apiUrl = `https://api.seniverse.com/v3/weather/now.json?key=${apiKey}&location=${latitude},${longitude}&language=zh-Hans&unit=c`;
+
+                    fetch(apiUrl)
+                       .then(response => response.json())
+                       .then(data => {
+                            const weatherInfo = document.getElementById('weatherInfo');
+                            const location = data.results[0].location.name;
+                            const weather = data.results[0].now.text;
+                            const temperature = data.results[0].now.temperature;
+                            weatherInfo.innerHTML = `${location} ${weather} ${temperature}°C`;
+                        })
+                       .catch(error => {
+                            console.error('获取天气信息失败:', error);
+                        });
+                }, function (error) {
+                    console.error('获取地理位置失败:', error);
+                });
+            } else {
+                console.error('浏览器不支持地理位置定位');
+            }
+        }
+
+        window.onload = function () {
+            getWeather();
+        };
+    </script>
+</body>
+
+</html>    
