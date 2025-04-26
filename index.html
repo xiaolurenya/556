@@ -234,6 +234,11 @@
        .main-content {
             display: none;
         }
+
+       .备案信息 {
+            font-size: 12px;
+            color: #666;
+        }
     </style>
 </head>
 
@@ -244,8 +249,10 @@
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">提交</button>
             <!-- 添加网站备案信息和工信部链接 -->
-            <p>网站备案号：[皖ICP备2023023534号]</p>
-            <a href="https://beian.miit.gov.cn/" target="_blank">工业和信息化部ICP/IP地址/域名信息备案管理系统</a>
+            <div class="备案信息">
+                <p>网站备案号：[此处填写你的备案号]</p>
+                <a href="https://beian.miit.gov.cn/" target="_blank">工业和信息化部ICP/IP地址/域名信息备案管理系统</a>
+            </div>
         </div>
     </div>
     <div class="main-content">
@@ -379,10 +386,3 @@
             const now = new Date().getTime();
             if (verified && now < expiration) {
                 passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-            }
-        }
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById
