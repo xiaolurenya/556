@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>水印网</title>
+    <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
@@ -27,7 +27,7 @@
         p {
             text-align: center;
             font-size: 18px;
-            margin: 20px 0;
+            margin: 10px 0;
         }
 
        .search-box {
@@ -41,7 +41,14 @@
             padding: 10px 15px;
             border: 1px solid #ccc;
             border-radius: 5px 0 0 5px;
-            width: 70%;
+            width: 50%;
+            font-size: 16px;
+        }
+
+       .search-box select {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-left: none;
             font-size: 16px;
         }
 
@@ -70,7 +77,7 @@
         }
 
        .category h2 {
-            font-size: 24px;
+            font-size: 20px;
             margin-bottom: 15px;
             color: #007BFF;
         }
@@ -110,6 +117,16 @@
             display: none;
         }
 
+       .weather-info {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 28px;
@@ -125,7 +142,7 @@
             }
 
            .search-box input {
-                width: 70%;
+                width: 50%;
             }
         }
 
@@ -170,6 +187,10 @@
        .password-modal button:hover {
             background-color: #0056b3;
         }
+
+       .main-content {
+            display: none;
+        }
     </style>
 </head>
 
@@ -181,161 +202,153 @@
             <button onclick="checkPassword()">提交</button>
         </div>
     </div>
-    <h1>水印网</h1>
-    <div class="search-box">
-        <input type="text" placeholder="搜索...">
-        <button type="submit">搜索</button>
-    </div>
-    <p>视频工具，教程，网站，一站式触达</p>
-    <p>人非圣贤，孰能无过。——《训俗遗规》</p>
-
-    <!-- 搜索引擎相关链接 -->
-    <div class="category">
-        <h2>搜索引擎</h2>
-        <div class="link-container">
-            <a href="#">百度一下</a>
-            <a href="#">微信搜索</a>
-            <a href="#">谷歌搜索</a>
+    <div class="main-content">
+        <h1>自用导航</h1>
+        <div class="weather-info" id="weatherInfo"></div>
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="搜索...">
+            <select id="searchEngine">
+                <option value="https://www.baidu.com/s?wd=">百度</option>
+                <option value="https://www.bing.com/search?q=">必应</option>
+                <option value="https://search.bilibili.com/all?keyword=">B站</option>
+                <option value="https://www.google.com/search?q=">谷歌</option>
+            </select>
+            <button type="button" onclick="performSearch()">搜索</button>
         </div>
-    </div>
+        <p>个人自用，导航书签，网站，一站式触达</p>
 
-    <!-- 视频相关链接 -->
-    <div class="category">
-        <h2>视频平台</h2>
-        <div class="link-container">
-            <a href="#">VideoFK</a>
-            <a href="#">SaveVideoFrom</a>
-            <a href="#">TWDown</a>
-            <a href="#">哔哩哔哩</a>
-            <a href="#">视频号</a>
-            <a href="#">腾讯视频</a>
-            <a href="#">优酷</a>
-            <a href="#">爱奇艺</a>
-            <a href="#">抖音网页版</a>
-            <a href="#">快手网页版</a>
-            <a href="#">120秒视界</a>
-            <a href="#">YouTube</a>
-            <a href="#">X-Twitter</a>
+        <!-- 视频相关链接 -->
+        <div class="category">
+            <h2>飞牛外网</h2>
+            <div class="link-container">
+                <a href="http://li0580.top:3000">MoviePilot</a>
+                <a href="http://li0580.top:8000">飞牛OS</a>
+                <a href="http://li0580.top:8000/v/login">飞牛影视</a>
+                <a href="http://li0580.top:5244">Alist</a>
+                <a href="http://li0580.top:8000">qBittorrent</a>
+                <a href="qBittorrent">Emby</a>
+                <a href="http://li0580.top:3002">G-box导航</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 视频下载工具相关链接 -->
-    <div class="category">
-        <h2>视频下载工具</h2>
-        <div class="link-container">
-            <a href="#">海外视频下载工具</a>
-            <a href="#">YouTube下载器</a>
-            <a href="#">YouTube下载器(缓存版)</a>
-            <a href="#">YouTube下载器2</a>
+        <!-- 视频下载工具相关链接 -->
+        <div class="category">
+            <h2>视频下载工具</h2>
+            <div class="link-container">
+                <a href="#">海外视频下载工具</a>
+                <a href="#">YouTube下载器</a>
+                <a href="#">YouTube下载器(缓存版)</a>
+                <a href="#">YouTube下载器2</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 图片与设计相关链接 -->
-    <div class="category">
-        <h2>图片与设计</h2>
-        <div class="link-container">
-            <a href="#">图片去水印</a>
-            <a href="#">Office模板</a>
-            <a href="#">搞定设计</a>
-            <a href="#">素材天下</a>
-            <a href="#">千库网</a>
-            <a href="#">图怪兽</a>
-            <a href="#">站酷</a>
-            <a href="#">阿里图标</a>
-            <a href="#">IconFinder</a>
-            <a href="#">优设教程</a>
+        <!-- 图片与设计相关链接 -->
+        <div class="category">
+            <h2>图片与设计</h2>
+            <div class="link-container">
+                <a href="#">图片去水印</a>
+                <a href="#">Office模板</a>
+                <a href="#">搞定设计</a>
+                <a href="#">素材天下</a>
+                <a href="#">千库网</a>
+                <a href="#">图怪兽</a>
+                <a href="#">站酷</a>
+                <a href="#">阿里图标</a>
+                <a href="#">IconFinder</a>
+                <a href="#">优设教程</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 去水印编辑工具相关链接 -->
-    <div class="category">
-        <h2>去水印编辑工具</h2>
-        <div class="link-container">
-            <a href="#">去水印编辑工具</a>
+        <!-- 去水印编辑工具相关链接 -->
+        <div class="category">
+            <h2>去水印编辑工具</h2>
+            <div class="link-container">
+                <a href="#">去水印编辑工具</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 社交与内容平台相关链接 -->
-    <div class="category">
-        <h2>社交与内容平台</h2>
-        <div class="link-container">
-            <a href="#">知乎</a>
-            <a href="#">豆瓣</a>
-            <a href="#">简书</a>
-            <a href="#">微博</a>
-            <a href="#">百度贴吧</a>
+        <!-- 社交与内容平台相关链接 -->
+        <div class="category">
+            <h2>社交与内容平台</h2>
+            <div class="link-container">
+                <a href="#">知乎</a>
+                <a href="#">豆瓣</a>
+                <a href="#">简书</a>
+                <a href="#">微博</a>
+                <a href="#">百度贴吧</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 网盘相关链接 -->
-    <div class="category">
-        <h2>网盘</h2>
-        <div class="link-container">
-            <a href="#">阿里云盘</a>
-            <a href="#">百度网盘</a>
-            <a href="#">蓝奏云</a>
-            <a href="#">迅雷云盘</a>
-            <a href="#">OneDrive</a>
-            <a href="#">天翼云盘</a>
-            <a href="#">UC网盘</a>
-            <a href="#">QQ邮箱</a>
-            <a href="#">Gmail</a>
-            <a href="#">Hotmail</a>
-            <a href="#">网易邮箱</a>
-            <a href="#">新浪邮箱</a>
-            <a href="#">阿里邮箱</a>
+        <!-- 网盘相关链接 -->
+        <div class="category">
+            <h2>网盘</h2>
+            <div class="link-container">
+                <a href="#">阿里云盘</a>
+                <a href="#">百度网盘</a>
+                <a href="#">蓝奏云</a>
+                <a href="#">迅雷云盘</a>
+                <a href="#">OneDrive</a>
+                <a href="#">天翼云盘</a>
+                <a href="#">UC网盘</a>
+                <a href="#">QQ邮箱</a>
+                <a href="#">Gmail</a>
+                <a href="#">Hotmail</a>
+                <a href="#">网易邮箱</a>
+                <a href="#">新浪邮箱</a>
+                <a href="#">阿里邮箱</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 视频解析下载工具与在线工具相关链接 -->
-    <div class="category">
-        <h2>视频解析与在线工具</h2>
-        <div class="link-container">
-            <a href="#">视频解析下载工具</a>
-            <a href="#">在线工具</a>
-            <a href="#">IP查询</a>
-            <a href="#">文档在线转换</a>
-            <a href="#">谷歌翻译</a>
-            <a href="#">有道翻译</a>
-            <a href="#">HTML在线运行</a>
-            <a href="#">MD编辑器</a>
-            <a href="#">微PE工具</a>
-            <a href="#">在线代码格式化</a>
-            <a href="#">JS混淆器</a>
-            <a href="#">站长工具</a>
-            <a href="#">在线Ping</a>
-            <a href="#">ICP备案查询</a>
-            <a href="#">在线PS</a>
-            <a href="#">资源人工代下载</a>
+        <!-- 视频解析下载工具与在线工具相关链接 -->
+        <div class="category">
+            <h2>视频解析与在线工具</h2>
+            <div class="link-container">
+                <a href="#">视频解析下载工具</a>
+                <a href="#">在线工具</a>
+                <a href="#">IP查询</a>
+                <a href="#">文档在线转换</a>
+                <a href="#">谷歌翻译</a>
+                <a href="#">有道翻译</a>
+                <a href="#">HTML在线运行</a>
+                <a href="#">MD编辑器</a>
+                <a href="#">微PE工具</a>
+                <a href="#">在线代码格式化</a>
+                <a href="#">JS混淆器</a>
+                <a href="#">站长工具</a>
+                <a href="#">在线Ping</a>
+                <a href="#">ICP备案查询</a>
+                <a href="#">在线PS</a>
+                <a href="#">资源人工代下载</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 学习与技术资源相关链接 -->
-    <div class="category">
-        <h2>学习与技术资源</h2>
-        <div class="link-container">
-            <a href="#">W3school</a>
-            <a href="#">Github</a>
-            <a href="#">码云Gitee</a>
-            <a href="#">Linux命令查询</a>
-            <a href="#">CSDN</a>
-            <a href="#">CdnJs</a>
-            <a href="#">字节跳动CDN</a>
-            <a href="#">Font Awesome</a>
-            <a href="#">MSDN我告诉你</a>
-            <a href="#">腾讯云</a>
-            <a href="#">阿里云</a>
+        <!-- 学习与技术资源相关链接 -->
+        <div class="category">
+            <h2>学习与技术资源</h2>
+            <div class="link-container">
+                <a href="#">W3school</a>
+                <a href="#">Github</a>
+                <a href="#">码云Gitee</a>
+                <a href="#">Linux命令查询</a>
+                <a href="#">CSDN</a>
+                <a href="#">CdnJs</a>
+                <a href="#">字节跳动CDN</a>
+                <a href="#">Font Awesome</a>
+                <a href="#">MSDN我告诉你</a>
+                <a href="#">腾讯云</a>
+                <a href="#">阿里云</a>
+            </div>
         </div>
-    </div>
 
-    <!-- 网站相关链接 -->
-    <div class="category">
-        <h2>网站相关</h2>
-        <div class="link-container">
-            <a href="#">网站公告</a>
-            <a href="#">官方主页</a>
-            <a href="#">申请收录</a>
-            <a href="#">建议&反馈</a>
+        <!-- 网站相关链接 -->
+        <div class="category">
+            <h2>网站相关</h2>
+            <div class="link-container">
+                <a href="#">网站公告</a>
+                <a href="#">官方主页</a>
+                <a href="#">申请收录</a>
+                <a href="#">建议&反馈</a>
+            </div>
         </div>
     </div>
     <div class="debug-warning" id="debugWarning">禁止调试网页！</div>
@@ -343,11 +356,13 @@
         const correctPassword = '123456'; // 请替换为实际密码
         const passwordModal = document.getElementById('passwordModal');
         const passwordInput = document.getElementById('passwordInput');
+        const mainContent = document.querySelector('.main-content');
 
         function checkPassword() {
             const inputPassword = passwordInput.value;
             if (inputPassword === correctPassword) {
                 passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
                 // 保存密码验证状态到本地存储，有效期 30 天
                 const expirationDate = new Date();
                 expirationDate.setDate(expirationDate.getDate() + 30);
@@ -367,6 +382,7 @@
             const currentTime = new Date().getTime();
             if (verified && currentTime < expiration) {
                 passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
             }
         }
 
@@ -386,6 +402,49 @@
                 }, 3000);
             }
         });
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const searchEngine = document.getElementById('searchEngine').value;
+            if (searchInput) {
+                const searchUrl = searchEngine + encodeURIComponent(searchInput);
+                window.location.href = searchUrl;
+            } else {
+                alert('请输入搜索关键词！');
+            }
+        }
+
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const apiKey = 'your_api_key'; // 请替换为你自己的心知天气 API Key
+                    const apiUrl = `https://api.seniverse.com/v3/weather/now.json?key=${apiKey}&location=${latitude},${longitude}&language=zh-Hans&unit=c`;
+
+                    fetch(apiUrl)
+                       .then(response => response.json())
+                       .then(data => {
+                            const weatherInfo = document.getElementById('weatherInfo');
+                            const location = data.results[0].location.name;
+                            const weather = data.results[0].now.text;
+                            const temperature = data.results[0].now.temperature;
+                            weatherInfo.innerHTML = `${location} ${weather} ${temperature}°C`;
+                        })
+                       .catch(error => {
+                            console.error('获取天气信息失败:', error);
+                        });
+                }, function (error) {
+                    console.error('获取地理位置失败:', error);
+                });
+            } else {
+                console.error('浏览器不支持地理位置定位');
+            }
+        }
+
+        window.onload = function () {
+            getWeather();
+        };
     </script>
 </body>
 
