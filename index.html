@@ -235,9 +235,26 @@
             display: none;
         }
 
-       .备案信息 {
+       .record-info {
             font-size: 12px;
             color: #666;
+            margin-top: 10px;
+        }
+
+       .record-info a {
+            font-size: 12px;
+            padding: 0;
+            background-color: transparent;
+            color: #007bff;
+            box-shadow: none;
+            text-decoration: underline;
+            animation: none;
+        }
+
+       .record-info a:hover {
+            background-color: transparent;
+            transform: none;
+            box-shadow: none;
         }
     </style>
 </head>
@@ -249,7 +266,7 @@
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">提交</button>
             <!-- 添加网站备案信息和工信部链接 -->
-            <div class="备案信息">
+            <div class="record-info">
                 <p>网站备案号：[此处填写你的备案号]</p>
                 <a href="https://beian.miit.gov.cn/" target="_blank">工业和信息化部ICP/IP地址/域名信息备案管理系统</a>
             </div>
@@ -342,7 +359,7 @@
         </div>
 
 
-      <!-- 学习与技术资源相关链接 -->
+        <!-- 学习与技术资源相关链接 -->
         <div class="category">
             <h2>学习与技术资源</h2>
             <div class="link-container">
@@ -386,3 +403,36 @@
             const now = new Date().getTime();
             if (verified && now < expiration) {
                 passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const searchEngine = document.getElementById('searchEngine').value;
+            const url = searchEngine + encodeURIComponent(searchInput);
+            window.open(url, '_blank');
+        }
+
+        // 禁止F12和右键调试
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                debugWarning.style.display = 'block';
+                setTimeout(() => {
+                    debugWarning.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            debugWarning.style.display = 'block';
+            setTimeout(() => {
+                debugWarning.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>    
