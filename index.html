@@ -1,452 +1,187 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自用导航</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>水印网</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="水印网">
+    <meta name="author" content="LyLme">
+    <link rel="icon" href="./assets/img/logo.png" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="full-screen" content="yes">
+    <meta name="browsermode" content="application">
+    <meta name="x5-fullscreen" content="true">
+    <meta name="x5-page-mode" content="app">
+    <meta name="lsvn" content="djIuMS4w">
+    <script src="./assets/js/jquery.min.js" type="application/javascript"></script>
+    <link href="./assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="./template/default/css/style.css?v=20240414" type="text/css">
     <style>
-        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
-        @keyframes colorfulAnimation {
-            0% {
-                background-color: #ff6b6b;
-            }
-            25% {
-                background-color: #ffcc5c;
-            }
-            50% {
-                background-color: #8ee4af;
-            }
-            75% {
-                background-color: #a5d8ff;
-            }
-            100% {
-                background-color: #ff6b6b;
-            }
-        }
-
+        /* 背景图片接口地址，可通过修改这个变量来更换背景图片 */
         body {
-            font-family: "Roboto", sans-serif;
-            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
-            background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
+            background-image: url(''); /* 这里填写背景图片的地址 */
             background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #333;
-            margin: 0;
-        }
-
-        h1 {
-            text-align: center;
-            color: white;
-            padding: 30px 0;
-            margin: 0;
-            font-size: 48px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
-        }
-
-        p {
-            text-align: center;
-            font-size: 18px;
-            margin: 10px 0;
-        }
-
-       .search-box {
-            display: flex;
-            justify-content: center;
-            margin: 20px auto;
-            max-width: 500px;
-        }
-
-       .search-box input {
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            width: 50%;
-            font-size: 16px;
-        }
-
-       .search-box select {
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-left: none;
-            font-size: 16px;
-        }
-
-       .search-box button {
-            padding: 10px 15px;
-            border: none;
-            /* 修改按钮背景颜色 */
-            background-color: #ff6b6b;
-            color: white;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 16px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
-        }
-
-       .search-box button:hover {
-            /* 修改按钮悬停时的背景颜色 */
-            background-color: #e84118;
-        }
-
-       .category {
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8);
-            max-width: 90%;
-        }
-
-       .category h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            /* 修改标题颜色 */
-            color: #ff6b6b;
-            /* 移除动画，避免产生背景框效果 */
-            /* animation: colorfulAnimation 10s infinite linear; */
-        }
-
-       .link-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        a {
-            display: inline-block;
-            padding: 12px 25px;
-            /* 修改链接背景颜色 */
-            background-color: #ff6b6b;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
-        }
-
-        a:hover {
-            /* 修改链接悬停时的背景颜色 */
-            background-color: #e84118;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
-        }
-
-       .debug-warning {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            display: none;
-        }
-
-       .weather-info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 28px;
-            }
-
-            p {
-                font-size: 16px;
-            }
-
-            a {
-                width: 100%;
-                text-align: center;
-            }
-
-           .search-box input {
-                width: 50%;
-            }
-        }
-
-       .password-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-       .password-modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-            top: 0;
-            left: 0;
-            transform: translateY(0);
-            margin: 0 auto;
-            max-width: 400px;
-        }
-
-       .password-modal input {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: 100%;
-        }
-
-       .password-modal button {
-            padding: 10px 20px;
-            /* 修改密码框提交按钮背景颜色 */
-            background-color: #ff6b6b;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-       .password-modal button:hover {
-            /* 修改密码框提交按钮悬停时的背景颜色 */
-            background-color: #e84118;
-        }
-
-       .main-content {
-            display: none;
+            background-position: center;
         }
     </style>
 </head>
-
 <body>
-    <div class="password-modal" id="passwordModal">
-        <div class="password-modal-content">
-            <h2>请输入密码</h2>
-            <input type="password" id="passwordInput" placeholder="输入密码">
-            <button onclick="checkPassword()">提交</button>
-        </div>
-    </div>
-    <div class="main-content">
-        <h1>自用导航</h1>
-        <div class="weather-info" id="weatherInfo"></div>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="搜索...">
-            <select id="searchEngine">
-                <option value="https://www.baidu.com/s?wd=">百度</option>
-                <option value="https://www.bing.com/search?q=">必应</option>
-                <option value="https://search.bilibili.com/all?keyword=">B站</option>
-                <option value="https://www.google.com/search?q=">谷歌</option>
-            </select>
-            <button type="button" onclick="performSearch()">搜索</button>
-        </div>
-        <p>个人自用，导航书签，网站，一站式触达</p>
-
-        <!-- 视频相关链接 -->
-        <div class="category">
-            <h2>飞牛外网</h2>
-            <div class="link-container">
-                <a href="http://li0580.top:3000" target="_blank">MoviePilot</a>
-                <a href="http://li0580.top:8000" target="_blank">飞牛OS</a>
-                <a href="http://li0580.top:8000/v/login" target="_blank">飞牛影视</a>
-                <a href="http://li0580.top:5244" target="_blank">Alist</a>
-                <a href="http://li0580.top:8000" target="_blank">qBittorrent</a>
-                <a href="qBittorrent" target="_blank">Emby</a>
-                <a href="http://li0580.top:3002" target="_blank">G-box导航</a>
-            </div>
-        </div>
-
-        <!-- 视频下载工具相关链接 -->
-        <div class="category">
-            <h2>视频下载工具</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">海外视频下载工具</a>
-                <a href="#" target="_blank">YouTube下载器</a>
-                <a href="#" target="_blank">YouTube下载器(缓存版)</a>
-                <a href="#" target="_blank">YouTube下载器2</a>
-            </div>
-        </div>
-
-        <!-- 图片与设计相关链接 -->
-        <div class="category">
-            <h2>图片与设计</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">图片去水印</a>
-                <a href="#" target="_blank">Office模板</a>
-                <a href="#" target="_blank">搞定设计</a>
-                <a href="#" target="_blank">素材天下</a>
-                <a href="#" target="_blank">千库网</a>
-                <a href="#" target="_blank">图怪兽</a>
-                <a href="#" target="_blank">站酷</a>
-                <a href="#" target="_blank">阿里图标</a>
-                <a href="#" target="_blank">IconFinder</a>
-                <a href="#" target="_blank">优设教程</a>
-            </div>
-        </div>
-
-        <!-- 去水印编辑工具相关链接 -->
-        <div class="category">
-            <h2>去水印编辑工具</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">去水印编辑工具</a>
-            </div>
-        </div>
-
-        <!-- 社交与内容平台相关链接 -->
-        <div class="category">
-            <h2>社交与内容平台</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">知乎</a>
-                <a href="#" target="_blank">豆瓣</a>
-                <a href="#" target="_blank">简书</a>
-                <a href="#" target="_blank">微博</a>
-                <a href="#" target="_blank">百度贴吧</a>
-            </div>
-        </div>
-
-        <!-- 网盘相关链接 -->
-        <div class="category">
-            <h2>网盘</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">阿里云盘</a>
-                <a href="#" target="_blank">百度网盘</a>
-                <a href="#" target="_blank">蓝奏云</a>
-                <a href="#" target="_blank">迅雷云盘</a>
-                <a href="#" target="_blank">OneDrive</a>
-                <a href="#" target="_blank">天翼云盘</a>
-                <a href="#" target="_blank">UC网盘</a>
-                <a href="#" target="_blank">QQ邮箱</a>
-                <a href="#" target="_blank">Gmail</a>
-                <a href="#" target="_blank">Hotmail</a>
-                <a href="#" target="_blank">网易邮箱</a>
-                <a href="#" target="_blank">新浪邮箱</a>
-                <a href="#" target="_blank">阿里邮箱</a>
-            </div>
-        </div>
-
-        <!-- 视频解析下载工具与在线工具相关链接 -->
-        <div class="category">
-            <h2>视频解析与在线工具</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">视频解析下载工具</a>
-                <a href="#" target="_blank">在线工具</a>
-                <a href="#" target="_blank">IP查询</a>
-                <a href="#" target="_blank">文档在线转换</a>
-                <a href="#" target="_blank">谷歌翻译</a>
-                <a href="#" target="_blank">有道翻译</a>
-                <a href="#" target="_blank">HTML在线运行</a>
-                <a href="#" target="_blank">MD编辑器</a>
-                <a href="#" target="_blank">微PE工具</a>
-                <a href="#" target="_blank">在线代码格式化</a>
-                <a href="#" target="_blank">JS混淆器</a>
-                <a href="#" target="_blank">站长工具</a>
-                <a href="#" target="_blank">在线Ping</a>
-                <a href="#" target="_blank">ICP备案查询</a>
-                <a href="#" target="_blank">在线PS</a>
-                <a href="#" target="_blank">资源人工代下载</a>
-            </div>
-        </div>
-
-        <!-- 学习与技术资源相关链接 -->
-        <div class="category">
-            <h2>学习与技术资源</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">W3school</a>
-                <a href="#" target="_blank">Github</a>
-                <a href="#" target="_blank">码云Gitee</a>
-                <a href="#" target="_blank">Linux命令查询</a>
-                <a href="#" target="_blank">CSDN</a>
-                <a href="#" target="_blank">CdnJs</a>
-                <a href="#" target="_blank">字节跳动CDN</a>
-                <a href="#" target="_blank">Font Awesome</a>
-                <a href="#" target="_blank">MSDN我告诉你</a>
-                <a href="#" target="_blank">腾讯云</a>
-                <a href="#" target="_blank">阿里云</a>
-            </div>
-        </div>
-
-        <!-- 网站相关链接 -->
-        <div class="category">
-            <h2>网站相关</h2>
-            <div class="link-container">
-                <a href="#" target="_blank">网站公告</a>
-                <a href="#" target="_blank">官方主页</a>
-                <a href="#" target="_blank">申请收录</a>
-                <a href="#" target="_blank">建议&反馈</a>
+    <div id="password-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="password-modal-label" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="password-modal-label">请输入密码</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="password" id="password-input" placeholder="请输入密码">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="password-submit">确定</button>
+                </div>
             </div>
         </div>
     </div>
-    <div class="debug-warning" id="debugWarning">禁止调试网页！</div>
+
+    <div class="banner-video">
+        <img src="/assets/img/web-background.jpg">
+        <div class="bottom-cover" style="background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(244 248 251 / 0.6) 50%, rgb(244 248 251) 100%);">
+        </div>
+    </div>
+
+    <div class="box">
+        <div class="change-type">
+            <div class="type-left" id="type-left">
+                <ul>
+                    <li data-lylme="search"><a>搜索</a><span></span></li>
+                    <li data-lylme="group_1"><a>短视频去水印</a><span></span></li>
+                    <li data-lylme="group_6"><a>海外视频下载工具</a><span></span></li>
+                    <li data-lylme="group_2"><a>图片去水印</a><span></span></li>
+                    <li data-lylme="group_3"><a>去水印编辑工具</a><span></span></li>
+                    <li data-lylme="group_4"><a>视频解析下载工具</a><span></span></li>
+                    <li data-lylme="group_5"><a>资源人工代下载</a><span></span></li>
+                    <li data-lylme="group_7"><a>网站公告</a><span></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--topbar开始-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" style="position: absolute; z-index: 10000;">
+        <!--<a class="navbar-brand" href="/"><img src="./assets/img/logo.png" height="25"  title="LyLme_Spage"></a>-->
+        <button class="navbar-toggler collapsed" style="border: none; outline: none;" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+            <svg class="icon" width="200" height="200">
+                <use xlink:href="#icon-menus"></use>
+            </svg>
+        </button>
+
+        <div class="type-right">
+            <svg t="1711940240250" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7074" width="200" height="200">
+                <path d="M512 0c281.6 0 512 230.4 512 512s-230.4 512-512 512S0 793.6 0 512 230.4 0 512 0z m192.96 261.888l-259.904 78.784c-51.2 13.76-90.592 53.184-106.336 104.384L259.936 704.96c-5.888 15.776 0 33.472 11.808 45.312 7.872 9.824 21.696 13.76 33.472 13.76 3.936 0 9.856 0 13.792-1.984l259.904-78.784c51.2-13.76 90.592-53.184 106.336-104.384l78.784-259.904c5.888-15.776 0-33.472-11.808-45.312-13.792-13.76-31.52-17.728-47.296-11.808v-0.032z m-96.448 295.424a79.872 79.872 0 0 1-53.184 53.152l-200.864 59.072 61.056-202.816a79.904 79.904 0 0 1 53.184-53.184l200.864-59.072-61.056 202.848zM472.64 512a39.36 39.36 0 1 0 78.72 0 39.36 39.36 0 0 0-78.72 0z" fill="#dbdbdb" p-id="7075" data-spm-anchor-id="a313x.search_index.0.i6.29583a81RxO4Dj" class="selected"></path>
+            </svg>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarsExample05">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a class="nav-link" href="https://www.lylme.com/">主页</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://www,shipinhao.org/" target="_blank">视频号</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://www.qushuiyin.cc" target="_blank">车马通去水印</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about" target="_blank">关于本站</a></li>
+                <li class="nav-item"><a class="nav-link" href="/apply" target="_blank">申请收录</a></li>
+                <li class="nav-item"><a class="nav-link" href="/pwd">查看</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://www.qushuiyin.cc" target="_blank">外网视频专用APP</a></li>
+            </ul>
+            <div id="main">
+                <div id="show_date"></div>
+                <div id="show_time"></div>
+            </div>
+        </div>
+    </nav>
+    <!--topbar结束-->
+    <div class="container" style="margin-top:10vh; position: relative; z-index: 100;">
+        <h2 class="title">视频工具，教程，网站，一站式触达</h2>
+        <p class="content">桃李不言，下自成蹊。——《史记》</p>
+        <!--搜索开始-->
+        <div id="search" class="s-search">
+            <div id="search-list" class="hide-type-list">
+                <div class="search-group group-a s-current" style=" margin-top: 50px;">
+                    <ul class="search-type">
+                        <li>
+                            <input hidden=""  checked="" type="radio" name="type" id="type-baidu" value="https://www.baidu.com/s?word=" data-placeholder="百度一下，你就知道">
+                            <label for="type-baidu" style="font-weight:600">
+                                <svg class="icon" aria-hidden="true"><use xlink:href="#icon-icon_baidulogo"></use></svg>
+                                <span style="color:#0c498c">
+                                    百度一下
+                                </span>
+                            </label>
+                        </li>
+                        <!-- 其他搜索选项 -->
+                    </ul>
+                </div>
+            </div>
+            <form action="https://www.bing.com/search?q=" method="get" target="_blank" id="super-search-fm">
+                <input type="text" id="search-text" placeholder="搜索一下" name="q" style="outline:0" autocomplete="off">
+                <button class="submit" type="submit">
+                    <svg style="width: 22px; height: 22px; margin: 0 20px 0 20px; color: #fff;" class="icon" aria-hidden="true" viewBox="0 0 1024 1024">
+                        <use xlink:href="#icon-sousuo">
+                        </use>
+                    </svg>
+                    <span>
+                </button>
+                <ul id="word" style="display: none;">
+                </ul>
+            </form>
+            <div class="set-check hidden-xs">
+                <input type="checkbox" id="set-search-blank" class="bubble-3" autocomplete="off">
+            </div>
+        </div>
+
+        <!-- 其他内容 -->
+
+    </div>
+
+    <script src="./assets/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="./template/default/js/script.js?v=20240414"></script>
+    <script src="./assets/js/svg.js"></script>
     <script>
-        const correctPassword = '123456'; // 请替换为实际密码
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordInput = document.getElementById('passwordInput');
-        const mainContent = document.querySelector('.main-content');
-
-        console.log('passwordModal:', passwordModal);
-        console.log('passwordInput:', passwordInput);
-        console.log('mainContent:', mainContent);
-
-        function checkPassword() {
-            try {
-                console.log('checkPassword 函数被调用');
-                const inputPassword = passwordInput.value;
-                console.log('输入的密码:', inputPassword);
-                if (inputPassword === correctPassword) {
-                    console.log('密码正确');
-                    passwordModal.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    // 保存密码验证状态到本地存储，有效期 30 天
-                    const expirationDate = new Date();
-                    expirationDate.setDate(expirationDate.getDate() + 30);
-                    localStorage.setItem('passwordVerified', JSON.stringify({
-                        verified: true,
-                        expiration: expirationDate.getTime()
-                    }));
+        // 密码验证
+        $(document).ready(function() {
+            $('#password-modal').modal('show');
+            $('#password-submit').click(function() {
+                var password = $('#password-input').val();
+                if (password === 'your_password') { // 这里替换成你的密码
+                    $('#password-modal').modal('hide');
                 } else {
-                    console.log('密码错误');
-                    alert('密码错误，请重新输入！');
+                    alert('密码错误，请重新输入');
                 }
-            } catch (error) {
-                console.error('发生错误:', error);
-            }
-        }
+            });
 
-        // 检查本地存储中的密码验证状态
-        const storedData = localStorage.getItem('passwordVerified');
-        if (storedData) {
-            const { verified, expiration } = JSON.parse(storedData);
-            const now = new Date().getTime();
-            if (verified && now < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-            }
-        }
+            // 禁止F12
+            document.onkeydown = function(e) {
+                if (e.keyCode == 123) {
+                    return false;
+                }
+            };
 
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            const url = searchEngine + encodeURIComponent(searchInput);
-            window.open(url, '_blank');
-        }
+            // 禁止右键
+            document.oncontextmenu = function() {
+                return false;
+            };
+        });
     </script>
+    <div style="display:none;" class="back-to" id="toolBackTop">
+        <a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top"></a>
+    </div>
+    <div class="mt-5 mb-3 footer text-muted text-center">
+        <!--备案信息-->
+        <!--版权信息-->
+        <p> Copyright ©2022 <a href="/">水印网</a>.  All Rights Reserved.</p>
+        <!--网站统计-->
+    </div>
 </body>
-
-</html>    
+</html>
