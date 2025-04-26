@@ -7,28 +7,27 @@
     <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
+        /* 定义通用的动态变化动画，修改色调更协调 */
         @keyframes colorfulAnimation {
             0% {
-                background-color: #ff6b6b;
+                background-color: #FF9F6B;
             }
             25% {
-                background-color: #ffcc5c;
+                background-color: #FFE07C;
             }
             50% {
-                background-color: #8ee4af;
+                background-color: #87E8B8;
             }
             75% {
-                background-color: #a5d8ff;
+                background-color: #A5D8FF;
             }
             100% {
-                background-color: #ff6b6b;
+                background-color: #FF9F6B;
             }
         }
 
         body {
             font-family: "Roboto", sans-serif;
-            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
             background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
@@ -43,14 +42,15 @@
             padding: 30px 0;
             margin: 0;
             font-size: 48px;
-            /* 应用新的动画 */
             animation: colorfulAnimation 10s infinite linear;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
         }
 
         p {
             text-align: center;
             font-size: 18px;
             margin: 10px 0;
+            color: #555;
         }
 
        .search-box {
@@ -58,40 +58,43 @@
             justify-content: center;
             margin: 20px auto;
             max-width: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
        .search-box input {
             padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            width: 50%;
+            border: none;
+            width: 60%;
             font-size: 16px;
+            outline: none;
+            background-color: #F4F4F4;
         }
 
        .search-box select {
             padding: 10px 15px;
-            border: 1px solid #ccc;
+            border: none;
             border-left: none;
             font-size: 16px;
+            outline: none;
+            background-color: #F4F4F4;
         }
 
        .search-box button {
             padding: 10px 15px;
             border: none;
-            /* 修改按钮背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #FF9F6B;
             color: white;
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 8px 8px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            /* 应用新的动画 */
             animation: colorfulAnimation 10s infinite linear;
         }
 
        .search-box button:hover {
-            /* 修改按钮悬停时的背景颜色 */
-            background-color: #e84118;
+            background-color: #FF7A43;
         }
 
        .category {
@@ -99,17 +102,16 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: white;
             max-width: 90%;
         }
 
        .category h2 {
             font-size: 20px;
             margin-bottom: 15px;
-            /* 修改标题颜色 */
-            color: #ff6b6b;
-            /* 移除动画，避免产生背景框效果 */
-            /* animation: colorfulAnimation 10s infinite linear; */
+            color: #FF9F6B;
+            border-bottom: 2px solid #FF9F6B;
+            padding-bottom: 5px;
         }
 
        .link-container {
@@ -121,20 +123,17 @@
         a {
             display: inline-block;
             padding: 12px 25px;
-            /* 修改链接背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #FF9F6B;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 应用新的动画 */
             animation: colorfulAnimation 10s infinite linear;
         }
 
         a:hover {
-            /* 修改链接悬停时的背景颜色 */
-            background-color: #e84118;
+            background-color: #FF7A43;
             transform: translateY(-3px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
@@ -217,8 +216,7 @@
 
        .password-modal button {
             padding: 10px 20px;
-            /* 修改密码框提交按钮背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #FF9F6B;
             color: white;
             border: none;
             border-radius: 5px;
@@ -226,8 +224,7 @@
         }
 
        .password-modal button:hover {
-            /* 修改密码框提交按钮悬停时的背景颜色 */
-            background-color: #e84118;
+            background-color: #FF7A43;
         }
 
        .main-content {
@@ -421,32 +418,4 @@
                         expiration: expirationDate.getTime()
                     }));
                 } else {
-                    console.log('密码错误');
-                    alert('密码错误，请重新输入！');
-                }
-            } catch (error) {
-                console.error('发生错误:', error);
-            }
-        }
-
-        // 检查本地存储中的密码验证状态
-        const storedData = localStorage.getItem('passwordVerified');
-        if (storedData) {
-            const { verified, expiration } = JSON.parse(storedData);
-            const now = new Date().getTime();
-            if (verified && now < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-            }
-        }
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            const url = searchEngine + encodeURIComponent(searchInput);
-            window.open(url, '_blank');
-        }
-    </script>
-</body>
-
-</html>    
+                    console.log('密码错误
