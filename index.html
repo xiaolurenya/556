@@ -1,249 +1,294 @@
+
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="zh-CN" element::-webkit-scrollbar {display:none}>
 
 <head>
-    <meta charset="UTF-8">
-    <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/index.css">
-    <title>私人导航</title>
-    <style>
-        /* 密码验证模态框样式 */
-        #password-modal {
-            display: block;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        #password-modal .modal-content {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 350px;
-            text-align: center;
-        }
-
-        #password-modal h2 {
-            color: #333;
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        #password-modal #password-input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            font-size: 16px;
-            box-sizing: border-box;
-        }
-
-        #password-modal #password-submit {
-            width: 100%;
-            padding: 12px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        #password-modal #password-submit:hover {
-            background-color: #0056b3;
-        }
-    </style>
-    <!-- 新增样式，用于适配手机浏览器 -->
-    <style>
-        @media (max-width: 768px) {
-            /* 隐藏左侧导航栏 */
-           .left-nav {
-                display: none;
-            }
-            /* 主容器宽度设为 100% */
-           .main-container {
-                width: 100%;
-            }
-            /* 搜索框宽度设为 100% */
-           .search-box {
-                width: 100%;
-            }
-            /* 网站列表容器宽度设为 100% */
-           .sites-container {
-                width: 100%;
-            }
-            /* 调整搜索框内元素的宽度 */
-           .search-engins,
-           .search-btn {
-                width: 48%;
-            }
-           .search-input {
-                width: calc(100% - 96%);
-            }
-        }
-    </style>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>水印网</title>
+	<meta name="keywords" content="">
+	<meta name="description" content="水印网">
+	<meta name="author" content="LyLme">
+	<link rel="icon" href="./assets/img/logo.png" type="image/x-icon">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="full-screen" content="yes">
+	<meta name="browsermode" content="application">
+	<meta name="x5-fullscreen" content="true">
+	<meta name="x5-page-mode" content="app">
+	<meta name="lsvn" content="djIuMS4w">
+	<script src="./assets/js/jquery.min.js" type="application/javascript"></script>
+	<link href="./assets/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+	<link rel="stylesheet" href="./template/default/css/style.css?v=20240414" type="text/css">
 </head>
 
 <body>
-    <!-- 密码验证模态框 -->
-    <div id="password-modal">
-        <div class="modal-content">
-            <h2>请输入密码</h2>
-            <input type="password" id="password-input" placeholder="输入密码">
-            <button id="password-submit">提交</button>
-        </div>
+	<div class="banner-video">
+
+		<img src="/assets/img/web-background.jpg">
+		<div class="bottom-cover" style="background-image: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(244 248 251 / 0.6) 50%, rgb(244 248 251) 100%);">
+		</div>
+	</div>
+
+	<div class="box">
+		<div class="change-type">
+			<div class="type-left" id="type-left">
+				<ul>
+					<li data-lylme="search"><a>搜索</a><span></span></li>
+					<li data-lylme="group_1"><a>短视频去水印</a><span></span></li>
+<li data-lylme="group_6"><a>海外视频下载工具</a><span></span></li>
+<li data-lylme="group_2"><a>图片去水印</a><span></span></li>
+<li data-lylme="group_3"><a>去水印编辑工具</a><span></span></li>
+<li data-lylme="group_4"><a>视频解析下载工具</a><span></span></li>
+<li data-lylme="group_5"><a>资源人工代下载</a><span></span></li>
+<li data-lylme="group_7"><a>网站公告</a><span></span></li>
+				</ul>
+			</div>
+
+		</div>
+	</div>
+
+	<!--topbar开始-->
+	<nav class="navbar navbar-expand-lg navbar-light fixed-top" style="position: absolute; z-index: 10000;">
+		<!--<a class="navbar-brand" href="/"><img src="./assets/img/logo.png" height="25"  title="LyLme_Spage"></a>-->
+		<button class="navbar-toggler collapsed" style="border: none; outline: none;" type="button" data-toggle="collapse" data-target="#navbarsExample05" aria-controls="navbarsExample05" aria-expanded="false" aria-label="Toggle navigation">
+			<svg class="icon" width="200" height="200">
+				<use xlink:href="#icon-menus"></use>
+			</svg>
+		</button>
+
+		<div class="type-right">
+			<svg t="1711940240250" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="7074" width="200" height="200">
+				<path d="M512 0c281.6 0 512 230.4 512 512s-230.4 512-512 512S0 793.6 0 512 230.4 0 512 0z m192.96 261.888l-259.904 78.784c-51.2 13.76-90.592 53.184-106.336 104.384L259.936 704.96c-5.888 15.776 0 33.472 11.808 45.312 7.872 9.824 21.696 13.76 33.472 13.76 3.936 0 9.856 0 13.792-1.984l259.904-78.784c51.2-13.76 90.592-53.184 106.336-104.384l78.784-259.904c5.888-15.776 0-33.472-11.808-45.312-13.792-13.76-31.52-17.728-47.296-11.808v-0.032z m-96.448 295.424a79.872 79.872 0 0 1-53.184 53.152l-200.864 59.072 61.056-202.816a79.904 79.904 0 0 1 53.184-53.184l200.864-59.072-61.056 202.848zM472.64 512a39.36 39.36 0 1 0 78.72 0 39.36 39.36 0 0 0-78.72 0z" fill="#dbdbdb" p-id="7075" data-spm-anchor-id="a313x.search_index.0.i6.29583a81RxO4Dj" class="selected"></path>
+			</svg>
+		</div>
+		<div class="collapse navbar-collapse" id="navbarsExample05">
+			<ul class="navbar-nav mr-auto">
+
+				<li class="nav-item"><a class="nav-link" href="https://www.lylme.com/">主页</a></li>
+				    <li class="nav-item"><a class="nav-link" href="http://www,shipinhao.org/" target="_blank">视频号</a></li>
+				    <li class="nav-item"><a class="nav-link" href="http://www.qushuiyin.cc" target="_blank">车马通去水印</a></li>
+				    <li class="nav-item"><a class="nav-link" href="/about" target="_blank">关于本站</a></li>
+				    <li class="nav-item"><a class="nav-link" href="/apply" target="_blank">申请收录</a></li>
+				    <li class="nav-item"><a class="nav-link" href="/pwd">查看</a></li>
+				    <li class="nav-item"><a class="nav-link" href="http://www.qushuiyin.cc" target="_blank">外网视频专用APP</a></li>
+				    
+			</ul>
+			<div id="main">
+				<div id="show_date"></div>
+				<div id="show_time"></div>
+			</div>
+		</div>
+
+	</nav>
+	<!--topbar结束-->
+	<div class="container" style="margin-top:10vh; position: relative; z-index: 100;">
+		<h2 class="title">视频工具，教程，网站，一站式触达</h2><p class="content">如果你不和家人在一起，你就永远无法成为真正的男人</p>		<!--搜索开始-->
+		<div id="search" class="s-search">
+			<div id="search-list" class="hide-type-list">
+				<div class="search-group group-a s-current" style=" margin-top: 50px;">
+					<ul class="search-type">
+							<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-baidu" value="https://www.baidu.com/s?word="data-placeholder="百度一下，你就知道">
+								<label for="type-baidu" style="font-weight:600">
+								<svg class="icon" aria-hidden="true"><use xlink:href="#icon-icon_baidulogo"></use></svg>
+									<span style="color:#0c498c">
+										百度一下
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-VideoFK" value="https://www.videofk.com/zh-CN/search?url="data-placeholder="请去掉文字，输入视频网址下载，">
+								<label for="type-VideoFK" style="font-weight:600">
+								<svg t="1712040262003" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="12650" width="32" height="32"><path d="M668.8 0H355.2C67.2 0 0 67.2 0 355.2v315.2C0 956.8 67.2 1024 355.2 1024h315.2C956.8 1024 1024 956.8 1024 668.8V355.2C1024 67.2 956.8 0 668.8 0z m158.4 731.2H752c-28.8 0-36.8-22.4-88-73.6-44.8-43.2-64-48-73.6-48-14.4 0-19.2 3.2-19.2 24v67.2c0 17.6-4.8 28.8-54.4 28.8-78.4 0-166.4-48-227.2-137.6-92.8-131.2-116.8-228.8-116.8-248 0-11.2 3.2-20.8 24-20.8H272c17.6 0 25.6 8 33.6 28.8 36.8 107.2 97.6 200 123.2 200 9.6 0 14.4-4.8 14.4-28.8v-110.4c-3.2-51.2-28.8-54.4-28.8-73.6 0-8 8-17.6 17.6-17.6h116.8c16 0 20.8 8 20.8 27.2V496c0 16 6.4 20.8 11.2 20.8 9.6 0 17.6-4.8 35.2-22.4 54.4-60.8 91.2-152 91.2-152 4.8-11.2 14.4-20.8 32-20.8h73.6c22.4 0 27.2 11.2 22.4 27.2-9.6 43.2-100.8 172.8-100.8 172.8-8 12.8-11.2 17.6 0 33.6 8 11.2 35.2 33.6 51.2 54.4 32 36.8 56 67.2 62.4 88 9.6 22.4 0 33.6-20.8 33.6z" p-id="12651" fill="#d81e06"></path></svg>
+									<span style="color:#fd6853">
+										VideoFK
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-SaveVideoFrom" value="https://savevideofrom.net/search?url="data-placeholder="输入视频网址">
+								<label for="type-SaveVideoFrom" style="font-weight:600">
+								<svg t="1712040013421" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9293" width="32" height="32"><path d="M837.8 64H186.2C114.1 64 64 114.1 64 186.2v651.6C64 909.9 114.1 960 186.2 960h651.6c72.1 0 122.2-50.1 122.2-122.2V186.2C960 114.1 909.9 64 837.8 64z m0 570.2c0 16.4-24.3 40.7-40.7 40.7h-81.5c-33.4 0-40.7 54.3-40.7 40.7v81.5c0 16.4-24.3 40.7-40.7 40.7H389.8c-16.4 0-40.7-24.3-40.7-40.7v-81.5c0 13.6-0.3-40.7-40.7-40.7h-81.5c-16.4 0-40.7-24.3-40.7-40.7V226.9c0-16.4 24.3-40.7 40.7-40.7h570.2c16.4 0 40.7 24.3 40.7 40.7v407.3z" fill="#d81e06" p-id="9294"></path><path d="M674.9 471.3h-81.5V308.4c0-22.5-18.2-40.7-40.7-40.7h-81.5c-22.5 0-40.7 18.2-40.7 40.7v162.9H349c-22.5 0-27.8 12.9-11.9 28.8L512 674.9l174.8-174.8c15.9-15.9 10.6-28.8-11.9-28.8z" fill="#d81e06" p-id="9295"></path></svg>
+									<span style="color:#696a6d">
+										SaveVideoFrom
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-TWDown" value="https://savevideofrom.net/search?url="data-placeholder="有问题，上知乎">
+								<label for="type-TWDown" style="font-weight:600">
+								<svg t="1712040167789" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9504" width="32" height="32"><path d="M102.760931 509.188218c0-2.556166 0.511233-5.112332 1.533699-7.668498-0.511233 2.044933-1.022466 4.601098-1.533699 7.668498zM116.052993 482.604094l-1.5337 1.533699 1.5337-1.533699z" p-id="9505" fill="#1296db"></path><path d="M511.236218 1.533699C229.035519 1.533699 0.003067 230.566151 0.003067 512.76685s229.032451 511.23315 511.233151 511.23315 511.23315-229.032451 511.23315-511.23315S793.436917 1.533699 511.236218 1.533699z m0 940.668997c-237.212182 0-429.435846-192.223665-429.435847-429.435846s192.223665-429.435846 429.435847-429.435847 429.435846 192.223665 429.435846 429.435847-192.223665 429.435846-429.435846 429.435846z" p-id="9506" fill="#1296db"></path><path d="M655.403966 548.55317l-115.538692 115.538692c-1.022466 1.022466-2.044933 1.533699-3.067399 2.556166-1.022466 0.511233-1.533699 1.533699-2.556166 2.044933h-0.511233c-0.511233 0-0.511233 0.511233-1.022466 0.511233-0.511233 0.511233-1.533699 1.022466-2.556166 1.533699l-0.511233 0.511233c-1.022466 0.511233-2.044933 1.022466-3.578632 1.5337-1.022466 0.511233-2.044933 1.022466-3.067399 1.022466h-0.511233c-1.022466 0.511233-2.556166 0.511233-3.578632 1.022466-1.533699 0.511233-2.556166 0.511233-4.089865 0.511234h-8.179731c-1.533699 0-2.556166-0.511233-4.089865-0.511234s-2.556166-0.511233-3.578632-1.022466h-0.511233c-1.022466-0.511233-2.044933-1.022466-3.067399-1.022466-1.022466-0.511233-2.556166-1.022466-3.578632-1.5337 0 0-0.511233 0-0.511233-0.511233-1.022466-0.511233-1.533699-1.022466-2.556166-1.533699-0.511233 0-0.511233-0.511233-1.022466-0.511233h-0.511233c-1.022466-0.511233-1.533699-1.533699-2.556166-2.044933-1.022466-1.022466-2.044933-1.533699-3.067399-2.556166l-115.538692-115.538692c-15.848228-15.848228-15.848228-41.921118 0-57.769346 8.17973-8.17973 18.404393-11.758362 29.14029-11.758362 10.224663 0 20.960559 4.089865 29.140289 11.758362l46.010984 46.010984V267.374938c0-22.494259 18.404393-40.898652 40.898652-40.898652 11.247129 0 21.471792 4.601098 29.140289 11.758362 7.157264 7.668497 11.758362 17.89316 11.758363 29.14029V536.794808l46.010983-46.010984c15.848228-15.848228 41.921118-15.848228 57.769346 0 15.848228 15.848228 15.848228 41.921118-0.511233 57.769346z m19.42686 250.504244h-327.189216c-22.494259 0-40.898652-18.404393-40.898652-40.898652s18.404393-40.898652 40.898652-40.898652h327.189216c22.494259 0 40.898652 18.404393 40.898652 40.898652s-18.404393 40.898652-40.898652 40.898652z" p-id="9507" fill="#1296db"></path></svg>
+									<span style="color:#007bff">
+										TWDown
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-bilibili" value="https://search.bilibili.com/all?keyword="data-placeholder="(゜-゜)つロ 干杯~">
+								<label for="type-bilibili" style="font-weight:600">
+								<svg class="icon" aria-hidden="true"><use xlink:href="#icon-bili"></use></svg>
+									<span style="color:#00aeec">
+										哔哩哔哩
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-weixin" value="https://weixin.sogou.com/weixin?ie=utf8&s_from=input&_sug_=y&type=2&query="data-placeholder="随时随地发现新鲜事">
+								<label for="type-weixin" style="font-weight:600">
+								<svg t="1745338751834" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1535" width="200" height="200"><path d="M337.387283 341.82659c-17.757225 0-35.514451 11.83815-35.514451 29.595375s17.757225 29.595376 35.514451 29.595376 29.595376-11.83815 29.595376-29.595376c0-18.49711-11.83815-29.595376-29.595376-29.595375zM577.849711 513.479769c-11.83815 0-22.936416 12.578035-22.936416 23.6763 0 12.578035 11.83815 23.676301 22.936416 23.676301 17.757225 0 29.595376-11.83815 29.595376-23.676301s-11.83815-23.676301-29.595376-23.6763zM501.641618 401.017341c17.757225 0 29.595376-12.578035 29.595376-29.595376 0-17.757225-11.83815-29.595376-29.595376-29.595375s-35.514451 11.83815-35.51445 29.595375 17.757225 29.595376 35.51445 29.595376zM706.589595 513.479769c-11.83815 0-22.936416 12.578035-22.936416 23.6763 0 12.578035 11.83815 23.676301 22.936416 23.676301 17.757225 0 29.595376-11.83815 29.595376-23.676301s-11.83815-23.676301-29.595376-23.6763z" fill="#28C445" p-id="1536"></path><path d="M510.520231 2.959538C228.624277 2.959538 0 231.583815 0 513.479769s228.624277 510.520231 510.520231 510.520231 510.520231-228.624277 510.520231-510.520231-228.624277-510.520231-510.520231-510.520231zM413.595376 644.439306c-29.595376 0-53.271676-5.919075-81.387284-12.578034l-81.387283 41.433526 22.936416-71.768786c-58.450867-41.433526-93.965318-95.445087-93.965317-159.815029 0-113.202312 105.803468-201.988439 233.803468-201.98844 114.682081 0 216.046243 71.028902 236.023121 166.473989-7.398844-0.739884-14.797688-1.479769-22.196532-1.479769-110.982659 1.479769-198.289017 85.086705-198.289017 188.67052 0 17.017341 2.959538 33.294798 7.398844 49.572255-7.398844 0.739884-15.537572 1.479769-22.936416 1.479768z m346.265896 82.867052l17.757225 59.190752-63.630058-35.514451c-22.936416 5.919075-46.612717 11.83815-70.289017 11.83815-111.722543 0-199.768786-76.947977-199.768786-172.393063-0.739884-94.705202 87.306358-171.653179 198.289017-171.65318 105.803468 0 199.028902 77.687861 199.028902 172.393064 0 53.271676-34.774566 100.624277-81.387283 136.138728z" fill="#28C445" p-id="1537"></path></svg>
+									<span style="color:#07c160">
+										微信搜索
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-google" value="https://www.google.com/search?q="data-placeholder="值得信任的搜索引擎">
+								<label for="type-google" style="font-weight:600">
+								<svg class="icon" aria-hidden="true"><use xlink:href="#icon-google00"></use></svg>
+									<span style="color:#3B83FA">
+										谷歌搜索
+									</span>
+								</label>
+							</li>
+								<li>
+								<input hidden=""  checked="" type="radio" name="type" id="type-fanyi" value="https://fanyi.baidu.com/#auto/zh/"data-placeholder="输入翻译内容（自动检测语言）">
+								<label for="type-fanyi" style="font-weight:600">
+								<svg class="icon" aria-hidden="true"><use xlink:href="#icon-fanyi"></use></svg>
+									<span style="color:#0084fe">
+										在线翻译
+									</span>
+								</label>
+							</li>
+												</ul>
+				</div>
+			</div>
+			<form action="https://www.bing.com/search?q=" method="get" target="_blank" id="super-search-fm">
+				<input type="text" id="search-text" placeholder="搜索一下" name="q" style="outline:0" autocomplete="off">
+				<button class="submit" type="submit">
+					<svg style="width: 22px; height: 22px; margin: 0 20px 0 20px; color: #fff;" class="icon" aria-hidden="true" viewBox="0 0 1024 1024">
+						<use xlink:href="#icon-sousuo">
+						</use>
+					</svg>
+					<span>
+				</button>
+
+				<ul id="word" style="display: none;">
+				</ul>
+			</form>
+			<div class="set-check hidden-xs">
+				<input type="checkbox" id="set-search-blank" class="bubble-3" autocomplete="off">
+			</div>
+		</div>
+
+		<ul class="mylist row"><li id="group_1" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-remen"></use></svg><sapn>短视频去水印</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.shuiyinjie.com"  title="水印姐解析"  target="_blank"><img src="http://www.shuiyin.org/files/upload/20240312054759311.png" alt="水印姐解析" /><span>水印姐解析</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.qushuiyin.cc"  title="车马通去水印"  target="_blank"><img src="http://www.shuiyin.org/files/upload/20240312054706647.jpg" alt="车马通去水印" /><span>车马通去水印</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.shipinhao.org/"  title="视频号"  target="_blank"><img src="http://www.shuiyin.org/files/upload/20240312053109117.png" alt="视频号" /><span><font color="#f4a261">视频号</font></span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://v.qq.com"  title="腾讯视频"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-tengxunshipin"></use></svg><span>腾讯视频</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.youku.com/"  title="优酷"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-youku"></use></svg><span>优酷</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.iqiyi.com/"  title="爱奇艺"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-aiqiyi"></use></svg><span>爱奇艺</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.taobao.com/"  title="淘宝"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-taobao"></use></svg><span>淘宝</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.bilibili.com/"  title="哔哩哔哩"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-bili"></use></svg><span>哔哩哔哩</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.weibo.com/"  title="微博"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-weibo"></use></svg><span>微博</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.qq.com/"  title="QQ邮箱"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qqmail00"></use></svg><span>QQ邮箱</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://tieba.baidu.com/"  title="百度贴吧"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-tieba00"></use></svg><span>百度贴吧</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://tv.cctv.com/live/index.shtml"  title="CCTV直播"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cctv"></use></svg><span>CCTV直播</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.douyin.com/"  title="抖音网页版"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-douyin00"></use></svg><span>抖音网页版</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.kuaishou.com/"  title="快手网页版"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-kuaishou00"></use></svg><span>快手网页版</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://music.163.com/"  title="网易云音乐"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wyyyy00"></use></svg><span>网易云音乐</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://y.qq.com/"  title="QQ音乐"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qqmusic00"></use></svg><span>QQ音乐</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.kugou.com/"  title="酷狗音乐"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-kugou00"></use></svg><span>酷狗音乐</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.huya.com/"  title="虎牙直播"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-huya00"></use></svg><span>虎牙直播</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.douyu.com/"  title="斗鱼直播"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-douyu00"></use></svg><span>斗鱼直播</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://egame.qq.com/"  title="企鹅电竞"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qie00"></use></svg><span>企鹅电竞</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://filehelper.weixin.qq.com/"  title="微信文件传输助手"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wechat00"></use></svg><span>微信文件传输助手</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://60s.lylme.com/"  title="120秒视界"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-remen"></use></svg><span>120秒视界</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.youtube.com"  title="YouTube"  target="_blank"><img src="http://www.shuiyin.org/files/upload/20240402035952757.png" alt="YouTube" /><span>YouTube</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.twitter.com"  title="X-Twitter"  target="_blank"><img src="http://www.shuiyin.org/files/upload/20240402040200891.png" alt="X-Twitter" /><span>X-Twitter</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_6" class="title"><svg t="1745339020260" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5874" width="200" height="200"><path d="M426.666667 682.666667V384l256 149.845333L426.666667 682.666667z m587.093333-355.541334s-10.026667-71.04-40.704-102.357333c-38.954667-41.088-82.602667-41.258667-102.613333-43.648C727.168 170.666667 512.213333 170.666667 512.213333 170.666667h-0.426666s-214.954667 0-358.229334 10.453333c-20.053333 2.389333-63.658667 2.56-102.656 43.648-30.677333 31.317333-40.661333 102.4-40.661333 102.4S0 410.538667 0 493.952v78.293333c0 83.456 10.24 166.912 10.24 166.912s9.984 71.04 40.661333 102.357334c38.997333 41.088 90.154667 39.765333 112.938667 44.074666C245.76 893.568 512 896 512 896s215.168-0.341333 358.442667-10.752c20.053333-2.432 63.658667-2.602667 102.613333-43.690667 30.72-31.317333 40.704-102.4 40.704-102.4s10.24-83.413333 10.24-166.869333v-78.250667c0-83.456-10.24-166.912-10.24-166.912z" fill="#FF0000" p-id="5875"></path></svg><sapn>海外视频下载工具</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://freesave.co/zh-cn/index.html"  title="YouTube下载器"  target="_blank"><img src="/assets/img/default-icon.png" alt="YouTube下载器" /><span><font color="#ff0000">YouTube下载器</font></span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://freesave.co/zh-cn/index.html"  title="YouTube下载器"  target="_blank"><svg t="1745339376853" class="icon" viewBox="0 0 2453 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3193" width="200" height="200"><path d="M2437.368875 220.776166s-14.450804-100.352803-58.204626-144.508036C2323.769502 18.464916 2261.149353 18.063505 2232.649157 14.852215 2028.330851 0 1721.652685 0 1721.652685 0h-0.802822s-306.678165 0-511.397883 14.852215c-28.500196 3.21129-90.718934 3.612701-146.515093 61.817326-43.753822 44.155233-58.204626 144.508036-58.204625 144.508036s-14.450804 117.613485-14.450804 235.628381v110.388084c0 117.613485 14.450804 235.628381 14.450804 235.628381s14.450804 100.352803 58.204625 144.508036c55.394747 57.803214 128.451588 56.19757 160.965896 62.218737 116.810662 11.239514 496.94708 14.450804 496.94708 14.450804s307.079577-0.401411 511.397883-15.253626c28.500196-3.21129 90.718934-3.612701 146.515092-61.817327 43.753822-44.155233 58.204626-144.508036 58.204626-144.508036s14.450804-117.613485 14.450803-235.628381v-110.388083c0.401411-118.014896-14.049392-235.628381-14.049392-235.628381" fill="#D54029" p-id="3194"></path><path d="M915.217562 828.111329h-93.127401v-53.789102C786.765974 814.864759 757.061544 834.935319 724.547236 834.935319c-28.500196 0-48.570757-13.647981-58.204625-37.732653-6.021168-14.852215-10.436691-38.134065-10.436692-71.852607V333.572717h93.127401V734.582517c2.007056 13.647981 8.028224 18.866327 19.66915 18.866327 17.662093 0 33.718542-15.655037 53.387691-43.352411V333.572717H915.217562v494.538612M587.264602 495.341435c0-52.98628-10.436691-92.324579-29.303018-117.613485-24.887495-33.718542-63.422971-47.767934-102.76127-47.767934-44.155233 0-77.873775 13.647981-102.76127 47.767934-18.866327 24.887495-29.303018 65.028616-29.303019 118.014896v175.81811c0 52.584869 9.232458 88.711878 28.098785 113.599373 24.887495 33.718542 65.028616 51.380635 103.965504 51.380635s79.880831-17.662093 104.768326-51.380635c18.866327-24.887495 27.295962-61.014504 27.295962-113.599373v-176.219521m-93.127401 185.853391c4.816935 48.972168-10.436691 73.05684-39.338299 73.05684-28.901607 0-44.155233-24.084673-39.338298-73.05684v-195.888672c-4.816935-48.972168 10.436691-71.852607 39.338298-71.852606 28.901607 0 44.155233 22.880439 39.338299 71.852606v195.888672zM220.374755 558.764406v269.346923H122.430419v-269.346923S20.873383 228.80439 0 167.388475h102.76127l68.641317 257.705998 68.239906-257.705998h102.76127l-122.029008 391.375931" fill="" p-id="3195"></path><path d="M2329.389259 598.102705v-99.951392c0-52.183457-10.436691-90.317523-28.901607-115.205017-24.887495-33.317131-60.211682-50.979224-104.366915-50.979224-45.359467 0-80.683653 17.662093-105.97256 50.979224-18.866327 24.887495-29.70443 65.028616-29.704429 117.212073v171.402587c0 51.782046 12.042336 88.310466 30.908663 112.796551 25.690318 33.317131 61.014504 50.176401 107.176793 50.176401s82.69071-17.662093 107.176794-52.98628c10.838103-15.655037 17.662093-33.317131 20.873383-52.98628 0.802822-8.831047 3.21129-28.901607 3.211289-57.803214v-14.049392h-93.127401c0 35.725598 0 56.598981-0.802822 61.415915-5.218346 23.683261-17.662093 35.725598-39.73971 35.725598-30.507252 0-43.352411-22.880439-42.951-67.838495V598.102705h176.219522m-176.219522-127.648765c0-45.760878 12.443748-58.204626 42.148178-58.204626 29.303018 0 40.943944 13.647981 40.943943 59.007448v53.387691h-83.092121v-54.190513zM1918.74559 330.762838c-32.514308 0-65.028616 20.070561-93.528812 55.394747V172.20541h-87.909056v655.905919h87.909056V778.73775c29.70443 36.52842 61.817327 55.394747 93.528812 55.394747 35.324187 0 61.014504-18.866327 73.05684-55.394747 6.021168-20.873383 9.633869-52.584869 9.633869-97.944336v-195.888671c0-46.162289-6.021168-77.873775-12.042336-97.542924-11.640925-36.127009-35.324187-56.598981-70.648373-56.598981m-10.03528 355.248922c0 48.972168-11.640925 67.838495-36.929832 67.838495-14.450804 0-31.310074-7.626813-46.162289-22.479028v-296.642885c14.852215-14.450804 31.711486-22.479028 46.162289-22.479028 25.690318 0 36.929831 14.450804 36.929832 63.422971v210.339475zM1663.849471 828.111329h-93.127401v-53.789102C1535.397883 814.864759 1505.693454 834.935319 1473.179145 834.935319c-28.500196 0-48.570757-13.647981-58.204625-37.732653-6.021168-14.852215-10.436691-38.134065-10.436692-71.852607V338.791062h93.127401v396.192866c2.007056 13.647981 8.028224 18.866327 19.66915 18.866327 17.662093 0 33.718542-15.655037 53.387691-43.352411V338.791062h93.127401v489.320267" fill="#FFFFFF" p-id="3196"></path><path d="M1311.410427 828.111329h-97.944335V265.332811h-102.76127V172.20541h308.28381v93.127401h-107.578205v562.778518" fill="#FFFFFF" p-id="3197"></path></svg><span><font color="#ff0000">YouTube下载器</font></span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://yt5s.biz/zh-cn"  title="YouTube下载器(缓存版)"  target="_blank"><svg t="1745339648360" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3348" width="200" height="200"><path d="M624.966337 710.857143v120.571428q0 38.285714-22.285714 38.285715-13.142857 0-25.714286-12.571429v-172q12.571429-12.571429 25.714286-12.571428 22.285714 0 22.285714 38.285714z m193.142857 0.571428v26.285715h-51.428571v-26.285715q0-38.857143 25.714286-38.857142t25.714285 38.857142z m-552-124.571428h61.142857v-53.714286H148.966337v53.714286h60v325.142857h57.142857v-325.142857z m164.571429 325.142857h50.857143v-282.285714h-50.857143v216q-17.142857 24-32.571429 24-10.285714 0-12-12-0.571429-1.714286-0.571428-20v-208h-50.857143v223.428571q0 28 4.571428 41.714286 6.857143 21.142857 33.142858 21.142857 27.428571 0 58.285714-34.857143v30.857143z m245.142857-84.571429v-112.571428q0-41.714286-5.142857-56.571429-9.714286-32-40.571429-32-28.571429 0-53.142857 30.857143V533.142857h-50.857143v378.857143h50.857143v-27.428571q25.714286 31.428571 53.142857 31.428571 30.857143 0 40.571429-31.428571 5.142857-15.428571 5.142857-57.142858z m193.142857-5.714285v-7.428572h-52q0 29.142857-1.142857 34.857143-4 20.571429-22.857143 20.571429-26.285714 0-26.285714-39.428572v-49.714285h102.285714v-58.857143q0-45.142857-15.428571-66.285715-22.285714-29.142857-60.571429-29.142857-38.857143 0-61.142857 29.142857-16 21.142857-16 66.285715v98.857143q0 45.142857 16.571429 66.285714 22.285714 29.142857 61.714285 29.142857 41.142857 0 61.714286-30.285714 10.285714-15.428571 12-30.857143 1.142857-5.142857 1.142857-33.142857zM521.537766 300V180q0-39.428571-24.571429-39.428571t-24.571428 39.428571v120q0 40 24.571428 40t24.571429-40z m410.857143 429.142857q0 133.714286-14.857143 200-8 33.714286-33.142857 56.571429t-58.285715 26.285714q-105.142857 12-317.142857 12t-317.142857-12q-33.142857-3.428571-58.571429-26.285714T100.394909 929.142857q-14.857143-64-14.857143-200 0-133.714286 14.857143-200 8-33.714286 33.142857-56.571428t58.857143-26.857143q104.571429-11.428571 316.571428-11.428572t317.142857 11.428572q33.142857 4 58.571429 26.857143t32.857143 56.571428q14.857143 64 14.857143 200zM362.109194 0h58.285715L351.252051 228v154.857143H294.109194V228q-8-42.285714-34.857143-121.142857Q238.109194 48 222.109194 0h60.571429l40.571428 150.285714z m211.428572 190.285714v100q0 46.285714-16 67.428572-21.714286 29.142857-60.571429 29.142857-38.285714 0-60-29.142857-16-21.714286-16-67.428572V190.285714q0-45.714286 16-66.857143 21.714286-29.142857 60-29.142857 38.857143 0 60.571429 29.142857 16 21.142857 16 66.857143z m191.428571-92.571428v285.142857h-52v-31.428572q-30.285714 35.428571-58.857143 35.428572-26.285714 0-33.714285-21.142857-4.571429-13.714286-4.571429-42.857143V97.714286h52v209.714285q0 18.857143 0.571429 20 1.714286 12.571429 12 12.571429 15.428571 0 32.571428-24.571429V97.714286h52z" p-id="3349" fill="#1296db"></path></svg><span><font color="#0077b6">YouTube下载器(缓存版)</font></span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://ddownr.com/zh7H/youtube-video-downloader"  title="YouTube下载器2"  target="_blank"><svg t="1745339648360" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3348" width="200" height="200"><path d="M624.966337 710.857143v120.571428q0 38.285714-22.285714 38.285715-13.142857 0-25.714286-12.571429v-172q12.571429-12.571429 25.714286-12.571428 22.285714 0 22.285714 38.285714z m193.142857 0.571428v26.285715h-51.428571v-26.285715q0-38.857143 25.714286-38.857142t25.714285 38.857142z m-552-124.571428h61.142857v-53.714286H148.966337v53.714286h60v325.142857h57.142857v-325.142857z m164.571429 325.142857h50.857143v-282.285714h-50.857143v216q-17.142857 24-32.571429 24-10.285714 0-12-12-0.571429-1.714286-0.571428-20v-208h-50.857143v223.428571q0 28 4.571428 41.714286 6.857143 21.142857 33.142858 21.142857 27.428571 0 58.285714-34.857143v30.857143z m245.142857-84.571429v-112.571428q0-41.714286-5.142857-56.571429-9.714286-32-40.571429-32-28.571429 0-53.142857 30.857143V533.142857h-50.857143v378.857143h50.857143v-27.428571q25.714286 31.428571 53.142857 31.428571 30.857143 0 40.571429-31.428571 5.142857-15.428571 5.142857-57.142858z m193.142857-5.714285v-7.428572h-52q0 29.142857-1.142857 34.857143-4 20.571429-22.857143 20.571429-26.285714 0-26.285714-39.428572v-49.714285h102.285714v-58.857143q0-45.142857-15.428571-66.285715-22.285714-29.142857-60.571429-29.142857-38.857143 0-61.142857 29.142857-16 21.142857-16 66.285715v98.857143q0 45.142857 16.571429 66.285714 22.285714 29.142857 61.714285 29.142857 41.142857 0 61.714286-30.285714 10.285714-15.428571 12-30.857143 1.142857-5.142857 1.142857-33.142857zM521.537766 300V180q0-39.428571-24.571429-39.428571t-24.571428 39.428571v120q0 40 24.571428 40t24.571429-40z m410.857143 429.142857q0 133.714286-14.857143 200-8 33.714286-33.142857 56.571429t-58.285715 26.285714q-105.142857 12-317.142857 12t-317.142857-12q-33.142857-3.428571-58.571429-26.285714T100.394909 929.142857q-14.857143-64-14.857143-200 0-133.714286 14.857143-200 8-33.714286 33.142857-56.571428t58.857143-26.857143q104.571429-11.428571 316.571428-11.428572t317.142857 11.428572q33.142857 4 58.571429 26.857143t32.857143 56.571428q14.857143 64 14.857143 200zM362.109194 0h58.285715L351.252051 228v154.857143H294.109194V228q-8-42.285714-34.857143-121.142857Q238.109194 48 222.109194 0h60.571429l40.571428 150.285714z m211.428572 190.285714v100q0 46.285714-16 67.428572-21.714286 29.142857-60.571429 29.142857-38.285714 0-60-29.142857-16-21.714286-16-67.428572V190.285714q0-45.714286 16-66.857143 21.714286-29.142857 60-29.142857 38.857143 0 60.571429 29.142857 16 21.142857 16 66.857143z m191.428571-92.571428v285.142857h-52v-31.428572q-30.285714 35.428571-58.857143 35.428572-26.285714 0-33.714285-21.142857-4.571429-13.714286-4.571429-42.857143V97.714286h52v209.714285q0 18.857143 0.571429 20 1.714286 12.571429 12 12.571429 15.428571 0 32.571428-24.571429V97.714286h52z" p-id="3349" fill="#2c2c2c"></path></svg><span>YouTube下载器2</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_2" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-sheji"></use></svg><sapn>图片去水印</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.officeplus.cn/"  title="Office模板"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-office00"></use></svg><span>Office模板</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.gaoding.com/"  title="搞定设计"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-gaoding00"></use></svg><span>搞定设计</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.sucaitianxia.net/"  title="素材天下"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-video"></use></svg><span>素材天下</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://588ku.com/"  title="千库网"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qianku00"></use></svg><span>千库网</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://818ps.com"  title="图怪兽"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-tu00"></use></svg><span>图怪兽</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.zcool.com.cn/"  title="站酷"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhanku"></use></svg><span>站酷</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.iconfont.cn/"  title="阿里图标"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-iconfont"></use></svg><span>阿里图标</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.iconfinder.com/"  title="IconFinder"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-eye"></use></svg><span>IconFinder</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://uiiiuiii.com/"  title="优设教程"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-jiaocheng"></use></svg><span>优设教程</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_3" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-msg"></use></svg><sapn>去水印编辑工具</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.zhihu.com/explore"  title="知乎"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhihu"></use></svg><span>知乎</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.douban.com/"  title="豆瓣"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-douban"></use></svg><span>豆瓣</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.jianshu.com/"  title="简书"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-jianshu"></use></svg><span>简书</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.aliyundrive.com/"  title="阿里云盘"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-alipan00"></use></svg><span>阿里云盘</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://pan.baidu.com/"  title="百度网盘"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-baidupan00"></use></svg><span>百度网盘</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.lanzou.com/"  title="蓝奏云"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-lanzou00"></use></svg><span>蓝奏云</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://pan.xunlei.com/"  title="迅雷云盘"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xunleipan00"></use></svg><span>迅雷云盘</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://onedrive.live.com/"  title="OneDrive"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-OneDrive00"></use></svg><span>OneDrive</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://cloud.189.cn/"  title="天翼云盘"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-tianyipan00"></use></svg><span>天翼云盘</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.yun.cn/"  title="UC网盘"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yunpan"></use></svg><span>UC网盘</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.qq.com/"  title="QQ邮箱"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qqmail00"></use></svg><span>QQ邮箱</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.google.com/"  title="Gmail"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-gmail"></use></svg><span>Gmail</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://outlook.live.com/mail/"  title="Hotmail"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-windows"></use></svg><span>Hotmail</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.163.com/"  title="网易邮箱"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wangyi"></use></svg><span>网易邮箱</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.sina.com.cn/"  title="新浪邮箱"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-xinlangwang"></use></svg><span>新浪邮箱</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://mail.aliyun.com/"  title="阿里邮箱"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-yunyouxiang"></use></svg><span>阿里邮箱</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_4" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ai-tool"></use></svg><sapn>视频解析下载工具</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://tool.lu/"  title="在线工具"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ai-tool"></use></svg><span>在线工具</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://ip.cn/"  title="IP查询"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wangluo"></use></svg><span>IP查询</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://xpdf.net/"  title="文档在线转换"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-docto"></use></svg><span>文档在线转换</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://translate.google.cn/?hl=zh-CN"  title="谷歌翻译"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fanyi"></use></svg><span>谷歌翻译</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://fanyi.youdao.com/"  title="有道翻译"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-youdao00"></use></svg><span>有道翻译</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://c.runoob.com/front-end/61/"  title="HTML在线运行"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-html00"></use></svg><span>HTML在线运行</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.lylme.com/html/"  title="MD编辑器"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-md"></use></svg><span>MD编辑器</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.wepe.com.cn/"  title="微PE工具"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wepe00"></use></svg><span>微PE工具</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://tool.oschina.net/codeformat/html/"  title="在线代码格式化"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-base64"></use></svg><span>在线代码格式化</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://tool.chinaz.com/tools/jscodeconfusion.aspx"  title="JS混淆器"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-jshunxiao"></use></svg><span>JS混淆器</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://tool.chinaz.com/"  title="站长工具"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zhanzhang00"></use></svg><span>站长工具</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://ping.chinaz.com/"  title="在线Ping"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-wangluo1"></use></svg><span>在线Ping</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://icp.chinaz.com/"  title="ICP备案查询"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-icp00"></use></svg><span>ICP备案查询</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.photopea.com/"  title="在线PS"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ps00"></use></svg><span>在线PS</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_5" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-kongzhitai"></use></svg><sapn>资源人工代下载</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="http://www.w3school.com.cn/"  title="W3school"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-h5"></use></svg><span>W3school</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://github.com/"  title="Github"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-github"></use></svg><span>Github</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://gitee.com/"  title="码云Gitee"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-gitee00"></use></svg><span>码云Gitee</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://linux.lylme.com/"  title="Linux命令查询"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-linux"></use></svg><span>Linux命令查询</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.csdn.net/"  title="CSDN"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-csdn"></use></svg><span>CSDN</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://cdnjs.com/"  title="CdnJs"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-cdnjs"></use></svg><span>CdnJs</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://cdn.bytedance.com/"  title="字节跳动CDN"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-zjtd00"></use></svg><span>字节跳动CDN</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://fontawesome.com/icons?https://fontawesome.com/"  title="Font Awesome"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-font-awesome"></use></svg><span>Font Awesome</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://msdn.itellyou.cn/"  title="MSDN我告诉你"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-msdn00"></use></svg><span>MSDN我告诉你</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://cloud.tencent.com/"  title="腾讯云"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-qcloud00"></use></svg><span>腾讯云</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.aliyun.com/"  title="阿里云"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-alicloud00"></use></svg><span>阿里云</span></a></li></ul>
+
+<ul class="mylist row"><li id="group_7" class="title"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-gg00"></use></svg><sapn>网站公告</sapn></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://www.lylme.com/"  title="官方主页"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-home00"></use></svg><span>官方主页</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="/apply"  title="申请收录"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-sq00"></use></svg><span>申请收录</span></a></li>
+<li class="col-3 col-sm-3 col-md-3 col-lg-1"><a rel="nofollow" href="https://support.qq.com/products/356339"  title="建议&反馈"  target="_blank"><svg class="icon" aria-hidden="true"><use xlink:href="#icon-fk00"></use></svg><span>建议&反馈</span></a></li></ul>
+
+<script src="./assets/js/bootstrap.min.js" type="application/javascript"></script>
+<script src="./template/default/js/script.js?v=20240414"></script>
+<script src="./assets/js/svg.js"></script>
+<div style="display:none;" class="back-to" id="toolBackTop">
+    <a title="返回顶部" onclick="window.scrollTo(0,0);return false;" href="#top" class="back-top"></a>
+</div>
+<div class="mt-5 mb-3 footer text-muted text-center">
+    <!--备案信息-->
+            <!--版权信息-->
+    <p> Copyright ©2022 <a href="/">水印网</a>.  All Rights Reserved.</p>
+    <!--网站统计-->
     </div>
-    <!-- 原页面内容，初始隐藏 -->
-    <div id="original-content" style="display: none;">
-        <div id="app">
-            <div class="left-nav">
-                <div class="head-image" :style="{backgroundImage: 'url(' + settings.headImage + ')'}"></div>
-            </div>
-            <div class="main-container">
-                <div class="center-container">
-                    <!-- 搜索框部分 -->
-                    <div class="search-box" v-if="settings.searchEngine">
-                        <!-- 搜索建议框 -->
-                        <div class="advice_box" v-if="advices.length > 0">
-                            <div :class="index === advice_selected? 'selected' : ''" class="advice_item"
-                                @mouseenter="advice_selected = index" v-for="(advice, index) in advices"
-                                @click="advice_clicked(index)">
-                                {{advice}}
-                            </div>
-                        </div>
-                        <!-- 选择搜索引擎 -->
-                        <div :class="show_engine_box? 'show' : 'hide'" class="engine-box" @blur="hideEngineBox(30)"
-                            tabindex="0" hidefocus="true" v-show="show_engine_box === true">
-                            <div class="engine" v-for="(engine, id) in getEngines()"
-                                @click="settings.searchEngine.selected = id; hideEngineBox()">
-                                <div class="icon" :style="{backgroundImage: 'url(' + engine.icon + ')', backgroundColor: engine.mainColor}"></div>
-                                <div class="name">{{engine.name}}</div>
-                            </div>
-                            <div class="engine not_show" v-for="i in 4"></div>
-                        </div>
-                        <!-- 搜索框左侧图标 -->
-                        <div class="search-engins" :style="{backgroundColor: getSelectedEngine().mainColor}"
-                            @click="show_engine_box? hideEngineBox() : showEngineBox()">
-                            <div class="selected-icon" :style="{backgroundImage: 'url(' + getSelectedEngine().icon + ')'}"></div>
-                            <div class="engine-name" :style="{color: getSelectedEngine().textColor}">
-                                {{getSelectedEngine().name}}
-                            </div>
-                            <div class="show-more"></div>
-                        </div>
-                        <!-- 搜索框主体 -->
-                        <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"
-                            oninput="showAdvice()" />
-                        <!-- 搜索按钮 -->
-                        <div class="search-btn" @click="search()"></div>
-                    </div>
-                    <!-- 网站列表部分 -->
-                    <div class="sites-container">
-                        <div class="second-kind" v-for="(kind_val, kind_name) in sitesData">
-                            <div class="kind-name">
-                                <div class="icon" :style="{backgroundImage: 'url(' + kind_val.icon + ')'}"></div>
-                                <div class="name">{{kind_name}}</div>
-                            </div>
-                            <div class="sites-box">
-                                <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
-                                    <div class="icon" :data-original="site_val.icon"></div>
-                                    <div class="info">
-                                        <div class="name">{{site_val.name}}</div>
-                                        <div class="describe">{{site_val.describe}}</div>
-                                    </div>
-                                </div>
-                                <div class="site-box not_show" v-for="i in 10"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <script>
-        // 禁止 F12 键并给出提示
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12') {
-                e.preventDefault();
-                alert('老铁你想干嘛-滚开禁止进行调试！');
-            }
-        });
-
-        // 禁止鼠标右键并给出提示
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            alert('此界面禁止使用鼠标右键进行调试！');
-        });
-
-        // 正确的密码，需要替换为实际密码
-        const correctPassword = 'a1234567';
-        const passwordModal = document.getElementById('password-modal');
-        const originalContent = document.getElementById('original-content');
-        const passwordInput = document.getElementById('password-input');
-        const passwordSubmit = document.getElementById('password-submit');
-
-        // 检查 localStorage 中是否有有效的密码记录
-        const savedPassword = localStorage.getItem('savedPassword');
-        const savedExpiry = localStorage.getItem('passwordExpiry');
-        const now = new Date().getTime();
-
-        if (savedPassword && savedExpiry && now < parseInt(savedExpiry)) {
-            if (savedPassword === correctPassword) {
-                console.log('使用本地存储的密码，跳过验证');
-                passwordModal.style.display = 'none';
-                originalContent.style.display = 'block';
-                attachLinkEvents();
-            }
-        }
-
-        passwordSubmit.addEventListener('click', function () {
-            console.log('点击了提交按钮');
-            const inputPassword = passwordInput.value;
-            if (inputPassword === correctPassword) {
-                console.log('密码正确');
-                passwordModal.style.display = 'none';
-                originalContent.style.display = 'block';
-                // 保存密码和过期时间
-                const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 天
-                localStorage.setItem('savedPassword', correctPassword);
-                localStorage.setItem('passwordExpiry', expiry.toString());
-                attachLinkEvents();
-            } else {
-                console.log('密码错误');
-                alert('密码错误，请重试！');
-            }
-        });
-
-        function attachLinkEvents() {
-            const siteBoxes = document.querySelectorAll('.site-box');
-            siteBoxes.forEach(siteBox => {
-                const siteVal = JSON.parse(siteBox.dataset.siteVal);
-                const url = siteVal && siteVal.url;
-                if (url) {
-                    siteBox.addEventListener('click', function (event) {
-                        window.open(url, '_blank');
-                        event.preventDefault();
-                    });
-                }
-            });
-        }
-    </script>
-    <script src="./js/vue3.js"></script>
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/jquery.lazyload.min.js"></script>
-    <script src="./js/utils.js"></script>
-    <script src="./js/index.js"></script>
-</body>
 
 </html>
