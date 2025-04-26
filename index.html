@@ -5,21 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>水印网</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 全局样式 */
-        * {
-            box-sizing: border-box;
-        }
-
         body {
             font-family: "Roboto", sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
             color: #333;
+            margin: 0;
         }
 
-        /* 标题样式 */
         h1 {
             text-align: center;
             background-color: #007BFF;
@@ -30,23 +24,63 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        /* 段落样式 */
         p {
             text-align: center;
             font-size: 18px;
-            margin-bottom: 30px;
+            margin: 20px 0;
         }
 
-        /* 链接容器样式 */
+       .search-box {
+            display: flex;
+            justify-content: center;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+
+       .search-box input {
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            width: 70%;
+            font-size: 16px;
+        }
+
+       .search-box button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 16px;
+        }
+
+       .search-box button:hover {
+            background-color: #0056b3;
+        }
+
+       .category {
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            max-width: 90%;
+        }
+
+       .category h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #007BFF;
+        }
+
        .link-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 15px;
-            margin-bottom: 30px;
         }
 
-        /* 链接样式 */
         a {
             display: inline-block;
             padding: 12px 25px;
@@ -64,7 +98,18 @@
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* 响应式设计 */
+       .debug-warning {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            display: none;
+        }
+
         @media (max-width: 768px) {
             h1 {
                 font-size: 28px;
@@ -78,134 +123,270 @@
                 width: 100%;
                 text-align: center;
             }
+
+           .search-box input {
+                width: 70%;
+            }
+        }
+
+       .password-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+       .password-modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+       .password-modal input {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+       .password-modal button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+       .password-modal button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 
 <body>
+    <div class="password-modal" id="passwordModal">
+        <div class="password-modal-content">
+            <h2>请输入密码</h2>
+            <input type="password" id="passwordInput" placeholder="输入密码">
+            <button onclick="checkPassword()">提交</button>
+        </div>
+    </div>
     <h1>水印网</h1>
+    <div class="search-box">
+        <input type="text" placeholder="搜索...">
+        <button type="submit">搜索</button>
+    </div>
     <p>视频工具，教程，网站，一站式触达</p>
     <p>人非圣贤，孰能无过。——《训俗遗规》</p>
 
     <!-- 搜索引擎相关链接 -->
-    <div class="link-container">
-        <a href="#">百度一下</a>
-        <a href="#">微信搜索</a>
-        <a href="#">谷歌搜索</a>
+    <div class="category">
+        <h2>搜索引擎</h2>
+        <div class="link-container">
+            <a href="#">百度一下</a>
+            <a href="#">微信搜索</a>
+            <a href="#">谷歌搜索</a>
+        </div>
     </div>
 
     <!-- 视频相关链接 -->
-    <div class="link-container">
-        <a href="#">VideoFK</a>
-        <a href="#">SaveVideoFrom</a>
-        <a href="#">TWDown</a>
-        <a href="#">哔哩哔哩</a>
-        <a href="#">视频号</a>
-        <a href="#">腾讯视频</a>
-        <a href="#">优酷</a>
-        <a href="#">爱奇艺</a>
-        <a href="#">抖音网页版</a>
-        <a href="#">快手网页版</a>
-        <a href="#">120秒视界</a>
-        <a href="#">YouTube</a>
-        <a href="#">X-Twitter</a>
+    <div class="category">
+        <h2>视频平台</h2>
+        <div class="link-container">
+            <a href="#">VideoFK</a>
+            <a href="#">SaveVideoFrom</a>
+            <a href="#">TWDown</a>
+            <a href="#">哔哩哔哩</a>
+            <a href="#">视频号</a>
+            <a href="#">腾讯视频</a>
+            <a href="#">优酷</a>
+            <a href="#">爱奇艺</a>
+            <a href="#">抖音网页版</a>
+            <a href="#">快手网页版</a>
+            <a href="#">120秒视界</a>
+            <a href="#">YouTube</a>
+            <a href="#">X-Twitter</a>
+        </div>
     </div>
 
     <!-- 视频下载工具相关链接 -->
-    <div class="link-container">
-        <a href="#">海外视频下载工具</a>
-        <a href="#">YouTube下载器</a>
-        <a href="#">YouTube下载器(缓存版)</a>
-        <a href="#">YouTube下载器2</a>
+    <div class="category">
+        <h2>视频下载工具</h2>
+        <div class="link-container">
+            <a href="#">海外视频下载工具</a>
+            <a href="#">YouTube下载器</a>
+            <a href="#">YouTube下载器(缓存版)</a>
+            <a href="#">YouTube下载器2</a>
+        </div>
     </div>
 
     <!-- 图片与设计相关链接 -->
-    <div class="link-container">
-        <a href="#">图片去水印</a>
-        <a href="#">Office模板</a>
-        <a href="#">搞定设计</a>
-        <a href="#">素材天下</a>
-        <a href="#">千库网</a>
-        <a href="#">图怪兽</a>
-        <a href="#">站酷</a>
-        <a href="#">阿里图标</a>
-        <a href="#">IconFinder</a>
-        <a href="#">优设教程</a>
+    <div class="category">
+        <h2>图片与设计</h2>
+        <div class="link-container">
+            <a href="#">图片去水印</a>
+            <a href="#">Office模板</a>
+            <a href="#">搞定设计</a>
+            <a href="#">素材天下</a>
+            <a href="#">千库网</a>
+            <a href="#">图怪兽</a>
+            <a href="#">站酷</a>
+            <a href="#">阿里图标</a>
+            <a href="#">IconFinder</a>
+            <a href="#">优设教程</a>
+        </div>
     </div>
 
     <!-- 去水印编辑工具相关链接 -->
-    <div class="link-container">
-        <a href="#">去水印编辑工具</a>
+    <div class="category">
+        <h2>去水印编辑工具</h2>
+        <div class="link-container">
+            <a href="#">去水印编辑工具</a>
+        </div>
     </div>
 
     <!-- 社交与内容平台相关链接 -->
-    <div class="link-container">
-        <a href="#">知乎</a>
-        <a href="#">豆瓣</a>
-        <a href="#">简书</a>
-        <a href="#">微博</a>
-        <a href="#">百度贴吧</a>
+    <div class="category">
+        <h2>社交与内容平台</h2>
+        <div class="link-container">
+            <a href="#">知乎</a>
+            <a href="#">豆瓣</a>
+            <a href="#">简书</a>
+            <a href="#">微博</a>
+            <a href="#">百度贴吧</a>
+        </div>
     </div>
 
     <!-- 网盘相关链接 -->
-    <div class="link-container">
-        <a href="#">阿里云盘</a>
-        <a href="#">百度网盘</a>
-        <a href="#">蓝奏云</a>
-        <a href="#">迅雷云盘</a>
-        <a href="#">OneDrive</a>
-        <a href="#">天翼云盘</a>
-        <a href="#">UC网盘</a>
-        <a href="#">QQ邮箱</a>
-        <a href="#">Gmail</a>
-        <a href="#">Hotmail</a>
-        <a href="#">网易邮箱</a>
-        <a href="#">新浪邮箱</a>
-        <a href="#">阿里邮箱</a>
+    <div class="category">
+        <h2>网盘</h2>
+        <div class="link-container">
+            <a href="#">阿里云盘</a>
+            <a href="#">百度网盘</a>
+            <a href="#">蓝奏云</a>
+            <a href="#">迅雷云盘</a>
+            <a href="#">OneDrive</a>
+            <a href="#">天翼云盘</a>
+            <a href="#">UC网盘</a>
+            <a href="#">QQ邮箱</a>
+            <a href="#">Gmail</a>
+            <a href="#">Hotmail</a>
+            <a href="#">网易邮箱</a>
+            <a href="#">新浪邮箱</a>
+            <a href="#">阿里邮箱</a>
+        </div>
     </div>
 
     <!-- 视频解析下载工具与在线工具相关链接 -->
-    <div class="link-container">
-        <a href="#">视频解析下载工具</a>
-        <a href="#">在线工具</a>
-        <a href="#">IP查询</a>
-        <a href="#">文档在线转换</a>
-        <a href="#">谷歌翻译</a>
-        <a href="#">有道翻译</a>
-        <a href="#">HTML在线运行</a>
-        <a href="#">MD编辑器</a>
-        <a href="#">微PE工具</a>
-        <a href="#">在线代码格式化</a>
-        <a href="#">JS混淆器</a>
-        <a href="#">站长工具</a>
-        <a href="#">在线Ping</a>
-        <a href="#">ICP备案查询</a>
-        <a href="#">在线PS</a>
-        <a href="#">资源人工代下载</a>
+    <div class="category">
+        <h2>视频解析与在线工具</h2>
+        <div class="link-container">
+            <a href="#">视频解析下载工具</a>
+            <a href="#">在线工具</a>
+            <a href="#">IP查询</a>
+            <a href="#">文档在线转换</a>
+            <a href="#">谷歌翻译</a>
+            <a href="#">有道翻译</a>
+            <a href="#">HTML在线运行</a>
+            <a href="#">MD编辑器</a>
+            <a href="#">微PE工具</a>
+            <a href="#">在线代码格式化</a>
+            <a href="#">JS混淆器</a>
+            <a href="#">站长工具</a>
+            <a href="#">在线Ping</a>
+            <a href="#">ICP备案查询</a>
+            <a href="#">在线PS</a>
+            <a href="#">资源人工代下载</a>
+        </div>
     </div>
 
     <!-- 学习与技术资源相关链接 -->
-    <div class="link-container">
-        <a href="#">W3school</a>
-        <a href="#">Github</a>
-        <a href="#">码云Gitee</a>
-        <a href="#">Linux命令查询</a>
-        <a href="#">CSDN</a>
-        <a href="#">CdnJs</a>
-        <a href="#">字节跳动CDN</a>
-        <a href="#">Font Awesome</a>
-        <a href="#">MSDN我告诉你</a>
-        <a href="#">腾讯云</a>
-        <a href="#">阿里云</a>
+    <div class="category">
+        <h2>学习与技术资源</h2>
+        <div class="link-container">
+            <a href="#">W3school</a>
+            <a href="#">Github</a>
+            <a href="#">码云Gitee</a>
+            <a href="#">Linux命令查询</a>
+            <a href="#">CSDN</a>
+            <a href="#">CdnJs</a>
+            <a href="#">字节跳动CDN</a>
+            <a href="#">Font Awesome</a>
+            <a href="#">MSDN我告诉你</a>
+            <a href="#">腾讯云</a>
+            <a href="#">阿里云</a>
+        </div>
     </div>
 
     <!-- 网站相关链接 -->
-    <div class="link-container">
-        <a href="#">网站公告</a>
-        <a href="#">官方主页</a>
-        <a href="#">申请收录</a>
-        <a href="#">建议&反馈</a>
+    <div class="category">
+        <h2>网站相关</h2>
+        <div class="link-container">
+            <a href="#">网站公告</a>
+            <a href="#">官方主页</a>
+            <a href="#">申请收录</a>
+            <a href="#">建议&反馈</a>
+        </div>
     </div>
+    <div class="debug-warning" id="debugWarning">禁止调试网页！</div>
+    <script>
+        const correctPassword = '123456'; // 请替换为实际密码
+        const passwordModal = document.getElementById('passwordModal');
+        const passwordInput = document.getElementById('passwordInput');
+
+        function checkPassword() {
+            const inputPassword = passwordInput.value;
+            if (inputPassword === correctPassword) {
+                passwordModal.style.display = 'none';
+                // 保存密码验证状态到本地存储，有效期 30 天
+                const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 30);
+                localStorage.setItem('passwordVerified', JSON.stringify({
+                    verified: true,
+                    expiration: expirationDate.getTime()
+                }));
+            } else {
+                alert('密码错误，请重新输入！');
+            }
+        }
+
+        // 检查本地存储中的密码验证状态
+        const storedData = localStorage.getItem('passwordVerified');
+        if (storedData) {
+            const { verified, expiration } = JSON.parse(storedData);
+            const currentTime = new Date().getTime();
+            if (verified && currentTime < expiration) {
+                passwordModal.style.display = 'none';
+            }
+        }
+
+        // 禁止鼠标右键
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+
+        // 禁止 F12 调试
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                const debugWarning = document.getElementById('debugWarning');
+                debugWarning.style.display = 'block';
+                setTimeout(() => {
+                    debugWarning.style.display = 'none';
+                }, 3000);
+            }
+        });
+    </script>
 </body>
 
-</html>
+</html>    
