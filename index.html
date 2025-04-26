@@ -7,60 +7,50 @@
     <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 定义通用的动态变化动画，修改为更柔和的颜色变化 */
-        @keyframes softAnimation {
+        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
+        @keyframes colorfulAnimation {
             0% {
-                background-color: #f099a7;
+                background-color: #ff6b6b;
+            }
+            25% {
+                background-color: #ffcc5c;
             }
             50% {
-                background-color: #f5d0a9;
+                background-color: #8ee4af;
+            }
+            75% {
+                background-color: #a5d8ff;
             }
             100% {
-                background-color: #f099a7;
+                background-color: #ff6b6b;
             }
         }
 
         body {
             font-family: "Roboto", sans-serif;
-            /* 更换为更简洁的背景图片 */
-            background-image: url('https://source.unsplash.com/random/1600x900/?tech');
+            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
+            background-image: url('https://source.unsplash.com/random/1600x900/?nature');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             color: #333;
             margin: 0;
-            /* 添加背景滤镜，这里使用模糊滤镜 */
-            filter: blur(2px);
-            -webkit-filter: blur(2px);
-            overflow: hidden;
-        }
-
-        /* 添加半透明遮罩层，使背景更柔和 */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.3);
-            z-index: -1;
         }
 
         h1 {
             text-align: center;
-            color: #333;
+            color: white;
             padding: 30px 0;
             margin: 0;
             font-size: 48px;
-            animation: softAnimation 10s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
         p {
             text-align: center;
             font-size: 18px;
             margin: 10px 0;
-            color: #333;
         }
 
        .search-box {
@@ -88,16 +78,19 @@
        .search-box button {
             padding: 10px 15px;
             border: none;
-            background-color: #f099a7;
+            /* 修改按钮背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            animation: softAnimation 10s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
        .search-box button:hover {
+            /* 修改按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
@@ -106,15 +99,17 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.8);
             max-width: 90%;
         }
 
        .category h2 {
             font-size: 20px;
             margin-bottom: 15px;
-            color: #f099a7;
-            animation: softAnimation 10s infinite linear;
+            /* 修改标题颜色 */
+            color: #ff6b6b;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
        .link-container {
@@ -126,16 +121,19 @@
         a {
             display: inline-block;
             padding: 12px 25px;
-            background-color: #f099a7;
+            /* 修改链接背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            animation: softAnimation 10s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
         a:hover {
+            /* 修改链接悬停时的背景颜色 */
             background-color: #e84118;
             transform: translateY(-3px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
@@ -157,7 +155,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -201,10 +199,12 @@
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center; /* 添加这一行，使内容水平居中 */
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: translateY(0); /* 添加这行来重置垂直位移 */
+            margin: 0 auto; /* 水平居中 */
+            max-width: 400px; /* 可根据需要调整宽度 */
         }
 
        .password-modal input {
@@ -213,12 +213,12 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
-            max-width: 300px; /* 限制输入框最大宽度 */
         }
 
        .password-modal button {
             padding: 10px 20px;
-            background-color: #f099a7;
+            /* 修改密码框提交按钮背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             border: none;
             border-radius: 5px;
@@ -226,6 +226,7 @@
         }
 
        .password-modal button:hover {
+            /* 修改密码框提交按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
@@ -412,11 +413,4 @@
                     expiration: expirationDate.getTime()
                 }));
             } else {
-                alert('密码错误，请重新输入！');
-            }
-        }
-
-        // 检查本地存储中的密码验证状态
-        const storedData = localStorage.getItem('passwordVerified');
-        if (storedData) {
-            const {
+                alert('密码错误，请重新
