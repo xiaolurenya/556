@@ -156,7 +156,7 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <div @click="openLink(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
+                                <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
                                     <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
@@ -222,55 +222,6 @@
                 alert('密码错误，请重试！');
             }
         });
-
-        // 创建 Vue 实例
-        const app = Vue.createApp({
-            data() {
-                return {
-                    settings: {
-                        searchEngine: {}
-                    },
-                    advices: [],
-                    show_engine_box: false,
-                    sitesData: []
-                };
-            },
-            methods: {
-                getEngines() {
-                    return []; // 这里需要根据实际情况返回搜索引擎数据
-                },
-                getSelectedEngine() {
-                    return {}; // 这里需要根据实际情况返回选中的搜索引擎数据
-                },
-                hideEngineBox(delay) {
-                    // 这里需要实现隐藏搜索引擎选择框的逻辑
-                },
-                showEngineBox() {
-                    // 这里需要实现显示搜索引擎选择框的逻辑
-                },
-                input_keydown(event) {
-                    // 这里需要实现按键按下的逻辑
-                },
-                showAdvice() {
-                    // 这里需要实现显示搜索建议的逻辑
-                },
-                search() {
-                    // 这里需要实现搜索的逻辑
-                },
-                advice_clicked(index) {
-                    // 这里需要实现点击搜索建议的逻辑
-                },
-                openLink(url) {
-                    if (url) {
-                        window.open(url, '_blank');
-                    } else {
-                        console.error('链接地址为空');
-                    }
-                }
-            }
-        });
-
-        app.mount('#app');
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
