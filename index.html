@@ -6,13 +6,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自用导航</title>
     <style>
-        /* 定义流光自动变色动画 */
-        @keyframes streamingLight {
+        /* 新增文字晃动动画 */
+        @keyframes shake {
             0% {
-                background-position: 0 0;
+                transform: rotate(0deg);
+            }
+            25% {
+                transform: rotate(3deg);
+            }
+            50% {
+                transform: rotate(0deg);
+            }
+            75% {
+                transform: rotate(-3deg);
             }
             100% {
-                background-position: 200% 0;
+                transform: rotate(0deg);
             }
         }
 
@@ -65,27 +74,14 @@
             padding: 10px 0;
             margin: 0;
             font-size: 30px;
-            /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(10px);
-            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: streamingLight 3s linear infinite, fadeIn 1s ease-out;
+            animation: fadeIn 1s ease-out;
         }
 
         p {
             text-align: center;
             font-size: 16px;
             margin: 10px 0;
-            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: streamingLight 3s linear infinite;
         }
 
        .search-box {
@@ -129,8 +125,6 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.01);
             backdrop-filter: blur(10px);
             max-width: 90%;
             animation: slideIn 1s ease-out;
@@ -142,12 +136,6 @@
        .category h2 {
             font-size: 18px;
             margin-bottom: 15px;
-            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: streamingLight 3s linear infinite;
         }
 
        .link-container {
@@ -163,18 +151,12 @@
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.5s ease;
-            background: linear-gradient(90deg, #FF0000, #FF7F00, #FFFF00, #00FF00, #0000FF, #4B0082, #8B00FF);
-            background-size: 200% 100%;
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: streamingLight 3s linear infinite;
         }
 
         a:hover {
             transform: translateY(-12px);
             box-shadow: 0 15px 18px rgba(0, 0, 0, 0.2);
-            animation: scaleText 0.3s ease forwards;
+            animation: scaleText 0.3s ease forwards, shake 0.5s infinite;
         }
 
        .debug-warning {
@@ -241,6 +223,16 @@
             border: 1px solid #ccc;
             border-radius: 5px;
             width: 100%;
+            /* 修改密码框样式颜色 */
+            background-color: #f0f0f0;
+            color: #333;
+            border-color: #999;
+        }
+
+       .password-modal input:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
        .password-modal button {
@@ -437,9 +429,23 @@
             return color;
         }
 
+        function getRandomGradient() {
+            const color1 = getRandomColor();
+            const color2 = getRandomColor();
+            const color3 = getRandomColor();
+            return `linear-gradient(90deg, ${color1}, ${color2}, ${color3})`;
+        }
+
         function applyRandomColors() {
             const elements = document.querySelectorAll('h1, p, .category h2, a');
             elements.forEach((element) => {
+                const gradient = getRandomGradient();
+                element.style.background = gradient;
+                element.style.backgroundSize = '200% 100%';
+                element.style.webkitBackgroundClip = 'text';
+                element.style.backgroundClip = 'text';
+                element.style.color = 'transparent';
+                element.style.animation = 'streamingLight 3s linear infinite';
                 element.style.backgroundColor = getRandomColor();
             });
         }
@@ -456,6 +462,8 @@
                     expiration: expirationDate.getTime()
                 }));
                 applyRandomColors();
+                // 启动背景颜色随机动画
+                setInterval(applyRandomColors, 2000);
             } else {
                 alert('密码错误，请重新输入！');
             }
@@ -469,6 +477,8 @@
                 passwordModal.style.display = 'none';
                 mainContent.style.display = 'block';
                 applyRandomColors();
+                // 启动背景颜色随机动画
+                setInterval(applyRandomColors, 2000);
             }
         }
 
@@ -496,7 +506,16 @@
                 debugWarning.style.display = 'none';
             }, 3000);
         });
+
+        // 定义流光动画
+        const style = document.createElement('style');
+        style.innerHTML = `@keyframes streamingLight {
+            0% { background-position: 0 0; }
+            100% { background-position: 200% 0; }
+        }`;
+        document.head.appendChild(style);
     </script>
 </body>
 
-</html>    
+</html>
+    
