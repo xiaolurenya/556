@@ -156,8 +156,9 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
-                                    <div class="icon" :data-original="site_val.icon"></div>
+                                <div class="site-box" v-for="site_val in kind_val.data">
+                                    <!-- 给每个链接元素添加 data-url 属性，这里假设 site_val.url 存在 -->
+                                    <div class="icon" :data-original="site_val.icon" data-url="{{site_val.url}}"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
                                         <div class="describe">{{site_val.describe}}</div>
@@ -203,8 +204,7 @@
                 console.log('使用本地存储的密码，跳过验证');
                 passwordModal.style.display = 'none';
                 originalContent.style.display = 'block';
-                // 在密码验证通过且使用本地存储密码跳过验证时，处理链接点击行为
-                handleLinkClicks();
+                setupLinkClicks();
             }
         }
 
@@ -219,30 +219,25 @@
                 const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 天
                 localStorage.setItem('savedPassword', correctPassword);
                 localStorage.setItem('passwordExpiry', expiry.toString());
-                // 在密码输入正确时，处理链接点击行为
-                handleLinkClicks();
+                setupLinkClicks();
             } else {
                 console.log('密码错误');
                 alert('密码错误，请重试！');
             }
         });
 
-        function handleLinkClicks() {
-            const siteBoxes = document.querySelectorAll('.site-box');
-            siteBoxes.forEach((siteBox, index) => {
-                siteBox.addEventListener('click', function (event) {
-                    // 从 Vue 绑定的数据中获取链接地址，这里假设 site_val 是 Vue 数据中的对象
-                    const siteVal = this.closest('[v-for]').dataset.siteVal;
-                    const parsedSiteVal = siteVal? JSON.parse(siteVal) : {};
-                    const url = parsedSiteVal.url;
+        function setupLinkClicks() {
+            // 获取所有带有 data-url 属性的元素
+            const linkElements = document.querySelectorAll('[data-url]');
+            linkElements.forEach(link => {
+                link.addEventListener('click', function (event) {
+                    const url = this.getAttribute('data-url');
                     if (url) {
-                        // 使用唯一的窗口名称确保每个链接在新窗口打开
-                        const windowName = `window_${index}`;
-                        window.open(url, windowName);
+                        window.open(url, '_blank');
                     } else {
                         console.error('链接地址为空');
                     }
-                    event.preventDefault(); // 防止原有的点击行为（如果有）
+                    event.preventDefault();
                 });
             });
         }
@@ -254,4 +249,4 @@
     <script src="./js/index.js"></script>
 </body>
 
-</html>
+</html>    
