@@ -156,7 +156,7 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <div @click="openInNewTab(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
+                                <div @click="window.open(site_val.url, '_blank')" class="site-box" v-for="site_val in kind_val.data">
                                     <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
@@ -222,11 +222,6 @@
                 alert('密码错误，请重试！');
             }
         });
-
-        // 新增函数，用于在新标签页打开页面
-        function openInNewTab(url) {
-            window.open(url, '_blank');
-        }
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
