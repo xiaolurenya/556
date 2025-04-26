@@ -64,6 +64,34 @@
         #password-modal #password-submit:hover {
             background-color: #0056b3;
         }
+
+        /* 以下为新增的手机端自适应样式 */
+        @media (max-width: 768px) {
+           .left-nav {
+                display: none;
+            }
+
+           .main-container {
+                width: 100%;
+            }
+
+           .search-box {
+                width: 100%;
+            }
+
+           .sites-container {
+                width: 100%;
+            }
+
+           .search-engins,
+           .search-btn {
+                width: 48%;
+            }
+
+           .search-input {
+                width: calc(100% - 96%);
+            }
+        }
     </style>
 </head>
 
@@ -127,7 +155,7 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
+                                <div @click="openInNewTab(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
                                     <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
@@ -193,6 +221,11 @@
                 alert('密码错误，请重试！');
             }
         });
+
+        // 新增函数，用于在新标签页打开页面
+        function openInNewTab(url) {
+            window.open(url, '_blank');
+        }
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
