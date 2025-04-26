@@ -229,11 +229,16 @@
 
         function handleLinkClicks() {
             const siteBoxes = document.querySelectorAll('.site-box');
-            siteBoxes.forEach(siteBox => {
+            siteBoxes.forEach((siteBox, index) => {
                 siteBox.addEventListener('click', function (event) {
-                    const url = this.getAttribute('data-url'); // 这里假设链接地址在 data-url 属性中，根据实际情况修改
+                    // 从 Vue 绑定的数据中获取链接地址，这里假设 site_val 是 Vue 数据中的对象
+                    const siteVal = this.closest('[v-for]').dataset.siteVal;
+                    const parsedSiteVal = siteVal? JSON.parse(siteVal) : {};
+                    const url = parsedSiteVal.url;
                     if (url) {
-                        window.open(url, '_blank');
+                        // 使用唯一的窗口名称确保每个链接在新窗口打开
+                        const windowName = `window_${index}`;
+                        window.open(url, windowName);
                     } else {
                         console.error('链接地址为空');
                     }
