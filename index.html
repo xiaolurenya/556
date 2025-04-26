@@ -65,7 +65,7 @@
             background-color: #0056b3;
         }
 
-        /* 以下为新增的手机端自适应样式 */
+        /* 手机端自适应样式 */
         @media (max-width: 768px) {
            .left-nav {
                 display: none;
@@ -83,6 +83,7 @@
                 width: 100%;
             }
 
+            /* 调整搜索相关元素在手机端的布局 */
            .search-engins,
            .search-btn {
                 width: 48%;
@@ -90,6 +91,13 @@
 
            .search-input {
                 width: calc(100% - 96%);
+            }
+
+            /* 增加触摸事件的点击反馈效果（可根据需要调整） */
+           .advice_item,
+           .engine,
+           .site-box {
+                cursor: pointer;
             }
         }
     </style>
@@ -117,7 +125,8 @@
                         <!-- 搜索建议框 -->
                         <div class="advice_box" v-if="advices.length > 0">
                             <div :class="index === advice_selected? 'selected' : ''" class="advice_item"
-                                @mouseenter="advice_selected = index" v-for="(advice, index) in advices"
+                                @touchstart="advice_selected = index" @click="advice_selected = index"
+                                v-for="(advice, index) in advices"
                                 @click="advice_clicked(index)">
                                 {{advice}}
                             </div>
@@ -126,6 +135,7 @@
                         <div :class="show_engine_box? 'show' : 'hide'" class="engine-box" @blur="hideEngineBox(30)"
                             tabindex="0" hidefocus="true" v-show="show_engine_box === true">
                             <div class="engine" v-for="(engine, id) in getEngines()"
+                                @touchstart="settings.searchEngine.selected = id; hideEngineBox()"
                                 @click="settings.searchEngine.selected = id; hideEngineBox()">
                                 <div class="icon" :style="{backgroundImage: 'url(' + engine.icon + ')', backgroundColor: engine.mainColor}"></div>
                                 <div class="name">{{engine.name}}</div>
@@ -134,6 +144,7 @@
                         </div>
                         <!-- 搜索框左侧图标 -->
                         <div class="search-engins" :style="{backgroundColor: getSelectedEngine().mainColor}"
+                            @touchstart="show_engine_box? hideEngineBox() : showEngineBox()"
                             @click="show_engine_box? hideEngineBox() : showEngineBox()">
                             <div class="selected-icon" :style="{backgroundImage: 'url(' + getSelectedEngine().icon + ')'}"></div>
                             <div class="engine-name" :style="{color: getSelectedEngine().textColor}">
@@ -145,7 +156,7 @@
                         <input id="search-input" autocomplete="off" onkeydown="return input_keydown(event)"
                             oninput="showAdvice()" />
                         <!-- 搜索按钮 -->
-                        <div class="search-btn" @click="search()"></div>
+                        <div class="search-btn" @touchstart="search()" @click="search()"></div>
                     </div>
                     <!-- 网站列表部分 -->
                     <div class="sites-container">
@@ -155,7 +166,8 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <div @click="openInNewTab(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
+                                <div @touchstart="openInNewTab(site_val.url)" @click="openInNewTab(site_val.url)"
+                                    class="site-box" v-for="site_val in kind_val.data">
                                     <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
