@@ -222,7 +222,8 @@
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
-            width: 100%;
+            width: calc(100% - 22px); /* 调整宽度，考虑边框和内边距 */
+            box-sizing: border-box; /* 确保宽度包含内边距和边框 */
             /* 修改密码框样式颜色 */
             background-color: #f0f0f0;
             color: #333;
