@@ -6,8 +6,6 @@
     --site-box-width: 220px;
     --site-box-icon-height: 48px;
     --search-engine-radius: 20px;
-
-
 }
 
 * {
@@ -26,11 +24,7 @@ html {
     overflow: hidden;
     display: flex;
     flex-direction: row;
-
-    /* background-image: url("https://api.233i.cn/bing/api.php"); */
-
     position: relative;
-
 }
 
 #app::before {
@@ -45,29 +39,9 @@ html {
     z-index: -1;
 }
 
-/* #app::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    background-image: url("/assets/th1.jpg");
-    background-size: cover;
-    z-index: -1;
-    animation: bg-animation ease-in 1000ms 1;
-    transform: translate3d(0,0,0);
-
-} */
-
 .main-container {
-    /* animation: bg-animation ease-in 1000ms 1 ;
-    animation-fill-mode: forwards;
-    transform: translate3d(0,0,0); */
     background-color: rgba(0, 0, 0, 0.7);
 }
-
-
 
 @keyframes bg-animation {
     from {
@@ -81,37 +55,24 @@ html {
     }
 }
 
-
-
-
-
 ::-webkit-scrollbar {
     width: 10px;
     background-color: transparent;
 }
 
-
-/*定义滚动条轨道 内阴影+圆角*/
 ::-webkit-scrollbar-track {
-
     background-color: rgba(245, 245, 245, 0);
 }
 
-/*定义滑块 内阴影+圆角*/
 ::-webkit-scrollbar-thumb {
     transition: background-color linear 1000ms;
-
     background-color: rgba(68, 73, 93, 0.79);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     transition: background-color linear 1000ms;
-
     background-color: rgba(94, 102, 128, 0.79);
 }
-
-
-
 
 .main-container {
     height: 100vh;
@@ -119,15 +80,12 @@ html {
     overflow-y: hidden;
     display: flex;
     flex-direction: row;
-    
-
 }
 
 .left-nav {
     height: 100%;
     min-width: var(--left-nav-width);
     background-color: var(--left-nav-bg-color);
-    /* background-color: red; */
     box-shadow: 0 0 10px rgba(128, 128, 128, 0.372);
     z-index: 1000;
     display: flex;
@@ -141,19 +99,15 @@ html {
     background-repeat: no-repeat;
     background-size: 60%;
     background-position: center;
-    /* background-color: red; */
 }
 
 .center-container {
     width: 100%;
-    /* background-color: var(--center-container-bg-color); */
     height: 100%;
     display: flex;
     flex-direction: column;
     overflow: auto;
 }
-
-
 
 .search-box {
     --height: 100px;
@@ -171,11 +125,11 @@ html {
 .search-engins {
     position: absolute;
     width: 130px;
-    /* background-color: red; */
     height: 40px;
     display: flex;
     border-bottom-left-radius: var(--search-engine-radius);
-    border-top-left-radius: var(--search-engine-radius);z-index: 100;
+    border-top-left-radius: var(--search-engine-radius);
+    z-index: 100;
 }
 
 .search-engins .selected-icon {
@@ -215,18 +169,12 @@ html {
     border-left-color: transparent;
     border-right-color: transparent;
     margin-top: 5px;
-
-    /* position: absolute;
-    right: 10px; */
-
-
 }
 
 .search-box .engine-box {
     width: 100%;
     background-color: rgba(10, 10, 10, 0.349);
     backdrop-filter: blur(30px);
-    /* box-shadow: 0 0 20px rgba(177, 177, 177, 0.1); */
     position: absolute;
     top: 50px;
     left: 0px;
@@ -245,13 +193,11 @@ html {
 .not_show {
     visibility: hidden;
     height: 1px !important;
-
 }
 
 .engine-box.show {
     animation: show-engine-box 1 300ms linear;
 }
-
 
 @keyframes show-engine-box {
     from {
@@ -261,11 +207,9 @@ html {
 
     to {
         opacity: 1;
-        transform:translateY(0)
+        transform: translateY(0);
     }
 }
-
-
 
 .engine-box .engine {
     width: 130px;
@@ -278,10 +222,8 @@ html {
     margin-top: 10px;
     margin-bottom: 10px;
     background-color: rgba(70, 70, 70, 0.55);
-    /* backdrop-filter: blur(10px); */
-    opacity: .6;
+    opacity: 0.6;
     transition: all linear 200ms;
-    
 }
 
 .engine.not_show {
@@ -294,7 +236,6 @@ html {
 }
 
 .engine-box .engine .icon {
-
     width: 40px;
     height: 40px;
     background-size: 40%;
@@ -302,7 +243,6 @@ html {
     background-position: center;
     background-color: green;
     border-radius: 10px;
-
 }
 
 .engine-box .engine .name {
@@ -316,7 +256,6 @@ html {
     font-weight: 600;
     letter-spacing: 1px;
     font-size: 14px;
-
 }
 
 #search-input {
@@ -339,8 +278,6 @@ html {
     font-weight: 600;
 }
 
-
-
 .search-btn {
     position: absolute;
     right: 0;
@@ -355,7 +292,6 @@ html {
     transition: all linear 200ms;
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.342);
-
 }
 
 .search-btn:hover {
@@ -363,12 +299,10 @@ html {
     transition: all linear 200ms;
 }
 
-
 .sites-container {
     padding-left: 100px;
     padding-right: 100px;
     padding-bottom: 100px;
-
 }
 
 .kind-name {
@@ -399,7 +333,6 @@ html {
     display: flex;
     flex-wrap: wrap;
     margin-top: 10px;
-
 }
 
 .site-box {
@@ -411,13 +344,11 @@ html {
     flex-direction: row;
     border-radius: 10px;
     transition: all ease-out 200ms;
-
 }
 
 .site-box:hover {
     transition: all ease-in 200ms;
     background-color: #85858580;
-    /* transform: translate3d(0,0,0); */
     backdrop-filter: blur(10px);
     transform: translateY(-8px);
 }
@@ -441,7 +372,6 @@ html {
 .site-box .info {
     display: flex;
     flex-direction: column;
-
 }
 
 .site-box .name {
@@ -462,7 +392,6 @@ html {
     transform: scale(.7);
     transform-origin: left top;
     margin-right: 10px;
-    /* 省略号 */
     word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box;
@@ -480,7 +409,6 @@ html {
 .advice_box {
     width: 100%;
     background-color: rgba(12, 12, 12, 0.607);
-
     backdrop-filter: blur(20px);
     position: absolute;
     top: 50px;
@@ -493,7 +421,6 @@ html {
     outline: none;
     height: fit-content;
     overflow: hidden;
-
 }
 
 .advice_box .advice_item {
@@ -504,13 +431,41 @@ html {
     padding-top: 10px;
     padding-bottom: 10px;
     padding-right: 10px;
-
     transition: background-color ease-out 60ms;
 }
-
-
 
 .advice_box .advice_item.selected {
     transition: background-color ease-in 60ms;
     background-color: rgba(0, 83, 238, 0.609);
 }
+
+/* 媒体查询，针对小屏幕设备（如手机） */
+@media (max-width: 768px) {
+    /* 隐藏左侧导航栏 */
+    .left-nav {
+        display: none;
+    }
+
+    /* 调整搜索框宽度 */
+    #search-input {
+        width: 80vw;
+        padding-left: 130px;
+        padding-right: 70px;
+    }
+
+    /* 调整搜索按钮宽度 */
+    .search-btn {
+        width: 60px;
+    }
+
+    /* 调整网站列表容器的内边距 */
+    .sites-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* 调整网站盒子的宽度 */
+    .site-box {
+        width: 100%;
+    }
+}    
