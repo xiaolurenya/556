@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
         /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
         @keyframes colorfulAnimation {
@@ -27,117 +29,163 @@
         }
 
         body {
-            font-family: "Roboto", sans-serif;
-            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
+            font-family: "Poppins", sans-serif;
             background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             color: #333;
             margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         h1 {
             text-align: center;
             color: white;
-            padding: 10px 0;
+            padding: 20px 0;
             margin: 0;
-            /* 增大标题文字大小 */
-            font-size: 100px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            font-size: 120px;
+            animation: colorfulAnimation 12s infinite linear;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
         }
 
         p {
             text-align: center;
-            font-size: 18px;
-            margin: 10px 0;
+            font-size: 20px;
+            margin: 15px 0;
+            color: #555;
         }
 
        .search-box {
             display: flex;
             justify-content: center;
-            margin: 20px auto;
-            max-width: 500px;
+            margin: 30px auto;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
         }
 
        .search-box input {
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px 0 0 5px;
-            width: 50%;
-            font-size: 16px;
+            padding: 12px 18px;
+            border: none;
+            border-right: 1px solid #ccc;
+            width: 60%;
+            font-size: 18px;
+            outline: none;
         }
 
        .search-box select {
-            padding: 10px 15px;
-            border: 1px solid #ccc;
-            border-left: none;
-            font-size: 16px;
+            padding: 12px 18px;
+            border: none;
+            border-right: 1px solid #ccc;
+            font-size: 18px;
+            outline: none;
         }
 
        .search-box button {
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: none;
-            /* 修改按钮背景颜色 */
             background-color: #ff6b6b;
             color: white;
-            border-radius: 0 5px 5px 0;
+            font-size: 18px;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-size: 16px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            animation: colorfulAnimation 12s infinite linear;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
        .search-box button:hover {
-            /* 修改按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
        .category {
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8);
+            margin: 40px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9);
             max-width: 90%;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
        .category h2 {
-            font-size: 20px;
-            margin-bottom: 15px;
-            /* 修改标题颜色 */
+            font-size: 24px;
+            margin-bottom: 20px;
             color: #ff6b6b;
-            /* 移除动画，避免产生背景框效果 */
-            /* animation: colorfulAnimation 10s infinite linear; */
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 10px;
         }
 
        .link-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 20px;
         }
 
         a {
-            display: inline-block;
-            padding: 12px 25px;
-            /* 修改链接背景颜色 */
+            display: inline-flex;
+            padding: 15px 30px;
             background-color: #ff6b6b;
             color: white;
             text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            animation: colorfulAnimation 12s infinite linear;
+            align-items: center;
+            gap: 10px;
         }
 
         a:hover {
-            /* 修改链接悬停时的背景颜色 */
             background-color: #e84118;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        /* 添加图标 */
+        a[href^="http://li0580.top"]::before {
+            content: "\f0ac";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        a[href^="https://hdhome.org"]::before {
+            content: "\f008";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        a[href^="https://www.zhihu.com"]::before {
+            content: "\f02d";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        a[href^="https://www.aliyundrive.com"]::before {
+            content: "\f0a0";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        a[href^="https://github.com"]::before {
+            content: "\f09b";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
         }
 
        .debug-warning {
@@ -164,11 +212,11 @@
 
         @media (max-width: 768px) {
             h1 {
-                font-size: 36px;
+                font-size: 60px;
             }
 
             p {
-                font-size: 16px;
+                font-size: 18px;
             }
 
             a {
@@ -196,9 +244,9 @@
 
        .password-modal-content {
             background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
             text-align: center;
             position: relative;
             top: 0;
@@ -209,46 +257,51 @@
         }
 
        .password-modal input {
-            margin: 10px 0;
-            padding: 10px;
+            margin: 15px 0;
+            padding: 12px;
             border: 1px solid #ccc;
-            border-radius: 5px;
+            border-radius: 8px;
             width: 100%;
+            font-size: 18px;
         }
 
        .password-modal button {
-            padding: 10px 20px;
-            /* 修改密码框提交按钮背景颜色 */
+            padding: 12px 30px;
             background-color: #ff6b6b;
             color: white;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-size: 18px;
+            transition: background-color 0.3s ease;
         }
 
        .password-modal button:hover {
-            /* 修改密码框提交按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
        .main-content {
             display: none;
+            flex: 1;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
         }
 
        .record-info {
-            font-size: 12px;
+            font-size: 14px;
             color: #666;
             margin-top: 10px;
         }
 
        .record-info p {
-            font-size: 12px; /* 调整网站备案信息文字大小 */
+            font-size: 14px;
             text-align: left;
             margin: 0;
         }
 
        .record-info a {
-            font-size: 10px;
+            font-size: 12px;
             padding: 0;
             background-color: transparent;
             color: #007bff;
@@ -277,7 +330,6 @@
             <div class="record-info">
                 <p>私人书签</p>
                 <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2023023534号</a>
-          
             </div>
         </div>
     </div>
@@ -338,10 +390,9 @@
                 <a href="http://igmp.vip:2332/zj/0201.m3u" target="_blank">IPTV内m3u</a>
                 <a href="http://max.token.iptv.xin:2052/login" target="_blank">花海iIPTV</a>
                 <a href="http://li0580.top:2025/" target="_blank">爱快外</a>
-
             </div>
         </div>
- 
+
         <!--十二大PT -->
         <div class="category">
             <h2>十二大PT</h2>
@@ -354,7 +405,7 @@
             </div>
         </div>
 
-          <!--其他PT -->
+        <!--其他PT -->
         <div class="category">
             <h2>其他PT</h2>
             <div class="link-container">
@@ -363,113 +414,34 @@
                 <a href="https://www.hdkyl.in/" target="_blank">HDfans</a>
                 <a href="https://pt.soulvoice.club/" target="_blank">聆音</a>
                 <a href="https://pt.btschool.club/" target="_blank">学校</a>
-                <a href=https://hdtime.org/" target="_blank">HD高清</a>
+                <a href="https://hdtime.org/" target="_blank">HD高清</a>
                 <a href="https://raingfh.top/" target="_blank">雨</a>
                 <a href="https://zmpt.cc/" target="_blank">织梦</a>
                 <a href="https://ptvicomo.net/" target="_blank">象岛</a>
-                
-            </div>
-        </div>
-
-        <!-- 社交与内容平台相关链接 -->
-        <div class="category">
-            <h2>社交与内容平台</h2>
-            <div class="link-container">
-                <a href="https://www.zhihu.com/" target="_blank">知乎</a>
-                <a href="https://www.douban.com/" target="_blank">豆瓣</a>
-                <a href="https://www.jianshu.com/" target="_blank">简书</a>
-                <a href="https://weibo.com/" target="_blank">微博</a>
-                <a href="https://tieba.baidu.com/" target="_blank">百度贴吧</a>
-                
-            </div>
-        </div>
-
-        <!-- 网盘相关链接 -->
-        <div class="category">
-            <h2>网盘</h2>
-            <div class="link-container">
-                <a href="https://www.aliyundrive.com" target="_blank">阿里云盘</a>
-                <a href="https://pan.baidu.com/" target="_blank">百度网盘</a>
-                <a href="https://wwe.lanzouo.com/" target="_blank">蓝奏云</a>
-                <a href="https://mail.qq.com/" target="_blank">QQ邮箱</a>
-                <a href="https://email.163.com/" target="_blank">网易邮箱</a>
-            </div>
-        </div>
-
-
-        <!-- 学习与技术资源相关链接 -->
-        <div class="category">
-            <h2>学习与技术资源</h2>
-            <div class="link-container">
-                <a href="https://github.com/" target="_blank">Github</a>
-                <a href="https://dash.cloudflare.com" target="_blank">cloudflare</a>
-                <a href="https://gitee.com/" target="_blank">码云Gitee</a>
-                <a href="https://next.itellyou.cn/" target="_blank">MSDN我告诉你</a>
-                <a href="https://cloud.tencent.com/" target="_blank">腾讯云</a>
-                <a href="https://www.aliyun.com/" target="_blank">阿里云</a>
             </div>
         </div>
     </div>
-    <div class="debug-warning" id="debugWarning">禁止调试网页！</div>
     <script>
-        const correctPassword = 'a1234567'; // 请替换为实际密码
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordInput = document.getElementById('passwordInput');
-        const mainContent = document.querySelector('.main-content');
-        const debugWarning = document.getElementById('debugWarning');
-
+        const correctPassword = 'your_password'; // 请替换为实际密码
         function checkPassword() {
-            const inputPassword = passwordInput.value;
-            if (inputPassword === correctPassword) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-                const expirationDate = new Date();
-                expirationDate.setDate(expirationDate.getDate() + 30);
-                localStorage.setItem('passwordVerified', JSON.stringify({
-                    verified: true,
-                    expiration: expirationDate.getTime()
-                }));
+            const passwordInput = document.getElementById('passwordInput');
+            const password = passwordInput.value;
+            if (password === correctPassword) {
+                document.getElementById('passwordModal').style.display = 'none';
+                document.querySelector('.main-content').style.display = 'flex';
             } else {
                 alert('密码错误，请重新输入！');
-            }
-        }
-
-        // 检查本地存储中的密码验证状态
-        const storedData = localStorage.getItem('passwordVerified');
-        if (storedData) {
-            const { verified, expiration } = JSON.parse(storedData);
-            const now = new Date().getTime();
-            if (verified && now < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
+                passwordInput.value = ''; // 清空输入框
             }
         }
 
         function performSearch() {
             const searchInput = document.getElementById('searchInput').value;
             const searchEngine = document.getElementById('searchEngine').value;
-            const url = searchEngine + encodeURIComponent(searchInput);
-            window.open(url, '_blank');
-        }
-
-        // 禁止F12和右键调试
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                debugWarning.style.display = 'block';
-                setTimeout(() => {
-                    debugWarning.style.display = 'none';
-                }, 3000);
+            if (searchInput) {
+                window.location.href = searchEngine + encodeURIComponent(searchInput);
             }
-        });
-
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            debugWarning.style.display = 'block';
-            setTimeout(() => {
-                debugWarning.style.display = 'none';
-            }, 3000);
-        });
+        }
     </script>
 </body>
 
