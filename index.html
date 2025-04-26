@@ -43,7 +43,7 @@
             padding: 10px 0;
             margin: 0;
             /* 增大标题文字大小 */
-            font-size: 100px; 
+            font-size: 100px;
             /* 应用新的动画 */
             animation: colorfulAnimation 10s infinite linear;
         }
@@ -234,6 +234,13 @@
        .main-content {
             display: none;
         }
+
+        /* 新增公安备案信息样式 */
+       .public-security备案 {
+            margin-top: 15px;
+            font-size: 12px;
+            color: #666;
+        }
     </style>
 </head>
 
@@ -243,6 +250,10 @@
             <h2>请输入密码</h2>
             <input type="password" id="passwordInput" placeholder="输入密码">
             <button onclick="checkPassword()">提交</button>
+            <!-- 添加公安备案信息 -->
+            <div class="public-security备案">
+                备案号：皖ICP备2023023534号-1号
+            </div>
         </div>
     </div>
     <div class="main-content">
@@ -332,7 +343,7 @@
         </div>
 
 
-      <!-- 学习与技术资源相关链接 -->
+        <!-- 学习与技术资源相关链接 -->
         <div class="category">
             <h2>学习与技术资源</h2>
             <div class="link-container">
@@ -378,35 +389,3 @@
                 passwordModal.style.display = 'none';
                 mainContent.style.display = 'block';
             }
-        }
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            const url = searchEngine + encodeURIComponent(searchInput);
-            window.open(url, '_blank');
-        }
-
-        // 禁止F12和右键调试
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                debugWarning.style.display = 'block';
-                setTimeout(() => {
-                    debugWarning.style.display = 'none';
-                }, 3000);
-            }
-        });
-
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            debugWarning.style.display = 'block';
-            setTimeout(() => {
-                debugWarning.style.display = 'none';
-            }, 3000);
-        });
-    </script>
-</body>
-
-</html>
-    
