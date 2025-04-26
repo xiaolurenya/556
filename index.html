@@ -418,3 +418,43 @@
         }
 
         // 检查本地存储中的密码验证状态
+        const storedData = localStorage.getItem('passwordVerified');
+        if (storedData) {
+            const { verified, expiration } = JSON.parse(storedData);
+            const now = new Date().getTime();
+            if (verified && now < expiration) {
+                passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const searchEngine = document.getElementById('searchEngine').value;
+            const url = searchEngine + encodeURIComponent(searchInput);
+            window.open(url, '_blank');
+        }
+
+        // 禁止F12和右键调试
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                debugWarning.style.display = 'block';
+                setTimeout(() => {
+                    debugWarning.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            debugWarning.style.display = 'block';
+            setTimeout(() => {
+                debugWarning.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>
+    
