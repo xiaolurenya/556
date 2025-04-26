@@ -236,19 +236,27 @@
         }
 
        .record-info {
-            font-size: 10px; /* 将字体大小调整为 10px，你可以根据需要进一步调整 */
+            font-size: 12px;
             color: #666;
             margin-top: 10px;
         }
 
+       .record-info p {
+            font-size: 10px; /* 调整网站备案信息文字大小 */
+            text-align: left;
+            margin: 0;
+        }
+
        .record-info a {
-            font-size: 10px; /* 也调整链接的字体大小 */
+            font-size: 10px;
             padding: 0;
             background-color: transparent;
             color: #007bff;
             box-shadow: none;
             text-decoration: underline;
             animation: none;
+            display: block;
+            text-align: left;
         }
 
        .record-info a:hover {
@@ -386,3 +394,53 @@
                 passwordModal.style.display = 'none';
                 mainContent.style.display = 'block';
                 const expirationDate = new Date();
+                expirationDate.setDate(expirationDate.getDate() + 30);
+                localStorage.setItem('passwordVerified', JSON.stringify({
+                    verified: true,
+                    expiration: expirationDate.getTime()
+                }));
+            } else {
+                alert('密码错误，请重新输入！');
+            }
+        }
+
+        // 检查本地存储中的密码验证状态
+        const storedData = localStorage.getItem('passwordVerified');
+        if (storedData) {
+            const { verified, expiration } = JSON.parse(storedData);
+            const now = new Date().getTime();
+            if (verified && now < expiration) {
+                passwordModal.style.display = 'none';
+                mainContent.style.display = 'block';
+            }
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput').value;
+            const searchEngine = document.getElementById('searchEngine').value;
+            const url = searchEngine + encodeURIComponent(searchInput);
+            window.open(url, '_blank');
+        }
+
+        // 禁止F12和右键调试
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
+                e.preventDefault();
+                debugWarning.style.display = 'block';
+                setTimeout(() => {
+                    debugWarning.style.display = 'none';
+                }, 3000);
+            }
+        });
+
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            debugWarning.style.display = 'block';
+            setTimeout(() => {
+                debugWarning.style.display = 'none';
+            }, 3000);
+        });
+    </script>
+</body>
+
+</html>    
