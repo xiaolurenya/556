@@ -156,8 +156,7 @@
                                 <div class="name">{{kind_name}}</div>
                             </div>
                             <div class="sites-box">
-                                <!-- 修改此处，调用新的 openInNewTab 方法 -->
-                                <div @click="openInNewTab(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
+                                <div @click="open(site_val.url)" class="site-box" v-for="site_val in kind_val.data">
                                     <div class="icon" :data-original="site_val.icon"></div>
                                     <div class="info">
                                         <div class="name">{{site_val.name}}</div>
@@ -204,6 +203,8 @@
                 console.log('使用本地存储的密码，跳过验证');
                 passwordModal.style.display = 'none';
                 originalContent.style.display = 'block';
+                // 在密码验证通过且使用本地存储密码跳过验证时，处理链接点击行为
+                handleLinkClicks();
             }
         }
 
@@ -218,61 +219,28 @@
                 const expiry = new Date().getTime() + 30 * 24 * 60 * 60 * 1000; // 30 天
                 localStorage.setItem('savedPassword', correctPassword);
                 localStorage.setItem('passwordExpiry', expiry.toString());
+                // 在密码输入正确时，处理链接点击行为
+                handleLinkClicks();
             } else {
                 console.log('密码错误');
                 alert('密码错误，请重试！');
             }
         });
 
-        // 创建 Vue 实例
-        const app = Vue.createApp({
-            data() {
-                return {
-                    settings: {
-                        searchEngine: {}
-                    },
-                    advices: [],
-                    show_engine_box: false,
-                    sitesData: []
-                };
-            },
-            methods: {
-                getEngines() {
-                    return []; // 这里需要根据实际情况返回搜索引擎数据
-                },
-                getSelectedEngine() {
-                    return {}; // 这里需要根据实际情况返回选中的搜索引擎数据
-                },
-                hideEngineBox(delay) {
-                    // 这里需要实现隐藏搜索引擎选择框的逻辑
-                },
-                showEngineBox() {
-                    // 这里需要实现显示搜索引擎选择框的逻辑
-                },
-                input_keydown(event) {
-                    // 这里需要实现按键按下的逻辑
-                },
-                showAdvice() {
-                    // 这里需要实现显示搜索建议的逻辑
-                },
-                search() {
-                    // 这里需要实现搜索的逻辑
-                },
-                advice_clicked(index) {
-                    // 这里需要实现点击搜索建议的逻辑
-                },
-                // 新增方法，用于在新页面打开链接
-                openInNewTab(url) {
+        function handleLinkClicks() {
+            const siteBoxes = document.querySelectorAll('.site-box');
+            siteBoxes.forEach(siteBox => {
+                siteBox.addEventListener('click', function (event) {
+                    const url = this.getAttribute('data-url'); // 这里假设链接地址在 data-url 属性中，根据实际情况修改
                     if (url) {
                         window.open(url, '_blank');
                     } else {
                         console.error('链接地址为空');
                     }
-                }
-            }
-        });
-
-        app.mount('#app');
+                    event.preventDefault(); // 防止原有的点击行为（如果有）
+                });
+            });
+        }
     </script>
     <script src="./js/vue3.js"></script>
     <script src="./js/jquery.min.js"></script>
@@ -281,4 +249,4 @@
     <script src="./js/index.js"></script>
 </body>
 
-</html>    
+</html>
