@@ -25,6 +25,52 @@
             }
         }
 
+        /* 新增标题淡入动画 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 新增栏目滑入动画 */
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* 新增鼠标悬停文字放大动画 */
+        @keyframes scaleText {
+            from {
+                transform: scale(1);
+            }
+            to {
+                transform: scale(1.2);
+            }
+        }
+
+        /* 新增背景粒子动画 */
+        @keyframes particleAnimation {
+            0% {
+                transform: translate(0, 0);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100px, -100px);
+                opacity: 0;
+            }
+        }
+
         body {
             font-family: "Roboto", sans-serif;
             background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
@@ -33,6 +79,22 @@
             background-attachment: fixed;
             color: #444;
             margin: 0;
+            position: relative;
+        }
+
+        /* 背景粒子样式 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="5" fill="rgba(255,255,255,0.3)" /></svg>');
+            background-size: 20px 20px;
+            animation: particleAnimation 10s linear infinite;
         }
 
         h1 {
@@ -41,9 +103,9 @@
             padding: 10px 0;
             margin: 0;
             font-size: 80px;
-            animation: colorfulAnimation 10s infinite linear;
-            /* 修改为透明磨砂色 */
-            background-color: rgba(255, 255, 255, 0.3);
+            animation: colorfulAnimation 10s infinite linear, fadeIn 1s ease-out;
+            /* 修改为更透明的磨砂色 */
+            background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
         }
 
@@ -96,10 +158,14 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* 修改为透明磨砂色 */
-            background-color: rgba(255, 255, 255, 0.3);
+            /* 修改为更透明的磨砂色 */
+            background-color: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
             max-width: 90%;
+            animation: slideIn 1s ease-out;
+            animation-fill-mode: both;
+            /* 每个栏目延迟一点显示 */
+            animation-delay: calc(0.2s * var(--index));
         }
 
        .category h2 {
@@ -122,14 +188,15 @@
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease, transform 0.5s ease;
             animation: colorfulAnimation 10s infinite linear;
         }
 
         a:hover {
             background-color: #218838;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
+            transform: translateY(-12px); /* 鼠标选中动画幅度加大 */
+            box-shadow: 0 15px 18px rgba(0, 0, 0, 0.2);
+            animation: scaleText 0.3s ease forwards; /* 鼠标悬停文字放大动画 */
         }
 
        .debug-warning {
@@ -284,7 +351,7 @@
         </div>
         <p>个人自用，导航书签，网站，一站式触达</p>
 
-        <div class="category">
+        <div class="category" style="--index: 1;">
             <h2>飞牛外网</h2>
             <div class="link-container">
                 <a href="http://li0580.top:3000" target="_blank">MoviePilot</a>
@@ -298,7 +365,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 2;">
             <h2>飞牛内网</h2>
             <div class="link-container">
                 <a href="192.168.2.225:3000" target="_blank">MoviePilot</a>
@@ -312,7 +379,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 3;">
             <h2>自用工具</h2>
             <div class="link-container">
                 <a href="192.168.2.225:2025/" target="_blank">爱快内</a>
@@ -326,7 +393,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 4;">
             <h2>十二大PT</h2>
             <div class="link-container">
                 <a href="https://hdhome.org/" target="_blank">家园</a>
@@ -337,7 +404,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 5;">
             <h2>其他PT</h2>
             <div class="link-container">
                 <a href="https://www.agsvpt.com/" target="_blank">末日</a>
@@ -352,7 +419,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 6;">
             <h2>社交与内容平台</h2>
             <div class="link-container">
                 <a href="https://www.zhihu.com/" target="_blank">知乎</a>
@@ -363,7 +430,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 7;">
             <h2>网盘</h2>
             <div class="link-container">
                 <a href="https://www.aliyundrive.com" target="_blank">阿里云盘</a>
@@ -374,7 +441,7 @@
             </div>
         </div>
 
-        <div class="category">
+        <div class="category" style="--index: 8;">
             <h2>学习与技术资源</h2>
             <div class="link-container">
                 <a href="https://github.com/" target="_blank">Github</a>
