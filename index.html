@@ -7,23 +7,29 @@
     <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 定义通用的蓝色动态变化动画 */
-        @keyframes blueAnimation {
+        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
+        @keyframes colorfulAnimation {
             0% {
-                background-color: #007BFF;
+                background-color: #ff6b6b;
+            }
+            25% {
+                background-color: #ffcc5c;
             }
             50% {
-                background-color: #0056b3;
+                background-color: #8ee4af;
+            }
+            75% {
+                background-color: #a5d8ff;
             }
             100% {
-                background-color: #007BFF;
+                background-color: #ff6b6b;
             }
         }
 
         body {
             font-family: "Roboto", sans-serif;
-            /* 添加背景图片，这里假设图片名为background.jpg，你需要替换为实际的图片路径 */
-            background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
+            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
+            background-image: url('https://source.unsplash.com/random/1600x900/?nature');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
@@ -37,8 +43,8 @@
             padding: 30px 0;
             margin: 0;
             font-size: 48px;
-            /* 应用动画，持续时间为5秒，无限循环，线性过渡 */
-            animation: blueAnimation 5s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
         p {
@@ -72,18 +78,20 @@
        .search-box button {
             padding: 10px 15px;
             border: none;
-            background-color: #007BFF;
+            /* 修改按钮背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            /* 应用动画 */
-            animation: blueAnimation 5s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
        .search-box button:hover {
-            background-color: #0056b3;
+            /* 修改按钮悬停时的背景颜色 */
+            background-color: #e84118;
         }
 
        .category {
@@ -98,9 +106,10 @@
        .category h2 {
             font-size: 20px;
             margin-bottom: 15px;
-            color: #007BFF;
-            /* 应用动画 */
-            animation: blueAnimation 5s infinite linear;
+            /* 修改标题颜色 */
+            color: #ff6b6b;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
        .link-container {
@@ -112,18 +121,20 @@
         a {
             display: inline-block;
             padding: 12px 25px;
-            background-color: #007BFF;
+            /* 修改链接背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 应用动画 */
-            animation: blueAnimation 5s infinite linear;
+            /* 应用新的动画 */
+            animation: colorfulAnimation 10s infinite linear;
         }
 
         a:hover {
-            background-color: #0056b3;
+            /* 修改链接悬停时的背景颜色 */
+            background-color: #e84118;
             transform: translateY(-3px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
         }
@@ -200,7 +211,8 @@
 
        .password-modal button {
             padding: 10px 20px;
-            background-color: #007BFF;
+            /* 修改密码框提交按钮背景颜色 */
+            background-color: #ff6b6b;
             color: white;
             border: none;
             border-radius: 5px;
@@ -208,7 +220,8 @@
         }
 
        .password-modal button:hover {
-            background-color: #0056b3;
+            /* 修改密码框提交按钮悬停时的背景颜色 */
+            background-color: #e84118;
         }
 
        .main-content {
@@ -401,74 +414,3 @@
         // 检查本地存储中的密码验证状态
         const storedData = localStorage.getItem('passwordVerified');
         if (storedData) {
-            const { verified, expiration } = JSON.parse(storedData);
-            const currentTime = new Date().getTime();
-            if (verified && currentTime < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-            }
-        }
-
-        // 禁止鼠标右键
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-
-        // 禁止 F12 调试
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                const debugWarning = document.getElementById('debugWarning');
-                debugWarning.style.display = 'block';
-                setTimeout(() => {
-                    debugWarning.style.display = 'none';
-                }, 3000);
-            }
-        });
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            if (searchInput) {
-                const searchUrl = searchEngine + encodeURIComponent(searchInput);
-                window.open(searchUrl, '_blank');
-            } else {
-                alert('请输入搜索关键词！');
-            }
-        }
-
-        function getWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    const apiKey = 'your_api_key'; // 请替换为你自己的心知天气 API Key
-                    const apiUrl = `https://api.seniverse.com/v3/weather/now.json?key=${apiKey}&location=${latitude},${longitude}&language=zh-Hans&unit=c`;
-
-                    fetch(apiUrl)
-                       .then(response => response.json())
-                       .then(data => {
-                            const weatherInfo = document.getElementById('weatherInfo');
-                            const location = data.results[0].location.name;
-                            const weather = data.results[0].now.text;
-                            const temperature = data.results[0].now.temperature;
-                            weatherInfo.innerHTML = `${location} ${weather} ${temperature}°C`;
-                        })
-                       .catch(error => {
-                            console.error('获取天气信息失败:', error);
-                        });
-                }, function (error) {
-                    console.error('获取地理位置失败:', error);
-                });
-            } else {
-                console.error('浏览器不支持地理位置定位');
-            }
-        }
-
-        window.onload = function () {
-            getWeather();
-        };
-    </script>
-</body>
-
-</html>    
