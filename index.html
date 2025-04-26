@@ -7,50 +7,60 @@
     <title>自用导航</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
-        @keyframes colorfulAnimation {
+        /* 定义通用的动态变化动画，修改为更柔和的颜色变化 */
+        @keyframes softAnimation {
             0% {
-                background-color: #ff6b6b;
-            }
-            25% {
-                background-color: #ffcc5c;
+                background-color: #f099a7;
             }
             50% {
-                background-color: #8ee4af;
-            }
-            75% {
-                background-color: #a5d8ff;
+                background-color: #f5d0a9;
             }
             100% {
-                background-color: #ff6b6b;
+                background-color: #f099a7;
             }
         }
 
         body {
             font-family: "Roboto", sans-serif;
-            /* 更换为色彩更丰富的背景图片，你也可以根据喜好选择其他图片 */
-            background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
+            /* 更换为更简洁的背景图片 */
+            background-image: url('https://source.unsplash.com/random/1600x900/?tech');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             color: #333;
             margin: 0;
+            /* 添加背景滤镜，这里使用模糊滤镜 */
+            filter: blur(2px);
+            -webkit-filter: blur(2px);
+            overflow: hidden;
+        }
+
+        /* 添加半透明遮罩层，使背景更柔和 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.3);
+            z-index: -1;
         }
 
         h1 {
             text-align: center;
-            color: white;
+            color: #333;
             padding: 30px 0;
             margin: 0;
             font-size: 48px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            animation: softAnimation 10s infinite linear;
         }
 
         p {
             text-align: center;
             font-size: 18px;
             margin: 10px 0;
+            color: #333;
         }
 
        .search-box {
@@ -78,19 +88,16 @@
        .search-box button {
             padding: 10px 15px;
             border: none;
-            /* 修改按钮背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #f099a7;
             color: white;
             border-radius: 0 5px 5px 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
             font-size: 16px;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            animation: softAnimation 10s infinite linear;
         }
 
        .search-box button:hover {
-            /* 修改按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
@@ -99,17 +106,15 @@
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: white;
             max-width: 90%;
         }
 
        .category h2 {
             font-size: 20px;
             margin-bottom: 15px;
-            /* 修改标题颜色 */
-            color: #ff6b6b;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            color: #f099a7;
+            animation: softAnimation 10s infinite linear;
         }
 
        .link-container {
@@ -121,19 +126,16 @@
         a {
             display: inline-block;
             padding: 12px 25px;
-            /* 修改链接背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #f099a7;
             color: white;
             text-decoration: none;
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s ease, transform 0.2s ease;
-            /* 应用新的动画 */
-            animation: colorfulAnimation 10s infinite linear;
+            animation: softAnimation 10s infinite linear;
         }
 
         a:hover {
-            /* 修改链接悬停时的背景颜色 */
             background-color: #e84118;
             transform: translateY(-3px);
             box-shadow: 0 6px 8px rgba(0, 0, 0, 0.2);
@@ -155,7 +157,7 @@
             position: absolute;
             top: 10px;
             right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
+            background-color: white;
             padding: 10px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -211,8 +213,7 @@
 
        .password-modal button {
             padding: 10px 20px;
-            /* 修改密码框提交按钮背景颜色 */
-            background-color: #ff6b6b;
+            background-color: #f099a7;
             color: white;
             border: none;
             border-radius: 5px;
@@ -220,7 +221,6 @@
         }
 
        .password-modal button:hover {
-            /* 修改密码框提交按钮悬停时的背景颜色 */
             background-color: #e84118;
         }
 
@@ -415,73 +415,4 @@
         const storedData = localStorage.getItem('passwordVerified');
         if (storedData) {
             const { verified, expiration } = JSON.parse(storedData);
-            const currentTime = new Date().getTime();
-            if (verified && currentTime < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-            }
-        }
-
-        // 禁止鼠标右键
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-        });
-
-        // 禁止 F12 调试
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                const debugWarning = document.getElementById('debugWarning');
-                debugWarning.style.display = 'block';
-                setTimeout(() => {
-                    debugWarning.style.display = 'none';
-                }, 3000);
-            }
-        });
-
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            if (searchInput) {
-                const searchUrl = searchEngine + encodeURIComponent(searchInput);
-                window.open(searchUrl, '_blank');
-            } else {
-                alert('请输入搜索关键词！');
-            }
-        }
-
-        function getWeather() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    const latitude = position.coords.latitude;
-                    const longitude = position.coords.longitude;
-                    const apiKey = 'your_api_key'; // 请替换为你自己的心知天气 API Key
-                    const apiUrl = `https://api.seniverse.com/v3/weather/now.json?key=${apiKey}&location=${latitude},${longitude}&language=zh-Hans&unit=c`;
-
-                    fetch(apiUrl)
-                       .then(response => response.json())
-                       .then(data => {
-                            const weatherInfo = document.getElementById('weatherInfo');
-                            const location = data.results[0].location.name;
-                            const weather = data.results[0].now.text;
-                            const temperature = data.results[0].now.temperature;
-                            weatherInfo.innerHTML = `${location} ${weather} ${temperature}°C`;
-                        })
-                       .catch(error => {
-                            console.error('获取天气信息失败:', error);
-                        });
-                }, function (error) {
-                    console.error('获取地理位置失败:', error);
-                });
-            } else {
-                console.error('浏览器不支持地理位置定位');
-            }
-        }
-
-        window.onload = function () {
-            getWeather();
-        };
-    </script>
-</body>
-
-</html>    
+            const currentTime = new Date().
