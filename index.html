@@ -47,7 +47,8 @@
 
         .top-container {
             background-color: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            /* 增大模糊值，让背景玻璃磨砂透明效果更模糊 */
+            backdrop-filter: blur(20px); 
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -90,6 +91,12 @@
             background-color: #f9fafb;
             color: #1f2937;
             transform: scale(1.05);
+        }
+
+        /* 按钮选中状态样式 */
+        .switch-buttons button.active {
+            background-color: yellow;
+            color: #1f2937;
         }
 
         .search-container {
@@ -428,7 +435,7 @@
             <nav>
                 <h1>六零导航页</h1>
                 <div class="switch-buttons">
-                    <button id="outerNetBtn">外网</button>
+                    <button id="outerNetBtn" class="active">外网</button>
                     <button id="innerNetBtn">内网</button>
                 </div>
             </nav>
@@ -652,27 +659,24 @@
 
         let isOuterNet = true;
 
-        document.getElementById('outerNetBtn').addEventListener('click', function () {
+        const outerNetBtn = document.getElementById('outerNetBtn');
+        const innerNetBtn = document.getElementById('innerNetBtn');
+
+        outerNetBtn.addEventListener('click', function () {
             if (!isOuterNet) {
                 const links = document.querySelectorAll('.category a');
                 links.forEach(link => {
                     link.href = link.dataset.outer;
                 });
                 isOuterNet = true;
+                outerNetBtn.classList.add('active');
+                innerNetBtn.classList.remove('active');
             }
         });
 
-        document.getElementById('innerNetBtn').addEventListener('click', function () {
+        innerNetBtn.addEventListener('click', function () {
             if (isOuterNet) {
                 const links = document.querySelectorAll('.category a');
                 links.forEach(link => {
                     link.href = link.dataset.inner;
                 });
-                isOuterNet = false;
-            }
-        });
-    </script>
-</body>
-
-</html>
-    
