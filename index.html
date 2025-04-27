@@ -47,8 +47,7 @@
 
         .top-container {
             background-color: rgba(255, 255, 255, 0.1);
-            /* 增大模糊值，让背景玻璃磨砂透明效果更模糊 */
-            backdrop-filter: blur(20px); 
+            backdrop-filter: blur(20px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
@@ -78,13 +77,12 @@
             letter-spacing: 0.05em;
         }
 
-        /* 外网和内网文字颜色区分 */
         #outerNetBtn {
-            color: #00ff00; /* 外网文字颜色设为绿色 */
+            color: #00ff00;
         }
 
         #innerNetBtn {
-            color: #ff0000; /* 内网文字颜色设为红色 */
+            color: #ff0000;
         }
 
         .switch-buttons button:hover {
@@ -93,7 +91,6 @@
             transform: scale(1.05);
         }
 
-        /* 按钮选中状态样式 */
         .switch-buttons button.active {
             background-color: yellow;
             color: #1f2937;
@@ -205,7 +202,6 @@
             }
         }
 
-        /* 主栏目动画效果幅度增大 */
         .category:hover {
             transform: translateY(-20px);
             box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
@@ -247,7 +243,6 @@
             transition: width 0.3s ease;
         }
 
-        /* 导航栏目中的链接鼠标选中颜色调整为大红色 */
         .category a:hover {
             color: #FF0000;
             transform: scale(1.1);
@@ -356,11 +351,14 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
-        /* 手机端适配 */
         @media (max-width: 768px) {
             .category-container {
                 grid-template-columns: repeat(2, 1fr);
@@ -579,7 +577,7 @@
 
     <script>
         const correctPassword = '123456';
-        const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000; // 密码保存时长为7天
+        const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
@@ -658,7 +656,6 @@
         }
 
         let isOuterNet = true;
-
         const outerNetBtn = document.getElementById('outerNetBtn');
         const innerNetBtn = document.getElementById('innerNetBtn');
 
@@ -680,3 +677,13 @@
                 links.forEach(link => {
                     link.href = link.dataset.inner;
                 });
+                isOuterNet = false;
+                outerNetBtn.classList.remove('active');
+                innerNetBtn.classList.add('active');
+            }
+        });
+    </script>
+</body>
+
+</html>
+    
