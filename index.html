@@ -118,7 +118,7 @@
             padding: 0.5rem;
             border: none;
             border-radius: 0.375rem 0 0 0.375rem;
-            width: 300px; /* 增加搜索框长度 */
+            width: 300px;
             font-size: 0.8rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -151,7 +151,7 @@
         .category-container {
             padding: 1rem;
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* 一排5个 */
+            grid-template-columns: repeat(5, 1fr);
             gap: 1.5rem;
         }
 
@@ -259,7 +259,7 @@
             border-radius: 0.5rem;
             padding: 2rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            text-align: center; /* 让登录按钮居中 */
+            text-align: center;
         }
 
         .login-box h2 {
@@ -318,15 +318,6 @@
             color: #f9fafb;
             text-decoration: underline;
         }
-
-        /* 新增内网导航栏样式 */
-        #innerNetCategoryContainer {
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
-            display: none;
-        }
     </style>
 </head>
 
@@ -370,176 +361,132 @@
                 </div>
             </div>
         </div>
-        <div class="category-container" id="outerNetCategoryContainer">
+        <div class="category-container">
             <div class="category">
                 <h3>常用导航</h3>
                 <ul>
-                    <li><a href="https://v.qq.com/">腾讯视频</a></li>
-                    <li><a href="https://www.youku.com/">优酷</a></li>
-                    <li><a href="https://www.bilibili.com/">哔哩哔哩</a></li>
-                    <li><a href="https://weibo.com/">微博</a></li>
+                    <li><a href="https://v.qq.com/" data-outer="https://v.qq.com/" data-inner="http://192.168.1.10/vqq">腾讯视频</a></li>
+                    <li><a href="https://www.youku.com/" data-outer="https://www.youku.com/" data-inner="http://192.168.1.11/youku">优酷</a></li>
+                    <li><a href="https://www.bilibili.com/" data-outer="https://www.bilibili.com/" data-inner="http://192.168.1.12/bilibili">哔哩哔哩</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>AI工具</h3>
                 <ul>
-                    <li><a href="https://www.doubao.com/">抖音云豆包</a></li>
-                    <li><a href="https://yiyan.baidu.com/">文心一言</a></li>
-                    <li><a href="https://chat.openai.com/">ChatGPT</a></li>
+                    <li><a href="https://www.doubao.com/" data-outer="https://www.doubao.com/" data-inner="http://192.168.1.13/doubao">抖音云豆包</a></li>
+                    <li><a href="https://yiyan.baidu.com/" data-outer="https://yiyan.baidu.com/" data-inner="http://192.168.1.14/yiyan">文心一言</a></li>
+                    <li><a href="https://chat.openai.com/" data-outer="https://chat.openai.com/" data-inner="http://192.168.1.15/chatgpt">ChatGPT</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>设计办公</h3>
                 <ul>
-                    <li><a href="https://templates.office.com/zh-cn">Office模板</a></li>
-                    <li><a href="https://www.gaoding.com/">稿定设计</a></li>
-                    <li><a href="https://www.588ku.com/">千库网</a></li>
+                    <li><a href="https://templates.office.com/zh-cn" data-outer="https://templates.office.com/zh-cn" data-inner="http://192.168.1.16/office">Office模板</a></li>
+                    <li><a href="https://www.gaoding.com/" data-outer="https://www.gaoding.com/" data-inner="http://192.168.1.17/gaoding">稿定设计</a></li>
+                    <li><a href="https://www.588ku.com/" data-outer="https://www.588ku.com/" data-inner="http://192.168.1.18/588ku">千库网</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>学习资源</h3>
                 <ul>
-                    <li><a href="https://www.icourse163.org/">中国大学MOOC</a></li>
-                    <li><a href="https://www.coursera.org/">Coursera</a></li>
-                    <li><a href="https://study.163.com/">网易云课堂</a></li>
+                    <li><a href="https://www.icourse163.org/" data-outer="https://www.icourse163.org/" data-inner="http://192.168.1.19/icourse">中国大学MOOC</a></li>
+                    <li><a href="https://www.coursera.org/" data-outer="https://www.coursera.org/" data-inner="http://192.168.1.20/coursera">Coursera</a></li>
+                    <li><a href="https://study.163.com/" data-outer="https://study.163.com/" data-inner="http://192.168.1.21/163study">网易云课堂</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>娱乐生活</h3>
                 <ul>
-                    <li><a href="https://movie.douban.com/">豆瓣电影</a></li>
-                    <li><a href="https://maoyan.com/">猫眼电影</a></li>
-                    <li><a href="https://www.ximalaya.com/">喜马拉雅</a></li>
+                    <li><a href="https://movie.douban.com/" data-outer="https://movie.douban.com/" data-inner="http://192.168.1.22/doubanmovie">豆瓣电影</a></li>
+                    <li><a href="https://maoyan.com/" data-outer="https://maoyan.com/" data-inner="http://192.168.1.23/maoyan">猫眼电影</a></li>
+                    <li><a href="https://www.ximalaya.com/" data-outer="https://www.ximalaya.com/" data-inner="http://192.168.1.24/ximalaya">喜马拉雅</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>社交平台</h3>
                 <ul>
-                    <li><a href="https://wx.qq.com/">微信</a></li>
-                    <li><a href="https://im.qq.com/">QQ</a></li>
-                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                    <li><a href="https://wx.qq.com/" data-outer="https://wx.qq.com/" data-inner="http://192.168.1.25/wx">微信</a></li>
+                    <li><a href="https://im.qq.com/" data-outer="https://im.qq.com/" data-inner="http://192.168.1.26/qq">QQ</a></li>
+                    <li><a href="https://www.facebook.com/" data-outer="https://www.facebook.com/" data-inner="http://192.168.1.27/facebook">Facebook</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>新闻资讯</h3>
                 <ul>
-                    <li><a href="https://news.sina.com.cn/">新浪新闻</a></li>
-                    <li><a href="https://news.qq.com/">腾讯新闻</a></li>
-                    <li><a href="https://www.toutiao.com/">今日头条</a></li>
+                    <li><a href="https://news.sina.com.cn/" data-outer="https://news.sina.com.cn/" data-inner="http://192.168.1.28/sinanews">新浪新闻</a></li>
+                    <li><a href="https://news.qq.com/" data-outer="https://news.qq.com/" data-inner="http://192.168.1.29/qqnews">腾讯新闻</a></li>
+                    <li><a href="https://www.toutiao.com/" data-outer="https://www.toutiao.com/" data-inner="http://192.168.1.30/toutiao">今日头条</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>金融财经</h3>
                 <ul>
-                    <li><a href="https://www.eastmoney.com/">东方财富</a></li>
-                    <li><a href="https://xueqiu.com/">雪球</a></li>
-                    <li><a href="https://www.10jqka.com.cn/">同花顺</a></li>
+                    <li><a href="https://www.eastmoney.com/" data-outer="https://www.eastmoney.com/" data-inner="http://192.168.1.31/eastmoney">东方财富</a></li>
+                    <li><a href="https://xueqiu.com/" data-outer="https://xueqiu.com/" data-inner="http://192.168.1.32/xueqiu">雪球</a></li>
+                    <li><a href="https://www.10jqka.com.cn/" data-outer="https://www.10jqka.com.cn/" data-inner="http://192.168.1.33/10jqka">同花顺</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>生活服务</h3>
                 <ul>
-                    <li><a href="https://www.meituan.com/">美团</a></li>
-                    <li><a href="https://www.ele.me/">饿了么</a></li>
-                    <li><a href="https://www.didiglobal.com/">滴滴出行</a></li>
+                    <li><a href="https://www.meituan.com/" data-outer="https://www.meituan.com/" data-inner="http://192.168.1.34/meituan">美团</a></li>
+                    <li><a href="https://www.ele.me/" data-outer="https://www.ele.me/" data-inner="http://192.168.1.35/eleme">饿了么</a></li>
+                    <li><a href="https://www.didiglobal.com/" data-outer="https://www.didiglobal.com/" data-inner="http://192.168.1.36/didi">滴滴出行</a></li>
                 </ul>
             </div>
             <div class="category">
                 <h3>游戏娱乐</h3>
                 <ul>
-                    <li><a href="https://store.steampowered.com/">Steam</a></li>
-                    <li><a href="https://pvp.qq.com/">王者荣耀</a></li>
-                    <li><a href="https://pubgmobile.com/">和平精英</a></li>
-                </ul>
-            </div>
-        </div>
-        <!-- 新增内网导航栏 -->
-        <div id="innerNetCategoryContainer">
-            <div class="category">
-                <h3>内网常用1</h3>
-                <ul>
-                    <li><a href="#">内网链接1</a></li>
-                    <li><a href="#">内网链接2</a></li>
-                    <li><a href="#">内网链接3</a></li>
+                    <li><a href="https://store.steampowered.com/" data-outer="https://store.steampowered.com/" data-inner="http://192.168.1.37/steam">Steam</a></li>
+                    <li><a href="https://pvp.qq.com/" data-outer="https://pvp.qq.com/" data-inner="http://192.168.1.38/pvp">王者荣耀</a></li>
+                    <li><a href="https://pubgmobile.com/" data-outer="https://pubgmobile.com/" data-inner="http://192.168.1.39/pubg">和平精英</a></li>
                 </ul>
             </div>
             <div class="category">
-                <h3>内网常用2</h3>
+                <h3>科技前沿</h3>
                 <ul>
-                    <li><a href="#">内网链接4</a></li>
-                    <li><a href="#">内网链接5</a></li>
-                    <li><a href="#">内网链接6</a></li>
+                    <li><a href="https://www.technologyreview.com/" data-outer="https://www.technologyreview.com/" data-inner="http://192.168.1.40/techreview">麻省理工科技评论</a></li>
+                    <li><a href="https://www.nature.com/" data-outer="https://www.nature.com/" data-inner="http://192.168.1.41/nature">自然</a></li>
+                    <li><a href="https://www.science.org/" data-outer="https://www.science.org/" data-inner="http://192.168.1.42/science">科学</a></li>
                 </ul>
             </div>
             <div class="category">
-                <h3>内网常用3</h3>
+                <h3>教育资源</h3>
                 <ul>
-                    <li><a href="#">内网链接7</a></li>
-                    <li><a href="#">内网链接8</a></li>
-                    <li><a href="#">内网链接9</a></li>
+                    <li><a href="https://www.edx.org/" data-outer="https://www.edx.org/" data-inner="http://192.168.1.43/edx">edX</a></li>
+                    <li><a href="https://www.khanacademy.org/" data-outer="https://www.khanacademy.org/" data-inner="http://192.168.1.44/khan">可汗学院</a></li>
+                    <li><a href="https://www.coursera.org/" data-outer="https://www.coursera.org/" data-inner="http://192.168.1.45/coursera2">Coursera</a></li>
                 </ul>
             </div>
             <div class="category">
-                <h3>内网常用4</h3>
+                <h3>健康养生</h3>
                 <ul>
-                    <li><a href="#">内网链接10</a></li>
-                    <li><a href="#">内网链接11</a></li>
-                    <li><a href="#">内网链接12</a></li>
+                    <li><a href="https://www.mayoclinic.org/" data-outer="https://www.mayoclinic.org/" data-inner="http://192.168.1.46/mayoclinic">梅奥诊所</a></li>
+                    <li><a href="https://www.webmd.com/" data-outer="https://www.webmd.com/" data-inner="http://192.168.1.47/webmd">WebMD</a></li>
+                    <li><a href="https://www.healthline.com/" data-outer="https://www.healthline.com/" data-inner="http://192.168.1.48/healthline">Healthline</a></li>
                 </ul>
             </div>
             <div class="category">
-                <h3>内网常用5</h3>
+                <h3>艺术设计</h3>
                 <ul>
-                    <li><a href="#">内网链接13</a></li>
-                    <li><a href="#">内网链接14</a></li>
-                    <li><a href="#">内网链接15</a></li>
+                    <li><a href="https://www.behance.net/" data-outer="https://www.behance.net/" data-inner="http://192.168.1.49/behance">Behance</a></li>
+                    <li><a href="https://dribbble.com/" data-outer="https://dribbble.com/" data-inner="http://192.168.1.50/dribbble">Dribbble</a></li>
+                    <li><a href="https://www.artincontext.org/" data-outer="https://www.artincontext.org/" data-inner="http://192.168.1.51/artincontext">艺术背景</a></li>
                 </ul>
             </div>
             <div class="category">
-                <h3>内网常用6</h3>
+                <h3>体育健身</h3>
                 <ul>
-                    <li><a href="#">内网链接16</a></li>
-                    <li><a href="#">内网链接17</a></li>
-                    <li><a href="#">内网链接18</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>内网常用7</h3>
-                <ul>
-                    <li><a href="#">内网链接19</a></li>
-                    <li><a href="#">内网链接20</a></li>
-                    <li><a href="#">内网链接21</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>内网常用8</h3>
-                <ul>
-                    <li><a href="#">内网链接22</a></li>
-                    <li><a href="#">内网链接23</a></li>
-                    <li><a href="#">内网链接24</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>内网常用9</h3>
-                <ul>
-                    <li><a href="#">内网链接25</a></li>
-                    <li><a href="#">内网链接26</a></li>
-                    <li><a href="#">内网链接27</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>内网常用10</h3>
-                <ul>
-                    <li><a href="#">内网链接28</a></li>
-                    <li><a href="#">内网链接29</a></li>
-                    <li><a href="#">内网链接30</a></li>
+                    <li><a href="https://www.espn.com/" data-outer="https://www.espn.com/" data-inner="http://192.168.1.52/espn">ESPN</a></li>
+                    <li><a href="https://www.bodybuilding.com/" data-outer="https://www.bodybuilding.com/" data-inner="http://192.168.1.53/bodybuilding">Bodybuilding</a></li>
+                    <li><a href="https://www.runnersworld.com/" data-outer="https://www.runnersworld.com/" data-inner="http://192.168.1.54/runnersworld">跑者世界</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
     <script>
-        const correctPassword = '123456'; // 可修改为实际密码
+        const correctPassword = '123456';
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
@@ -587,14 +534,26 @@
             window.open(url, '_blank');
         }
 
+        let isOuterNet = true;
+
         document.getElementById('outerNetBtn').addEventListener('click', function () {
-            document.getElementById('outerNetCategoryContainer').style.display = 'grid';
-            document.getElementById('innerNetCategoryContainer').style.display = 'none';
+            if (!isOuterNet) {
+                const links = document.querySelectorAll('.category a');
+                links.forEach(link => {
+                    link.href = link.dataset.outer;
+                });
+                isOuterNet = true;
+            }
         });
 
         document.getElementById('innerNetBtn').addEventListener('click', function () {
-            document.getElementById('outerNetCategoryContainer').style.display = 'none';
-            document.getElementById('innerNetCategoryContainer').style.display = 'grid';
+            if (isOuterNet) {
+                const links = document.querySelectorAll('.category a');
+                links.forEach(link => {
+                    link.href = link.dataset.inner;
+                });
+                isOuterNet = false;
+            }
         });
     </script>
 </body>
