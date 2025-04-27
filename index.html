@@ -200,8 +200,23 @@
 
         /* 主栏目动画效果幅度增大 */
         .category:hover {
-            transform: translateY(-10px);
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
             box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
         }
 
         .category h3 {
@@ -240,9 +255,9 @@
             transition: width 0.3s ease;
         }
 
-        /* 导航栏目中的链接鼠标选中颜色调整 */
+        /* 导航栏目中的链接鼠标选中颜色调整为大红色 */
         .category a:hover {
-            color: #ff69b4; /* 鼠标选中链接颜色设为亮粉色 */
+            color: #FF0000;
             transform: scale(1.1);
         }
 
@@ -342,6 +357,17 @@
             margin: 0 0 0 0.5rem;
         }
 
+        .password-error {
+            color: red;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* 手机端适配 */
         @media (max-width: 768px) {
             .category-container {
@@ -401,6 +427,7 @@
             <h2>请输入密码登录</h2>
             <input type="password" id="passwordInput" placeholder="密码">
             <button onclick="checkPassword()">登录</button>
+            <div class="password-error" id="passwordError">密码错误，请重新输入！</div>
             <div class="remember-password">
                 记住密码
                 <input type="checkbox" id="rememberPassword">
@@ -565,7 +592,9 @@
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
             const rememberPassword = document.getElementById('rememberPassword').checked;
+            const passwordError = document.getElementById('passwordError');
             if (password === correctPassword) {
+                passwordError.style.display = 'none';
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 if (rememberPassword) {
@@ -577,7 +606,7 @@
                     localStorage.removeItem('correctPassword');
                 }
             } else {
-                alert('密码错误，请重新输入！');
+                passwordError.style.display = 'block';
             }
         }
 
@@ -637,27 +666,3 @@
         }
 
         let isOuterNet = true;
-
-        document.getElementById('outerNetBtn').addEventListener('click', function () {
-            if (!isOuterNet) {
-                const links = document.querySelectorAll('.category a');
-                links.forEach(link => {
-                    link.href = link.dataset.outer;
-                });
-                isOuterNet = true;
-            }
-        });
-
-        document.getElementById('innerNetBtn').addEventListener('click', function () {
-            if (isOuterNet) {
-                const links = document.querySelectorAll('.category a');
-                links.forEach(link => {
-                    link.href = link.dataset.inner;
-                });
-                isOuterNet = false;
-            }
-        });
-    </script>
-</body>
-
-</html>    
