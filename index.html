@@ -4,29 +4,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>自用导航</title>
+    <title>个人导航页</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
-        /* 定义通用的动态变化动画，修改为更丰富的颜色变化 */
-        @keyframes colorfulAnimation {
+        body {
+            background-image: url('https://picsum.photos/1920/1080');
+            background-size: cover;
+            background-repeat: no-repeat;
+            font-family: 'Inter', sans-serif;
+            color: #333;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .cloud {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.3);
+            animation: moveCloud linear infinite;
+        }
+
+        @keyframes moveCloud {
             0% {
-                background-color: #0088ff;
-            }
-            25% {
-                background-color: #00ff88;
-            }
-            50% {
-                background-color: #ff0088;
-            }
-            75% {
-                background-color: #8800ff;
+                transform: translateX(-100%);
             }
             100% {
-                background-color: #0088ff;
+                transform: translateX(100vw);
             }
         }
 
-        /* 新增标题淡入动画 */
-        @keyframes fadeIn {
+        .top-container {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            padding: 0.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            color: #f9fafb;
+            font-size: 1.25rem;
+            margin: 0;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .switch-buttons button {
+            background-color: transparent;
+            color: #f9fafb;
+            border: 2px solid #f9fafb;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .switch-buttons button:hover {
+            background-color: #f9fafb;
+            color: #1f2937;
+            transform: scale(1.05);
+        }
+
+        .search-container {
+            padding: 0.75rem;
+            text-align: center;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
             from {
                 opacity: 0;
                 transform: translateY(-20px);
@@ -37,210 +101,146 @@
             }
         }
 
-        /* 新增栏目滑入动画 */
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .search-container h2 {
+            color: #f9fafb;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        /* 新增鼠标悬停文字放大动画 */
-        @keyframes scaleText {
-            from {
-                transform: scale(1);
-            }
-            to {
-                transform: scale(1.2);
-            }
-        }
-
-        /* 新增背景粒子动画 */
-        @keyframes particleAnimation {
-            0% {
-                transform: translate(0, 0);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(100px, -100px);
-                opacity: 0;
-            }
-        }
-
-        body {
-            font-family: "Roboto", sans-serif;
-            background-image: url('https://shuiyin.org/assets/img/web-background.jpg');
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            color: #444;
-            margin: 0;
-            position: relative;
-        }
-
-        /* 背景粒子样式 */
-        body::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="5" fill="rgba(255,255,255,0.3)" /></svg>');
-            background-size: 20px 20px;
-            animation: particleAnimation 10s linear infinite;
-        }
-
-        h1 {
-            text-align: center;
-            color: #0056b3;
-            padding: 10px 0;
-            margin: 0;
-            font-size: 30px;
-            animation: colorfulAnimation 10s infinite linear, fadeIn 1s ease-out;
-            /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-        }
-
-        p {
-            text-align: center;
-            font-size: 16px;
-            margin: 10px 0;
-        }
-
-       .search-box {
+        .search-group {
             display: flex;
             justify-content: center;
-            margin: 20px auto;
-            max-width: 500px;
+            align-items: center;
         }
 
-       .search-box input {
-            padding: 10px 15px;
-            border: 1px solid #999;
-            border-radius: 5px 0 0 5px;
-            width: 50%;
-            font-size: 16px;
-        }
-
-       .search-box select {
-            padding: 10px 15px;
-            border: 1px solid #999;
-            border-left: none;
-            font-size: 16px;
-        }
-
-       .search-box button {
-            padding: 10px 15px;
+        .search-group input {
+            padding: 0.5rem;
             border: none;
-            background-color: #007bff;
-            color: white;
-            border-radius: 0 5px 5px 0;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            font-size: 16px;
-            animation: colorfulAnimation 10s infinite linear;
-        }
-
-       .search-box button:hover {
-            background-color: #0056b3;
-        }
-
-       .category {
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* 修改为更透明的磨砂色 */
-            background-color: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            max-width: 90%;
-            animation: slideIn 1s ease-out;
-            animation-fill-mode: both;
-            /* 每个栏目延迟一点显示 */
-            animation-delay: calc(0.2s * var(--index));
-        }
-
-       .category h2 {
-            font-size: 18px;
-            margin-bottom: 15px;
-            color: #007bff;
-        }
-
-       .link-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        a {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: background-color 0.3s ease, transform 0.5s ease;
-            animation: colorfulAnimation 10s infinite linear;
-        }
-
-        a:hover {
-            background-color: #218838;
-            transform: translateY(-12px); /* 鼠标选中动画幅度加大 */
-            box-shadow: 0 15px 18px rgba(0, 0, 0, 0.2);
-            animation: scaleText 0.3s ease forwards; /* 鼠标悬停文字放大动画 */
-        }
-
-       .debug-warning {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 12px;
-            display: none;
-        }
-
-       .weather-info {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 5px;
+            border-radius: 0.375rem 0 0 0.375rem;
+            width: 200px;
+            font-size: 0.8rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 36px;
-            }
+        .search-group select {
+            padding: 0.5rem;
+            border: none;
+            background-color: white;
+            font-size: 0.8rem;
+        }
 
-            p {
-                font-size: 14px;
-            }
+        .search-group button {
+            background-color: #2563eb;
+            color: #f9fafb;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0 0.375rem 0.375rem 0;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
 
-            a {
-                width: 100%;
-                text-align: center;
-            }
+        .search-group button:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
+        }
 
-           .search-box input {
-                width: 50%;
+        .category-container {
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+        }
+
+        .category {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+            background-size: 200% 200%;
+            background-position: 0 0;
+            filter: blur(20px);
+            opacity: 0.1;
+            animation: waterDrop 10s linear infinite;
+        }
+
+        @keyframes waterDrop {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: 200% 200%;
             }
         }
 
-       .password-modal {
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .category h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #f9fafb;
+            border-bottom: 2px solid rgba(249, 250, 251, 0.3);
+            padding-bottom: 0.5rem;
+        }
+
+        .category ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .category li {
+            margin-bottom: 0.75rem;
+        }
+
+        .category a {
+            color: #f9fafb;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+        }
+
+        .category a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #2563eb;
+            transition: width 0.3s ease;
+        }
+
+        .category a:hover {
+            color: #2563eb;
+            transform: scale(1.1);
+        }
+
+        .category a:hover::after {
+            width: 100%;
+        }
+
+        .login-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -253,269 +253,255 @@
             z-index: 1000;
         }
 
-       .password-modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            position: relative;
-            top: 0;
-            left: 0;
-            transform: translateY(0);
-            margin: 0 auto;
-            max-width: 400px;
+        .login-box {
+            background-color: rgba(255, 255, 255, 0.02); /* 进一步降低透明度 */
+            backdrop-filter: blur(5px); /* 适当降低模糊度 */
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
 
-       .password-modal input {
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            width: calc(100% - 22px); /* 调整宽度以匹配其他输入框样式 */
-            box-sizing: border-box; /* 确保宽度包含内边距和边框 */
+        .login-box h2 {
+            color: #f9fafb;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
         }
 
-       .password-modal button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
+        .login-box input {
+            padding: 0.5rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 0.375rem;
+            width: 100%;
+            margin-bottom: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .login-box button {
+            background-color: #2563eb;
+            color: #f9fafb;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
             cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
         }
 
-       .password-modal button:hover {
-            background-color: #0056b3;
+        .login-box button:hover {
+            background-color: #1d4ed8;
+            transform: scale(1.05);
         }
 
-       .main-content {
+        .debug-warning {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            z-index: 1001;
             display: none;
         }
 
-       .record-info {
-            font-size: 12px;
-            color: #666;
-            margin-top: 10px;
+        .beian {
+            color: #f9fafb;
+            text-align: center;
+            margin-top: 1rem;
         }
 
-       .record-info p {
-            font-size: 12px;
-            text-align: left;
-            margin: 0;
-        }
-
-       .record-info a {
-            font-size: 10px;
-            padding: 0;
-            background-color: transparent;
-            color: #007bff;
-            box-shadow: none;
+        .beian a {
+            color: #f9fafb;
             text-decoration: underline;
-            animation: none;
-            display: block;
-            text-align: left;
-        }
-
-       .record-info a:hover {
-            background-color: transparent;
-            transform: none;
-            box-shadow: none;
         }
     </style>
 </head>
 
 <body>
-    <div class="password-modal" id="passwordModal">
-        <div class="password-modal-content">
-            <h2>请输入密码</h2>
-            <input type="password" id="passwordInput" placeholder="输入密码">
-            <button onclick="checkPassword()">提交</button>
-            <div class="record-info">
-                <p>私人书签</p>
-                <a href="https://beian.miit.gov.cn/" target="_blank">皖ICP备2023023534号</a>
+    <div class="clouds">
+        <div class="cloud" style="top: 20px; left: -50px; width: 150px; height: 50px; animation-duration: 30s;"></div>
+        <div class="cloud" style="top: 50px; left: -100px; width: 200px; height: 70px; animation-duration: 25s;"></div>
+        <div class="cloud" style="top: 80px; left: -150px; width: 250px; height: 80px; animation-duration: 35s;"></div>
+    </div>
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h2>请输入密码登录</h2>
+            <input type="password" id="passwordInput" placeholder="密码">
+            <button onclick="checkPassword()">登录</button>
+            <div class="beian">
+                <a href="https://beian.miit.gov.cn/" target="_blank">备案信息</a>
             </div>
         </div>
     </div>
-    <div class="main-content">
-        <h1>自用导航</h1>
-        <div class="weather-info" id="weatherInfo"></div>
-        <div class="search-box">
-            <input type="text" id="searchInput" placeholder="搜索一下 就知道了...">
-            <select id="searchEngine">
-                <option value="https://www.baidu.com/s?wd=">百度</option>
-                <option value="https://www.bing.com/search?q=">必应</option>
-                <option value="https://search.bilibili.com/all?keyword=">B站</option>
-                <option value="https://www.google.com/search?q=">谷歌</option>
-            </select>
-            <button type="button" onclick="performSearch()">搜索</button>
-        </div>
-        <p>个人自用，导航书签，网站，一站式触达</p>
-
-        <div class="category" style="--index: 1;">
-            <h2>飞牛外网</h2>
-            <div class="link-container">
-                <a href="http://li0580.top:3000" target="_blank">MoviePilot</a>
-                <a href="http://li0580.top:8000" target="_blank">飞牛OS</a>
-                <a href="http://li0580.top:8000/v/login" target="_blank">飞牛影视</a>
-                <a href="http://li0580.top:5244" target="_blank">Alist</a>
-                <a href="http://li0580.top:3615" target="_blank">PDF工具箱</a>
-                <a href="http://li0580.top:8085" target="_blank">qBittorrent</a>
-                <a href="http://li0580.top:8096" target="_blank">Emby</a>
-                <a href="http://li0580.top:3002" target="_blank">G-box导航</a>
+    <div class="debug-warning" id="debugWarning">禁止调试</div>
+    <div id="mainContent" style="display: none;">
+        <div class="top-container">
+            <nav>
+                <h1>六零导航页</h1>
+                <div class="switch-buttons">
+                    <button id="outerNetBtn">外网</button>
+                    <button id="innerNetBtn">内网</button>
+                </div>
+            </nav>
+            <div class="search-container">
+                <h2>上网，从六零导航页开始！</h2>
+                <div class="search-group">
+                    <input type="text" id="search-input" placeholder="输入关键词搜索">
+                    <select id="search-engine">
+                        <option value="https://www.baidu.com/s?wd=">百度</option>
+                        <option value="https://cn.bing.com/search?q=">必应</option>
+                        <option value="https://search.bilibili.com/all?keyword=">B站</option>
+                        <option value="https://www.google.com/search?q=">谷歌</option>
+                    </select>
+                    <button onclick="search()">搜索</button>
+                </div>
             </div>
         </div>
-
-        <div class="category" style="--index: 2;">
-            <h2>飞牛内网</h2>
-            <div class="link-container">
-                <a href="192.168.2.225:3000" target="_blank">MoviePilot</a>
-                <a href="192.168.2.225:8000" target="_blank">飞牛OS</a>
-                <a href="192.168.2.225:8000/v/login" target="_blank">飞牛影视</a>
-                <a href="192.168.2.225:5244" target="_blank">Alist</a>
-                <a href="192.168.2.225:3615" target="_blank">PDF工具箱</a>
-                <a href="192.168.2.225:8085" target="_blank">qBittorrent</a>
-                <a href="192.168.2.225:8096" target="_blank">Emby</a>
-                <a href="192.168.2.225:3002" target="_blank">G-box导航</a>
+        <div class="category-container">
+            <div class="category">
+                <h3>常用导航</h3>
+                <ul>
+                    <li><a href="https://v.qq.com/">腾讯视频</a></li>
+                    <li><a href="https://www.youku.com/">优酷</a></li>
+                    <li><a href="https://www.bilibili.com/">哔哩哔哩</a></li>
+                    <li><a href="https://weibo.com/">微博</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 3;">
-            <h2>自用工具</h2>
-            <div class="link-container">
-                <a href="https://libretv-3x4.pages.dev/" target="_blank">libretv</a>
-                <a href="192.168.2.225:2025/" target="_blank">爱快内</a>
-                <a href="https://pting.club/" target="_blank">蜂巢</a>
-                <a href="https://xn--clouds-o43k.com/" target="_blank">奇</a>
-                <a href="http://igmp.vip:2332/zj/li0580.txt" target="_blank">IPVT总外订阅</a>
-                <a href="http://igmp.vip:2332/zj/li0580.m3u" target="_blank">IPTV总外m3u</a>
-                <a href="http://igmp.vip:2332/zj/0201.m3u" target="_blank">IPTV内m3u</a>
-                <a href="http://max.token.iptv.xin:2052/login" target="_blank">花海iIPTV</a>
-                <a href="http://li0580.top:2025/" target="_blank">爱快外</a>
+            <div class="category">
+                <h3>AI工具</h3>
+                <ul>
+                    <li><a href="https://www.doubao.com/">抖音云豆包</a></li>
+                    <li><a href="https://yiyan.baidu.com/">文心一言</a></li>
+                    <li><a href="https://chat.openai.com/">ChatGPT</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 4;">
-            <h2>十二大PT</h2>
-            <div class="link-container">
-                <a href="https://hdhome.org/" target="_blank">家园</a>
-                <a href="https://ourbits.club/" target="_blank">我堡</a>
-                <a href="https://kp.m-team.cc/" target="_blank">馒头</a>
-                <a href="https://audiences.me/" target="_blank">人人</a>
-                <a href="https://ptchdbits.co" target="_blank">岛</a>
+            <div class="category">
+                <h3>设计办公</h3>
+                <ul>
+                    <li><a href="https://templates.office.com/zh-cn">Office模板</a></li>
+                    <li><a href="https://www.gaoding.com/">稿定设计</a></li>
+                    <li><a href="https://www.588ku.com/">千库网</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 5;">
-            <h2>其他PT</h2>
-            <div class="link-container">
-                <a href="https://www.agsvpt.com/" target="_blank">末日</a>
-                <a href="https://www.haidan.video/" target="_blank">海胆</a>
-                <a href="https://www.hdkyl.in/" target="_blank">HDfans</a>
-                <a href="https://pt.soulvoice.club/" target="_blank">聆音</a>
-                <a href="https://pt.btschool.club/" target="_blank">学校</a>
-                <a href="https://hdtime.org/" target="_blank">HD高清</a>
-                <a href="https://raingfh.top/" target="_blank">雨</a>
-                <a href="https://zmpt.cc/" target="_blank">织梦</a>
-                <a href="https://ptvicomo.net/" target="_blank">象岛</a>
+            <div class="category">
+                <h3>学习资源</h3>
+                <ul>
+                    <li><a href="https://www.icourse163.org/">中国大学MOOC</a></li>
+                    <li><a href="https://www.coursera.org/">Coursera</a></li>
+                    <li><a href="https://study.163.com/">网易云课堂</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 6;">
-            <h2>社交与内容平台</h2>
-            <div class="link-container">
-                <a href="https://www.zhihu.com/" target="_blank">知乎</a>
-                <a href="https://www.douban.com/" target="_blank">豆瓣</a>
-                <a href="https://www.jianshu.com/" target="_blank">简书</a>
-                <a href="https://weibo.com/" target="_blank">微博</a>
-                <a href="https://tieba.baidu.com/" target="_blank">百度贴吧</a>
+            <div class="category">
+                <h3>娱乐生活</h3>
+                <ul>
+                    <li><a href="https://movie.douban.com/">豆瓣电影</a></li>
+                    <li><a href="https://maoyan.com/">猫眼电影</a></li>
+                    <li><a href="https://www.ximalaya.com/">喜马拉雅</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 7;">
-            <h2>网盘</h2>
-            <div class="link-container">
-                <a href="https://www.aliyundrive.com" target="_blank">阿里云盘</a>
-                <a href="https://pan.baidu.com/" target="_blank">百度网盘</a>
-                <a href="https://wwe.lanzouo.com/" target="_blank">蓝奏云</a>
-                <a href="https://mail.qq.com/" target="_blank">QQ邮箱</a>
-                <a href="https://email.163.com/" target="_blank">网易邮箱</a>
+            <div class="category">
+                <h3>社交平台</h3>
+                <ul>
+                    <li><a href="https://wx.qq.com/">微信</a></li>
+                    <li><a href="https://im.qq.com/">QQ</a></li>
+                    <li><a href="https://www.facebook.com/">Facebook</a></li>
+                </ul>
             </div>
-        </div>
-
-        <div class="category" style="--index: 8;">
-            <h2>学习与技术资源</h2>
-            <div class="link-container">
-                <a href="https://github.com/" target="_blank">Github</a>
-                <a href="https://dash.cloudflare.com" target="_blank">cloudflare</a>
-                <a href="https://gitee.com/" target="_blank">码云Gitee</a>
-                <a href="https://nullbr.online/nullbr_emby?category=00.%E7%83%AD%E9%97%A8%2F%E7%94%B5%E5%BD%B1" target="_blank">nullbr</a>
-                <a href="https://next.itellyou.cn/" target="_blank">MSDN我告诉你</a>
-                <a href="https://cloud.tencent.com/" target="_blank">腾讯云</a>
-                <a href="https://www.aliyun.com/" target="_blank">阿里云</a>
+            <div class="category">
+                <h3>新闻资讯</h3>
+                <ul>
+                    <li><a href="https://news.sina.com.cn/">新浪新闻</a></li>
+                    <li><a href="https://news.qq.com/">腾讯新闻</a></li>
+                    <li><a href="https://www.toutiao.com/">今日头条</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>金融财经</h3>
+                <ul>
+                    <li><a href="https://www.eastmoney.com/">东方财富</a></li>
+                    <li><a href="https://xueqiu.com/">雪球</a></li>
+                    <li><a href="https://www.10jqka.com.cn/">同花顺</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>生活服务</h3>
+                <ul>
+                    <li><a href="https://www.meituan.com/">美团</a></li>
+                    <li><a href="https://www.ele.me/">饿了么</a></li>
+                    <li><a href="https://www.didiglobal.com/">滴滴出行</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>游戏娱乐</h3>
+                <ul>
+                    <li><a href="https://store.steampowered.com/">Steam</a></li>
+                    <li><a href="https://pvp.qq.com/">王者荣耀</a></li>
+                    <li><a href="https://pubgmobile.com/">和平精英</a></li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="debug-warning" id="debugWarning">禁止调试网页！</div>
+
     <script>
-        const correctPassword = 'a1234567';
-        const passwordModal = document.getElementById('passwordModal');
-        const passwordInput = document.getElementById('passwordInput');
-        const mainContent = document.querySelector('.main-content');
-        const debugWarning = document.getElementById('debugWarning');
+        const correctPassword = '123456'; // 可修改为实际密码
 
         function checkPassword() {
-            const inputPassword = passwordInput.value;
-            if (inputPassword === correctPassword) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
-                const expirationDate = new Date();
-                expirationDate.setDate(expirationDate.getDate() + 30);
-                localStorage.setItem('passwordVerified', JSON.stringify({
-                    verified: true,
-                    expiration: expirationDate.getTime()
-                }));
+            const password = document.getElementById('passwordInput').value;
+            if (password === correctPassword) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
             } else {
                 alert('密码错误，请重新输入！');
             }
         }
 
-        const storedData = localStorage.getItem('passwordVerified');
-        if (storedData) {
-            const { verified, expiration } = JSON.parse(storedData);
-            const now = new Date().getTime();
-            if (verified && now < expiration) {
-                passwordModal.style.display = 'none';
-                mainContent.style.display = 'block';
+        function preventDebugging() {
+            const debugWarning = document.getElementById('debugWarning');
+            const threshold = 160;
+
+            function detectDebug() {
+                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
+                    debugWarning.style.display = 'block';
+                } else {
+                    debugWarning.style.display = 'none';
+                }
             }
+
+            window.addEventListener('resize', detectDebug);
+            setInterval(detectDebug, 1000);
+
+            document.addEventListener('contextmenu', function (e) {
+                e.preventDefault();
+            });
+
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+                    e.preventDefault();
+                    debugWarning.style.display = 'block';
+                }
+            });
         }
 
-        function performSearch() {
-            const searchInput = document.getElementById('searchInput').value;
-            const searchEngine = document.getElementById('searchEngine').value;
-            const url = searchEngine + encodeURIComponent(searchInput);
+        preventDebugging();
+
+        function search() {
+            const input = document.getElementById('search-input').value;
+            const engine = document.getElementById('search-engine').value;
+            const url = engine + encodeURIComponent(input);
             window.open(url, '_blank');
         }
 
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I') || (e.ctrlKey && e.shiftKey && e.key === 'J') || (e.ctrlKey && e.key === 'U')) {
-                e.preventDefault();
-                debugWarning.style.display = 'block';
-                setTimeout(() => {
-                    debugWarning.style.display = 'none';
-                }, 3000);
-            }
+        document.getElementById('outerNetBtn').addEventListener('click', function () {
+            console.log('切换到外网');
         });
 
-        document.addEventListener('contextmenu', function (e) {
-            e.preventDefault();
-            debugWarning.style.display = 'block';
-            setTimeout(() => {
-                debugWarning.style.display = 'none';
-            }, 3000);
+        document.getElementById('innerNetBtn').addEventListener('click', function () {
+            window.open('http://192.168.2.100', '_blank');
         });
     </script>
 </body>
 
-</html>
-    
+</html>    
