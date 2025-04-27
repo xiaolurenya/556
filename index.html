@@ -118,7 +118,7 @@
             padding: 0.5rem;
             border: none;
             border-radius: 0.375rem 0 0 0.375rem;
-            width: 200px;
+            width: 300px; /* 增加搜索框长度 */
             font-size: 0.8rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
@@ -151,7 +151,7 @@
         .category-container {
             padding: 1rem;
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
+            grid-template-columns: repeat(5, 1fr); /* 一排5个 */
             gap: 1.5rem;
         }
 
@@ -254,11 +254,12 @@
         }
 
         .login-box {
-            background-color: rgba(255, 255, 255, 0.02); /* 进一步降低透明度 */
-            backdrop-filter: blur(5px); /* 适当降低模糊度 */
+            background-color: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(5px);
             border-radius: 0.5rem;
             padding: 2rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            text-align: center; /* 让登录按钮居中 */
         }
 
         .login-box h2 {
@@ -317,6 +318,15 @@
             color: #f9fafb;
             text-decoration: underline;
         }
+
+        /* 新增内网导航栏样式 */
+        #innerNetCategoryContainer {
+            padding: 1rem;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+            display: none;
+        }
     </style>
 </head>
 
@@ -360,7 +370,7 @@
                 </div>
             </div>
         </div>
-        <div class="category-container">
+        <div class="category-container" id="outerNetCategoryContainer">
             <div class="category">
                 <h3>常用导航</h3>
                 <ul>
@@ -443,6 +453,89 @@
                 </ul>
             </div>
         </div>
+        <!-- 新增内网导航栏 -->
+        <div id="innerNetCategoryContainer">
+            <div class="category">
+                <h3>内网常用1</h3>
+                <ul>
+                    <li><a href="#">内网链接1</a></li>
+                    <li><a href="#">内网链接2</a></li>
+                    <li><a href="#">内网链接3</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用2</h3>
+                <ul>
+                    <li><a href="#">内网链接4</a></li>
+                    <li><a href="#">内网链接5</a></li>
+                    <li><a href="#">内网链接6</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用3</h3>
+                <ul>
+                    <li><a href="#">内网链接7</a></li>
+                    <li><a href="#">内网链接8</a></li>
+                    <li><a href="#">内网链接9</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用4</h3>
+                <ul>
+                    <li><a href="#">内网链接10</a></li>
+                    <li><a href="#">内网链接11</a></li>
+                    <li><a href="#">内网链接12</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用5</h3>
+                <ul>
+                    <li><a href="#">内网链接13</a></li>
+                    <li><a href="#">内网链接14</a></li>
+                    <li><a href="#">内网链接15</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用6</h3>
+                <ul>
+                    <li><a href="#">内网链接16</a></li>
+                    <li><a href="#">内网链接17</a></li>
+                    <li><a href="#">内网链接18</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用7</h3>
+                <ul>
+                    <li><a href="#">内网链接19</a></li>
+                    <li><a href="#">内网链接20</a></li>
+                    <li><a href="#">内网链接21</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用8</h3>
+                <ul>
+                    <li><a href="#">内网链接22</a></li>
+                    <li><a href="#">内网链接23</a></li>
+                    <li><a href="#">内网链接24</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用9</h3>
+                <ul>
+                    <li><a href="#">内网链接25</a></li>
+                    <li><a href="#">内网链接26</a></li>
+                    <li><a href="#">内网链接27</a></li>
+                </ul>
+            </div>
+            <div class="category">
+                <h3>内网常用10</h3>
+                <ul>
+                    <li><a href="#">内网链接28</a></li>
+                    <li><a href="#">内网链接29</a></li>
+                    <li><a href="#">内网链接30</a></li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -495,11 +588,13 @@
         }
 
         document.getElementById('outerNetBtn').addEventListener('click', function () {
-            console.log('切换到外网');
+            document.getElementById('outerNetCategoryContainer').style.display = 'grid';
+            document.getElementById('innerNetCategoryContainer').style.display = 'none';
         });
 
         document.getElementById('innerNetBtn').addEventListener('click', function () {
-            window.open('http://192.168.2.100', '_blank');
+            document.getElementById('outerNetCategoryContainer').style.display = 'none';
+            document.getElementById('innerNetCategoryContainer').style.display = 'grid';
         });
     </script>
 </body>
