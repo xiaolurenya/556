@@ -67,7 +67,6 @@
 
         .switch-buttons button {
             background-color: transparent;
-            color: #f9fafb;
             border: 2px solid #f9fafb;
             padding: 0.25rem 0.5rem;
             border-radius: 0.375rem;
@@ -76,6 +75,15 @@
             margin-left: 0.5rem;
             font-weight: 600;
             letter-spacing: 0.05em;
+        }
+
+        /* 外网和内网文字颜色区分 */
+        #outerNetBtn {
+            color: #00ff00; /* 外网文字颜色设为绿色 */
+        }
+
+        #innerNetBtn {
+            color: #ff0000; /* 内网文字颜色设为红色 */
         }
 
         .switch-buttons button:hover {
@@ -190,8 +198,9 @@
             }
         }
 
+        /* 主栏目动画效果幅度增大 */
         .category:hover {
-            transform: translateY(-5px);
+            transform: translateY(-10px);
             box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
         }
 
@@ -231,8 +240,9 @@
             transition: width 0.3s ease;
         }
 
+        /* 导航栏目中的链接鼠标选中颜色调整 */
         .category a:hover {
-            color: #2563eb;
+            color: #ff69b4; /* 鼠标选中链接颜色设为亮粉色 */
             transform: scale(1.1);
         }
 
