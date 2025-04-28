@@ -18,34 +18,8 @@
             min-height: 100vh;
             background-size: cover;
             background-repeat: no-repeat;
-            background-image: url('https://picsum.photos/1920/1080');
-        }
-
-       .clouds {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 150px;
-            overflow: hidden;
-            z-index: -1;
-        }
-
-       .cloud {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            box-shadow: 0 0 20px 10px rgba(255, 255, 255, 0.3);
-            animation: moveCloud linear infinite;
-        }
-
-        @keyframes moveCloud {
-            0% {
-                transform: translateX(-100%);
-            }
-            100% {
-                transform: translateX(100vw);
-            }
+            /* 先使用示例背景图，可手动修改 */
+            background-image: url('https://picsum.photos/1920/1080'); 
         }
 
        .top-container {
@@ -302,6 +276,11 @@
             height: 100%;
         }
 
+       .link-card a::before {
+            content: '👉';
+            margin-right: 5px;
+        }
+
        .link-card a:hover {
             color: #FF0000;
         }
@@ -476,11 +455,6 @@
 </head>
 
 <body>
-    <div class="clouds">
-        <div class="cloud" style="top: 20px; left: -50px; width: 150px; height: 50px; animation-duration: 30s;"></div>
-        <div class="cloud" style="top: 50px; left: -100px; width: 200px; height: 70px; animation-duration: 25s;"></div>
-        <div class="cloud" style="top: 80px; left: -150px; width: 250px; height: 80px; animation-duration: 35s;"></div>
-    </div>
     <div class="login-container" id="loginContainer">
         <div class="login-box">
             <h2>请输入密码登录</h2>
@@ -665,9 +639,10 @@
         }
 
         function changeBackground() {
-            const randomNum = Math.floor(Math.random() * 10) + 1;
-            const newBgUrl = `https://picsum.photos/1920/1080?random=${randomNum}`;
-            document.body.style.backgroundImage = `url('${newBgUrl}')`;
+            const newBgUrl = prompt('请输入新的背景图链接');
+            if (newBgUrl) {
+                document.body.style.backgroundImage = `url('${newBgUrl}')`;
+            }
         }
 
         function openTechDigitalLogin() {
@@ -699,17 +674,16 @@
                 { name: 'MoviePilot', outer: 'http://li0580.top:3000', inner: '192.168.2.225:3000' },
                 { name: '飞牛OS', outer: 'http://li0580.top:8000', inner: '192.168.2.225:8000' },
                 { name: 'Alist', outer: 'http://li0580.top:5244', inner: '192.168.2.225:5244' },
-                { name: 'PDF工具箱', outer: '"http://li0580.top:3615', inner: '192.168.2.225:3615' },
-                { name: '环球网', outer: 'http://li0580.top:8085"', inner: '192.168.2.225:8085' }
+                { name: 'PDF工具箱', outer: 'http://li0580.top:3615', inner: '192.168.2.225:3615' },
+                { name: '环球网', outer: 'http://li0580.top:8085', inner: '192.168.2.225:8085' }
             ],
             'learning-education': [
-                { name: '蜂巢', outer: 'https://pting.club/', inner: https://pting.club/' },
+                { name: '蜂巢', outer: 'https://pting.club/', inner: 'https://pting.club/' },
                 { name: '爱快路由器', outer: 'http://li0580.top:2025', inner: '192.168.2.225:2025/' },
                 { name: 'Github', outer: 'https://github.com/', inner: 'https://github.com/' },
                 { name: 'Cloudflare', outer: 'https://dash.cloudflare.com', inner: 'https://dash.cloudflare.com' },
-                { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' }
-                { name: '花海IPTV', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' }
-                { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' }
+                { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' },
+                { name: '花海IPTV', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' },
                 { name: '网易邮箱', outer: 'https://email.163.com/', inner: 'https://email.163.com/' }
             ],
             'life-service': [
@@ -720,24 +694,24 @@
                 { name: '滴滴出行', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
             ],
             'tech-digital': [
-                { name: 'libretv', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' }
-                { name: 'nullbr', outer: 'https://nullbr.online/', inner: https://nullbr.online/' },
+                { name: 'libretv', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' },
+                { name: 'nullbr', outer: 'https://nullbr.online/', inner: 'https://nullbr.online/' },
                 { name: '飞牛影视', outer: 'http://li0580.top:8000/v/logi/', inner: '192.168.2.225:8000/v/logi' },
                 { name: 'EMBY', outer: 'http://li0580.top:8096', inner: '192.168.2.225:8096/' },
                 { name: '家园', outer: 'https://hdhome.org/', inner: 'https://hdhome.org/' },
                 { name: '我堡', outer: 'https://ourbits.club/', inner: 'https://ourbits.club/' },
                 { name: '馒头', outer: 'https://kp.m-team.cc/', inner: 'https://kp.m-team.cc/' },
                 { name: '人人', outer: 'https://36kr.com/', inner: 'https://audiences.me' },
-                { name: '彩虹岛', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' }
+                { name: '彩虹岛', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' },
                 { name: '末日', outer: 'https://www.agsvpt.com', inner: 'https://www.agsvpt.com' },
                 { name: '海胆', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
                 { name: 'HDfans', outer: 'https://www.hdkyl.in/', inner: 'https://www.hdkyl.in/' },
-                { name: '聆音', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club//' },
-                { name: '学校', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' }
+                { name: '聆音', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club/' },
+                { name: '学校', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' },
                 { name: 'HD高清', outer: 'https://hdtime.org/', inner: 'https://hdtime.org/' },
                 { name: '雨', outer: 'https://raingfh.top/', inner: 'https://raingfh.top/' },
                 { name: '织梦', outer: 'https://zmpt.cc/', inner: 'https://zmpt.cc/' },
-                { name: '象岛', outer: 'https://ptvicomo.net/', inner: 'https://ptvicomo.net/' },
+                { name: '象岛', outer: 'https://ptvicomo.net/', inner: 'https://ptvicomo.net/' }
             ]
         };
 
