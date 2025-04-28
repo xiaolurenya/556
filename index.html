@@ -9,16 +9,19 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <style>
         body {
-            background-image: url('https://picsum.photos/1920/1080');
-            background-size: cover;
-            background-repeat: no-repeat;
             font-family: 'Inter', sans-serif;
-            color: #333;
+            color: #f9fafb;
             margin: 0;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url('https://picsum.photos/1920/1080');
         }
 
-        .clouds {
+       .clouds {
             position: absolute;
             top: 0;
             left: 0;
@@ -28,7 +31,7 @@
             z-index: -1;
         }
 
-        .cloud {
+       .cloud {
             position: absolute;
             background: rgba(255, 255, 255, 0.3);
             border-radius: 50%;
@@ -45,61 +48,104 @@
             }
         }
 
-        .top-container {
+       .top-container {
             background-color: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(20px);
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        nav {
-            padding: 0.5rem 2rem;
+            padding: 0.25rem 2rem;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
         }
 
-        nav h1 {
-            color: #f9fafb;
-            font-size: 1.25rem;
-            margin: 0;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+       .switch-buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
         }
 
-        .switch-buttons button {
+       .switch-buttons button {
             background-color: transparent;
             border: 2px solid #f9fafb;
-            padding: 0.25rem 0.5rem;
+            padding: 0.5rem 1rem;
             border-radius: 0.375rem;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-left: 0.5rem;
             font-weight: 600;
             letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         #outerNetBtn {
             color: #00ff00;
         }
 
+        #outerNetBtn::before {
+            content: '\f0ac';
+            font-family: 'Font Awesome 6 Free';
+            margin-right: 0.5rem;
+        }
+
         #innerNetBtn {
             color: #ff0000;
         }
 
-        .switch-buttons button:hover {
+        #innerNetBtn::before {
+            content: '\f783';
+            font-family: 'Font Awesome 6 Free';
+            margin-right: 0.5rem;
+        }
+
+       .switch-buttons button:hover {
             background-color: #f9fafb;
             color: #1f2937;
             transform: scale(1.05);
         }
 
-        .switch-buttons button.active {
+       .switch-buttons button.active {
             background-color: yellow;
             color: #1f2937;
         }
 
-        .search-container {
-            padding: 0.75rem;
+       .bg-change-btn {
+            background-color: #007BFF;
+            backdrop-filter: blur(10px);
+            color: #ffd700;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .bg-change-btn::before {
+            content: '\f576';
+            font-family: 'Font Awesome 6 Free';
+            margin-right: 0.5rem;
+        }
+
+       .bg-change-btn:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+       .search-container {
+            margin-top: 1rem;
             text-align: center;
             animation: fadeInDown 0.8s ease;
+            margin-bottom: 1.5rem;
         }
 
         @keyframes fadeInDown {
@@ -113,146 +159,148 @@
             }
         }
 
-        .search-container h2 {
-            color: #f9fafb;
-            font-size: 1.25rem;
+       .search-container h2 {
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        .search-group {
+       .search-group {
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
-        .search-group input {
-            padding: 0.5rem;
+       .search-group input {
+            padding: 0.75rem;
             border: none;
             border-radius: 0.375rem 0 0 0.375rem;
-            width: 300px;
-            font-size: 0.8rem;
+            width: 500px;
+            font-size: 0.9rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.9); /* 调整搜索框背景颜色 */
+            color: #333; /* 调整搜索框文字颜色 */
         }
 
-        .search-group select {
-            padding: 0.5rem;
+       .search-group select {
+            padding: 0.75rem;
             border: none;
-            background-color: white;
-            font-size: 0.8rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+            color: #333;
         }
 
-        .search-group button {
+       .search-group button {
             background-color: #2563eb;
             color: #f9fafb;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 0 0.375rem 0.375rem 0;
             cursor: pointer;
             transition: background-color 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
 
-        .search-group button:hover {
+       .search-group button:hover {
             background-color: #1d4ed8;
-            transform: scale(1.15);
-        }
-
-        .category-container {
-            padding: 1rem;
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 1.5rem;
-        }
-
-        .category {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 0.5rem;
-            padding: 1.25rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .category::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
-            background-size: 200% 200%;
-            background-position: 0 0;
-            filter: blur(20px);
-            opacity: 0.1;
-            animation: waterDrop 10s linear infinite;
-        }
-
-        @keyframes waterDrop {
-            0% {
-                background-position: 0 0;
-            }
-            100% {
-                background-position: 200% 200%;
-            }
-        }
-
-        .category:hover {
-            transform: translateY(-20px);
-            box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
-        }
-
-        .category h3 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: #f9fafb;
-            border-bottom: 2px solid rgba(249, 250, 251, 0.3);
-            padding-bottom: 0.5rem;
-        }
-
-        .category ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .category li {
-            margin-bottom: 0.75rem;
-        }
-
-        .category a {
-            color: #f9fafb;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            display: inline-block;
-            position: relative;
-        }
-
-        .category a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: #2563eb;
-            transition: width 0.3s ease;
-        }
-
-        .category a:hover {
-            color: #FF0000;
             transform: scale(1.1);
         }
 
-        .category a:hover::after {
-            width: 100%;
+       .main-content {
+            display: flex;
+            flex-grow: 1;
         }
 
-        .login-container {
+       .sidebar {
+            width: 200px;
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+       .sidebar h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+       .sidebar h3:hover {
+            transform: scale(1.05);
+        }
+
+       .sidebar ul {
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 1rem;
+        }
+
+       .sidebar li {
+            margin-bottom: 0.25rem;
+        }
+
+       .sidebar a {
+            color: #f9fafb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0.375rem;
+            padding: 0.75rem;
+            display: block;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+       .sidebar a:hover {
+            color: #FF0000;
+            transform: scale(1.05);
+        }
+
+       .links-container {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 1.5rem;
+            flex-grow: 1;
+        }
+
+       .link-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 0.375rem;
+            padding: 0.5rem 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+       .link-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px -1px rgba(0, 0, 0, 0.15), 0 4px 8px -1px rgba(0, 0, 0, 0.1);
+        }
+
+       .link-card a {
+            color: #f9fafb;
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+        }
+
+       .link-card a:hover {
+            color: #FF0000;
+        }
+
+       .login-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -265,7 +313,7 @@
             z-index: 1000;
         }
 
-        .login-box {
+       .login-box {
             background-color: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(5px);
             border-radius: 0.5rem;
@@ -274,40 +322,40 @@
             text-align: center;
         }
 
-        .login-box h2 {
-            color: #f9fafb;
-            font-size: 1.25rem;
+       .login-box h2 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
         }
 
-        .login-box input {
-            padding: 0.5rem;
+       .login-box input {
+            padding: 0.75rem;
             border: none;
             border-radius: 0.375rem;
             width: 100%;
             margin-bottom: 1rem;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
+            background-color: rgba(255, 255, 255, 0.8);
         }
 
-        .login-box button {
+       .login-box button {
             background-color: #2563eb;
             color: #f9fafb;
             border: none;
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 0.375rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             font-weight: 600;
             letter-spacing: 0.05em;
         }
 
-        .login-box button:hover {
+       .login-box button:hover {
             background-color: #1d4ed8;
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
-        .debug-warning {
+       .debug-warning {
             position: fixed;
             top: 10px;
             left: 50%;
@@ -320,31 +368,29 @@
             display: none;
         }
 
-        .beian {
-            color: #f9fafb;
+       .beian {
             text-align: center;
             margin-top: 1rem;
         }
 
-        .beian a {
+       .beian a {
             color: #f9fafb;
             text-decoration: underline;
         }
 
-        .remember-password {
-            color: white;
+       .remember-password {
             margin-top: 0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        .remember-password input {
+       .remember-password input {
             width: auto;
             margin: 0 0 0 0.5rem;
         }
 
-        .password-error {
+       .password-error {
             color: red;
             display: none;
             animation: fadeIn 0.3s ease;
@@ -359,48 +405,65 @@
             }
         }
 
-        @media (max-width: 768px) {
-            .category-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+       .private-login-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1002;
+        }
 
-            .search-group input {
-                width: 60%;
+        @media (max-width: 768px) {
+           .search-group input {
+                width: 80%;
+            }
+           .main-content {
+                flex-direction: column;
+            }
+           .sidebar {
+                width: 100%;
+            }
+           .links-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
         @media (max-width: 480px) {
-            .category-container {
-                grid-template-columns: 1fr;
+           .switch-buttons {
+                flex-wrap: wrap;
+                justify-content: center;
             }
 
-            nav {
-                flex-direction: column;
-                align-items: center;
+           .switch-buttons button {
+                margin: 0.25rem;
             }
 
-            .switch-buttons {
-                margin-top: 0.5rem;
-            }
-
-            .search-group {
+           .search-group {
                 flex-direction: column;
             }
 
-            .search-group input {
+           .search-group input {
                 width: 100%;
                 border-radius: 0.375rem;
                 margin-bottom: 0.5rem;
             }
 
-            .search-group select {
+           .search-group select {
                 width: 100%;
                 margin-bottom: 0.5rem;
             }
 
-            .search-group button {
+           .search-group button {
                 width: 100%;
                 border-radius: 0.375rem;
+            }
+           .links-container {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
     </style>
@@ -430,13 +493,11 @@
     <div class="debug-warning" id="debugWarning">禁止调试</div>
     <div id="mainContent" style="display: none;">
         <div class="top-container">
-            <nav>
-                <h1>个人导航页</h1>
-                <div class="switch-buttons">
-                    <button id="outerNetBtn" class="active">外网</button>
-                    <button id="innerNetBtn">内网</button>
-                </div>
-            </nav>
+            <div class="switch-buttons">
+                <button id="outerNetBtn" class="active">外网</button>
+                <button id="innerNetBtn">内网</button>
+                <button class="bg-change-btn" onclick="changeBackground()">更换背景</button>
+            </div>
             <div class="search-container">
                 <h2>个人书签，上网如此简单！</h2>
                 <div class="search-group">
@@ -451,147 +512,61 @@
                 </div>
             </div>
         </div>
-        <div class="category-container">
-            <div class="category">
-                <h3>飞牛系统</h3>
+        <div class="main-content">
+            <div class="sidebar">
+                <h3>全部</h3>
                 <ul>
-                    <li><a href="http://li0580.top:3000" data-outer="http://li0580.top:3000" data-inner="http://192.168.2.225:3000/" target="_blank">MoviePilot</a></li>
-                    <li><a href="http://li0580.top:8000" data-outer="http://li0580.top:8000" data-inner="http://192.168.2.225:8000" target="_blank">飞牛OS</a></li>
-                    <li><a href="http://li0580.top:5244" data-outer="http://li0580.top:5244" data-inner="http://192.168.2.225:5244" target="_blank">Alist</a></li>
-                    <li><a href="http://li0580.top:3615/" data-outer="http://li0580.top:3615/" data-inner="http://192.168.2.225:3615/" target="_blank">Stirling PDF</a></li>
-                    <li><a href="http://li0580.top:8085/" data-outer="http://li0580.top:8085/" data-inner="http://192.168.2.225:8085/" target="_blank">QB下载器</a></li>
+                    <li><a href="#" onclick="filterLinks('life-entertainment')">生活娱乐</a></li>
+                    <li><a href="#" onclick="filterLinks('video-entertainment')">影音娱乐</a></li>
+                    <li><a href="#" onclick="openPrivateZone()">私人专区</a></li>
                 </ul>
             </div>
-            <div class="category">
-                <h3>常规网站</h3>
-                <ul>
-                    <li><a href="https://github.com/" data-outer="https://github.com/" data-inner="https://github.com/" target="_blank">github</a></li>
-                    <li><a href="https://dash.cloudflare.com" data-outer="https://dash.cloudflare.com" data-inner="https://dash.cloudflare.com" target="_blank">Cloudflare</a></li>
-                    <li><a href="https://pting.club/" data-outer="https://pting.club/" data-inner="https://pting.club/" target="_blank">蜂巢</a></li>
-                    <li><a href="http://max.token.iptv.xin:2052/login" data-outer="http://max.token.iptv.xin:2052/login" data-inner="http://max.token.iptv.xin:2052/login" target="_blank">花海iIPTV</a></li>
-                    <li><a href="http://li0580.top:2025/" data-outer="http://li0580.top:2025/" data-inner="192.168.2.1" target="_blank">爱快路由</a></li>
-                </ul>
+            <div class="links-container">
+                <div class="link-card life-entertainment video-entertainment">
+                    <a href="http://li0580.top:8000/v/login" data-outer="http://li0580.top:8000/v/login" data-inner="http://192.168.2.225:8000/v/login" target="_blank">飞牛影视</a>
+                </div>
+                <div class="link-card life-entertainment video-entertainment">
+                    <a href="https://libretv-3x4.pages.dev/" data-outer="https://libretv-3x4.pages.dev/" data-inner="https://libretv-3x4.pages.dev/" target="_blank">LibreTV</a>
+                </div>
+                <div class="link-card life-entertainment video-entertainment">
+                    <a href="https://movie.douban.com/" data-outer="https://movie.douban.com/" data-inner="http://192.168.1.22/doubanmovie" target="_blank">豆瓣电影</a>
+                </div>
+                <div class="link-card life-entertainment video-entertainment">
+                    <a href="https://maoyan.com/" data-outer="https://maoyan.com/" data-inner="http://192.168.1.23/maoyan" target="_blank">猫眼电影</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://www.ximalaya.com/" data-outer="https://www.ximalaya.com/" data-inner="http://192.168.1.24/ximalaya" target="_blank">喜马拉雅</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://www.espn.com/" data-outer="https://www.espn.com/" data-inner="http://192.168.1.52/espn" target="_blank">ESPN</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://www.bodybuilding.com/" data-outer="https://www.bodybuilding.com/" data-inner="http://192.168.1.53/bodybuilding" target="_blank">Bodybuilding</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://www.runnersworld.com/" data-outer="https://www.runnersworld.com/" data-inner="http://192.168.1.54/runnersworld" target="_blank">跑者世界</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://example1.com" data-outer="https://example1.com" data-inner="http://192.168.1.55/example1" target="_blank">示例链接1</a>
+                </div>
+                <div class="link-card life-entertainment">
+                    <a href="https://example2.com" data-outer="https://example2.com" data-inner="http://192.168.1.56/example2" target="_blank">示例链接2</a>
+                </div>
             </div>
-            <div class="category">
-                <h3>PT①</h3>
-                <ul>
-                    <li><a href="https://kp.m-team.cc/" data-outer="https://kp.m-team.cc/" data-inner="https://kp.m-team.cc/" target="_blank">馒头</a></li>
-                    <li><a href="https://ptchdbits.co" data-outer="https://ptchdbits.co" data-inner="https://ptchdbits.co" target="_blank">彩虹岛</a></li>
-                    <li><a href="https://audiences.me/" data-outer="https://audiences.me/" data-inner="https://audiences.me/" target="_blank">人人</a></li>
-                     <li><a href="https://ourbits.club/" data-outer="https://ourbits.club/" data-inner="https://ourbits.club/" target="_blank">我堡</a></li>
-                    <li><a href="https://hdhome.org/" data-outer="https://hdhome.org/" data-inner="https://hdhome.org/" target="_blank">家园</a></li>
-                     <li><a href="https://www.agsvpt.com/" data-outer="https://www.agsvpt.com/" data-inner="https://www.agsvpt.com/" target="_blank">末日</a></li>
-                    <li><a href="https://www.hdkyl.in/" data-outer="https://www.hdkyl.in/" data-inner="https://www.hdkyl.in/" target="_blank">麒麟</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>PT②</h3>
-                <ul>
-                    <li><a href="https://www.haidan.video/" data-outer="https://www.haidan.video/" data-inner="https://www.haidan.video/" target="_blank">海胆</a></li>
-                    <li><a href="https://pt.btschool.club/" data-outer="https://pt.btschool.club/" data-inner="https://pt.btschool.club/" target="_blank">学校</a></li>
-                    <li><a href="https://hdfans.org/" data-outer="https://hdfans.org/" data-inner="https://hdfans.org/" target="_blank">HDfans</a></li>
-                    <li><a href="https://pt.soulvoice.club/" data-outer="https://pt.soulvoice.club/" data-inner="https://pt.soulvoice.club/" target="_blank">聆音</a></li>
-                     <li><a href="https://hdtime.org/" data-outer="https://hdtime.org/" data-inner="https://hdtime.org/" target="_blank">HD高清</a></li>
-                    <li><a href="https://raingfh.top/" data-outer="https://raingfh.top/" data-inner="https://raingfh.top/" target="_blank">雨</a></li>
-                    <li><a href="https://zmpt.cc//" data-outer="https://zmpt.cc/" data-inner="https://zmpt.cc/" target="_blank">织梦</a></li>
-                    <li><a href="https://ptvicomo.net/" data-outer="https://ptvicomo.net/" data-inner="https://ptvicomo.net/" target="_blank">象岛</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>娱乐生活</h3>
-                <ul>
-                    <li><a href="http://li0580.top:8000/v/login" data-outer="http://li0580.top:8000/v/login" data-inner="http://192.168.2.225:8000/v/login" target="_blank">飞牛影视</a></li>
-                    <li><a href="https://libretv-3x4.pages.dev/" data-outer="https://libretv-3x4.pages.dev/" data-inner="https://libretv-3x4.pages.dev/" target="_blank">LibreTV</a></li>
-                    <li><a href="https://movie.douban.com/" data-outer="https://movie.douban.com/" data-inner="http://192.168.1.22/doubanmovie" target="_blank">豆瓣电影</a></li>
-                    <li><a href="https://maoyan.com/" data-outer="https://maoyan.com/" data-inner="http://192.168.1.23/maoyan" target="_blank">猫眼电影</a></li>
-                    <li><a href="https://www.ximalaya.com/" data-outer="https://www.ximalaya.com/" data-inner="http://192.168.1.24/ximalaya" target="_blank">喜马拉雅</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>社交平台</h3>
-                <ul>
-                    <li><a href="https://wx.qq.com/" data-outer="https://wx.qq.com/" data-inner="http://192.168.1.25/wx" target="_blank">微信</a></li>
-                    <li><a href="https://im.qq.com/" data-outer="https://im.qq.com/" data-inner="http://192.168.1.26/qq" target="_blank">QQ</a></li>
-                    <li><a href="https://www.facebook.com/" data-outer="https://www.facebook.com/" data-inner="http://192.168.1.27/facebook" target="_blank">Facebook</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>新闻资讯</h3>
-                <ul>
-                    <li><a href="https://news.sina.com.cn/" data-outer="https://news.sina.com.cn/" data-inner="http://192.168.1.28/sinanews" target="_blank">新浪新闻</a></li>
-                    <li><a href="https://news.qq.com/" data-outer="https://news.qq.com/" data-inner="http://192.168.1.29/qqnews" target="_blank">腾讯新闻</a></li>
-                    <li><a href="https://www.toutiao.com/" data-outer="https://www.toutiao.com/" data-inner="http://192.168.1.30/toutiao" target="_blank">今日头条</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>金融财经</h3>
-                <ul>
-                    <li><a href="https://www.eastmoney.com/" data-outer="https://www.eastmoney.com/" data-inner="http://192.168.1.31/eastmoney" target="_blank">东方财富</a></li>
-                    <li><a href="https://xueqiu.com/" data-outer="https://xueqiu.com/" data-inner="http://192.168.1.32/xueqiu" target="_blank">雪球</a></li>
-                    <li><a href="https://www.10jqka.com.cn/" data-outer="https://www.10jqka.com.cn/" data-inner="http://192.168.1.33/10jqka" target="_blank">同花顺</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>生活服务</h3>
-                <ul>
-                    <li><a href="https://www.meituan.com/" data-outer="https://www.meituan.com/" data-inner="http://192.168.1.34/meituan" target="_blank">美团</a></li>
-                    <li><a href="https://www.ele.me/" data-outer="https://www.ele.me/" data-inner="http://192.168.1.35/eleme" target="_blank">饿了么</a></li>
-                    <li><a href="https://www.didiglobal.com/" data-outer="https://www.didiglobal.com/" data-inner="http://192.168.1.36/didi" target="_blank">滴滴出行</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>游戏娱乐</h3>
-                <ul>
-                    <li><a href="https://store.steampowered.com/" data-outer="https://store.steampowered.com/" data-inner="http://192.168.1.37/steam" target="_blank">Steam</a></li>
-                    <li><a href="https://pvp.qq.com/" data-outer="https://pvp.qq.com/" data-inner="http://192.168.1.38/pvp" target="_blank">王者荣耀</a></li>
-                    <li><a href="https://pubgmobile.com/" data-outer="https://pubgmobile.com/" data-inner="http://192.168.1.39/pubg" target="_blank">和平精英</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>科技前沿</h3>
-                <ul>
-                    <li><a href="https://www.technologyreview.com/" data-outer="https://www.technologyreview.com/" data-inner="http://192.168.1.40/techreview" target="_blank">麻省理工科技评论</a></li>
-                    <li><a href="https://www.nature.com/" data-outer="https://www.nature.com/" data-inner="http://192.168.1.41/nature" target="_blank">自然</a></li>
-                    <li><a href="https://www.science.org/" data-outer="https://www.science.org/" data-inner="http://192.168.1.42/science" target="_blank">科学</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>教育资源</h3>
-                <ul>
-                    <li><a href="https://www.edx.org/" data-outer="https://www.edx.org/" data-inner="http://192.168.1.43/edx" target="_blank">edX</a></li>
-                    <li><a href="https://www.khanacademy.org/" data-outer="https://www.khanacademy.org/" data-inner="http://192.168.1.44/khan" target="_blank">可汗学院</a></li>
-                    <li><a href="https://www.coursera.org/" data-outer="https://www.coursera.org/" data-inner="http://192.168.1.45/coursera2" target="_blank">Coursera</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>健康养生</h3>
-                <ul>
-                    <li><a href="https://www.mayoclinic.org/" data-outer="https://www.mayoclinic.org/" data-inner="http://192.168.1.46/mayoclinic" target="_blank">梅奥诊所</a></li>
-                    <li><a href="https://www.webmd.com/" data-outer="https://www.webmd.com/" data-inner="http://192.168.1.47/webmd" target="_blank">WebMD</a></li>
-                    <li><a href="https://www.healthline.com/" data-outer="https://www.healthline.com/" data-inner="http://192.168.1.48/healthline" target="_blank">Healthline</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>艺术设计</h3>
-                <ul>
-                    <li><a href="https://www.behance.net/" data-outer="https://www.behance.net/" data-inner="http://192.168.1.49/behance" target="_blank">Behance</a></li>
-                    <li><a href="https://dribbble.com/" data-outer="https://dribbble.com/" data-inner="http://192.168.1.50/dribbble" target="_blank">Dribbble</a></li>
-                    <li><a href="https://www.artincontext.org/" data-outer="https://www.artincontext.org/" data-inner="http://192.168.1.51/artincontext" target="_blank">艺术背景</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>体育健身</h3>
-                <ul>
-                    <li><a href="https://www.espn.com/" data-outer="https://www.espn.com/" data-inner="http://192.168.1.52/espn" target="_blank">ESPN</a></li>
-                    <li><a href="https://www.bodybuilding.com/" data-outer="https://www.bodybuilding.com/" data-inner="http://192.168.1.53/bodybuilding" target="_blank">Bodybuilding</a></li>
-                    <li><a href="https://www.runnersworld.com/" data-outer="https://www.runnersworld.com/" data-inner="http://192.168.1.54/runnersworld" target="_blank">跑者世界</a></li>
-                </ul>
-            </div>
+        </div>
+    </div>
+    <div class="private-login-container" id="privateLoginContainer">
+        <div class="login-box">
+            <h2>请输入私人专区密码</h2>
+            <input type="password" id="privatePasswordInput" placeholder="密码">
+            <button onclick="checkPrivatePassword()">登录</button>
+            <div class="password-error" id="privatePasswordError">密码错误，请重新输入！</div>
         </div>
     </div>
 
     <script>
         const correctPassword = '123456';
+        const privateZonePassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
 
         function checkPassword() {
@@ -676,7 +651,7 @@
 
         outerNetBtn.addEventListener('click', function () {
             if (!isOuterNet) {
-                const links = document.querySelectorAll('.category a');
+                const links = document.querySelectorAll('.link-card a');
                 links.forEach(link => {
                     link.href = link.dataset.outer;
                 });
@@ -688,7 +663,7 @@
 
         innerNetBtn.addEventListener('click', function () {
             if (isOuterNet) {
-                const links = document.querySelectorAll('.category a');
+                const links = document.querySelectorAll('.link-card a');
                 links.forEach(link => {
                     link.href = link.dataset.inner;
                 });
@@ -697,6 +672,40 @@
                 innerNetBtn.classList.add('active');
             }
         });
+
+        function filterLinks(category) {
+            const linkCards = document.querySelectorAll('.link-card');
+            linkCards.forEach(card => {
+                if (category === 'life-entertainment' || card.classList.contains(category)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        function changeBackground() {
+            const randomNum = Math.floor(Math.random() * 10) + 1;
+            const newBgUrl = `https://picsum.photos/1920/1080?random=${randomNum}`;
+            document.body.style.backgroundImage = `url('${newBgUrl}')`;
+        }
+
+        function openPrivateZone() {
+            document.getElementById('privateLoginContainer').style.display = 'flex';
+        }
+
+        function checkPrivatePassword() {
+            const password = document.getElementById('privatePasswordInput').value;
+            const passwordError = document.getElementById('privatePasswordError');
+            if (password === privateZonePassword) {
+                passwordError.style.display = 'none';
+                document.getElementById('privateLoginContainer').style.display = 'none';
+                // 这里可以添加跳转到私人专区页面的逻辑
+                alert('成功进入私人专区！');
+            } else {
+                passwordError.style.display = 'block';
+            }
+        }
     </script>
 </body>
 
