@@ -176,6 +176,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         .category::before {
@@ -222,6 +223,9 @@
 
         .category li {
             margin-bottom: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 0.5rem;
+            border-radius: 0.375rem;
         }
 
         .category a {
@@ -478,9 +482,9 @@
                     <li><a href="https://kp.m-team.cc/" data-outer="https://kp.m-team.cc/" data-inner="https://kp.m-team.cc/" target="_blank">馒头</a></li>
                     <li><a href="https://ptchdbits.co" data-outer="https://ptchdbits.co" data-inner="https://ptchdbits.co" target="_blank">彩虹岛</a></li>
                     <li><a href="https://audiences.me/" data-outer="https://audiences.me/" data-inner="https://audiences.me/" target="_blank">人人</a></li>
-                     <li><a href="https://ourbits.club/" data-outer="https://ourbits.club/" data-inner="https://ourbits.club/" target="_blank">我堡</a></li>
+                    <li><a href="https://ourbits.club/" data-outer="https://ourbits.club/" data-inner="https://ourbits.club/" target="_blank">我堡</a></li>
                     <li><a href="https://hdhome.org/" data-outer="https://hdhome.org/" data-inner="https://hdhome.org/" target="_blank">家园</a></li>
-                     <li><a href="https://www.agsvpt.com/" data-outer="https://www.agsvpt.com/" data-inner="https://www.agsvpt.com/" target="_blank">末日</a></li>
+                    <li><a href="https://www.agsvpt.com/" data-outer="https://www.agsvpt.com/" data-inner="https://www.agsvpt.com/" target="_blank">末日</a></li>
                     <li><a href="https://www.hdkyl.in/" data-outer="https://www.hdkyl.in/" data-inner="https://www.hdkyl.in/" target="_blank">麒麟</a></li>
                 </ul>
             </div>
@@ -491,7 +495,7 @@
                     <li><a href="https://pt.btschool.club/" data-outer="https://pt.btschool.club/" data-inner="https://pt.btschool.club/" target="_blank">学校</a></li>
                     <li><a href="https://hdfans.org/" data-outer="https://hdfans.org/" data-inner="https://hdfans.org/" target="_blank">HDfans</a></li>
                     <li><a href="https://pt.soulvoice.club/" data-outer="https://pt.soulvoice.club/" data-inner="https://pt.soulvoice.club/" target="_blank">聆音</a></li>
-                     <li><a href="https://hdtime.org/" data-outer="https://hdtime.org/" data-inner="https://hdtime.org/" target="_blank">HD高清</a></li>
+                    <li><a href="https://hdtime.org/" data-outer="https://hdtime.org/" data-inner="https://hdtime.org/" target="_blank">HD高清</a></li>
                     <li><a href="https://raingfh.top/" data-outer="https://raingfh.top/" data-inner="https://raingfh.top/" target="_blank">雨</a></li>
                     <li><a href="https://zmpt.cc//" data-outer="https://zmpt.cc/" data-inner="https://zmpt.cc/" target="_blank">织梦</a></li>
                     <li><a href="https://ptvicomo.net/" data-outer="https://ptvicomo.net/" data-inner="https://ptvicomo.net/" target="_blank">象岛</a></li>
@@ -598,107 +602,3 @@
             const password = document.getElementById('passwordInput').value;
             const rememberPassword = document.getElementById('rememberPassword').checked;
             const passwordError = document.getElementById('passwordError');
-            if (password === correctPassword) {
-                passwordError.style.display = 'none';
-                document.getElementById('loginContainer').style.display = 'none';
-                document.getElementById('mainContent').style.display = 'block';
-                if (rememberPassword) {
-                    const expirationDate = new Date().getTime() + passwordSaveDuration;
-                    localStorage.setItem('passwordExpiration', expirationDate);
-                    localStorage.setItem('correctPassword', correctPassword);
-                } else {
-                    localStorage.removeItem('passwordExpiration');
-                    localStorage.removeItem('correctPassword');
-                }
-            } else {
-                passwordError.style.display = 'block';
-            }
-        }
-
-        function checkSavedPassword() {
-            const expirationDate = localStorage.getItem('passwordExpiration');
-            const savedPassword = localStorage.getItem('correctPassword');
-            if (expirationDate && savedPassword) {
-                const currentTime = new Date().getTime();
-                if (currentTime < parseInt(expirationDate)) {
-                    if (savedPassword === correctPassword) {
-                        document.getElementById('loginContainer').style.display = 'none';
-                        document.getElementById('mainContent').style.display = 'block';
-                    }
-                } else {
-                    localStorage.removeItem('passwordExpiration');
-                    localStorage.removeItem('correctPassword');
-                }
-            }
-        }
-
-        checkSavedPassword();
-
-        function preventDebugging() {
-            const debugWarning = document.getElementById('debugWarning');
-            const threshold = 160;
-
-            function detectDebug() {
-                if (window.outerWidth - window.innerWidth > threshold || window.outerHeight - window.innerHeight > threshold) {
-                    debugWarning.style.display = 'block';
-                } else {
-                    debugWarning.style.display = 'none';
-                }
-            }
-
-            window.addEventListener('resize', detectDebug);
-            setInterval(detectDebug, 1000);
-
-            document.addEventListener('contextmenu', function (e) {
-                e.preventDefault();
-            });
-
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
-                    e.preventDefault();
-                    debugWarning.style.display = 'block';
-                }
-            });
-        }
-
-        preventDebugging();
-
-        function search() {
-            const input = document.getElementById('search-input').value;
-            const engine = document.getElementById('search-engine').value;
-            const url = engine + encodeURIComponent(input);
-            window.open(url, '_blank');
-        }
-
-        let isOuterNet = true;
-        const outerNetBtn = document.getElementById('outerNetBtn');
-        const innerNetBtn = document.getElementById('innerNetBtn');
-
-        outerNetBtn.addEventListener('click', function () {
-            if (!isOuterNet) {
-                const links = document.querySelectorAll('.category a');
-                links.forEach(link => {
-                    link.href = link.dataset.outer;
-                });
-                isOuterNet = true;
-                outerNetBtn.classList.add('active');
-                innerNetBtn.classList.remove('active');
-            }
-        });
-
-        innerNetBtn.addEventListener('click', function () {
-            if (isOuterNet) {
-                const links = document.querySelectorAll('.category a');
-                links.forEach(link => {
-                    link.href = link.dataset.inner;
-                });
-                isOuterNet = false;
-                outerNetBtn.classList.remove('active');
-                innerNetBtn.classList.add('active');
-            }
-        });
-    </script>
-</body>
-
-</html>
-    
