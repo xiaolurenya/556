@@ -522,10 +522,10 @@
             <div class="sidebar">
                 <ul>
                     <li><a href="#" onclick="filterLinks('all')">全部</a></li>
-                    <li><a href="#" onclick="filterLinks('news-information')">新闻资讯</a></li>
-                    <li><a href="#" onclick="filterLinks('learning-education')">学习教育</a></li>
+                    <li><a href="#" onclick="filterLinks('news-information')">常用书签</a></li>
+                    <li><a href="#" onclick="filterLinks('learning-education')">新闻资讯</a></li>
                     <li><a href="#" onclick="filterLinks('life-service')">生活服务</a></li>
-                    <li><a href="#" onclick="openTechDigitalLogin()">科技数码</a></li>
+                    <li><a href="#" onclick="openTechDigitalLogin()">私人区域</a></li>
                 </ul>
             </div>
             <div class="links-container" id="linksContainer">
@@ -534,7 +534,7 @@
     </div>
     <div class="tech-digital-login-container" id="techDigitalLoginContainer">
         <div class="login-box">
-            <h2>请输入科技数码栏目密码</h2>
+            <h2>请输入私人区域密码</h2>
             <input type="password" id="techDigitalPasswordInput" placeholder="密码">
             <button onclick="checkTechDigitalPassword()">登录</button>
             <button onclick="cancelTechDigitalLogin()">取消</button>
@@ -682,7 +682,7 @@
                 document.getElementById('techDigitalLoginContainer').style.display = 'none';
                 document.getElementById('techDigitalPasswordInput').value = '';
                 filterLinks('tech-digital');
-                alert('成功进入科技数码栏目！');
+                alert('成功进入私人区域！');
             } else {
                 passwordError.style.display = 'block';
             }
@@ -696,18 +696,21 @@
 
         const linkData = {
             'news-information': [
-                { name: '新浪新闻', outer: 'https://news.sina.com.cn/', inner: 'https://news.sina.com.cn/' },
-                { name: '腾讯新闻', outer: 'https://news.qq.com/', inner: 'https://news.qq.com/' },
-                { name: '央视新闻', outer: 'https://news.cctv.com/', inner: 'https://news.cctv.com/' },
-                { name: '澎湃新闻', outer: 'https://www.thepaper.cn/', inner: 'https://www.thepaper.cn/' },
-                { name: '环球网', outer: 'https://www.huanqiu.com/', inner: 'https://www.huanqiu.com/' }
+                { name: 'MoviePilot', outer: 'http://li0580.top:3000', inner: '192.168.2.225:3000' },
+                { name: '飞牛OS', outer: 'http://li0580.top:8000', inner: '192.168.2.225:8000' },
+                { name: 'Alist', outer: 'http://li0580.top:5244', inner: '192.168.2.225:5244' },
+                { name: 'PDF工具箱', outer: '"http://li0580.top:3615', inner: '192.168.2.225:3615' },
+                { name: '环球网', outer: 'http://li0580.top:8085"', inner: '192.168.2.225:8085' }
             ],
             'learning-education': [
-                { name: '中国大学MOOC', outer: 'https://www.icourse163.org/', inner: 'https://www.icourse163.org/' },
-                { name: 'Coursera', outer: 'https://www.coursera.org/', inner: 'https://www.coursera.org/' },
-                { name: '网易云课堂', outer: 'https://study.163.com/', inner: 'https://study.163.com/' },
-                { name: '哔哩哔哩学习区', outer: 'https://www.bilibili.com/study/', inner: 'https://www.bilibili.com/study/' },
-                { name: 'TED演讲', outer: 'https://www.ted.com/', inner: 'https://www.ted.com/' }
+                { name: '蜂巢', outer: 'https://pting.club/', inner: https://pting.club/' },
+                { name: '爱快路由器', outer: 'http://li0580.top:2025', inner: '192.168.2.225:2025/' },
+                { name: 'Github', outer: 'https://github.com/', inner: 'https://github.com/' },
+                { name: 'Cloudflare', outer: 'https://dash.cloudflare.com', inner: 'https://dash.cloudflare.com' },
+                { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' }
+                { name: '花海IPTV', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' }
+                { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' }
+                { name: '网易邮箱', outer: 'https://email.163.com/', inner: 'https://email.163.com/' }
             ],
             'life-service': [
                 { name: '美团', outer: 'https://www.meituan.com/', inner: 'https://www.meituan.com/' },
@@ -717,11 +720,24 @@
                 { name: '滴滴出行', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
             ],
             'tech-digital': [
-                { name: '中关村在线', outer: 'https://www.zol.com.cn/', inner: 'https://www.zol.com.cn/' },
-                { name: '太平洋电脑网', outer: 'https://www.pconline.com.cn/', inner: 'https://www.pconline.com.cn/' },
-                { name: '爱范儿', outer: 'https://www.ifanr.com/', inner: 'https://www.ifanr.com/' },
-                { name: '36氪', outer: 'https://36kr.com/', inner: 'https://36kr.com/' },
-                { name: '虎嗅网', outer: 'https://www.huxiu.com/', inner: 'https://www.huxiu.com/' }
+                { name: 'libretv', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' }
+                { name: 'nullbr', outer: 'https://nullbr.online/', inner: https://nullbr.online/' },
+                { name: '飞牛影视', outer: 'http://li0580.top:8000/v/logi/', inner: '192.168.2.225:8000/v/logi' },
+                { name: 'EMBY', outer: 'http://li0580.top:8096', inner: '192.168.2.225:8096/' },
+                { name: '家园', outer: 'https://hdhome.org/', inner: 'https://hdhome.org/' },
+                { name: '我堡', outer: 'https://ourbits.club/', inner: 'https://ourbits.club/' },
+                { name: '馒头', outer: 'https://kp.m-team.cc/', inner: 'https://kp.m-team.cc/' },
+                { name: '人人', outer: 'https://36kr.com/', inner: 'https://audiences.me' },
+                { name: '彩虹岛', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' }
+                { name: '末日', outer: 'https://www.agsvpt.com', inner: 'https://www.agsvpt.com' },
+                { name: '海胆', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
+                { name: 'HDfans', outer: 'https://www.hdkyl.in/', inner: 'https://www.hdkyl.in/' },
+                { name: '聆音', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club//' },
+                { name: '学校', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' }
+                { name: 'HD高清', outer: 'https://hdtime.org/', inner: 'https://hdtime.org/' },
+                { name: '雨', outer: 'https://raingfh.top/', inner: 'https://raingfh.top/' },
+                { name: '织梦', outer: 'https://zmpt.cc/', inner: 'https://zmpt.cc/' },
+                { name: '象岛', outer: 'https://ptvicomo.net/', inner: 'https://ptvicomo.net/' },
             ]
         };
 
