@@ -184,13 +184,13 @@
        .main-content {
             display: flex;
             flex-grow: 1;
-            gap: 1rem; /* 缩小左边栏目和中间文字链接栏目的间距 */
-            align-items: flex-start; 
+            gap: 1rem;
+            align-items: flex-start;
         }
 
        .sidebar {
             width: 200px;
-            padding: 1rem 0; /* 调整侧边栏上下内边距 */
+            padding: 1rem 0;
             display: flex;
             flex-direction: column;
         }
@@ -239,13 +239,13 @@
         }
 
        .links-container {
-            padding: 1rem; /* 调整中间文字链接栏目的内边距，使其顶部对齐 */
+            padding: 1rem;
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 0.25rem;
             flex-grow: 1;
             place-items: start;
-            justify-content: center; 
+            justify-content: center;
         }
 
        .link-card {
@@ -522,6 +522,8 @@
         const correctPassword = '123456';
         const techDigitalPassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
+        let currentBgIndex = 0;
+        let customBgUrls = [];
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
@@ -532,7 +534,7 @@
                 document.getElementById('loginContainer').style.display = 'none';
                 document.getElementById('mainContent').style.display = 'block';
                 // 登录成功后默认显示全部非私人区域内容
-                filterLinks('all'); 
+                filterLinks('all');
                 if (rememberPassword) {
                     const expirationDate = new Date().getTime() + passwordSaveDuration;
                     localStorage.setItem('passwordExpiration', expirationDate);
@@ -556,7 +558,7 @@
                         document.getElementById('loginContainer').style.display = 'none';
                         document.getElementById('mainContent').style.display = 'block';
                         // 记住密码登录后默认显示全部非私人区域内容
-                        filterLinks('all'); 
+                        filterLinks('all');
                     }
                 } else {
                     localStorage.removeItem('passwordExpiration');
@@ -649,10 +651,23 @@
         }
 
         function changeBackground() {
-            const newBgUrl = prompt('请输入新的背景图链接');
-            if (newBgUrl) {
-                document.body.style.backgroundImage = `url('${newBgUrl}')`;
+            if (customBgUrls.length === 0) {
+                const url1 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
+                const url2 = prompt('https://shuiyin.org/assets/img/web-background.jpg);
+                const url3 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
+                if (url1) customBgUrls.push(url1);
+                if (url2) customBgUrls.push(url2);
+                if (url3) customBgUrls.push(url3);
+                if (customBgUrls.length === 0) {
+                    alert('请至少输入一个背景图链接');
+                    return;
+                }
             }
+            if (currentBgIndex >= customBgUrls.length) {
+                currentBgIndex = 0;
+            }
+            document.body.style.backgroundImage = `url('${customBgUrls[currentBgIndex]}')`;
+            currentBgIndex++;
         }
 
         function openTechDigitalLogin() {
