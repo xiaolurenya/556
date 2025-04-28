@@ -411,7 +411,7 @@
             }
         }
 
-       .private-login-container {
+       .tech-digital-login-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -422,15 +422,6 @@
             justify-content: center;
             align-items: center;
             z-index: 1002;
-        }
-
-       .private-content {
-            padding: 2rem;
-            display: none;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 0.25rem;
-            flex-grow: 1;
-            place-items: start; /* 私人专区链接置顶 */
         }
 
         @media (max-width: 768px) {
@@ -444,9 +435,6 @@
                 width: 100%;
             }
            .links-container {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-           .private-content {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
@@ -481,9 +469,6 @@
                 border-radius: 0.375rem;
             }
            .links-container {
-                grid-template-columns: repeat(1, minmax(0, 1fr));
-            }
-           .private-content {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
@@ -540,29 +525,26 @@
                     <li><a href="#" onclick="filterLinks('news-information')">新闻资讯</a></li>
                     <li><a href="#" onclick="filterLinks('learning-education')">学习教育</a></li>
                     <li><a href="#" onclick="filterLinks('life-service')">生活服务</a></li>
-                    <li><a href="#" onclick="filterLinks('tech-digital')">科技数码</a></li>
-                    <li><a href="#" onclick="openPrivateZone()">私人专区</a></li>
+                    <li><a href="#" onclick="openTechDigitalLogin()">科技数码</a></li>
                 </ul>
             </div>
             <div class="links-container" id="linksContainer">
             </div>
         </div>
     </div>
-    <div class="private-login-container" id="privateLoginContainer">
+    <div class="tech-digital-login-container" id="techDigitalLoginContainer">
         <div class="login-box">
-            <h2>请输入私人专区密码</h2>
-            <input type="password" id="privatePasswordInput" placeholder="密码">
-            <button onclick="checkPrivatePassword()">登录</button>
-            <button onclick="cancelPrivateLogin()">取消</button>
-            <div class="password-error" id="privatePasswordError">密码错误，请重新输入！</div>
+            <h2>请输入科技数码栏目密码</h2>
+            <input type="password" id="techDigitalPasswordInput" placeholder="密码">
+            <button onclick="checkTechDigitalPassword()">登录</button>
+            <button onclick="cancelTechDigitalLogin()">取消</button>
+            <div class="password-error" id="techDigitalPasswordError">密码错误，请重新输入！</div>
         </div>
-    </div>
-    <div id="privateContent" class="private-content">
     </div>
 
     <script>
         const correctPassword = '123456';
-        const privateZonePassword = '654321';
+        const techDigitalPassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
 
         function checkPassword() {
@@ -670,7 +652,7 @@
         });
 
         function filterLinks(category) {
-            const linkCards = document.querySelectorAll('.links-container .link-card, .private-content .link-card');
+            const linkCards = document.querySelectorAll('.links-container .link-card');
             linkCards.forEach(card => {
                 if (category === 'all') {
                     card.style.display = 'flex';
@@ -680,10 +662,6 @@
                     card.style.display = 'none';
                 }
             });
-            const privateContent = document.getElementById('privateContent');
-            if (category!== 'private-zone') {
-                privateContent.style.display = 'none';
-            }
         }
 
         function changeBackground() {
@@ -692,33 +670,27 @@
             document.body.style.backgroundImage = `url('${newBgUrl}')`;
         }
 
-        function openPrivateZone() {
-            document.getElementById('privateLoginContainer').style.display = 'flex';
+        function openTechDigitalLogin() {
+            document.getElementById('techDigitalLoginContainer').style.display = 'flex';
         }
 
-        function checkPrivatePassword() {
-            const password = document.getElementById('privatePasswordInput').value;
-            const passwordError = document.getElementById('privatePasswordError');
-            const linksContainer = document.getElementById('linksContainer');
-            const privateContent = document.getElementById('privateContent');
-            if (password === privateZonePassword) {
+        function checkTechDigitalPassword() {
+            const password = document.getElementById('techDigitalPasswordInput').value;
+            const passwordError = document.getElementById('techDigitalPasswordError');
+            if (password === techDigitalPassword) {
                 passwordError.style.display = 'none';
-                document.getElementById('privateLoginContainer').style.display = 'none';
-                document.getElementById('privatePasswordInput').value = '';
-                const linkCards = document.querySelectorAll('.links-container .link-card');
-                linkCards.forEach(card => {
-                    card.style.display = 'none';
-                });
-                privateContent.style.display = 'grid';
-                alert('成功进入私人专区！');
+                document.getElementById('techDigitalLoginContainer').style.display = 'none';
+                document.getElementById('techDigitalPasswordInput').value = '';
+                filterLinks('tech-digital');
+                alert('成功进入科技数码栏目！');
             } else {
                 passwordError.style.display = 'block';
             }
         }
 
-        function cancelPrivateLogin() {
-            document.getElementById('privateLoginContainer').style.display = 'none';
-            document.getElementById('privatePasswordInput').value = '';
+        function cancelTechDigitalLogin() {
+            document.getElementById('techDigitalLoginContainer').style.display = 'none';
+            document.getElementById('techDigitalPasswordInput').value = '';
             filterLinks('all');
         }
 
@@ -750,24 +722,11 @@
                 { name: '爱范儿', outer: 'https://www.ifanr.com/', inner: 'https://www.ifanr.com/' },
                 { name: '36氪', outer: 'https://36kr.com/', inner: 'https://36kr.com/' },
                 { name: '虎嗅网', outer: 'https://www.huxiu.com/', inner: 'https://www.huxiu.com/' }
-            ],
-            'private-zone': [
-                { name: '私有链接1', outer: 'https://private1.example.com', inner: 'http://192.168.1.100/private1' },
-                { name: '私有链接2', outer: 'https://private2.example.com', inner: 'http://192.168.1.101/private2' },
-                { name: '私有链接3', outer: 'https://private3.example.com', inner: 'http://192.168.1.102/private3' },
-                { name: '私有链接4', outer: 'https://private4.example.com', inner: 'http://192.168.1.103/private4' },
-                { name: '私有链接5', outer: 'https://private5.example.com', inner: 'http://192.168.1.104/private5' },
-                { name: '新增文件链接1', outer: 'https://file1.example.com', inner: 'http://192.168.1.105/file1' },
-                { name: '新增文件链接2', outer: 'https://file2.example.com', inner: 'http://192.168.1.106/file2' },
-                { name: '新增文件链接3', outer: 'https://file3.example.com', inner: 'http://192.168.1.107/file3' },
-                { name: '新增文件链接4', outer: 'https://file4.example.com', inner: 'http://192.168.1.108/file4' },
-                { name: '新增文件链接5', outer: 'https://file5.example.com', inner: 'http://192.168.1.109/file5' }
             ]
         };
 
         function populateLinks() {
             const linksContainer = document.getElementById('linksContainer');
-            const privateContent = document.getElementById('privateContent');
 
             for (const category in linkData) {
                 linkData[category].forEach(link => {
@@ -780,12 +739,7 @@
                     linkAnchor.target = '_blank';
                     linkAnchor.textContent = link.name;
                     linkCard.appendChild(linkAnchor);
-
-                    if (category === 'private-zone') {
-                        privateContent.appendChild(linkCard);
-                    } else {
-                        linksContainer.appendChild(linkCard);
-                    }
+                    linksContainer.appendChild(linkCard);
                 });
             }
         }
@@ -794,5 +748,4 @@
     </script>
 </body>
 
-</html>
-    
+</html>    
