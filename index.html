@@ -178,8 +178,8 @@
             width: 500px;
             font-size: 0.9rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            background-color: rgba(255, 255, 255, 0.9); /* 调整搜索框背景颜色 */
-            color: #333; /* 调整搜索框文字颜色 */
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #333;
         }
 
        .search-group select {
@@ -267,21 +267,23 @@
             padding: 2rem;
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
-            gap: 1.5rem;
+            gap: 0.25rem;
             flex-grow: 1;
+            place-items: start; /* 链接置顶 */
         }
 
        .link-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
             border-radius: 0.375rem;
-            padding: 0.5rem 0.75rem;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
-            text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
+            width: 100%;
+            min-height: 80px;
+            padding: 0.5rem;
         }
 
        .link-card:hover {
@@ -292,8 +294,12 @@
        .link-card a {
             color: #f9fafb;
             text-decoration: none;
-            display: block;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             font-size: 1.1rem;
+            width: 100%;
+            height: 100%;
         }
 
        .link-card a:hover {
@@ -418,6 +424,15 @@
             z-index: 1002;
         }
 
+       .private-content {
+            padding: 2rem;
+            display: none;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 0.25rem;
+            flex-grow: 1;
+            place-items: start; /* 私人专区链接置顶 */
+        }
+
         @media (max-width: 768px) {
            .search-group input {
                 width: 80%;
@@ -429,6 +444,9 @@
                 width: 100%;
             }
            .links-container {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+           .private-content {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
@@ -463,6 +481,9 @@
                 border-radius: 0.375rem;
             }
            .links-container {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+           .private-content {
                 grid-template-columns: repeat(1, minmax(0, 1fr));
             }
         }
@@ -514,44 +535,16 @@
         </div>
         <div class="main-content">
             <div class="sidebar">
-                <h3>全部</h3>
                 <ul>
-                    <li><a href="#" onclick="filterLinks('life-entertainment')">生活娱乐</a></li>
-                    <li><a href="#" onclick="filterLinks('video-entertainment')">影音娱乐</a></li>
+                    <li><a href="#" onclick="filterLinks('all')">全部</a></li>
+                    <li><a href="#" onclick="filterLinks('news-information')">新闻资讯</a></li>
+                    <li><a href="#" onclick="filterLinks('learning-education')">学习教育</a></li>
+                    <li><a href="#" onclick="filterLinks('life-service')">生活服务</a></li>
+                    <li><a href="#" onclick="filterLinks('tech-digital')">科技数码</a></li>
                     <li><a href="#" onclick="openPrivateZone()">私人专区</a></li>
                 </ul>
             </div>
-            <div class="links-container">
-                <div class="link-card life-entertainment video-entertainment">
-                    <a href="http://li0580.top:8000/v/login" data-outer="http://li0580.top:8000/v/login" data-inner="http://192.168.2.225:8000/v/login" target="_blank">飞牛影视</a>
-                </div>
-                <div class="link-card life-entertainment video-entertainment">
-                    <a href="https://libretv-3x4.pages.dev/" data-outer="https://libretv-3x4.pages.dev/" data-inner="https://libretv-3x4.pages.dev/" target="_blank">LibreTV</a>
-                </div>
-                <div class="link-card life-entertainment video-entertainment">
-                    <a href="https://movie.douban.com/" data-outer="https://movie.douban.com/" data-inner="http://192.168.1.22/doubanmovie" target="_blank">豆瓣电影</a>
-                </div>
-                <div class="link-card life-entertainment video-entertainment">
-                    <a href="https://maoyan.com/" data-outer="https://maoyan.com/" data-inner="http://192.168.1.23/maoyan" target="_blank">猫眼电影</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://www.ximalaya.com/" data-outer="https://www.ximalaya.com/" data-inner="http://192.168.1.24/ximalaya" target="_blank">喜马拉雅</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://www.espn.com/" data-outer="https://www.espn.com/" data-inner="http://192.168.1.52/espn" target="_blank">ESPN</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://www.bodybuilding.com/" data-outer="https://www.bodybuilding.com/" data-inner="http://192.168.1.53/bodybuilding" target="_blank">Bodybuilding</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://www.runnersworld.com/" data-outer="https://www.runnersworld.com/" data-inner="http://192.168.1.54/runnersworld" target="_blank">跑者世界</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://example1.com" data-outer="https://example1.com" data-inner="http://192.168.1.55/example1" target="_blank">示例链接1</a>
-                </div>
-                <div class="link-card life-entertainment">
-                    <a href="https://example2.com" data-outer="https://example2.com" data-inner="http://192.168.1.56/example2" target="_blank">示例链接2</a>
-                </div>
+            <div class="links-container" id="linksContainer">
             </div>
         </div>
     </div>
@@ -560,8 +553,11 @@
             <h2>请输入私人专区密码</h2>
             <input type="password" id="privatePasswordInput" placeholder="密码">
             <button onclick="checkPrivatePassword()">登录</button>
+            <button onclick="cancelPrivateLogin()">取消</button>
             <div class="password-error" id="privatePasswordError">密码错误，请重新输入！</div>
         </div>
+    </div>
+    <div id="privateContent" class="private-content">
     </div>
 
     <script>
@@ -674,14 +670,20 @@
         });
 
         function filterLinks(category) {
-            const linkCards = document.querySelectorAll('.link-card');
+            const linkCards = document.querySelectorAll('.links-container .link-card, .private-content .link-card');
             linkCards.forEach(card => {
-                if (category === 'life-entertainment' || card.classList.contains(category)) {
-                    card.style.display = 'block';
+                if (category === 'all') {
+                    card.style.display = 'flex';
+                } else if (card.classList.contains(category)) {
+                    card.style.display = 'flex';
                 } else {
                     card.style.display = 'none';
                 }
             });
+            const privateContent = document.getElementById('privateContent');
+            if (category!== 'private-zone') {
+                privateContent.style.display = 'none';
+            }
         }
 
         function changeBackground() {
@@ -697,15 +699,93 @@
         function checkPrivatePassword() {
             const password = document.getElementById('privatePasswordInput').value;
             const passwordError = document.getElementById('privatePasswordError');
+            const linksContainer = document.getElementById('linksContainer');
+            const privateContent = document.getElementById('privateContent');
             if (password === privateZonePassword) {
                 passwordError.style.display = 'none';
                 document.getElementById('privateLoginContainer').style.display = 'none';
-                // 这里可以添加跳转到私人专区页面的逻辑
+                document.getElementById('privatePasswordInput').value = '';
+                const linkCards = document.querySelectorAll('.links-container .link-card');
+                linkCards.forEach(card => {
+                    card.style.display = 'none';
+                });
+                privateContent.style.display = 'grid';
                 alert('成功进入私人专区！');
             } else {
                 passwordError.style.display = 'block';
             }
         }
+
+        function cancelPrivateLogin() {
+            document.getElementById('privateLoginContainer').style.display = 'none';
+            document.getElementById('privatePasswordInput').value = '';
+            filterLinks('all');
+        }
+
+        const linkData = {
+            'news-information': [
+                { name: '新浪新闻', outer: 'https://news.sina.com.cn/', inner: 'https://news.sina.com.cn/' },
+                { name: '腾讯新闻', outer: 'https://news.qq.com/', inner: 'https://news.qq.com/' },
+                { name: '央视新闻', outer: 'https://news.cctv.com/', inner: 'https://news.cctv.com/' },
+                { name: '澎湃新闻', outer: 'https://www.thepaper.cn/', inner: 'https://www.thepaper.cn/' },
+                { name: '环球网', outer: 'https://www.huanqiu.com/', inner: 'https://www.huanqiu.com/' }
+            ],
+            'learning-education': [
+                { name: '中国大学MOOC', outer: 'https://www.icourse163.org/', inner: 'https://www.icourse163.org/' },
+                { name: 'Coursera', outer: 'https://www.coursera.org/', inner: 'https://www.coursera.org/' },
+                { name: '网易云课堂', outer: 'https://study.163.com/', inner: 'https://study.163.com/' },
+                { name: '哔哩哔哩学习区', outer: 'https://www.bilibili.com/study/', inner: 'https://www.bilibili.com/study/' },
+                { name: 'TED演讲', outer: 'https://www.ted.com/', inner: 'https://www.ted.com/' }
+            ],
+            'life-service': [
+                { name: '美团', outer: 'https://www.meituan.com/', inner: 'https://www.meituan.com/' },
+                { name: '饿了么', outer: 'https://www.ele.me/', inner: 'https://www.ele.me/' },
+                { name: '携程旅行', outer: 'https://www.ctrip.com/', inner: 'https://www.ctrip.com/' },
+                { name: '支付宝', outer: 'https://www.alipay.com/', inner: 'https://www.alipay.com/' },
+                { name: '滴滴出行', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
+            ],
+            'tech-digital': [
+                { name: '中关村在线', outer: 'https://www.zol.com.cn/', inner: 'https://www.zol.com.cn/' },
+                { name: '太平洋电脑网', outer: 'https://www.pconline.com.cn/', inner: 'https://www.pconline.com.cn/' },
+                { name: '爱范儿', outer: 'https://www.ifanr.com/', inner: 'https://www.ifanr.com/' },
+                { name: '36氪', outer: 'https://36kr.com/', inner: 'https://36kr.com/' },
+                { name: '虎嗅网', outer: 'https://www.huxiu.com/', inner: 'https://www.huxiu.com/' }
+            ],
+            'private-zone': [
+                { name: '私有链接1', outer: 'https://private1.example.com', inner: 'http://192.168.1.100/private1' },
+                { name: '私有链接2', outer: 'https://private2.example.com', inner: 'http://192.168.1.101/private2' },
+                { name: '私有链接3', outer: 'https://private3.example.com', inner: 'http://192.168.1.102/private3' },
+                { name: '私有链接4', outer: 'https://private4.example.com', inner: 'http://192.168.1.103/private4' },
+                { name: '私有链接5', outer: 'https://private5.example.com', inner: 'http://192.168.1.104/private5' }
+            ]
+        };
+
+        function populateLinks() {
+            const linksContainer = document.getElementById('linksContainer');
+            const privateContent = document.getElementById('privateContent');
+
+            for (const category in linkData) {
+                linkData[category].forEach(link => {
+                    const linkCard = document.createElement('div');
+                    linkCard.classList.add('link-card', category);
+                    const linkAnchor = document.createElement('a');
+                    linkAnchor.href = link.outer;
+                    linkAnchor.dataset.outer = link.outer;
+                    linkAnchor.dataset.inner = link.inner;
+                    linkAnchor.target = '_blank';
+                    linkAnchor.textContent = link.name;
+                    linkCard.appendChild(linkAnchor);
+
+                    if (category === 'private-zone') {
+                        privateContent.appendChild(linkCard);
+                    } else {
+                        linksContainer.appendChild(linkCard);
+                    }
+                });
+            }
+        }
+
+        populateLinks();
     </script>
 </body>
 
