@@ -523,7 +523,11 @@
         const techDigitalPassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
         let currentBgIndex = 0;
-        let customBgUrls = [];
+        let customBgUrls = [
+            'https://shuiyin.org/assets/img/web-background.jpg',
+            'https://shuiyin.org/assets/img/web-background.jpg',
+            'https://shuiyin.org/assets/img/web-background.jpg'
+        ];
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
@@ -652,9 +656,9 @@
 
         function changeBackground() {
             if (customBgUrls.length === 0) {
-                const url1 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
-                const url2 = prompt('https://shuiyin.org/assets/img/web-background.jpg);
-                const url3 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
+                const url1 = prompt('请输入自定义背景图链接1');
+                const url2 = prompt('请输入自定义背景图链接2');
+                const url3 = prompt('请输入自定义背景图链接3');
                 if (url1) customBgUrls.push(url1);
                 if (url2) customBgUrls.push(url2);
                 if (url3) customBgUrls.push(url3);
@@ -759,8 +763,14 @@
             }
         }
 
+        // 页面加载时自动更换背景
+        document.addEventListener('DOMContentLoaded', function () {
+            changeBackground();
+        });
+
         populateLinks();
     </script>
 </body>
 
-</html>    
+</html>
+    
