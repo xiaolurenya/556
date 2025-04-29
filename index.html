@@ -523,7 +523,7 @@
         const techDigitalPassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
         let currentBgIndex = 0;
-        let customBgUrls = [];
+        let customBgUrls = JSON.parse(localStorage.getItem('customBgUrls')) || [];
 
         function checkPassword() {
             const password = document.getElementById('passwordInput').value;
@@ -653,8 +653,8 @@
         function changeBackground() {
             if (customBgUrls.length === 0) {
                 const url1 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
-                const url2 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
-                const url3 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
+                const url2 = prompt('请输入第二张背景图的链接');
+                const url3 = prompt('请输入第三张背景图的链接');
 
                 if (url1) customBgUrls.push(url1);
                 if (url2) customBgUrls.push(url2);
@@ -664,6 +664,8 @@
                     alert('请至少输入一个背景图链接');
                     return;
                 }
+
+                localStorage.setItem('customBgUrls', JSON.stringify(customBgUrls));
             }
 
             if (currentBgIndex >= customBgUrls.length) {
@@ -763,10 +765,11 @@
             }
         }
 
-        // 页面加载时自动更换背景
-        document.addEventListener('DOMContentLoaded', function () {
-            changeBackground();
-        });
+        // 页面加载时如果有自定义背景图，随机显示一张
+        if (customBgUrls.length > 0) {
+            currentBgIndex = Math.floor(Math.random() * customBgUrls.length);
+            document.body.style.backgroundImage = `url('${customBgUrls[currentBgIndex]}')`;
+        }
 
         populateLinks();
     </script>
