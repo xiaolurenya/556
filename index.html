@@ -498,9 +498,9 @@
             <div class="sidebar">
                 <ul>
                     <li><a href="#" onclick="filterLinks('all')">全部</a></li>
-                    <li><a href="#" onclick="filterLinks('news-information')">飞牛系统</a></li>
-                    <li><a href="#" onclick="filterLinks('learning-education')">热门书签</a></li>
-                    <li><a href="#" onclick="filterLinks('life-service')">常用服务</a></li>
+                    <li><a href="#" onclick="filterLinks('news-information')">常用书签</a></li>
+                    <li><a href="#" onclick="filterLinks('learning-education')">新闻资讯</a></li>
+                    <li><a href="#" onclick="filterLinks('life-service')">生活服务</a></li>
                     <li><a href="#" onclick="openTechDigitalLogin()">私人区域</a></li>
                 </ul>
             </div>
@@ -519,7 +519,7 @@
     </div>
 
     <script>
-        const correctPassword = 'a1234567';
+        const correctPassword = 'a123456';
         const techDigitalPassword = '654321';
         const passwordSaveDuration = 7 * 24 * 60 * 60 * 1000;
         let currentBgIndex = 0;
@@ -653,7 +653,7 @@
 
         function changeBackground() {
             if (isFirstBgChange) {
-                const url1 = prompt('https://shuiyin.org/assets/img/web-background.jpg');
+                const url1 = prompt('请输入第一张背景图的链接');
                 const url2 = prompt('请输入第二张背景图的链接');
                 const url3 = prompt('请输入第三张背景图的链接');
 
@@ -662,7 +662,7 @@
                 if (url3) customBgUrls.push(url3);
 
                 if (customBgUrls.length === 0) {
-                    alert('https://shuiyin.org/assets/img/web-background.jpg');
+                    alert('请至少输入一个背景图链接');
                     return;
                 }
 
@@ -706,29 +706,31 @@
             'news-information': [
                 { name: 'MoviePilot', outer: 'http://li0580.top:3000', inner: 'http://192.168.2.225:3000' },
                 { name: '飞牛OS', outer: 'http://li0580.top:8000', inner: 'http://192.168.2.225:8000' },
-                { name: 'Alist', outer: 'http://li0580.top:5244', inner: 'http://192.168.2.225:5244' },
-                { name: 'PDF工具箱', outer: 'http://li0580.top:3615', inner: 'http://192.168.2.225:3615' },
+                { name: 'Alist', outer: 'http://li0580.top:5244', inner: 'http://92.168.2.225:5244' },
+                { name: 'PDF工具箱', outer: 'http://li0580.top:3615', inner: '192.168.2.225:3615' },
+                { name: '环球网', outer: 'http://li0580.top:8085', inner: '192.168.2.225:8085' }
             ],
             'learning-education': [
                 { name: '蜂巢', outer: 'https://pting.club/', inner: 'https://pting.club/' },
-                { name: '爱快路由器', outer: 'http://li0580.top:2025', inner: 'http://192.168.2.225:2025/' },
+                { name: '爱快路由器', outer: 'http://li0580.top:2025', inner: 'http://92.168.2.225:2025/' },
                 { name: 'Github', outer: 'https://github.com/', inner: 'https://github.com/' },
                 { name: 'Cloudflare', outer: 'https://dash.cloudflare.com', inner: 'https://dash.cloudflare.com' },
                 { name: '奇节点', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' },
                 { name: '花海IPTV', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' },
+                { name: '网易邮箱', outer: 'https://email.163.com/', inner: 'https://email.163.com/' }
             ],
             'life-service': [
                 { name: '美团', outer: 'https://www.meituan.com/', inner: 'https://www.meituan.com/' },
                 { name: '饿了么', outer: 'https://www.ele.me/', inner: 'https://www.ele.me/' },
                 { name: '携程旅行', outer: 'https://www.ctrip.com/', inner: 'https://www.ctrip.com/' },
-                { name: '网易邮箱', outer: 'https://email.163.com/', inner: 'https://email.163.com/' }
+                { name: '支付宝', outer: 'https://www.alipay.com/', inner: 'https://www.alipay.com/' },
                 { name: '滴滴出行', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
             ],
             'tech-digital': [
                 { name: 'libretv', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' },
                 { name: 'nullbr', outer: 'https://nullbr.online/', inner: 'https://nullbr.online/' },
-                { name: '飞牛影视', outer: 'http://li0580.top:8000/v/logi/', inner: '192.168.2.225:8000/v/logi' },
-                { name: 'EMBY', outer: 'http://li0580.top:8096', inner: '192.168.2.225:8096/' },
+                { name: '飞牛影视', outer: 'http://li0580.top:8000/v/logi/', inner: 'http://192.168.2.225:8000/v/logi' },
+                { name: 'EMBY', outer: 'http://li0580.top:8096', inner: 'http://192.168.2.225:8096/' },
                 { name: '家园', outer: 'https://hdhome.org/', inner: 'https://hdhome.org/' },
                 { name: '我堡', outer: 'https://ourbits.club/', inner: 'https://ourbits.club/' },
                 { name: '馒头', outer: 'https://kp.m-team.cc/', inner: 'https://kp.m-team.cc/' },
