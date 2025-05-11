@@ -82,6 +82,9 @@
                         <button onclick="openImportModal()" class="btn-secondary flex items-center">
                             <i class="fa fa-upload mr-2"></i>导入书签
                         </button>
+                        <button onclick="openAddLinkModal()" class="btn-primary flex items-center">
+                            <i class="fa fa-plus mr-2"></i>添加链接
+                        </button>
                     </div>
                 </div>
             </div>
@@ -197,6 +200,56 @@
         </div>
     </div>
 
+    <!-- 添加链接模态框 -->
+    <div id="addLinkModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
+        <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
+            <h2 class="text-2xl font-bold mb-6 text-center">添加新链接</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">链接名称</label>
+                    <input type="text" id="linkName" placeholder="例如：百度" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">外网地址</label>
+                    <input type="url" id="outerUrl" placeholder="例如：https://www.baidu.com" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">内网地址</label>
+                    <input type="url" id="innerUrl" placeholder="例如：http://192.168.1.100" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">图标</label>
+                    <div class="flex gap-2 flex-wrap">
+                        <button type="button" class="icon-btn" data-icon="fa-globe"><i class="fa fa-globe"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-book"><i class="fa fa-book"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-music"><i class="fa fa-music"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-film"><i class="fa fa-film"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-gamepad"><i class="fa fa-gamepad"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-shopping-cart"><i class="fa fa-shopping-cart"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-envelope"><i class="fa fa-envelope"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-wrench"><i class="fa fa-wrench"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-cog"><i class="fa fa-cog"></i></button>
+                        <button type="button" class="icon-btn" data-icon="fa-link"><i class="fa fa-link"></i></button>
+                    </div>
+                    <input type="hidden" id="selectedIcon" value="fa-link">
+                </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">分类</label>
+                    <select id="linkCategory" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                        <option value="news-information">飞牛系统</option>
+                        <option value="learning-education">热门书签</option>
+                        <option value="life-service">其他书签</option>
+                        <option value="tech-digital">私人区域</option>
+                    </select>
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="addNewLink()" class="btn-primary flex-1">添加</button>
+                    <button onclick="closeAddLinkModal()" class="btn-secondary flex-1">取消</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         // 配置信息
         const CONFIG = {
@@ -216,7 +269,8 @@
             customBgUrls: JSON.parse(localStorage.getItem('customBgUrls')) || CONFIG.defaultBackgrounds,
             isFirstBgChange: JSON.parse(localStorage.getItem('customBgUrls')) === null,
             importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
-            isTechDigitalAuthenticated: false
+            isTechDigitalAuthenticated: false,
+            selectedIcon: 'fa-link'
         };
 
         // DOM元素
@@ -236,7 +290,14 @@
             fileInput: document.getElementById('fileInput'),
             importStatus: document.getElementById('importStatus'),
             importProgress: document.getElementById('importProgress').querySelector('div'),
-            importMessage: document.getElementById('importMessage')
+            importMessage: document.getElementById('importMessage'),
+            addLinkModal: document.getElementById('addLinkModal'),
+            linkName: document.getElementById('linkName'),
+            outerUrl: document.getElementById('outerUrl'),
+            innerUrl: document.getElementById('innerUrl'),
+            selectedIcon: document.getElementById('selectedIcon'),
+            linkCategory: document.getElementById('linkCategory'),
+            iconButtons: document.querySelectorAll('.icon-btn')
         };
 
         // 书签数据
@@ -320,9 +381,21 @@
                 const name = document.createElement('span');
                 name.textContent = link.name;
                 
+                // 添加删除按钮
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'absolute top-2 right-2 text-white/60 hover:text-white transition-colors';
+                deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
+                deleteBtn.onclick = function(e) {
+                    e.stopPropagation();
+                    if (confirm(`确定要删除 "${link.name}" 吗？`)) {
+                        deleteLink(link, category);
+                    }
+                };
+                
                 anchor.appendChild(icon);
                 anchor.appendChild(name);
                 card.appendChild(anchor);
+                card.appendChild(deleteBtn);
                 
                 return card;
             },
@@ -358,7 +431,11 @@
                         state.isTechDigitalAuthenticated = true;
                         
                         // 保存认证状态到localStorage
-                        localStorage.setItem('techDigitalAuthenticated', 'true');
+                        const authExpiry = new Date().getTime() + CONFIG.passwordSaveDuration;
+                        localStorage.setItem('techDigitalAuthenticated', JSON.stringify({
+                            authenticated: true,
+                            expiry: authExpiry
+                        }));
                         
                         // 重新加载所有链接并显示私人区域
                         modules.links.populateLinks();
@@ -381,8 +458,19 @@
                 checkSavedAuthentication() {
                     // 检查是否有保存的认证状态
                     const savedAuth = localStorage.getItem('techDigitalAuthenticated');
-                    if (savedAuth === 'true') {
-                        state.isTechDigitalAuthenticated = true;
+                    if (savedAuth) {
+                        try {
+                            const authData = JSON.parse(savedAuth);
+                            if (authData.authenticated && authData.expiry > new Date().getTime()) {
+                                state.isTechDigitalAuthenticated = true;
+                            } else {
+                                // 认证已过期，删除保存的状态
+                                localStorage.removeItem('techDigitalAuthenticated');
+                            }
+                        } catch (e) {
+                            console.error('Failed to parse authentication data:', e);
+                            localStorage.removeItem('techDigitalAuthenticated');
+                        }
                     }
                 }
             },
@@ -603,6 +691,55 @@
                     linkData.imported = links;
                     utils.saveToLocalStorage('importedLinks', JSON.stringify(links));
                 }
+            },
+            linksManagement: {
+                addLink(name, outerUrl, innerUrl, icon, category) {
+                    // 检查是否已存在同名链接
+                    for (const cat in linkData) {
+                        const existingLink = linkData[cat].find(link => link.name === name);
+                        if (existingLink) {
+                            return false;
+                        }
+                    }
+                    
+                    // 添加新链接
+                    const newLink = {
+                        name,
+                        outer: outerUrl,
+                        inner: innerUrl || outerUrl,
+                        icon
+                    };
+                    
+                    linkData[category].push(newLink);
+                    
+                    // 保存到localStorage
+                    if (category === 'imported') {
+                        state.importedLinks = linkData.imported;
+                        utils.saveToLocalStorage('importedLinks', JSON.stringify(state.importedLinks));
+                    } else {
+                        // 对于其他分类，我们也保存到localStorage
+                        utils.saveToLocalStorage('customLinks', JSON.stringify(linkData));
+                    }
+                    
+                    return true;
+                },
+                deleteLink(link, category) {
+                    // 从数组中删除链接
+                    linkData[category] = linkData[category].filter(item => item.name !== link.name);
+                    
+                    // 更新localStorage
+                    if (category === 'imported') {
+                        state.importedLinks = linkData.imported;
+                        utils.saveToLocalStorage('importedLinks', JSON.stringify(state.importedLinks));
+                    } else {
+                        utils.saveToLocalStorage('customLinks', JSON.stringify(linkData));
+                    }
+                    
+                    // 重新渲染链接
+                    modules.links.populateLinks();
+                    
+                    return true;
+                }
             }
         };
 
@@ -643,6 +780,97 @@
         function cancelTechDigitalLogin() {
             modules.auth.cancelTechDigitalLogin();
         }
+        
+        // 新增函数
+        function openAddLinkModal() {
+            // 重置表单
+            elements.linkName.value = '';
+            elements.outerUrl.value = '';
+            elements.innerUrl.value = '';
+            elements.selectedIcon.value = 'fa-link';
+            elements.linkCategory.value = 'news-information';
+            
+            // 重置图标按钮样式
+            elements.iconButtons.forEach(btn => {
+                btn.classList.remove('bg-primary/50');
+            });
+            
+            // 显示模态框
+            elements.addLinkModal.classList.remove('hidden');
+        }
+        
+        function closeAddLinkModal() {
+            elements.addLinkModal.classList.add('hidden');
+        }
+        
+        function selectIcon(icon) {
+            state.selectedIcon = icon;
+            elements.selectedIcon.value = icon;
+            
+            // 更新图标按钮样式
+            elements.iconButtons.forEach(btn => {
+                if (btn.dataset.icon === icon) {
+                    btn.classList.add('bg-primary/50');
+                } else {
+                    btn.classList.remove('bg-primary/50');
+                }
+            });
+        }
+        
+        function addNewLink() {
+            const name = elements.linkName.value.trim();
+            const outerUrl = elements.outerUrl.value.trim();
+            const innerUrl = elements.innerUrl.value.trim() || outerUrl;
+            const icon = elements.selectedIcon.value;
+            const category = elements.linkCategory.value;
+            
+            // 验证
+            if (!name) {
+                alert('请输入链接名称');
+                return;
+            }
+            
+            if (!outerUrl) {
+                alert('请输入外网地址');
+                return;
+            }
+            
+            // 尝试添加链接
+            const success = modules.linksManagement.addLink(name, outerUrl, innerUrl, icon, category);
+            
+            if (success) {
+                // 关闭模态框
+                closeAddLinkModal();
+                
+                // 刷新链接显示
+                modules.links.populateLinks();
+                
+                // 切换到添加的链接所在分类
+                modules.links.filterLinks(category);
+                
+                alert(`成功添加链接 "${name}"`);
+            } else {
+                alert(`已存在同名链接 "${name}"`);
+            }
+        }
+        
+        function deleteLink(link, category) {
+            // 检查是否需要权限
+            if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
+                alert('需要先登录私人区域才能删除此分类中的链接');
+                openTechDigitalLogin();
+                return;
+            }
+            
+            // 执行删除
+            const success = modules.linksManagement.deleteLink(link, category);
+            
+            if (success) {
+                alert(`成功删除链接 "${link.name}"`);
+            } else {
+                alert(`删除链接失败`);
+            }
+        }
 
         // 事件监听
         function setupEventListeners() {
@@ -675,6 +903,31 @@
             });
             
             elements.fileInput.addEventListener('change', modules.import.handleFileSelect);
+            
+            // 图标选择事件
+            elements.iconButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectIcon(btn.dataset.icon);
+                });
+            });
+            
+            // 初始化图标选择
+            selectIcon('fa-link');
+            
+            // 加载本地存储的自定义链接
+            const savedCustomLinks = localStorage.getItem('customLinks');
+            if (savedCustomLinks) {
+                try {
+                    const customLinks = JSON.parse(savedCustomLinks);
+                    for (const category in customLinks) {
+                        if (category !== 'imported' && Array.isArray(customLinks[category])) {
+                            linkData[category] = customLinks[category];
+                        }
+                    }
+                } catch (e) {
+                    console.error('Failed to parse custom links:', e);
+                }
+            }
         }
 
         // 初始化
@@ -696,5 +949,4 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
-</html>
-    
+</html>    
