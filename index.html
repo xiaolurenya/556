@@ -33,6 +33,12 @@
                         'icon-accent': '#f97316',
                         'icon-dark': '#1e293b',
                         'icon-light': '#f8fafc',
+                        
+                        // 新增侧边栏颜色配置
+                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)', // 侧边栏背景色
+                        'sidebar-text': '#94a3b8', // 侧边栏文本默认颜色
+                        'sidebar-text-hover': '#e2e8f0', // 侧边栏文本悬停颜色
+                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)', // 侧边栏激活项背景
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
@@ -110,6 +116,19 @@
                 transform: translateY(2px);
                 color: theme('colors.text-primary');
             }
+            /* 新增侧边栏自定义样式 */
+            .sidebar {
+                @apply bg-sidebar-bg text-sidebar-text rounded-xl shadow-lg;
+            }
+            .sidebar-item {
+                @apply block py-2 px-3 rounded-lg transition-all hover:bg-sidebar-item-active hover:text-sidebar-text-hover;
+            }
+            .sidebar-item.active {
+                @apply bg-sidebar-item-active text-sidebar-text-hover;
+            }
+            .sidebar-title {
+                @apply text-lg font-bold mb-4 pb-2 border-b border-white/20 text-text-primary;
+            }
         }
     </style>
 </head>
@@ -174,25 +193,26 @@
         <main class="flex-1 container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
             <!-- 侧边栏导航 -->
             <aside class="w-full md:w-64 shrink-0">
-                <div class="glass-effect rounded-xl p-4 shadow-lg">
-                    <h3 class="text-lg font-bold mb-4 pb-2 border-b border-white/20 text-text-primary">导航分类</h3>
+                <!-- 修改为使用sidebar类 -->
+                <div class="sidebar p-4">
+                    <h3 class="sidebar-title">导航分类</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" onclick="filterLinks('all')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="filterLinks('all')" class="sidebar-item">
                             <i class="fa fa-th-large mr-2"></i>全部
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('news-information')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="filterLinks('news-information')" class="sidebar-item">
                             <i class="fa fa-bullhorn mr-2"></i>飞牛系统
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('learning-education')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="filterLinks('learning-education')" class="sidebar-item">
                             <i class="fa fa-book mr-2"></i>热门书签
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('life-service')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="filterLinks('life-service')" class="sidebar-item">
                             <i class="fa fa-life-ring mr-2"></i>其他书签
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('imported')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="filterLinks('imported')" class="sidebar-item">
                             <i class="fa fa-bookmark mr-2"></i>导入书签
                         </a></li>
-                        <li><a href="#" onclick="openTechDigitalLogin()" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
+                        <li><a href="#" onclick="openTechDigitalLogin()" class="sidebar-item">
                             <i class="fa fa-lock mr-2"></i>私人区域
                         </a></li>
                     </ul>
@@ -673,14 +693,15 @@
                     });
                     
                     // 高亮当前选中的分类
-                    document.querySelectorAll('.glass-effect ul a').forEach(link => {
-                        link.classList.remove('bg-white/20');
+                    // 修改为使用sidebar-item-active类
+                    document.querySelectorAll('.sidebar-item').forEach(link => {
+                        link.classList.remove('active');
                     });
                     
                     if (category === 'all') {
-                        document.querySelector('.glass-effect ul a:first-child').classList.add('bg-white/20');
+                        document.querySelector('.sidebar-item:first-child').classList.add('active');
                     } else {
-                        document.querySelector(`.glass-effect ul a[onclick="filterLinks('${category}')"]`).classList.add('bg-white/20');
+                        document.querySelector(`.sidebar-item[onclick="filterLinks('${category}')"]`).classList.add('active');
                     }
                 }
             },
@@ -1077,5 +1098,4 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
-</html>
-    
+</html></
