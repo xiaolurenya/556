@@ -237,7 +237,8 @@
             isOuterNet: true,
             customBgUrls: JSON.parse(localStorage.getItem('customBgUrls')) || CONFIG.defaultBackgrounds,
             isFirstBgChange: JSON.parse(localStorage.getItem('customBgUrls')) === null,
-            importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || []
+            importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
+            isTechDigitalAuthenticated: false
         };
 
         // DOM元素
@@ -331,7 +332,7 @@
             },
             createLinkCard(link, category) {
                 const card = document.createElement('div');
-                card.className = `glass-effect rounded-xl p-4 shadow-lg card-hover ${category}`;
+                card.className = `glass-effect rounded-xl p-4 shadow-lg card-hover link-card ${category}`;
                 
                 const anchor = document.createElement('a');
                 anchor.href = state.isOuterNet ? link.outer : link.inner;
@@ -426,6 +427,7 @@
                         elements.techDigitalPasswordError.classList.add('hidden');
                         elements.techDigitalLoginContainer.classList.add('hidden');
                         elements.techDigitalPasswordInput.value = '';
+                        state.isTechDigitalAuthenticated = true;
                         modules.links.filterLinks('tech-digital');
                         alert('成功进入私人区域！');
                     } else {
@@ -511,6 +513,8 @@
                     elements.linksContainer.innerHTML = '';
                     
                     for (const category in linkData) {
+                        if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) continue;
+                        
                         linkData[category].forEach(link => {
                             const card = utils.createLinkCard(link, category);
                             elements.linksContainer.appendChild(card);
@@ -522,13 +526,17 @@
                     
                     cards.forEach(card => {
                         if (category === 'all') {
-                            if (!card.classList.contains('tech-digital')) {
-                                card.classList.remove('hidden');
-                            } else {
+                            if (card.classList.contains('tech-digital') && !state.isTechDigitalAuthenticated) {
                                 card.classList.add('hidden');
+                            } else {
+                                card.classList.remove('hidden');
                             }
                         } else if (card.classList.contains(category)) {
-                            card.classList.remove('hidden');
+                            if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
+                                card.classList.add('hidden');
+                            } else {
+                                card.classList.remove('hidden');
+                            }
                         } else {
                             card.classList.add('hidden');
                         }
