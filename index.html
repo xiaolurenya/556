@@ -94,7 +94,7 @@
                 <div class="max-w-2xl mx-auto">
                     <div class="flex flex-col sm:flex-row gap-2">
                         <input type="text" id="search-input" placeholder="输入关键词搜索" class="flex-1 px-4 py-3 rounded-l-lg sm:rounded-r-none bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
-                        <select id="search-engine" class="px-4 py-3 bg-white/20 border-y border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                        <select id="search-engine" class="px-4 py-3 bg-white/20 border-y border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white appearance-none relative">
                             <option value="https://www.baidu.com/s?wd=">百度</option>
                             <option value="https://cn.bing.com/search?q=">必应</option>
                             <option value="https://search.bilibili.com/all?keyword=">B站</option>
@@ -501,30 +501,19 @@
             },
             background: {
                 changeBackground() {
-                    if (state.isFirstBgChange) {
-                        const url1 = prompt('请输入第一张背景图的链接');
-                        const url2 = prompt('请输入第二张背景图的链接');
-                        const url3 = prompt('请输入第三张背景图的链接');
-                        
-                        if (url1) state.customBgUrls.push(url1);
-                        if (url2) state.customBgUrls.push(url2);
-                        if (url3) state.customBgUrls.push(url3);
-                        
-                        if (state.customBgUrls.length === 0) {
-                            alert('请至少输入一个背景图链接');
-                            return;
-                        }
-                        
-                        utils.saveToLocalStorage('customBgUrls', JSON.stringify(state.customBgUrls));
-                        state.isFirstBgChange = false;
+                    // 修复更换背景问题：确保有自定义背景
+                    if (state.customBgUrls.length === 0) {
+                        state.customBgUrls = CONFIG.defaultBackgrounds;
                     }
                     
-                    if (state.currentBgIndex >= state.customBgUrls.length) {
-                        state.currentBgIndex = 0;
-                    }
+                    // 修复更换背景问题：正确循环背景
+                    state.currentBgIndex = (state.currentBgIndex + 1) % state.customBgUrls.length;
                     
+                    // 修复更换背景问题：应用新背景
                     document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
-                    state.currentBgIndex++;
+                    
+                    // 保存背景设置
+                    utils.saveToLocalStorage('customBgUrls', JSON.stringify(state.customBgUrls));
                 },
                 initBackground() {
                     if (state.customBgUrls.length > 0) {
