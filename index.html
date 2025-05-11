@@ -12,11 +12,20 @@
             theme: {
                 extend: {
                     colors: {
+                        // 文件元素相关颜色
                         primary: '#2563eb',
                         secondary: '#0ea5e9',
                         accent: '#f97316',
                         dark: '#1e293b',
-                        light: '#f8fafc'
+                        light: '#f8fafc',
+                        'text-primary': '#ffffff',
+                        'text-secondary': '#cbd5e1',
+                        'card-bg': 'rgba(255, 255, 255, 0.1)',
+                        'card-hover': 'rgba(255, 255, 255, 0.2)',
+                        
+                        // 图片/背景相关颜色
+                        'bg-overlay': 'rgba(0, 0, 0, 0.3)',
+                        'bg-blur': 'rgba(255, 255, 255, 0.1)',
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
@@ -31,7 +40,7 @@
                 content-visibility: auto;
             }
             .glass-effect {
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: theme('colors.bg-blur');
                 backdrop-filter: blur(16px);
                 -webkit-backdrop-filter: blur(16px);
             }
@@ -41,6 +50,7 @@
             .card-hover:hover {
                 transform: translateY(-5px);
                 box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+                background-color: theme('colors.card-hover');
             }
             .btn-primary {
                 @apply bg-primary hover:bg-primary/90 text-white font-semibold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105;
@@ -61,10 +71,27 @@
             .custom-select option {
                 @apply bg-dark text-white;
             }
+            /* 新增图片覆盖层工具类 */
+            .image-overlay {
+                background-color: theme('colors.bg-overlay');
+            }
+            /* 新增鼠标悬停效果 */
+            .hover-scale {
+                transition: transform 0.3s ease;
+            }
+            .hover-scale:hover {
+                transform: scale(1.1);
+            }
+            .hover-glow {
+                transition: all 0.3s ease;
+            }
+            .hover-glow:hover {
+                filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+            }
         }
     </style>
 </head>
-<body class="font-inter min-h-screen bg-cover bg-center bg-no-repeat">
+<body class="font-inter min-h-screen bg-cover bg-center bg-no-repeat image-overlay">
     <!-- 调试警告 -->
     <div id="debugWarning" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg hidden">
         禁止调试
@@ -77,22 +104,22 @@
             <div class="container mx-auto px-4 py-3">
                 <div class="flex flex-col md:flex-row justify-between items-center">
                     <div class="flex items-center mb-4 md:mb-0">
-                        <h1 class="text-2xl font-bold tracking-tight">个人导航页</h1>
+                        <h1 class="text-2xl font-bold tracking-tight text-text-primary">个人导航页</h1>
                     </div>
                     <div class="flex flex-wrap gap-2">
-                        <button id="outerNetBtn" class="btn-primary flex items-center">
+                        <button id="outerNetBtn" class="btn-primary flex items-center hover-glow">
                             <i class="fa fa-globe mr-2"></i>外网
                         </button>
-                        <button id="innerNetBtn" class="btn-secondary flex items-center">
+                        <button id="innerNetBtn" class="btn-secondary flex items-center hover-glow">
                             <i class="fa fa-server mr-2"></i>内网
                         </button>
-                        <button onclick="changeBackground()" class="btn-accent flex items-center">
+                        <button onclick="changeBackground()" class="btn-accent flex items-center hover-glow">
                             <i class="fa fa-image mr-2"></i>更换背景
                         </button>
-                        <button onclick="openImportModal()" class="btn-secondary flex items-center">
+                        <button onclick="openImportModal()" class="btn-secondary flex items-center hover-glow">
                             <i class="fa fa-upload mr-2"></i>导入书签
                         </button>
-                        <button onclick="openAddLinkModal()" class="btn-primary flex items-center">
+                        <button onclick="openAddLinkModal()" class="btn-primary flex items-center hover-glow">
                             <i class="fa fa-plus mr-2"></i>添加链接
                         </button>
                     </div>
@@ -103,7 +130,7 @@
         <!-- 搜索区域 -->
         <section class="glass-effect py-6 mb-6">
             <div class="container mx-auto px-4">
-                <h2 class="text-2xl font-bold mb-4 text-center">个人书签，上网如此简单！</h2>
+                <h2 class="text-2xl font-bold mb-4 text-center text-text-primary">个人书签，上网如此简单！</h2>
                 <div class="max-w-2xl mx-auto">
                     <div class="flex flex-col sm:flex-row gap-2">
                         <input type="text" id="search-input" placeholder="输入关键词搜索" class="flex-1 px-4 py-3 rounded-l-lg sm:rounded-r-none bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
@@ -113,7 +140,7 @@
                             <option value="https://search.bilibili.com/all?keyword=">B站</option>
                             <option value="https://www.google.com/search?q=">谷歌</option>
                         </select>
-                        <button onclick="search()" class="btn-primary rounded-r-lg sm:rounded-l-none">
+                        <button onclick="search()" class="btn-primary rounded-r-lg sm:rounded-l-none hover-glow">
                             <i class="fa fa-search mr-2"></i>搜索
                         </button>
                     </div>
@@ -126,24 +153,24 @@
             <!-- 侧边栏导航 -->
             <aside class="w-full md:w-64 shrink-0">
                 <div class="glass-effect rounded-xl p-4 shadow-lg">
-                    <h3 class="text-lg font-bold mb-4 pb-2 border-b border-white/20">导航分类</h3>
+                    <h3 class="text-lg font-bold mb-4 pb-2 border-b border-white/20 text-text-primary">导航分类</h3>
                     <ul class="space-y-2">
-                        <li><a href="#" onclick="filterLinks('all')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="filterLinks('all')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-th-large mr-2"></i>全部
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('news-information')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="filterLinks('news-information')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-bullhorn mr-2"></i>飞牛系统
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('learning-education')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="filterLinks('learning-education')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-book mr-2"></i>热门书签
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('life-service')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="filterLinks('life-service')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-life-ring mr-2"></i>其他书签
                         </a></li>
-                        <li><a href="#" onclick="filterLinks('imported')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="filterLinks('imported')" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-bookmark mr-2"></i>导入书签
                         </a></li>
-                        <li><a href="#" onclick="openTechDigitalLogin()" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all">
+                        <li><a href="#" onclick="openTechDigitalLogin()" class="block py-2 px-3 rounded-lg hover:bg-white/20 transition-all text-text-secondary hover-scale">
                             <i class="fa fa-lock mr-2"></i>私人区域
                         </a></li>
                     </ul>
@@ -163,7 +190,7 @@
         <!-- 页脚 -->
         <footer class="glass-effect py-4 mt-6">
             <div class="container mx-auto px-4 text-center text-white/70 text-sm">
-                <p>© 2023 个人导航页 | <a href="https://beian.miit.gov.cn/" target="_blank" class="underline">皖ICP备2023023534号</a></p>
+                <p>© 2023 个人导航页 | <a href="https://beian.miit.gov.cn/" target="_blank" class="underline hover-scale">皖ICP备2023023534号</a></p>
             </div>
         </footer>
     </div>
@@ -171,12 +198,12 @@
     <!-- 私人区域登录模态框 -->
     <div id="techDigitalLoginContainer" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
-            <h2 class="text-2xl font-bold mb-6 text-center">请输入私人区域密码</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">请输入私人区域密码</h2>
             <div class="space-y-4">
                 <input type="password" id="techDigitalPasswordInput" placeholder="密码" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
                 <div class="flex gap-3">
-                    <button onclick="checkTechDigitalPassword()" class="btn-primary flex-1">登录</button>
-                    <button onclick="cancelTechDigitalLogin()" class="btn-secondary flex-1">取消</button>
+                    <button onclick="checkTechDigitalPassword()" class="btn-primary flex-1 hover-glow">登录</button>
+                    <button onclick="cancelTechDigitalLogin()" class="btn-secondary flex-1 hover-glow">取消</button>
                 </div>
                 <div id="techDigitalPasswordError" class="text-red-500 text-center hidden">密码错误，请重新输入！</div>
             </div>
@@ -186,25 +213,25 @@
     <!-- 导入书签模态框 -->
     <div id="importModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
-            <h2 class="text-2xl font-bold mb-6 text-center">导入浏览器书签</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">导入浏览器书签</h2>
             <div class="space-y-4">
-                <p class="text-center">请将浏览器导出的书签HTML文件拖放到下方区域，或点击选择文件</p>
-                <div id="dropArea" class="border-2 border-dashed border-white/30 rounded-lg p-6 text-center cursor-pointer hover:border-primary transition-colors">
-                    <i class="fa fa-cloud-upload text-4xl mb-2"></i>
-                    <p>拖放文件到此处，或</p>
+                <p class="text-center text-text-secondary">请将浏览器导出的书签HTML文件拖放到下方区域，或点击选择文件</p>
+                <div id="dropArea" class="border-2 border-dashed border-white/30 rounded-lg p-6 text-center cursor-pointer hover:border-primary transition-colors hover-scale">
+                    <i class="fa fa-cloud-upload text-4xl mb-2 text-text-secondary"></i>
+                    <p class="text-text-secondary">拖放文件到此处，或</p>
                     <input type="file" id="fileInput" class="hidden" accept=".html,.htm">
-                    <button onclick="document.getElementById('fileInput').click()" class="btn-primary mt-2">选择文件</button>
+                    <button onclick="document.getElementById('fileInput').click()" class="btn-primary mt-2 hover-glow">选择文件</button>
                 </div>
                 <div id="importStatus" class="hidden">
                     <div class="bg-primary/20 rounded-lg p-4">
                         <div id="importProgress" class="w-full bg-white/20 rounded-full h-2">
                             <div class="bg-primary h-2 rounded-full" style="width: 0%"></div>
                         </div>
-                        <p id="importMessage" class="text-center mt-2">正在导入...</p>
+                        <p id="importMessage" class="text-center mt-2 text-text-secondary">正在导入...</p>
                     </div>
                 </div>
                 <div class="flex gap-3">
-                    <button onclick="closeImportModal()" class="btn-secondary flex-1">取消</button>
+                    <button onclick="closeImportModal()" class="btn-secondary flex-1 hover-glow">取消</button>
                 </div>
             </div>
         </div>
@@ -213,39 +240,39 @@
     <!-- 添加链接模态框 -->
     <div id="addLinkModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
-            <h2 class="text-2xl font-bold mb-6 text-center">添加新链接</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">添加新链接</h2>
             <div class="space-y-4">
                 <div>
                     <label class="block mb-2 text-sm font-medium text-white/80">链接名称</label>
-                    <input type="text" id="linkName" placeholder="例如：百度" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                    <input type="text" id="linkName" placeholder="例如：百度" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white hover-scale">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-white/80">外网地址</label>
-                    <input type="url" id="outerUrl" placeholder="例如：https://www.baidu.com" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                    <input type="url" id="outerUrl" placeholder="例如：https://www.baidu.com" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white hover-scale">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-white/80">内网地址</label>
-                    <input type="url" id="innerUrl" placeholder="例如：http://192.168.1.100" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white">
+                    <input type="url" id="innerUrl" placeholder="例如：http://192.168.1.100" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white hover-scale">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-white/80">图标</label>
                     <div class="flex gap-2 flex-wrap">
-                        <button type="button" class="icon-btn" data-icon="fa-globe"><i class="fa fa-globe"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-book"><i class="fa fa-book"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-music"><i class="fa fa-music"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-film"><i class="fa fa-film"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-gamepad"><i class="fa fa-gamepad"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-shopping-cart"><i class="fa fa-shopping-cart"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-envelope"><i class="fa fa-envelope"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-wrench"><i class="fa fa-wrench"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-cog"><i class="fa fa-cog"></i></button>
-                        <button type="button" class="icon-btn" data-icon="fa-link"><i class="fa fa-link"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-globe"><i class="fa fa-globe"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-book"><i class="fa fa-book"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-music"><i class="fa fa-music"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-film"><i class="fa fa-film"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-gamepad"><i class="fa fa-gamepad"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-shopping-cart"><i class="fa fa-shopping-cart"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-envelope"><i class="fa fa-envelope"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-wrench"><i class="fa fa-wrench"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-cog"><i class="fa fa-cog"></i></button>
+                        <button type="button" class="icon-btn bg-card-bg hover:bg-card-hover hover-scale" data-icon="fa-link"><i class="fa fa-link"></i></button>
                     </div>
                     <input type="hidden" id="selectedIcon" value="fa-link">
                 </div>
                 <div>
                     <label class="block mb-2 text-sm font-medium text-white/80">分类</label>
-                    <select id="linkCategory" class="custom-select w-full px-4 py-3">
+                    <select id="linkCategory" class="custom-select w-full px-4 py-3 hover-scale">
                         <option value="news-information">飞牛系统</option>
                         <option value="learning-education">热门书签</option>
                         <option value="life-service">其他书签</option>
@@ -253,8 +280,8 @@
                     </select>
                 </div>
                 <div class="flex gap-3">
-                    <button onclick="addNewLink()" class="btn-primary flex-1">添加</button>
-                    <button onclick="closeAddLinkModal()" class="btn-secondary flex-1">取消</button>
+                    <button onclick="addNewLink()" class="btn-primary flex-1 hover-glow">添加</button>
+                    <button onclick="closeAddLinkModal()" class="btn-secondary flex-1 hover-glow">取消</button>
                 </div>
             </div>
         </div>
@@ -386,14 +413,15 @@
                 anchor.dataset.inner = link.inner || link.href;
                 
                 const icon = document.createElement('i');
-                icon.className = `fa ${link.icon || 'fa-link'} text-3xl mb-2`;
+                icon.className = `fa ${link.icon || 'fa-link'} text-3xl mb-2 text-text-primary hover-scale`;
                 
                 const name = document.createElement('span');
                 name.textContent = link.name;
+                name.className = 'text-text-secondary hover-scale';
                 
                 // 添加删除按钮
                 const deleteBtn = document.createElement('button');
-                deleteBtn.className = 'absolute top-2 right-2 text-white/60 hover:text-white transition-colors';
+                deleteBtn.className = 'absolute top-2 right-2 text-white/60 hover:text-white transition-colors hover-scale';
                 deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
                 deleteBtn.onclick = function(e) {
                     e.stopPropagation();
@@ -959,4 +987,5 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 </body>
-</html>    
+</html>
+    
