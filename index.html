@@ -356,6 +356,12 @@
                         elements.techDigitalLoginContainer.classList.add('hidden');
                         elements.techDigitalPasswordInput.value = '';
                         state.isTechDigitalAuthenticated = true;
+                        
+                        // 保存认证状态到localStorage
+                        localStorage.setItem('techDigitalAuthenticated', 'true');
+                        
+                        // 重新加载所有链接并显示私人区域
+                        modules.links.populateLinks();
                         modules.links.filterLinks('tech-digital');
                         alert('成功进入私人区域！');
                     } else {
@@ -369,7 +375,15 @@
                 cancelTechDigitalLogin() {
                     elements.techDigitalLoginContainer.classList.add('hidden');
                     elements.techDigitalPasswordInput.value = '';
+                    // 如果取消登录，返回到全部视图
                     modules.links.filterLinks('all');
+                },
+                checkSavedAuthentication() {
+                    // 检查是否有保存的认证状态
+                    const savedAuth = localStorage.getItem('techDigitalAuthenticated');
+                    if (savedAuth === 'true') {
+                        state.isTechDigitalAuthenticated = true;
+                    }
                 }
             },
             security: {
@@ -441,6 +455,7 @@
                     elements.linksContainer.innerHTML = '';
                     
                     for (const category in linkData) {
+                        // 只有认证后才显示tech-digital分类
                         if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) continue;
                         
                         linkData[category].forEach(link => {
@@ -454,12 +469,14 @@
                     
                     cards.forEach(card => {
                         if (category === 'all') {
+                            // 如果是全部，隐藏未认证的tech-digital
                             if (card.classList.contains('tech-digital') && !state.isTechDigitalAuthenticated) {
                                 card.classList.add('hidden');
                             } else {
                                 card.classList.remove('hidden');
                             }
                         } else if (card.classList.contains(category)) {
+                            // 如果是tech-digital但未认证，则隐藏
                             if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
                                 card.classList.add('hidden');
                             } else {
@@ -622,7 +639,12 @@
         }
         
         function openTechDigitalLogin() {
-            elements.techDigitalLoginContainer.classList.remove('hidden');
+            if (!state.isTechDigitalAuthenticated) {
+                elements.techDigitalLoginContainer.classList.remove('hidden');
+            } else {
+                // 如果已认证，直接显示私人区域
+                modules.links.filterLinks('tech-digital');
+            }
         }
         
         function checkTechDigitalPassword() {
@@ -670,6 +692,10 @@
         function init() {
             modules.security.preventDebugging();
             modules.background.initBackground();
+            
+            // 检查是否有保存的认证状态
+            modules.auth.checkSavedAuthentication();
+            
             modules.links.populateLinks();
             setupEventListeners();
             
