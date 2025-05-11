@@ -26,6 +26,13 @@
                         // 图片/背景相关颜色
                         'bg-overlay': 'rgba(0, 0, 0, 0.3)',
                         'bg-blur': 'rgba(255, 255, 255, 0.1)',
+                        
+                        // 新增图标颜色配置
+                        'icon-primary': '#3b82f6',
+                        'icon-secondary': '#06b6d4',
+                        'icon-accent': '#f97316',
+                        'icon-dark': '#1e293b',
+                        'icon-light': '#f8fafc',
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
@@ -87,6 +94,21 @@
             }
             .hover-glow:hover {
                 filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+            }
+            /* 新增图标和文字悬停效果分离 */
+            .icon-hover {
+                transition: all 0.3s ease;
+            }
+            .icon-hover:hover {
+                transform: scale(1.2);
+                filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
+            }
+            .text-hover {
+                transition: all 0.3s ease;
+            }
+            .text-hover:hover {
+                transform: translateY(2px);
+                color: theme('colors.text-primary');
             }
         }
     </style>
@@ -279,6 +301,22 @@
                         <option value="tech-digital">私人区域</option>
                     </select>
                 </div>
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">图标颜色</label>
+                    <div class="flex gap-2 flex-wrap">
+                        <button type="button" class="icon-color-btn bg-blue-500 hover:bg-blue-600 w-8 h-8 rounded-full hover-scale" data-color="fa-blue"></button>
+                        <button type="button" class="icon-color-btn bg-green-500 hover:bg-green-600 w-8 h-8 rounded-full hover-scale" data-color="fa-green"></button>
+                        <button type="button" class="icon-color-btn bg-yellow-500 hover:bg-yellow-600 w-8 h-8 rounded-full hover-scale" data-color="fa-yellow"></button>
+                        <button type="button" class="icon-color-btn bg-red-500 hover:bg-red-600 w-8 h-8 rounded-full hover-scale" data-color="fa-red"></button>
+                        <button type="button" class="icon-color-btn bg-purple-500 hover:bg-purple-600 w-8 h-8 rounded-full hover-scale" data-color="fa-purple"></button>
+                        <button type="button" class="icon-color-btn bg-pink-500 hover:bg-pink-600 w-8 h-8 rounded-full hover-scale" data-color="fa-pink"></button>
+                        <button type="button" class="icon-color-btn bg-indigo-500 hover:bg-indigo-600 w-8 h-8 rounded-full hover-scale" data-color="fa-indigo"></button>
+                        <button type="button" class="icon-color-btn bg-teal-500 hover:bg-teal-600 w-8 h-8 rounded-full hover-scale" data-color="fa-teal"></button>
+                        <button type="button" class="icon-color-btn bg-amber-500 hover:bg-amber-600 w-8 h-8 rounded-full hover-scale" data-color="fa-amber"></button>
+                        <button type="button" class="icon-color-btn bg-white hover:bg-gray-200 w-8 h-8 rounded-full hover-scale" data-color="fa-white"></button>
+                    </div>
+                    <input type="hidden" id="selectedIconColor" value="fa-blue">
+                </div>
                 <div class="flex gap-3">
                     <button onclick="addNewLink()" class="btn-primary flex-1 hover-glow">添加</button>
                     <button onclick="closeAddLinkModal()" class="btn-secondary flex-1 hover-glow">取消</button>
@@ -307,7 +345,8 @@
             isFirstBgChange: JSON.parse(localStorage.getItem('customBgUrls')) === null,
             importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
             isTechDigitalAuthenticated: false,
-            selectedIcon: 'fa-link'
+            selectedIcon: 'fa-link',
+            selectedIconColor: 'fa-blue'
         };
 
         // DOM元素
@@ -333,53 +372,55 @@
             outerUrl: document.getElementById('outerUrl'),
             innerUrl: document.getElementById('innerUrl'),
             selectedIcon: document.getElementById('selectedIcon'),
+            selectedIconColor: document.getElementById('selectedIconColor'),
             linkCategory: document.getElementById('linkCategory'),
-            iconButtons: document.querySelectorAll('.icon-btn')
+            iconButtons: document.querySelectorAll('.icon-btn'),
+            iconColorButtons: document.querySelectorAll('.icon-color-btn')
         };
 
         // 书签数据
         const linkData = {
             'news-information': [
-                { name: 'MoviePilot', icon: 'fa-film', outer: 'http://li0580.top:3000', inner: 'http://192.168.2.225:3000' },
-                { name: '飞牛OS', icon: 'fa-desktop', outer: 'http://li0580.top:8000', inner: 'http://192.168.2.225:8000' },
-                { name: 'Alist', icon: 'fa-list', outer: 'http://li0580.top:5244', inner: 'http://192.168.2.225:5244' },
-                { name: 'PDF工具箱', icon: 'fa-file-pdf', outer: 'http://li0580.top:3615', inner: '192.168.2.225:3615' },
+                { name: 'MoviePilot', icon: 'fa-film', color: 'fa-blue', outer: 'http://li0580.top:3000', inner: 'http://192.168.2.225:3000' },
+                { name: '飞牛OS', icon: 'fa-desktop', color: 'fa-green', outer: 'http://li0580.top:8000', inner: 'http://192.168.2.225:8000' },
+                { name: 'Alist', icon: 'fa-list', color: 'fa-yellow', outer: 'http://li0580.top:5244', inner: 'http://192.168.2.225:5244' },
+                { name: 'PDF工具箱', icon: 'fa-file-pdf', color: 'fa-red', outer: 'http://li0580.top:3615', inner: '192.168.2.225:3615' },
             ],
             'learning-education': [
-                { name: '蜂巢', icon: 'fa-hive', outer: 'https://pting.club/', inner: 'https://pting.club/' },
-                { name: '爱快路由器', icon: 'fa-wifi', outer: 'http://li0580.top:2025', inner: 'http://192.168.2.225:2025/' },
-                { name: 'Github', icon: 'fa-github', outer: 'https://github.com/', inner: 'https://github.com/' },
-                { name: 'Cloudflare', icon: 'fa-cloud', outer: 'https://dash.cloudflare.com', inner: 'https://dash.cloudflare.com' },
-                { name: '奇节点', icon: 'fa-server', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' },
-                { name: '花海IPTV', icon: 'fa-television', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' },
+                { name: '蜂巢', icon: 'fa-hive', color: 'fa-purple', outer: 'https://pting.club/', inner: 'https://pting.club/' },
+                { name: '爱快路由器', icon: 'fa-wifi', color: 'fa-pink', outer: 'http://li0580.top:2025', inner: 'http://192.168.2.225:2025/' },
+                { name: 'Github', icon: 'fa-github', color: 'fa-indigo', outer: 'https://github.com/', inner: 'https://github.com/' },
+                { name: 'Cloudflare', icon: 'fa-cloud', color: 'fa-teal', outer: 'https://dash.cloudflare.com', inner: 'https://dash.cloudflare.com' },
+                { name: '奇节点', icon: 'fa-server', color: 'fa-amber', outer: 'https://xn--clouds-o43k.com/', inner: 'https://xn--clouds-o43k.com/' },
+                { name: '花海IPTV', icon: 'fa-television', color: 'fa-blue', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' },
             ],
             'life-service': [
-                { name: '美团', icon: 'fa-utensils', outer: 'https://www.meituan.com/', inner: 'https://www.meituan.com/' },
-                { name: '饿了么', icon: 'fa-hamburger', outer: 'https://www.ele.me/', inner: 'https://www.ele.me/' },
-                { name: '携程旅行', icon: 'fa-plane', outer: 'https://www.ctrip.com/', inner: 'https://www.ctrip.com/' },
-                { name: '网易邮箱', icon: 'fa-envelope', outer: 'https://email.163.com/', inner: 'https://email.163.com/' },
-                { name: '支付宝', icon: 'fa-money-bill', outer: 'https://www.alipay.com/', inner: 'https://www.alipay.com/' },
-                { name: '滴滴出行', icon: 'fa-car', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
+                { name: '美团', icon: 'fa-utensils', color: 'fa-red', outer: 'https://www.meituan.com/', inner: 'https://www.meituan.com/' },
+                { name: '饿了么', icon: 'fa-hamburger', color: 'fa-blue', outer: 'https://www.ele.me/', inner: 'https://www.ele.me/' },
+                { name: '携程旅行', icon: 'fa-plane', color: 'fa-green', outer: 'https://www.ctrip.com/', inner: 'https://www.ctrip.com/' },
+                { name: '网易邮箱', icon: 'fa-envelope', color: 'fa-yellow', outer: 'https://email.163.com/', inner: 'https://email.163.com/' },
+                { name: '支付宝', icon: 'fa-money-bill', color: 'fa-purple', outer: 'https://www.alipay.com/', inner: 'https://www.alipay.com/' },
+                { name: '滴滴出行', icon: 'fa-car', color: 'fa-pink', outer: 'https://www.didiglobal.com/', inner: 'https://www.didiglobal.com/' }
             ],
             'tech-digital': [
-                { name: 'libretv', icon: 'fa-play', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' },
-                { name: 'nullbr', icon: 'fa-tv', outer: 'https://nullbr.online/', inner: 'https://nullbr.online/' },
-                { name: '飞牛影视', icon: 'fa-film', outer: 'http://li0580.top:8000/v/logi/', inner: 'http://192.168.2.225:8000/v/logi' },
-                { name: 'EMBY', icon: 'fa-video', outer: 'http://li0580.top:8096', inner: 'http://192.168.2.225:8096/' },
-                { name: '家园', icon: 'fa-home', outer: 'https://hdhome.org/', inner: 'https://hdhome.org/' },
-                { name: '我堡', icon: 'fa-fort-awesome', outer: 'https://ourbits.club/', inner: 'https://ourbits.club/' },
-                { name: '馒头', icon: 'fa-bread-slice', outer: 'https://kp.m-team.cc/', inner: 'https://kp.m-team.cc/' },
-                { name: '人人', icon: 'fa-users', outer: 'https://audiences.me/', inner: 'https://audiences.me/' },
-                { name: '彩虹岛', icon: 'fa-rainbow', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' },
-                { name: '末日', icon: 'fa-skull', outer: 'https://www.agsvpt.com', inner: 'https://www.agsvpt.com' },
-                { name: '海胆', icon: 'fa-sea', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
-                { name: 'HDfans', icon: 'fa-star', outer: 'https://www.hdkyl.in/', inner: 'https://www.hdkyl.in/' },
-                { name: '聆音', icon: 'fa-music', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club/' },
-                { name: '学校', icon: 'fa-school', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' },
-                { name: 'HD高清', icon: 'fa-video', outer: 'https://hdtime.org/', inner: 'https://hdtime.org/' },
-                { name: '雨', icon: 'fa-cloud-rain', outer: 'https://raingfh.top/', inner: 'https://raingfh.top/' },
-                { name: '织梦', icon: 'fa-dream', outer: 'https://zmpt.cc/', inner: 'https://zmpt.cc/' },
-                { name: '象岛', icon: 'fa-elephant', outer: 'https://ptvicomo.net/', inner: 'https://ptvicomo.net/' }
+                { name: 'libretv', icon: 'fa-play', color: 'fa-indigo', outer: 'https://libretv-3x4.pages.dev', inner: 'https://libretv-3x4.pages.dev' },
+                { name: 'nullbr', icon: 'fa-tv', color: 'fa-teal', outer: 'https://nullbr.online/', inner: 'https://nullbr.online/' },
+                { name: '飞牛影视', icon: 'fa-film', color: 'fa-amber', outer: 'http://li0580.top:8000/v/logi/', inner: 'http://192.168.2.225:8000/v/logi' },
+                { name: 'EMBY', icon: 'fa-video', color: 'fa-blue', outer: 'http://li0580.top:8096', inner: 'http://192.168.2.225:8096/' },
+                { name: '家园', icon: 'fa-home', color: 'fa-green', outer: 'https://hdhome.org/', inner: 'https://hdhome.org/' },
+                { name: '我堡', icon: 'fa-fort-awesome', color: 'fa-yellow', outer: 'https://ourbits.club/', inner: 'https://ourbits.club/' },
+                { name: '馒头', icon: 'fa-bread-slice', color: 'fa-red', outer: 'https://kp.m-team.cc/', inner: 'https://kp.m-team.cc/' },
+                { name: '人人', icon: 'fa-users', color: 'fa-purple', outer: 'https://audiences.me/', inner: 'https://audiences.me/' },
+                { name: '彩虹岛', icon: 'fa-rainbow', color: 'fa-pink', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' },
+                { name: '末日', icon: 'fa-skull', color: 'fa-indigo', outer: 'https://www.agsvpt.com', inner: 'https://www.agsvpt.com' },
+                { name: '海胆', icon: 'fa-sea', color: 'fa-teal', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
+                { name: 'HDfans', icon: 'fa-star', color: 'fa-amber', outer: 'https://www.hdkyl.in/', inner: 'https://www.hdkyl.in/' },
+                { name: '聆音', icon: 'fa-music', color: 'fa-blue', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club/' },
+                { name: '学校', icon: 'fa-school', color: 'fa-green', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' },
+                { name: 'HD高清', icon: 'fa-video', color: 'fa-yellow', outer: 'https://hdtime.org/', inner: 'https://hdtime.org/' },
+                { name: '雨', icon: 'fa-cloud-rain', color: 'fa-red', outer: 'https://raingfh.top/', inner: 'https://raingfh.top/' },
+                { name: '织梦', icon: 'fa-dream', color: 'fa-purple', outer: 'https://zmpt.cc/', inner: 'https://zmpt.cc/' },
+                { name: '象岛', icon: 'fa-elephant', color: 'fa-pink', outer: 'https://ptvicomo.net/', inner: 'https://ptvicomo.net/' }
             ],
             'imported': state.importedLinks
         };
@@ -413,11 +454,11 @@
                 anchor.dataset.inner = link.inner || link.href;
                 
                 const icon = document.createElement('i');
-                icon.className = `fa ${link.icon || 'fa-link'} text-3xl mb-2 text-text-primary hover-scale`;
+                icon.className = `fa ${link.icon || 'fa-link'} text-3xl mb-2 icon-hover ${getIconColorClass(link.color)}`;
                 
                 const name = document.createElement('span');
                 name.textContent = link.name;
-                name.className = 'text-text-secondary hover-scale';
+                name.className = 'text-hover text-text-secondary';
                 
                 // 添加删除按钮
                 const deleteBtn = document.createElement('button');
@@ -455,6 +496,24 @@
                 return 'fa-link';
             }
         };
+
+        // 获取图标颜色类
+        function getIconColorClass(color) {
+            const colorMap = {
+                'fa-blue': 'text-blue-400',
+                'fa-green': 'text-green-400',
+                'fa-yellow': 'text-yellow-400',
+                'fa-red': 'text-red-400',
+                'fa-purple': 'text-purple-400',
+                'fa-pink': 'text-pink-400',
+                'fa-indigo': 'text-indigo-400',
+                'fa-teal': 'text-teal-400',
+                'fa-amber': 'text-amber-400',
+                'fa-white': 'text-white'
+            };
+            
+            return colorMap[color] || 'text-primary';
+        }
 
         // 功能模块
         const modules = {
@@ -716,6 +775,7 @@
                                 name: name,
                                 href: href,
                                 icon: utils.detectLinkIcon(href),
+                                color: 'fa-blue', // 默认蓝色图标
                                 outer: href,
                                 inner: href
                             });
@@ -731,7 +791,7 @@
                 }
             },
             linksManagement: {
-                addLink(name, outerUrl, innerUrl, icon, category) {
+                addLink(name, outerUrl, innerUrl, icon, color, category) {
                     // 检查是否已存在同名链接
                     for (const cat in linkData) {
                         const existingLink = linkData[cat].find(link => link.name === name);
@@ -745,7 +805,8 @@
                         name,
                         outer: outerUrl,
                         inner: innerUrl || outerUrl,
-                        icon
+                        icon,
+                        color
                     };
                     
                     linkData[category].push(newLink);
@@ -826,11 +887,17 @@
             elements.outerUrl.value = '';
             elements.innerUrl.value = '';
             elements.selectedIcon.value = 'fa-link';
+            elements.selectedIconColor.value = 'fa-blue';
             elements.linkCategory.value = 'news-information';
             
             // 重置图标按钮样式
             elements.iconButtons.forEach(btn => {
                 btn.classList.remove('bg-primary/50');
+            });
+            
+            // 重置图标颜色按钮样式
+            elements.iconColorButtons.forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-white');
             });
             
             // 显示模态框
@@ -855,11 +922,26 @@
             });
         }
         
+        function selectIconColor(color) {
+            state.selectedIconColor = color;
+            elements.selectedIconColor.value = color;
+            
+            // 更新图标颜色按钮样式
+            elements.iconColorButtons.forEach(btn => {
+                if (btn.dataset.color === color) {
+                    btn.classList.add('ring-2', 'ring-white');
+                } else {
+                    btn.classList.remove('ring-2', 'ring-white');
+                }
+            });
+        }
+        
         function addNewLink() {
             const name = elements.linkName.value.trim();
             const outerUrl = elements.outerUrl.value.trim();
             const innerUrl = elements.innerUrl.value.trim() || outerUrl;
             const icon = elements.selectedIcon.value;
+            const color = elements.selectedIconColor.value;
             const category = elements.linkCategory.value;
             
             // 验证
@@ -874,7 +956,7 @@
             }
             
             // 尝试添加链接
-            const success = modules.linksManagement.addLink(name, outerUrl, innerUrl, icon, category);
+            const success = modules.linksManagement.addLink(name, outerUrl, innerUrl, icon, color, category);
             
             if (success) {
                 // 关闭模态框
@@ -949,8 +1031,16 @@
                 });
             });
             
+            // 图标颜色选择事件
+            elements.iconColorButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    selectIconColor(btn.dataset.color);
+                });
+            });
+            
             // 初始化图标选择
             selectIcon('fa-link');
+            selectIconColor('fa-blue');
             
             // 加载本地存储的自定义链接
             const savedCustomLinks = localStorage.getItem('customLinks');
