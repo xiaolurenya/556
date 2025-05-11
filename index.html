@@ -7,12 +7,10 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
     <script>
-        // 配置Tailwind自定义主题
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        // 文件元素相关颜色
                         primary: '#2563eb',
                         secondary: '#0ea5e9',
                         accent: '#f97316',
@@ -22,23 +20,13 @@
                         'text-secondary': '#cbd5e1',
                         'card-bg': 'rgba(255, 255, 255, 0.1)',
                         'card-hover': 'rgba(255, 255, 255, 0.2)',
-                        
-                        // 图片/背景相关颜色
                         'bg-overlay': 'rgba(0, 0, 0, 0.3)',
                         'bg-blur': 'rgba(255, 255, 255, 0.1)',
-                        
-                        // 新增图标颜色配置
                         'icon-primary': '#3b82f6',
-                        'icon-secondary': '#06b6d4',
-                        'icon-accent': '#f97316',
-                        'icon-dark': '#1e293b',
-                        'icon-light': '#f8fafc',
-                        
-                        // 新增侧边栏颜色配置
-                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)', // 侧边栏背景色
-                        'sidebar-text': '#94a3b8', // 侧边栏文本默认颜色
-                        'sidebar-text-hover': '#e2e8f0', // 侧边栏文本悬停颜色
-                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)', // 侧边栏激活项背景
+                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)',
+                        'sidebar-text': '#94a3b8',
+                        'sidebar-text-hover': '#e2e8f0',
+                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)',
                     },
                     fontFamily: {
                         inter: ['Inter', 'sans-serif'],
@@ -49,9 +37,6 @@
     </script>
     <style type="text/tailwindcss">
         @layer utilities {
-            .content-auto {
-                content-visibility: auto;
-            }
             .glass-effect {
                 background-color: theme('colors.bg-blur');
                 backdrop-filter: blur(16px);
@@ -74,7 +59,6 @@
             .btn-accent {
                 @apply bg-accent hover:bg-accent/90 text-white font-semibold py-2 px-4 rounded transition-all duration-300 transform hover:scale-105;
             }
-            /* 修复下拉选项文字背景问题 */
             .custom-select {
                 @apply bg-white/20 border border-white/30 text-white rounded-lg appearance-none;
             }
@@ -84,11 +68,9 @@
             .custom-select option {
                 @apply bg-dark text-white;
             }
-            /* 新增图片覆盖层工具类 */
             .image-overlay {
                 background-color: theme('colors.bg-overlay');
             }
-            /* 新增鼠标悬停效果 */
             .hover-scale {
                 transition: transform 0.3s ease;
             }
@@ -101,7 +83,6 @@
             .hover-glow:hover {
                 filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.6));
             }
-            /* 新增图标和文字悬停效果分离 */
             .icon-hover {
                 transition: all 0.3s ease;
             }
@@ -116,7 +97,6 @@
                 transform: translateY(2px);
                 color: theme('colors.text-primary');
             }
-            /* 新增侧边栏自定义样式 */
             .sidebar {
                 @apply bg-sidebar-bg text-sidebar-text rounded-xl shadow-lg;
             }
@@ -133,14 +113,11 @@
     </style>
 </head>
 <body class="font-inter min-h-screen bg-cover bg-center bg-no-repeat image-overlay">
-    <!-- 调试警告 -->
     <div id="debugWarning" class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg hidden">
         禁止调试
     </div>
 
-    <!-- 主内容区域 -->
     <div id="mainContent" class="flex-1 flex flex-col">
-        <!-- 顶部导航栏 -->
         <header class="glass-effect shadow-md">
             <div class="container mx-auto px-4 py-3">
                 <div class="flex flex-col md:flex-row justify-between items-center">
@@ -163,12 +140,14 @@
                         <button onclick="openAddLinkModal()" class="btn-primary flex items-center hover-glow">
                             <i class="fa fa-plus mr-2"></i>添加链接
                         </button>
+                        <button onclick="openCustomBgModal()" class="btn-secondary flex items-center hover-glow">
+                            <i class="fa fa-cog mr-2"></i>背景设置
+                        </button>
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- 搜索区域 -->
         <section class="glass-effect py-6 mb-6">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl font-bold mb-4 text-center text-text-primary">个人书签，上网如此简单！</h2>
@@ -189,11 +168,8 @@
             </div>
         </section>
 
-        <!-- 主内容区 -->
         <main class="flex-1 container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-            <!-- 侧边栏导航 -->
             <aside class="w-full md:w-64 shrink-0">
-                <!-- 修改为使用sidebar类 -->
                 <div class="sidebar p-4">
                     <h3 class="sidebar-title">导航分类</h3>
                     <ul class="space-y-2">
@@ -219,17 +195,14 @@
                 </div>
             </aside>
 
-            <!-- 书签展示区 -->
             <section class="flex-1">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     <div id="linksContainer" class="col-span-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                        <!-- 书签卡片将通过JavaScript动态生成 -->
                     </div>
                 </div>
             </section>
         </main>
 
-        <!-- 页脚 -->
         <footer class="glass-effect py-4 mt-6">
             <div class="container mx-auto px-4 text-center text-white/70 text-sm">
                 <p>© 2023 个人导航页 | <a href="https://beian.miit.gov.cn/" target="_blank" class="underline hover-scale">皖ICP备2023023534号</a></p>
@@ -237,7 +210,6 @@
         </footer>
     </div>
 
-    <!-- 私人区域登录模态框 -->
     <div id="techDigitalLoginContainer" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
             <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">请输入私人区域密码</h2>
@@ -252,7 +224,6 @@
         </div>
     </div>
 
-    <!-- 导入书签模态框 -->
     <div id="importModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
             <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">导入浏览器书签</h2>
@@ -279,7 +250,6 @@
         </div>
     </div>
 
-    <!-- 添加链接模态框 -->
     <div id="addLinkModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
         <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
             <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">添加新链接</h2>
@@ -345,8 +315,28 @@
         </div>
     </div>
 
+    <div id="customBgModal" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 hidden">
+        <div class="glass-effect rounded-xl p-8 w-full max-w-md mx-4 shadow-2xl transform transition-all">
+            <h2 class="text-2xl font-bold mb-6 text-center text-text-primary">自定义背景图片</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block mb-2 text-sm font-medium text-white/80">图片URL</label>
+                    <input type="url" id="customBgUrl" placeholder="输入图片URL地址" class="w-full px-4 py-3 rounded-lg bg-white/20 border border-white/30 focus:outline-none focus:ring-2 focus:ring-primary/50 text-white hover-scale">
+                </div>
+                <div class="flex gap-3">
+                    <button onclick="addCustomBackground()" class="btn-primary flex-1 hover-glow">添加</button>
+                    <button onclick="closeCustomBgModal()" class="btn-secondary flex-1 hover-glow">取消</button>
+                </div>
+                <div id="customBgList" class="mt-4">
+                    <h3 class="text-lg font-semibold mb-2 text-text-primary">已添加的背景</h3>
+                    <div id="bgListContainer" class="space-y-2">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // 配置信息
         const CONFIG = {
             techDigitalPassword: '654321',
             passwordSaveDuration: 7 * 24 * 60 * 60 * 1000,
@@ -357,7 +347,6 @@
             ]
         };
 
-        // 应用状态
         const state = {
             currentBgIndex: 0,
             isOuterNet: true,
@@ -369,7 +358,6 @@
             selectedIconColor: 'fa-blue'
         };
 
-        // DOM元素
         const elements = {
             mainContent: document.getElementById('mainContent'),
             debugWarning: document.getElementById('debugWarning'),
@@ -395,10 +383,12 @@
             selectedIconColor: document.getElementById('selectedIconColor'),
             linkCategory: document.getElementById('linkCategory'),
             iconButtons: document.querySelectorAll('.icon-btn'),
-            iconColorButtons: document.querySelectorAll('.icon-color-btn')
+            iconColorButtons: document.querySelectorAll('.icon-color-btn'),
+            customBgModal: document.getElementById('customBgModal'),
+            customBgUrl: document.getElementById('customBgUrl'),
+            bgListContainer: document.getElementById('bgListContainer')
         };
 
-        // 书签数据
         const linkData = {
             'news-information': [
                 { name: 'MoviePilot', icon: 'fa-film', color: 'fa-blue', outer: 'http://li0580.top:3000', inner: 'http://192.168.2.225:3000' },
@@ -445,18 +435,17 @@
             'imported': state.importedLinks
         };
 
-        // 工具函数
         const utils = {
             saveToLocalStorage(key, value) {
                 try {
-                    localStorage.setItem(key, value);
+                    localStorage.setItem(key, JSON.stringify(value));
                 } catch (e) {
                     console.error('Failed to save to localStorage:', e);
                 }
             },
             getFromLocalStorage(key) {
                 try {
-                    return localStorage.getItem(key);
+                    return JSON.parse(localStorage.getItem(key));
                 } catch (e) {
                     console.error('Failed to get from localStorage:', e);
                     return null;
@@ -480,7 +469,6 @@
                 name.textContent = link.name;
                 name.className = 'text-hover text-text-secondary';
                 
-                // 添加删除按钮
                 const deleteBtn = document.createElement('button');
                 deleteBtn.className = 'absolute top-2 right-2 text-white/60 hover:text-white transition-colors hover-scale';
                 deleteBtn.innerHTML = '<i class="fa fa-times"></i>';
@@ -514,10 +502,43 @@
                 if (hostname.includes('shop')) return 'fa-shopping-cart';
                 if (hostname.includes('news')) return 'fa-newspaper';
                 return 'fa-link';
+            },
+            createBgItem(url, index) {
+                const item = document.createElement('div');
+                item.className = 'flex items-center justify-between p-2 bg-card-bg rounded-lg hover:bg-card-hover transition-colors';
+                
+                const img = document.createElement('img');
+                img.src = url;
+                img.className = 'w-12 h-8 object-cover rounded mr-2';
+                
+                const text = document.createElement('span');
+                text.textContent = `背景 ${index + 1}`;
+                text.className = 'text-text-secondary';
+                
+                const buttons = document.createElement('div');
+                buttons.className = 'flex gap-2';
+                
+                const useBtn = document.createElement('button');
+                useBtn.className = 'text-xs bg-primary/80 hover:bg-primary text-white px-2 py-1 rounded transition-colors';
+                useBtn.textContent = '使用';
+                useBtn.onclick = () => setBackground(index);
+                
+                const deleteBtn = document.createElement('button');
+                deleteBtn.className = 'text-xs bg-red-500/80 hover:bg-red-500 text-white px-2 py-1 rounded transition-colors';
+                deleteBtn.textContent = '删除';
+                deleteBtn.onclick = () => removeBackground(index);
+                
+                buttons.appendChild(useBtn);
+                buttons.appendChild(deleteBtn);
+                
+                item.appendChild(img);
+                item.appendChild(text);
+                item.appendChild(buttons);
+                
+                return item;
             }
         };
 
-        // 获取图标颜色类
         function getIconColorClass(color) {
             const colorMap = {
                 'fa-blue': 'text-blue-400',
@@ -535,375 +556,154 @@
             return colorMap[color] || 'text-primary';
         }
 
-        // 功能模块
-        const modules = {
-            auth: {
-                checkTechDigitalPassword() {
-                    const password = elements.techDigitalPasswordInput.value;
-                    
-                    if (password === CONFIG.techDigitalPassword) {
-                        elements.techDigitalPasswordError.classList.add('hidden');
-                        elements.techDigitalLoginContainer.classList.add('hidden');
-                        elements.techDigitalPasswordInput.value = '';
-                        state.isTechDigitalAuthenticated = true;
-                        
-                        // 保存认证状态到localStorage
-                        const authExpiry = new Date().getTime() + CONFIG.passwordSaveDuration;
-                        localStorage.setItem('techDigitalAuthenticated', JSON.stringify({
-                            authenticated: true,
-                            expiry: authExpiry
-                        }));
-                        
-                        // 重新加载所有链接并显示私人区域
-                        modules.links.populateLinks();
-                        modules.links.filterLinks('tech-digital');
-                        alert('成功进入私人区域！');
-                    } else {
-                        elements.techDigitalPasswordError.classList.remove('hidden');
-                        elements.techDigitalPasswordInput.classList.add('border-red-500');
-                        setTimeout(() => {
-                            elements.techDigitalPasswordInput.classList.remove('border-red-500');
-                        }, 2000);
-                    }
-                },
-                cancelTechDigitalLogin() {
-                    elements.techDigitalLoginContainer.classList.add('hidden');
-                    elements.techDigitalPasswordInput.value = '';
-                    // 如果取消登录，返回到全部视图
-                    modules.links.filterLinks('all');
-                },
-                checkSavedAuthentication() {
-                    // 检查是否有保存的认证状态
-                    const savedAuth = localStorage.getItem('techDigitalAuthenticated');
-                    if (savedAuth) {
-                        try {
-                            const authData = JSON.parse(savedAuth);
-                            if (authData.authenticated && authData.expiry > new Date().getTime()) {
-                                state.isTechDigitalAuthenticated = true;
-                            } else {
-                                // 认证已过期，删除保存的状态
-                                localStorage.removeItem('techDigitalAuthenticated');
-                            }
-                        } catch (e) {
-                            console.error('Failed to parse authentication data:', e);
-                            localStorage.removeItem('techDigitalAuthenticated');
-                        }
-                    }
-                }
-            },
-            security: {
-                preventDebugging() {
-                    const threshold = 160;
-                    
-                    function detectDebug() {
-                        if (window.outerWidth - window.innerWidth > threshold || 
-                            window.outerHeight - window.innerHeight > threshold) {
-                            elements.debugWarning.classList.remove('hidden');
-                        } else {
-                            elements.debugWarning.classList.add('hidden');
-                        }
-                    }
-                    
-                    window.addEventListener('resize', detectDebug);
-                    setInterval(detectDebug, 1000);
-                    
-                    document.addEventListener('contextmenu', e => e.preventDefault());
-                    
-                    document.addEventListener('keydown', e => {
-                        if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && 
-                            (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
-                            e.preventDefault();
-                            elements.debugWarning.classList.remove('hidden');
-                        }
-                    });
-                }
-            },
-            search: {
-                performSearch() {
-                    const input = elements.searchInput.value.trim();
-                    const engine = elements.searchEngine.value;
-                    
-                    if (input) {
-                        const url = engine + encodeURIComponent(input);
-                        window.open(url, '_blank');
-                    }
-                }
-            },
-            network: {
-                switchToOuterNet() {
-                    if (!state.isOuterNet) {
-                        document.querySelectorAll('.link-card a').forEach(link => {
-                            link.href = link.dataset.outer;
-                        });
-                        state.isOuterNet = true;
-                        elements.outerNetBtn.classList.add('bg-primary');
-                        elements.outerNetBtn.classList.remove('bg-secondary');
-                        elements.innerNetBtn.classList.add('bg-secondary');
-                        elements.innerNetBtn.classList.remove('bg-primary');
-                    }
-                },
-                switchToInnerNet() {
-                    if (state.isOuterNet) {
-                        document.querySelectorAll('.link-card a').forEach(link => {
-                            link.href = link.dataset.inner;
-                        });
-                        state.isOuterNet = false;
-                        elements.outerNetBtn.classList.remove('bg-primary');
-                        elements.outerNetBtn.classList.add('bg-secondary');
-                        elements.innerNetBtn.classList.remove('bg-secondary');
-                        elements.innerNetBtn.classList.add('bg-primary');
-                    }
-                }
-            },
-            links: {
-                populateLinks() {
-                    elements.linksContainer.innerHTML = '';
-                    
-                    for (const category in linkData) {
-                        // 只有认证后才显示tech-digital分类
-                        if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) continue;
-                        
-                        linkData[category].forEach(link => {
-                            const card = utils.createLinkCard(link, category);
-                            elements.linksContainer.appendChild(card);
-                        });
-                    }
-                },
-                filterLinks(category) {
-                    const cards = document.querySelectorAll('.link-card');
-                    
-                    cards.forEach(card => {
-                        if (category === 'all') {
-                            // 如果是全部，隐藏未认证的tech-digital
-                            if (card.classList.contains('tech-digital') && !state.isTechDigitalAuthenticated) {
-                                card.classList.add('hidden');
-                            } else {
-                                card.classList.remove('hidden');
-                            }
-                        } else if (card.classList.contains(category)) {
-                            // 如果是tech-digital但未认证，则隐藏
-                            if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
-                                card.classList.add('hidden');
-                            } else {
-                                card.classList.remove('hidden');
-                            }
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                    
-                    // 高亮当前选中的分类
-                    // 修改为使用sidebar-item-active类
-                    document.querySelectorAll('.sidebar-item').forEach(link => {
-                        link.classList.remove('active');
-                    });
-                    
-                    if (category === 'all') {
-                        document.querySelector('.sidebar-item:first-child').classList.add('active');
-                    } else {
-                        document.querySelector(`.sidebar-item[onclick="filterLinks('${category}')"]`).classList.add('active');
-                    }
-                }
-            },
-            background: {
-                changeBackground() {
-                    // 修复更换背景问题：确保有自定义背景
-                    if (state.customBgUrls.length === 0) {
-                        state.customBgUrls = CONFIG.defaultBackgrounds;
-                    }
-                    
-                    // 修复更换背景问题：正确循环背景
-                    state.currentBgIndex = (state.currentBgIndex + 1) % state.customBgUrls.length;
-                    
-                    // 修复更换背景问题：应用新背景
-                    document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
-                    
-                    // 保存背景设置
-                    utils.saveToLocalStorage('customBgUrls', JSON.stringify(state.customBgUrls));
-                },
-                initBackground() {
-                    if (state.customBgUrls.length > 0) {
-                        state.currentBgIndex = Math.floor(Math.random() * state.customBgUrls.length);
-                        document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
-                    }
-                }
-            },
-            import: {
-                openImportModal() {
-                    elements.importModal.classList.remove('hidden');
-                },
-                closeImportModal() {
-                    elements.importModal.classList.add('hidden');
-                    elements.importStatus.classList.add('hidden');
-                    elements.fileInput.value = '';
-                },
-                handleFileSelect(event) {
-                    const file = event.target.files[0];
-                    if (!file) return;
-                    
-                    elements.importStatus.classList.remove('hidden');
-                    elements.importMessage.textContent = '正在解析书签文件...';
-                    
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        try {
-                            const content = e.target.result;
-                            const links = modules.import.parseBookmarks(content);
-                            
-                            elements.importMessage.textContent = '正在导入书签...';
-                            elements.importProgress.style.width = '50%';
-                            
-                            setTimeout(() => {
-                                modules.import.processImportedLinks(links);
-                                elements.importProgress.style.width = '100%';
-                                elements.importMessage.textContent = `成功导入 ${links.length} 个书签！`;
-                                
-                                setTimeout(() => {
-                                    modules.import.closeImportModal();
-                                    modules.links.populateLinks();
-                                    modules.links.filterLinks('imported');
-                                    alert(`成功导入 ${links.length} 个书签！`);
-                                }, 1000);
-                            }, 1000);
-                        } catch (error) {
-                            console.error('Error parsing bookmarks:', error);
-                            elements.importMessage.textContent = '解析书签文件失败，请检查文件格式！';
-                            elements.importProgress.style.width = '0%';
-                            elements.importProgress.classList.add('bg-red-500');
-                            
-                            setTimeout(() => {
-                                elements.importProgress.classList.remove('bg-red-500');
-                                modules.import.closeImportModal();
-                            }, 2000);
-                        }
-                    };
-                    
-                    reader.readAsText(file);
-                },
-                parseBookmarks(content) {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(content, 'text/html');
-                    const links = [];
-                    
-                    // 处理标准的Chrome/Firefox书签导出格式
-                    const linkElements = doc.querySelectorAll('a');
-                    linkElements.forEach((a, index) => {
-                        const href = a.getAttribute('href');
-                        const name = a.textContent.trim() || `书签 ${index + 1}`;
-                        
-                        if (href) {
-                            links.push({
-                                name: name,
-                                href: href,
-                                icon: utils.detectLinkIcon(href),
-                                color: 'fa-blue', // 默认蓝色图标
-                                outer: href,
-                                inner: href
-                            });
-                        }
-                    });
-                    
-                    return links;
-                },
-                processImportedLinks(links) {
-                    state.importedLinks = links;
-                    linkData.imported = links;
-                    utils.saveToLocalStorage('importedLinks', JSON.stringify(links));
-                }
-            },
-            linksManagement: {
-                addLink(name, outerUrl, innerUrl, icon, color, category) {
-                    // 检查是否已存在同名链接
-                    for (const cat in linkData) {
-                        const existingLink = linkData[cat].find(link => link.name === name);
-                        if (existingLink) {
-                            return false;
-                        }
-                    }
-                    
-                    // 添加新链接
-                    const newLink = {
-                        name,
-                        outer: outerUrl,
-                        inner: innerUrl || outerUrl,
-                        icon,
-                        color
-                    };
-                    
-                    linkData[category].push(newLink);
-                    
-                    // 保存到localStorage
-                    if (category === 'imported') {
-                        state.importedLinks = linkData.imported;
-                        utils.saveToLocalStorage('importedLinks', JSON.stringify(state.importedLinks));
-                    } else {
-                        // 对于其他分类，我们也保存到localStorage
-                        utils.saveToLocalStorage('customLinks', JSON.stringify(linkData));
-                    }
-                    
-                    return true;
-                },
-                deleteLink(link, category) {
-                    // 从数组中删除链接
-                    linkData[category] = linkData[category].filter(item => item.name !== link.name);
-                    
-                    // 更新localStorage
-                    if (category === 'imported') {
-                        state.importedLinks = linkData.imported;
-                        utils.saveToLocalStorage('importedLinks', JSON.stringify(state.importedLinks));
-                    } else {
-                        utils.saveToLocalStorage('customLinks', JSON.stringify(linkData));
-                    }
-                    
-                    // 重新渲染链接
-                    modules.links.populateLinks();
-                    
-                    return true;
-                }
-            }
-        };
-
-        // 全局函数 - 暴露给HTML的事件处理
         function search() {
-            modules.search.performSearch();
-        }
-        
-        function filterLinks(category) {
-            modules.links.filterLinks(category);
-        }
-        
-        function changeBackground() {
-            modules.background.changeBackground();
-        }
-        
-        function openImportModal() {
-            modules.import.openImportModal();
-        }
-        
-        function closeImportModal() {
-            modules.import.closeImportModal();
-        }
-        
-        function openTechDigitalLogin() {
-            if (!state.isTechDigitalAuthenticated) {
-                elements.techDigitalLoginContainer.classList.remove('hidden');
-            } else {
-                // 如果已认证，直接显示私人区域
-                modules.links.filterLinks('tech-digital');
+            const input = elements.searchInput.value.trim();
+            const engine = elements.searchEngine.value;
+            
+            if (input) {
+                const url = engine + encodeURIComponent(input);
+                window.open(url, '_blank');
             }
         }
-        
+
+        function openTechDigitalLogin() {
+            if (state.isTechDigitalAuthenticated) {
+                filterLinks('tech-digital');
+            } else {
+                elements.techDigitalLoginContainer.classList.remove('hidden');
+            }
+        }
+
         function checkTechDigitalPassword() {
-            modules.auth.checkTechDigitalPassword();
+            const password = elements.techDigitalPasswordInput.value;
+            
+            if (password === CONFIG.techDigitalPassword) {
+                elements.techDigitalPasswordError.classList.add('hidden');
+                elements.techDigitalLoginContainer.classList.add('hidden');
+                elements.techDigitalPasswordInput.value = '';
+                state.isTechDigitalAuthenticated = true;
+                
+                const authExpiry = new Date().getTime() + CONFIG.passwordSaveDuration;
+                localStorage.setItem('techDigitalAuthenticated', JSON.stringify({
+                    authenticated: true,
+                    expiry: authExpiry
+                }));
+                
+                populateLinks();
+                filterLinks('tech-digital');
+                alert('成功进入私人区域！');
+            } else {
+                elements.techDigitalPasswordError.classList.remove('hidden');
+                elements.techDigitalPasswordInput.classList.add('border-red-500');
+                setTimeout(() => {
+                    elements.techDigitalPasswordInput.classList.remove('border-red-500');
+                }, 2000);
+            }
         }
-        
+
         function cancelTechDigitalLogin() {
-            modules.auth.cancelTechDigitalLogin();
+            elements.techDigitalLoginContainer.classList.add('hidden');
+            elements.techDigitalPasswordInput.value = '';
+            filterLinks('all');
         }
-        
-        // 新增函数
+
+        function changeBackground() {
+            if (state.customBgUrls.length === 0) {
+                state.customBgUrls = CONFIG.defaultBackgrounds;
+            }
+            
+            state.currentBgIndex = (state.currentBgIndex + 1) % state.customBgUrls.length;
+            document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
+            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
+        }
+
+        function openImportModal() {
+            elements.importModal.classList.remove('hidden');
+        }
+
+        function closeImportModal() {
+            elements.importModal.classList.add('hidden');
+            elements.importStatus.classList.add('hidden');
+            elements.fileInput.value = '';
+        }
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            elements.importStatus.classList.remove('hidden');
+            elements.importMessage.textContent = '正在解析书签文件...';
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const content = e.target.result;
+                    const links = parseBookmarks(content);
+                    
+                    elements.importMessage.textContent = '正在导入书签...';
+                    elements.importProgress.style.width = '50%';
+                    
+                    setTimeout(() => {
+                        processImportedLinks(links);
+                        elements.importProgress.style.width = '100%';
+                        elements.importMessage.textContent = `成功导入 ${links.length} 个书签！`;
+                        
+                        setTimeout(() => {
+                            closeImportModal();
+                            populateLinks();
+                            filterLinks('imported');
+                            alert(`成功导入 ${links.length} 个书签！`);
+                        }, 1000);
+                    }, 1000);
+                } catch (error) {
+                    console.error('Error parsing bookmarks:', error);
+                    elements.importMessage.textContent = '解析书签文件失败，请检查文件格式！';
+                    elements.importProgress.style.width = '0%';
+                    elements.importProgress.classList.add('bg-red-500');
+                    
+                    setTimeout(() => {
+                        elements.importProgress.classList.remove('bg-red-500');
+                        closeImportModal();
+                    }, 2000);
+                }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        function parseBookmarks(content) {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(content, 'text/html');
+            const links = [];
+            
+            const linkElements = doc.querySelectorAll('a');
+            linkElements.forEach((a, index) => {
+                const href = a.getAttribute('href');
+                const name = a.textContent.trim() || `书签 ${index + 1}`;
+                
+                if (href) {
+                    links.push({
+                        name: name,
+                        href: href,
+                        icon: utils.detectLinkIcon(href),
+                        color: 'fa-blue',
+                        outer: href,
+                        inner: href
+                    });
+                }
+            });
+            
+            return links;
+        }
+
+        function processImportedLinks(links) {
+            state.importedLinks = links;
+            linkData.imported = links;
+            utils.saveToLocalStorage('importedLinks', links);
+        }
+
         function openAddLinkModal() {
-            // 重置表单
+            elements.addLinkModal.classList.remove('hidden');
             elements.linkName.value = '';
             elements.outerUrl.value = '';
             elements.innerUrl.value = '';
@@ -911,52 +711,17 @@
             elements.selectedIconColor.value = 'fa-blue';
             elements.linkCategory.value = 'news-information';
             
-            // 重置图标按钮样式
-            elements.iconButtons.forEach(btn => {
-                btn.classList.remove('bg-primary/50');
-            });
+            elements.iconButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-primary'));
+            elements.iconColorButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-white'));
             
-            // 重置图标颜色按钮样式
-            elements.iconColorButtons.forEach(btn => {
-                btn.classList.remove('ring-2', 'ring-white');
-            });
-            
-            // 显示模态框
-            elements.addLinkModal.classList.remove('hidden');
+            elements.iconButtons[0].classList.add('ring-2', 'ring-primary');
+            elements.iconColorButtons[0].classList.add('ring-2', 'ring-white');
         }
-        
+
         function closeAddLinkModal() {
             elements.addLinkModal.classList.add('hidden');
         }
-        
-        function selectIcon(icon) {
-            state.selectedIcon = icon;
-            elements.selectedIcon.value = icon;
-            
-            // 更新图标按钮样式
-            elements.iconButtons.forEach(btn => {
-                if (btn.dataset.icon === icon) {
-                    btn.classList.add('bg-primary/50');
-                } else {
-                    btn.classList.remove('bg-primary/50');
-                }
-            });
-        }
-        
-        function selectIconColor(color) {
-            state.selectedIconColor = color;
-            elements.selectedIconColor.value = color;
-            
-            // 更新图标颜色按钮样式
-            elements.iconColorButtons.forEach(btn => {
-                if (btn.dataset.color === color) {
-                    btn.classList.add('ring-2', 'ring-white');
-                } else {
-                    btn.classList.remove('ring-2', 'ring-white');
-                }
-            });
-        }
-        
+
         function addNewLink() {
             const name = elements.linkName.value.trim();
             const outerUrl = elements.outerUrl.value.trim();
@@ -965,137 +730,255 @@
             const color = elements.selectedIconColor.value;
             const category = elements.linkCategory.value;
             
-            // 验证
-            if (!name) {
-                alert('请输入链接名称');
+            if (!name || !outerUrl) {
+                alert('请输入链接名称和外网地址');
                 return;
             }
             
-            if (!outerUrl) {
-                alert('请输入外网地址');
+            try {
+                new URL(outerUrl);
+                if (innerUrl && innerUrl !== outerUrl) {
+                    new URL(innerUrl);
+                }
+            } catch (e) {
+                alert('请输入有效的URL地址');
                 return;
             }
             
-            // 尝试添加链接
-            const success = modules.linksManagement.addLink(name, outerUrl, innerUrl, icon, color, category);
-            
-            if (success) {
-                // 关闭模态框
-                closeAddLinkModal();
-                
-                // 刷新链接显示
-                modules.links.populateLinks();
-                
-                // 切换到添加的链接所在分类
-                modules.links.filterLinks(category);
-                
-                alert(`成功添加链接 "${name}"`);
-            } else {
-                alert(`已存在同名链接 "${name}"`);
+            for (const cat in linkData) {
+                const existingLink = linkData[cat].find(link => link.name === name);
+                if (existingLink) {
+                    if (confirm(`已存在名为 "${name}" 的链接，是否覆盖？`)) {
+                        linkData[cat] = linkData[cat].filter(link => link.name !== name);
+                        break;
+                    } else {
+                        return;
+                    }
+                }
             }
+            
+            const newLink = { name, outer: outerUrl, inner: innerUrl, icon, color };
+            linkData[category].push(newLink);
+            utils.saveToLocalStorage('linkData', linkData);
+            
+            closeAddLinkModal();
+            populateLinks();
+            filterLinks(category);
+            alert('链接添加成功！');
         }
-        
+
         function deleteLink(link, category) {
-            // 检查是否需要权限
-            if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
-                alert('需要先登录私人区域才能删除此分类中的链接');
-                openTechDigitalLogin();
-                return;
-            }
+            linkData[category] = linkData[category].filter(item => item.name !== link.name);
+            utils.saveToLocalStorage('linkData', linkData);
+            populateLinks();
+        }
+
+        function populateLinks() {
+            elements.linksContainer.innerHTML = '';
             
-            // 执行删除
-            const success = modules.linksManagement.deleteLink(link, category);
-            
-            if (success) {
-                alert(`成功删除链接 "${link.name}"`);
-            } else {
-                alert(`删除链接失败`);
+            for (const category in linkData) {
+                if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) continue;
+                
+                linkData[category].forEach(link => {
+                    const card = utils.createLinkCard(link, category);
+                    elements.linksContainer.appendChild(card);
+                });
             }
         }
 
-        // 事件监听
-        function setupEventListeners() {
-            elements.searchInput.addEventListener('keydown', e => {
-                if (e.key === 'Enter') {
-                    modules.search.performSearch();
+        function filterLinks(category) {
+            const cards = document.querySelectorAll('.link-card');
+            
+            cards.forEach(card => {
+                if (category === 'all') {
+                    if (card.classList.contains('tech-digital') && !state.isTechDigitalAuthenticated) {
+                        card.classList.add('hidden');
+                    } else {
+                        card.classList.remove('hidden');
+                    }
+                } else if (card.classList.contains(category)) {
+                    if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
+                        card.classList.add('hidden');
+                    } else {
+                        card.classList.remove('hidden');
+                    }
+                } else {
+                    card.classList.add('hidden');
                 }
             });
             
-            elements.outerNetBtn.addEventListener('click', modules.network.switchToOuterNet);
-            elements.innerNetBtn.addEventListener('click', modules.network.switchToInnerNet);
-            
-            elements.dropArea.addEventListener('dragover', e => {
-                e.preventDefault();
-                elements.dropArea.classList.add('border-primary');
+            document.querySelectorAll('.sidebar-item').forEach(link => {
+                link.classList.remove('active');
             });
             
-            elements.dropArea.addEventListener('dragleave', () => {
-                elements.dropArea.classList.remove('border-primary');
-            });
-            
-            elements.dropArea.addEventListener('drop', e => {
-                e.preventDefault();
-                elements.dropArea.classList.remove('border-primary');
-                
-                if (e.dataTransfer.files.length) {
-                    elements.fileInput.files = e.dataTransfer.files;
-                    modules.import.handleFileSelect({ target: elements.fileInput });
-                }
-            });
-            
-            elements.fileInput.addEventListener('change', modules.import.handleFileSelect);
-            
-            // 图标选择事件
-            elements.iconButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    selectIcon(btn.dataset.icon);
+            if (category === 'all') {
+                document.querySelector('.sidebar-item:first-child').classList.add('active');
+            } else {
+                document.querySelector(`.sidebar-item[onclick="filterLinks('${category}')"]`).classList.add('active');
+            }
+        }
+
+        function switchToOuterNet() {
+            if (!state.isOuterNet) {
+                document.querySelectorAll('.link-card a').forEach(link => {
+                    link.href = link.dataset.outer;
                 });
-            });
-            
-            // 图标颜色选择事件
-            elements.iconColorButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    selectIconColor(btn.dataset.color);
+                state.isOuterNet = true;
+                elements.outerNetBtn.classList.add('bg-primary');
+                elements.outerNetBtn.classList.remove('bg-secondary');
+                elements.innerNetBtn.classList.add('bg-secondary');
+                elements.innerNetBtn.classList.remove('bg-primary');
+            }
+        }
+
+        function switchToInnerNet() {
+            if (state.isOuterNet) {
+                document.querySelectorAll('.link-card a').forEach(link => {
+                    link.href = link.dataset.inner;
                 });
+                state.isOuterNet = false;
+                elements.outerNetBtn.classList.remove('bg-primary');
+                elements.outerNetBtn.classList.add('bg-secondary');
+                elements.innerNetBtn.classList.remove('bg-secondary');
+                elements.innerNetBtn.classList.add('bg-primary');
+            }
+        }
+
+        function openCustomBgModal() {
+            elements.customBgModal.classList.remove('hidden');
+            updateBgList();
+        }
+
+        function closeCustomBgModal() {
+            elements.customBgModal.classList.add('hidden');
+        }
+
+        function addCustomBackground() {
+            const url = elements.customBgUrl.value.trim();
+            if (!url) {
+                alert('请输入有效的图片URL');
+                return false;
+            }
+            
+            if (state.customBgUrls.includes(url)) {
+                alert('该背景已存在');
+                return false;
+            }
+            
+            state.customBgUrls.push(url);
+            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
+            updateBgList();
+            
+            state.currentBgIndex = state.customBgUrls.length - 1;
+            document.body.style.backgroundImage = `url('${url}')`;
+            
+            elements.customBgUrl.value = '';
+            alert('背景添加成功！');
+            return true;
+        }
+
+        function setBackground(index) {
+            state.currentBgIndex = index;
+            document.body.style.backgroundImage = `url('${state.customBgUrls[index]}')`;
+            closeCustomBgModal();
+        }
+
+        function removeBackground(index) {
+            if (state.customBgUrls.length <= 1) {
+                alert('至少保留一个背景');
+                return;
+            }
+            
+            state.customBgUrls.splice(index, 1);
+            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
+            updateBgList();
+            
+            if (index === state.currentBgIndex) {
+                state.currentBgIndex = 0;
+                document.body.style.backgroundImage = `url('${state.customBgUrls[0]}')`;
+            } else if (index < state.currentBgIndex) {
+                state.currentBgIndex--;
+            }
+        }
+
+        function updateBgList() {
+            elements.bgListContainer.innerHTML = '';
+            
+            state.customBgUrls.forEach((url, index) => {
+                const item = utils.createBgItem(url, index);
+                elements.bgListContainer.appendChild(item);
             });
-            
-            // 初始化图标选择
-            selectIcon('fa-link');
-            selectIconColor('fa-blue');
-            
-            // 加载本地存储的自定义链接
-            const savedCustomLinks = localStorage.getItem('customLinks');
-            if (savedCustomLinks) {
+        }
+
+        elements.iconButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                elements.iconButtons.forEach(b => b.classList.remove('ring-2', 'ring-primary'));
+                this.classList.add('ring-2', 'ring-primary');
+                elements.selectedIcon.value = this.dataset.icon;
+            });
+        });
+
+        elements.iconColorButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                elements.iconColorButtons.forEach(b => b.classList.remove('ring-2', 'ring-white'));
+                this.classList.add('ring-2', 'ring-white');
+                elements.selectedIconColor.value = this.dataset.color;
+            });
+        });
+
+        function checkSavedAuthentication() {
+            const savedAuth = localStorage.getItem('techDigitalAuthenticated');
+            if (savedAuth) {
                 try {
-                    const customLinks = JSON.parse(savedCustomLinks);
-                    for (const category in customLinks) {
-                        if (category !== 'imported' && Array.isArray(customLinks[category])) {
-                            linkData[category] = customLinks[category];
-                        }
+                    const authData = JSON.parse(savedAuth);
+                    if (authData.authenticated && authData.expiry > new Date().getTime()) {
+                        state.isTechDigitalAuthenticated = true;
+                    } else {
+                        localStorage.removeItem('techDigitalAuthenticated');
                     }
                 } catch (e) {
-                    console.error('Failed to parse custom links:', e);
+                    console.error('Failed to parse authentication data:', e);
+                    localStorage.removeItem('techDigitalAuthenticated');
                 }
             }
         }
 
-        // 初始化
-        function init() {
-            modules.security.preventDebugging();
-            modules.background.initBackground();
+        function preventDebugging() {
+            const threshold = 160;
             
-            // 检查是否有保存的认证状态
-            modules.auth.checkSavedAuthentication();
+            function detectDebug() {
+                if (window.outerWidth - window.innerWidth > threshold || 
+                    window.outerHeight - window.innerHeight > threshold) {
+                    elements.debugWarning.classList.remove('hidden');
+                } else {
+                    elements.debugWarning.classList.add('hidden');
+                }
+            }
             
-            modules.links.populateLinks();
-            setupEventListeners();
+            window.addEventListener('resize', detectDebug);
+            setInterval(detectDebug, 1000);
             
-            // 默认显示全部书签
-            modules.links.filterLinks('all');
+            document.addEventListener('contextmenu', e => e.preventDefault());
+            
+            document.addEventListener('keydown', e => {
+                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && 
+                    (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
+                    e.preventDefault();
+                    elements.debugWarning.classList.remove('hidden');
+                }
+            });
         }
 
-        // 页面加载完成后初始化
-        document.addEventListener('DOMContentLoaded', init);
+        function initApp() {
+            preventDebugging();
+            checkSavedAuthentication();
+            populateLinks();
+            filterLinks('all');
+            modules.background.initBackground();
+        }
+
+        document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-</html></
+</html>
+    
