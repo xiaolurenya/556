@@ -615,6 +615,7 @@
             state.currentBgIndex = (state.currentBgIndex + 1) % state.customBgUrls.length;
             document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
             utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
+            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
         }
 
         function openImportModal() {
@@ -715,6 +716,7 @@
             elements.iconColorButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-white'));
             
             elements.iconButtons[0].classList.add('ring-2', 'ring-primary');
+            elements.iconColorButtons[0].classList
             elements.iconColorButtons[0].classList.add('ring-2', 'ring-white');
         }
 
@@ -879,6 +881,7 @@
             
             state.currentBgIndex = state.customBgUrls.length - 1;
             document.body.style.backgroundImage = `url('${url}')`;
+            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
             
             elements.customBgUrl.value = '';
             alert('背景添加成功！');
@@ -888,6 +891,7 @@
         function setBackground(index) {
             state.currentBgIndex = index;
             document.body.style.backgroundImage = `url('${state.customBgUrls[index]}')`;
+            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
             closeCustomBgModal();
         }
 
@@ -899,7 +903,6 @@
             
             state.customBgUrls.splice(index, 1);
             utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
-            updateBgList();
             
             if (index === state.currentBgIndex) {
                 state.currentBgIndex = 0;
@@ -907,6 +910,9 @@
             } else if (index < state.currentBgIndex) {
                 state.currentBgIndex--;
             }
+            
+            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
+            updateBgList();
         }
 
         function updateBgList() {
@@ -983,6 +989,10 @@
             populateLinks();
             filterLinks('all');
             // 初始化背景
+            const savedIndex = utils.getFromLocalStorage('currentBgIndex');
+            if (savedIndex !== null && state.customBgUrls.length > savedIndex) {
+                state.currentBgIndex = savedIndex;
+            }
             document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
             // 绑定文件上传事件
             elements.fileInput.addEventListener('change', handleFileSelect);
@@ -994,5 +1004,4 @@
         document.addEventListener('DOMContentLoaded', initApp);
     </script>
 </body>
-</html>
-    
+</html>    
