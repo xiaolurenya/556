@@ -346,40 +346,40 @@
                 'https://picsum.photos/1920/1080?random=2',
                 'https://picsum.photos/1920/1080?random=3',
             ]
+        ;
+
+          = 
+            : ,
+            : ,
+            : .(localStorage('customBgUrls')) || CONFIG.defaultBackgrounds,
+            <: 脚本.>(localStorage.getItem('customBgUrls')) === null,
+        尾风.配置 = {importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
+            主题：{isTechDigitalAuthenticated: false,
+                扩展：{selectedIcon: 'fa-link',
+                    颜色：{selectedIconColor: 'fa-blue'
         };
 
-        const state = {
-            currentBgIndex: 0,
-            isOuterNet: true,
-            customBgUrls: JSON.parse(localStorage.getItem('customBgUrls')) || CONFIG.defaultBackgrounds,
-            isFirstBgChange: JSON.parse(localStorage.getItem('customBgUrls')) === null,
-            importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
-            isTechDigitalAuthenticated: false,
-            selectedIcon: 'fa-link',
-            selectedIconColor: 'fa-blue'
-        };
-
-        const elements = {
-            mainContent: document.getElementById('mainContent'),
-            debugWarning: document.getElementById('debugWarning'),
-            searchInput: document.getElementById('search-input'),
+                         accent  :  '#f97316'  ,const elements = {
+                        暗：'#1e293b'mainContent: document.getElementById('mainContent'),
+                        光：'#f8fafc'debugWarning: document.getElementById('debugWarning'),
+                        'text-primary': '#ffffff'，searchInput: document.getElementById('search-input'),
             searchEngine: document.getElementById('search-engine'),
-            outerNetBtn: document.getElementById('outerNetBtn'),
-            innerNetBtn: document.getElementById('innerNetBtn'),
-            linksContainer: document.getElementById('linksContainer'),
-            techDigitalLoginContainer: document.getElementById('techDigitalLoginContainer'),
-            techDigitalPasswordInput: document.getElementById('techDigitalPasswordInput'),
-            techDigitalPasswordError: document.getElementById('techDigitalPasswordError'),
-            importModal: document.getElementById('importModal'),
-            dropArea: document.getElementById('dropArea'),
-            fileInput: document.getElementById('fileInput'),
-            importStatus: document.getElementById('importStatus'),
-            importProgress: document.getElementById('importProgress').querySelector('div'),
-            importMessage: document.getElementById('importMessage'),
-            addLinkModal: document.getElementById('addLinkModal'),
-            linkName: document.getElementById('linkName'),
-            outerUrl: document.getElementById('outerUrl'),
-            innerUrl: document.getElementById('innerUrl'),
+                        'card-bg'：'rgba(255, 255, 255, 0.1)'outerNetBtn: document.getElementById('outerNetBtn'),
+                        'card-hover'：'rgba(255, 255, 255, 0.2)'innerNetBtn: document.getElementById('innerNetBtn'),
+                        'bg-overlay'：'rgba(0, 0, 0, 0.3)'linksContainer: document.getElementById('linksContainer'),
+                        'bg-blur'：'rgba(255, 255, 255, 0.1)'techDigitalLoginContainer: document.getElementById('techDigitalLoginContainer'),
+                        'icon-primary': '#3b82f6'techDigitalPasswordInput: document.getElementById('techDigitalPasswordInput'),
+                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)'techDigitalPasswordError: document.getElementById('techDigitalPasswordError'),
+                        'sidebar-text': '#94a3b8'importModal: document.getElementById('importModal'),
+                        'sidebar-text-hover': '#e2e8f0'dropArea: document.getElementById('dropArea'),
+                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)'fileInput: document.getElementById('fileInput'),
+                    }importStatus: document.getElementById('importStatus'),
+                    字体家族：{importProgress: document.getElementById('importProgress').querySelector('div'),
+                        inter：['Inter', '无衬线字体']，importMessage: document.getElementById('importMessage'),
+                    }addLinkModal: document.getElementById('addLinkModal'),
+                }linkName: document.getElementById('linkName'),
+            }outerUrl: document.getElementById('outerUrl'),
+        }innerUrl: document.getElementById('innerUrl'),
             selectedIcon: document.getElementById('selectedIcon'),
             selectedIconColor: document.getElementById('selectedIconColor'),
             linkCategory: document.getElementById('linkCategory'),
@@ -396,7 +396,6 @@
                 { name: '飞牛OS', icon: 'fa-desktop', color: 'fa-green', outer: 'http://li0580.top:8000', inner: 'http://192.168.2.225:8000' },
                 { name: 'Alist', icon: 'fa-list', color: 'fa-yellow', outer: 'http://li0580.top:5244', inner: 'http://192.168.2.225:5244' },
                 { name: 'PDF工具箱', icon: 'fa-file-pdf', color: 'fa-red', outer: 'http://li0580.top:3615', inner: 'http://192.168.2.225:3615' },
-                { name: '馒头菠菜', icon: 'fa-file-bocai', color: 'fa-red', outer: 'https://tiyuhao.pages.dev', inner: 'https://tiyuhao.pages.dev' },
                 { name: '金牌影院', icon: 'fa-film', color: 'fa-red', outer: 'https://www.rauljc.com/', inner: 'https://www.rauljc.com/' },
             ],
             'learning-education': [
