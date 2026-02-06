@@ -1,35 +1,35 @@
-
- 
-<头>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人导航页</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <链接 链接="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="样式表">
-    <脚本>
-        尾风.配置 = {
-            主题：{
-                扩展：{
-                    颜色：{
-                        主要：'#2563eb'，
-                        次要的：'#0ea5e9'，
-                         accent  :  '#f97316'  , 
-                        暗：'#1e293b',
-                        光：'#f8fafc'，
-                        'text-primary'：'#ffffff'，
-                        'text-secondary'：'#cbd5e1'，
-                        'card-bg'：'rgba(255, 255, 255, 0.1)'，
-                        'card-hover'：'rgba(255, 255, 255, 0.2)'，
-                        'bg-overlay'：'rgba(0, 0, 0, 0.3)'，
-                        'bg-blur'：'rgba(255, 255, 255, 0.1)'，
-                        'icon-primary'：'#3b82f6'，
-                        'sidebar-bg'：'rgba(30, 41, 59, 0.7)'，
-                        'sidebar-text'：'#94a3b8'，
-                        'sidebar-text-hover'：'#e2e8f0'，
-                        'sidebar-item-active'：'rgba(59, 130, 246, 0.2)'，
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0ea5e9',
+                        accent: '#f97316',
+                        dark: '#1e293b',
+                        light: '#f8fafc',
+                        'text-primary': '#ffffff',
+                        'text-secondary': '#cbd5e1',
+                        'card-bg': 'rgba(255, 255, 255, 0.1)',
+                        'card-hover': 'rgba(255, 255, 255, 0.2)',
+                        'bg-overlay': 'rgba(0, 0, 0, 0.3)',
+                        'bg-blur': 'rgba(255, 255, 255, 0.1)',
+                        'icon-primary': '#3b82f6',
+                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)',
+                        'sidebar-text': '#94a3b8',
+                        'sidebar-text-hover': '#e2e8f0',
+                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)',
                     },
-                    字体家族：{
-                        inter：['Inter'，'无衬线字体']，
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
                     },
                 }
             }
@@ -337,6 +337,7 @@
     </div>
 
     <script>
+        // 配置常量
         const CONFIG = {
             techDigitalPassword: '654321',
             passwordSaveDuration: 7 * 24 * 60 * 60 * 1000,
@@ -346,40 +347,42 @@
                 'https://picsum.photos/1920/1080?random=2',
                 'https://picsum.photos/1920/1080?random=3',
             ]
-        ;
-
-          = 
-            : ,
-            : ,
-            : .(localStorage('customBgUrls')) || CONFIG.defaultBackgrounds,
-            <: 脚本.>(localStorage.getItem('customBgUrls')) === null,
-        尾风.配置 = {importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
-            主题：{isTechDigitalAuthenticated: false,
-                扩展：{selectedIcon: 'fa-link',
-                    颜色：{selectedIconColor: 'fa-blue'
         };
 
-                         accent  :  '#f97316'  ,const elements = {
-                        暗：'#1e293b'mainContent: document.getElementById('mainContent'),
-                        光：'#f8fafc'debugWarning: document.getElementById('debugWarning'),
-                        'text-primary': '#ffffff'，searchInput: document.getElementById('search-input'),
+        // 状态管理
+        const state = {
+            isOuterNet: true,
+            currentBgIndex: 0,
+            bgUrls: JSON.parse(localStorage.getItem('customBgUrls')) || CONFIG.defaultBackgrounds,
+            isFirstLoad: JSON.parse(localStorage.getItem('customBgUrls')) === null,
+            importedLinks: JSON.parse(localStorage.getItem('importedLinks')) || [],
+            isTechDigitalAuthenticated: false,
+            selectedIcon: 'fa-link',
+            selectedIconColor: 'fa-blue'
+        };
+
+        // 元素选择器
+        const elements = {
+            mainContent: document.getElementById('mainContent'),
+            debugWarning: document.getElementById('debugWarning'),
+            searchInput: document.getElementById('search-input'),
             searchEngine: document.getElementById('search-engine'),
-                        'card-bg'：'rgba(255, 255, 255, 0.1)'outerNetBtn: document.getElementById('outerNetBtn'),
-                        'card-hover'：'rgba(255, 255, 255, 0.2)'innerNetBtn: document.getElementById('innerNetBtn'),
-                        'bg-overlay'：'rgba(0, 0, 0, 0.3)'linksContainer: document.getElementById('linksContainer'),
-                        'bg-blur'：'rgba(255, 255, 255, 0.1)'techDigitalLoginContainer: document.getElementById('techDigitalLoginContainer'),
-                        'icon-primary': '#3b82f6'techDigitalPasswordInput: document.getElementById('techDigitalPasswordInput'),
-                        'sidebar-bg': 'rgba(30, 41, 59, 0.7)'techDigitalPasswordError: document.getElementById('techDigitalPasswordError'),
-                        'sidebar-text': '#94a3b8'importModal: document.getElementById('importModal'),
-                        'sidebar-text-hover': '#e2e8f0'dropArea: document.getElementById('dropArea'),
-                        'sidebar-item-active': 'rgba(59, 130, 246, 0.2)'fileInput: document.getElementById('fileInput'),
-                    }importStatus: document.getElementById('importStatus'),
-                    字体家族：{importProgress: document.getElementById('importProgress').querySelector('div'),
-                        inter：['Inter', '无衬线字体']，importMessage: document.getElementById('importMessage'),
-                    }addLinkModal: document.getElementById('addLinkModal'),
-                }linkName: document.getElementById('linkName'),
-            }outerUrl: document.getElementById('outerUrl'),
-        }innerUrl: document.getElementById('innerUrl'),
+            outerNetBtn: document.getElementById('outerNetBtn'),
+            innerNetBtn: document.getElementById('innerNetBtn'),
+            linksContainer: document.getElementById('linksContainer'),
+            techDigitalLoginContainer: document.getElementById('techDigitalLoginContainer'),
+            techDigitalPasswordInput: document.getElementById('techDigitalPasswordInput'),
+            techDigitalPasswordError: document.getElementById('techDigitalPasswordError'),
+            importModal: document.getElementById('importModal'),
+            dropArea: document.getElementById('dropArea'),
+            fileInput: document.getElementById('fileInput'),
+            importStatus: document.getElementById('importStatus'),
+            importProgress: document.getElementById('importProgress').querySelector('div'),
+            importMessage: document.getElementById('importMessage'),
+            addLinkModal: document.getElementById('addLinkModal'),
+            linkName: document.getElementById('linkName'),
+            outerUrl: document.getElementById('outerUrl'),
+            innerUrl: document.getElementById('innerUrl'),
             selectedIcon: document.getElementById('selectedIcon'),
             selectedIconColor: document.getElementById('selectedIconColor'),
             linkCategory: document.getElementById('linkCategory'),
@@ -390,6 +393,7 @@
             bgListContainer: document.getElementById('bgListContainer')
         };
 
+        // 书签链接数据
         const linkData = {
             'news-information': [
                 { name: 'MoviePilot', icon: 'fa-film', color: 'fa-blue', outer: 'https://mp.li0580.top:16666', inner: 'http://192.168.2.225:3000' },
@@ -407,12 +411,11 @@
                 { name: '花海IPTV', icon: 'fa-television', color: 'fa-blue', outer: 'http://max.token.iptv.xin:2052/login', inner: 'http://max.token.iptv.xin:2052/login' },
             ],
             'life-service': [
-                { name: 'QB下载器', icon: 'fa-mony-bll', color: 'fa-purple', outer: 'https://qb.li0580.top:16666', inner: 'http://192.168.2.225:8085' },
-                { name: 'MDC别野刮削', icon: 'fa-mony-bil', color: 'fa-purpl', outer: 'https://mdc.li0580.top:16666', inner: 'http://192.168.2.225:3009' },
+                { name: 'QB下载器', icon: 'fa-money-bill', color: 'fa-purple', outer: 'https://qb.li0580.top:16666', inner: 'http://192.168.2.225:8085' },
+                { name: 'MDC别野刮削', icon: 'fa-money-bill', color: 'fa-purple', outer: 'https://mdc.li0580.top:16666', inner: 'http://192.168.2.225:3009' },
                 { name: 'voce.chat', icon: 'fa-plane', color: 'fa-green', outer: 'https://vc.li0580.top:16666', inner: 'http://192.168.2.225:3009' },
                 { name: 'IYUU辅种', icon: 'fa-envelope', color: 'fa-yellow', outer: 'https://iyuu.li0580.top:16666', inner: 'http://192.168.2.225:8780' },
                 { name: '微信通知', icon: 'fa-car', color: 'fa-pink', outer: 'https://wx.li0580.top:16666', inner: 'http://192.168.2.225:3210' }
-                
             ],
             'tech-digital': [
                 { name: 'Luckyweb', icon: 'fa-play', color: 'fa-indigo', outer: 'https://xunilucky.li0580.top:16666/liwenfei', inner: 'http://192.168.2.3:16601/liwenfei/' },
@@ -426,7 +429,7 @@
                 { name: '人人', icon: 'fa-users', color: 'fa-purple', outer: 'https://audiences.me/', inner: 'https://audiences.me/' },
                 { name: '彩虹岛', icon: 'fa-rainbow', color: 'fa-pink', outer: 'https://ptchdbits.co', inner: 'https://ptchdbits.co' },
                 { name: '末日', icon: 'fa-skull', color: 'fa-indigo', outer: 'https://www.agsvpt.com', inner: 'https://www.agsvpt.com' },
-                { name: '海胆', icon: 'fa-sea', color: 'fa-teal', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
+                { name: '海胆', icon: 'fa-water', color: 'fa-teal', outer: 'https://www.haidan.video', inner: 'https://www.haidan.video' },
                 { name: '麒麟', icon: 'fa-star', color: 'fa-amber', outer: 'https://www.hdkyl.in/', inner: 'https://www.hdkyl.in/' },
                 { name: '聆音', icon: 'fa-music', color: 'fa-blue', outer: 'https://pt.soulvoice.club/', inner: 'https://pt.soulvoice.club/' },
                 { name: '学校', icon: 'fa-school', color: 'fa-green', outer: 'https://pt.btschool.club/', inner: 'https://pt.btschool.club/' },
@@ -438,6 +441,7 @@
             'imported': state.importedLinks
         };
 
+        // 工具函数
         const utils = {
             saveToLocalStorage(key, value) {
                 try {
@@ -461,7 +465,7 @@
                 const anchor = document.createElement('a');
                 anchor.href = state.isOuterNet ? link.outer : link.inner;
                 anchor.target = '_blank';
-                anchor.className = 'flex flex-col items-center justify-center text-center h-full';
+                anchor.className = 'flex flex-col items-center justify-center text-center h-full relative';
                 anchor.dataset.outer = link.outer || link.href;
                 anchor.dataset.inner = link.inner || link.href;
                 
@@ -513,6 +517,9 @@
                 const img = document.createElement('img');
                 img.src = url;
                 img.className = 'w-12 h-8 object-cover rounded mr-2';
+                img.onerror = function() {
+                    this.src = 'https://picsum.photos/120/80?random=' + index;
+                };
                 
                 const text = document.createElement('span');
                 text.textContent = `背景 ${index + 1}`;
@@ -542,6 +549,7 @@
             }
         };
 
+        // 获取图标颜色类名
         function getIconColorClass(color) {
             const colorMap = {
                 'fa-blue': 'text-blue-400',
@@ -559,6 +567,7 @@
             return colorMap[color] || 'text-primary';
         }
 
+        // 搜索功能
         function search() {
             const input = elements.searchInput.value.trim();
             const engine = elements.searchEngine.value;
@@ -569,145 +578,102 @@
             }
         }
 
+        // 打开私人区域登录
         function openTechDigitalLogin() {
             if (state.isTechDigitalAuthenticated) {
                 filterLinks('tech-digital');
             } else {
                 elements.techDigitalLoginContainer.classList.remove('hidden');
+                elements.techDigitalPasswordInput.focus();
             }
         }
 
+        // 检查私人区域密码
         function checkTechDigitalPassword() {
-            const password = elements.techDigitalPasswordInput.value;
-            
+            const password = elements.techDigitalPasswordInput.value.trim();
             if (password === CONFIG.techDigitalPassword) {
-                elements.techDigitalPasswordError.classList.add('hidden');
-                elements.techDigitalLoginContainer.classList.add('hidden');
-                elements.techDigitalPasswordInput.value = '';
                 state.isTechDigitalAuthenticated = true;
-                
-                const authExpiry = new Date().getTime() + CONFIG.passwordSaveDuration;
-                localStorage.setItem('techDigitalAuthenticated', JSON.stringify({
-                    authenticated: true,
-                    expiry: authExpiry
-                }));
-                
-                populateLinks();
+                elements.techDigitalLoginContainer.classList.add('hidden');
+                elements.techDigitalPasswordError.classList.add('hidden');
                 filterLinks('tech-digital');
-                alert('成功进入私人区域！');
+                
+                // 保存登录状态
+                localStorage.setItem('techDigitalAuth', JSON.stringify({
+                    authenticated: true,
+                    expireTime: Date.now() + CONFIG.passwordSaveDuration
+                }));
             } else {
                 elements.techDigitalPasswordError.classList.remove('hidden');
-                elements.techDigitalPasswordInput.classList.add('border-red-500');
-                setTimeout(() => {
-                    elements.techDigitalPasswordInput.classList.remove('border-red-500');
-                }, 2000);
+                elements.techDigitalPasswordInput.focus();
             }
         }
 
+        // 取消私人区域登录
         function cancelTechDigitalLogin() {
             elements.techDigitalLoginContainer.classList.add('hidden');
+            elements.techDigitalPasswordError.classList.add('hidden');
             elements.techDigitalPasswordInput.value = '';
-            filterLinks('all');
         }
 
-        function changeBackground() {
-            if (state.customBgUrls.length === 0) {
-                state.customBgUrls = CONFIG.defaultBackgrounds;
-            }
+        // 过滤链接
+        function filterLinks(category) {
+            elements.linksContainer.innerHTML = '';
             
-            state.currentBgIndex = (state.currentBgIndex + 1) % state.customBgUrls.length;
-            document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
-            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
-            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
+            if (category === 'all') {
+                // 显示所有分类（排除私人区域，除非已认证）
+                Object.keys(linkData).forEach(cat => {
+                    if (cat === 'tech-digital' && !state.isTechDigitalAuthenticated) return;
+                    linkData[cat].forEach(link => {
+                        elements.linksContainer.appendChild(utils.createLinkCard(link, cat));
+                    });
+                });
+            } else if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
+                openTechDigitalLogin();
+            } else {
+                // 显示指定分类
+                linkData[category].forEach(link => {
+                    elements.linksContainer.appendChild(utils.createLinkCard(link, category));
+                });
+            }
         }
 
+        // 切换内外网
+        function toggleNetType(isOuter) {
+            state.isOuterNet = isOuter;
+            elements.outerNetBtn.classList.toggle('btn-primary', isOuter);
+            elements.outerNetBtn.classList.toggle('btn-secondary', !isOuter);
+            elements.innerNetBtn.classList.toggle('btn-secondary', isOuter);
+            elements.innerNetBtn.classList.toggle('btn-primary', !isOuter);
+            
+            // 更新所有链接的地址
+            document.querySelectorAll('.link-card a').forEach(anchor => {
+                anchor.href = isOuter ? anchor.dataset.outer : anchor.dataset.inner;
+            });
+        }
+
+        // 初始化内外网切换按钮
+        elements.outerNetBtn.addEventListener('click', () => toggleNetType(true));
+        elements.innerNetBtn.addEventListener('click', () => toggleNetType(false));
+
+        // 打开导入书签弹窗
         function openImportModal() {
             elements.importModal.classList.remove('hidden');
         }
 
+        // 关闭导入书签弹窗
         function closeImportModal() {
             elements.importModal.classList.add('hidden');
-            elements.importStatus.classList.add('hidden');
             elements.fileInput.value = '';
+            elements.importStatus.classList.add('hidden');
+            elements.importProgress.style.width = '0%';
         }
 
-        function handleFileSelect(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            elements.importStatus.classList.remove('hidden');
-            elements.importMessage.textContent = '正在解析书签文件...';
-            
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const content = e.target.result;
-                    const links = parseBookmarks(content);
-                    
-                    elements.importMessage.textContent = '正在导入书签...';
-                    elements.importProgress.style.width = '50%';
-                    
-                    setTimeout(() => {
-                        processImportedLinks(links);
-                        elements.importProgress.style.width = '100%';
-                        elements.importMessage.textContent = `成功导入 ${links.length} 个书签！`;
-                        
-                        setTimeout(() => {
-                            closeImportModal();
-                            populateLinks();
-                            filterLinks('imported');
-                            alert(`成功导入 ${links.length} 个书签！`);
-                        }, 1000);
-                    }, 1000);
-                } catch (error) {
-                    console.error('Error parsing bookmarks:', error);
-                    elements.importMessage.textContent = '解析书签文件失败，请检查文件格式！';
-                    elements.importProgress.style.width = '0%';
-                    elements.importProgress.classList.add('bg-red-500');
-                    
-                    setTimeout(() => {
-                        elements.importProgress.classList.remove('bg-red-500');
-                        closeImportModal();
-                    }, 2000);
-                }
-            };
-            
-            reader.readAsText(file);
-        }
-
-        function parseBookmarks(content) {
-            const parser = new DOMParser();
-            const doc = parser.parseFromString(content, 'text/html');
-            const links = [];
-            
-            const linkElements = doc.querySelectorAll('a');
-            linkElements.forEach((a, index) => {
-                const href = a.getAttribute('href');
-                const name = a.textContent.trim() || `书签 ${index + 1}`;
-                
-                if (href) {
-                    links.push({
-                        name: name,
-                        href: href,
-                        icon: utils.detectLinkIcon(href),
-                        color: 'fa-blue',
-                        outer: href,
-                        inner: href
-                    });
-                }
-            });
-            
-            return links;
-        }
-
-        function processImportedLinks(links) {
-            state.importedLinks = links;
-            linkData.imported = links;
-            utils.saveToLocalStorage('importedLinks', links);
-        }
-
+        // 打开添加链接弹窗
         function openAddLinkModal() {
             elements.addLinkModal.classList.remove('hidden');
+            elements.linkName.focus();
+            
+            // 重置表单
             elements.linkName.value = '';
             elements.outerUrl.value = '';
             elements.innerUrl.value = '';
@@ -715,226 +681,153 @@
             elements.selectedIconColor.value = 'fa-blue';
             elements.linkCategory.value = 'news-information';
             
-            elements.iconButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-primary'));
+            // 重置图标和颜色按钮样式
+            elements.iconButtons.forEach(btn => btn.classList.remove('bg-primary/50'));
             elements.iconColorButtons.forEach(btn => btn.classList.remove('ring-2', 'ring-white'));
             
-            elements.iconButtons[0].classList.add('ring-2', 'ring-primary');
-            elements.iconColorButtons[0].classList
-            elements.iconColorButtons[0].classList.add('ring-2', 'ring-white');
+            // 高亮默认选中项
+            Array.from(elements.iconButtons).find(btn => btn.dataset.icon === 'fa-link').classList.add('bg-primary/50');
+            Array.from(elements.iconColorButtons).find(btn => btn.dataset.color === 'fa-blue').classList.add('ring-2', 'ring-white');
         }
 
+        // 关闭添加链接弹窗
         function closeAddLinkModal() {
             elements.addLinkModal.classList.add('hidden');
         }
 
+        // 添加新链接
         function addNewLink() {
             const name = elements.linkName.value.trim();
             const outerUrl = elements.outerUrl.value.trim();
-            const innerUrl = elements.innerUrl.value.trim() || outerUrl;
+            const innerUrl = elements.innerUrl.value.trim();
+            const category = elements.linkCategory.value;
             const icon = elements.selectedIcon.value;
             const color = elements.selectedIconColor.value;
-            const category = elements.linkCategory.value;
             
-            if (!name || !outerUrl) {
-                alert('请输入链接名称和外网地址');
+            if (!name || (!outerUrl && !innerUrl)) {
+                alert('请填写链接名称和至少一个地址');
                 return;
             }
             
-            try {
-                new URL(outerUrl);
-                if (innerUrl && innerUrl !== outerUrl) {
-                    new URL(innerUrl);
-                }
-            } catch (e) {
-                alert('请输入有效的URL地址');
-                return;
-            }
+            const newLink = {
+                name: name,
+                icon: icon,
+                color: color,
+                outer: outerUrl,
+                inner: innerUrl || outerUrl
+            };
             
-            for (const cat in linkData) {
-                const existingLink = linkData[cat].find(link => link.name === name);
-                if (existingLink) {
-                    if (confirm(`已存在名为 "${name}" 的链接，是否覆盖？`)) {
-                        linkData[cat] = linkData[cat].filter(link => link.name !== name);
-                        break;
-                    } else {
-                        return;
-                    }
-                }
-            }
-            
-            const newLink = { name, outer: outerUrl, inner: innerUrl, icon, color };
+            // 添加到对应分类
             linkData[category].push(newLink);
-            utils.saveToLocalStorage('linkData', linkData);
             
-            closeAddLinkModal();
-            populateLinks();
+            // 如果是导入分类，保存到本地存储
+            if (category === 'imported') {
+                state.importedLinks.push(newLink);
+                utils.saveToLocalStorage('importedLinks', state.importedLinks);
+            }
+            
+            // 刷新链接列表
             filterLinks(category);
-            alert('链接添加成功！');
+            closeAddLinkModal();
         }
 
-        function deleteLink(link, category) {
-            linkData[category] = linkData[category].filter(item => item.name !== link.name);
-            utils.saveToLocalStorage('linkData', linkData);
-            populateLinks();
-        }
-
-        function populateLinks() {
-            elements.linksContainer.innerHTML = '';
-            
-            for (const category in linkData) {
-                if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) continue;
-                
-                linkData[category].forEach(link => {
-                    const card = utils.createLinkCard(link, category);
-                    elements.linksContainer.appendChild(card);
-                });
-            }
-        }
-
-        function filterLinks(category) {
-            const cards = document.querySelectorAll('.link-card');
-            
-            cards.forEach(card => {
-                if (category === 'all') {
-                    if (card.classList.contains('tech-digital') && !state.isTechDigitalAuthenticated) {
-                        card.classList.add('hidden');
-                    } else {
-                        card.classList.remove('hidden');
-                    }
-                } else if (card.classList.contains(category)) {
-                    if (category === 'tech-digital' && !state.isTechDigitalAuthenticated) {
-                        card.classList.add('hidden');
-                    } else {
-                        card.classList.remove('hidden');
-                    }
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-            
-            document.querySelectorAll('.sidebar-item').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            if (category === 'all') {
-                document.querySelector('.sidebar-item:first-child').classList.add('active');
-            } else {
-                document.querySelector(`.sidebar-item[onclick="filterLinks('${category}')"]`).classList.add('active');
-            }
-        }
-
-        function switchToOuterNet() {
-            if (!state.isOuterNet) {
-                document.querySelectorAll('.link-card a').forEach(link => {
-                    link.href = link.dataset.outer;
-                });
-                state.isOuterNet = true;
-                elements.outerNetBtn.classList.add('bg-primary');
-                elements.outerNetBtn.classList.remove('bg-secondary');
-                elements.innerNetBtn.classList.add('bg-secondary');
-                elements.innerNetBtn.classList.remove('bg-primary');
-            }
-        }
-
-        function switchToInnerNet() {
-            if (state.isOuterNet) {
-                document.querySelectorAll('.link-card a').forEach(link => {
-                    link.href = link.dataset.inner;
-                });
-                state.isOuterNet = false;
-                elements.outerNetBtn.classList.remove('bg-primary');
-                elements.outerNetBtn.classList.add('bg-secondary');
-                elements.innerNetBtn.classList.remove('bg-secondary');
-                elements.innerNetBtn.classList.add('bg-primary');
-            }
-        }
-
+        // 打开自定义背景弹窗
         function openCustomBgModal() {
             elements.customBgModal.classList.remove('hidden');
-            updateBgList();
+            elements.customBgUrl.focus();
+            renderBgList();
         }
 
+        // 关闭自定义背景弹窗
         function closeCustomBgModal() {
             elements.customBgModal.classList.add('hidden');
+            elements.customBgUrl.value = '';
         }
 
+        // 添加自定义背景
         function addCustomBackground() {
             const url = elements.customBgUrl.value.trim();
             if (!url) {
                 alert('请输入有效的图片URL');
-                return false;
-            }
-            
-            try {
-                // 验证URL格式
-                new URL(url);
-            } catch (error) {
-                alert('请输入有效的图片URL');
-                return false;
-            }
-            
-            if (state.customBgUrls.includes(url)) {
-                alert('该背景已存在');
-                return false;
-            }
-            
-            state.customBgUrls.push(url);
-            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
-            updateBgList();
-            
-            state.currentBgIndex = state.customBgUrls.length - 1;
-            document.body.style.backgroundImage = `url('${url}')`;
-            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
-            
-            elements.customBgUrl.value = '';
-            alert('背景添加成功！');
-            return true;
-        }
-
-        function setBackground(index) {
-            state.currentBgIndex = index;
-            document.body.style.backgroundImage = `url('${state.customBgUrls[index]}')`;
-            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
-            closeCustomBgModal();
-        }
-
-        function removeBackground(index) {
-            if (state.customBgUrls.length <= 1) {
-                alert('至少保留一个背景');
                 return;
             }
             
-            state.customBgUrls.splice(index, 1);
-            utils.saveToLocalStorage('customBgUrls', state.customBgUrls);
+            state.bgUrls.push(url);
+            utils.saveToLocalStorage('customBgUrls', state.bgUrls);
+            renderBgList();
+            elements.customBgUrl.value = '';
+        }
+
+        // 渲染背景列表
+        function renderBgList() {
+            elements.bgListContainer.innerHTML = '';
+            state.bgUrls.forEach((url, index) => {
+                elements.bgListContainer.appendChild(utils.createBgItem(url, index));
+            });
+        }
+
+        // 设置背景
+        function setBackground(index) {
+            if (index >= 0 && index < state.bgUrls.length) {
+                state.currentBgIndex = index;
+                document.body.style.backgroundImage = `url(${state.bgUrls[index]})`;
+                utils.saveToLocalStorage('currentBgIndex', index);
+            }
+        }
+
+        // 更换背景
+        function changeBackground() {
+            let newIndex = (state.currentBgIndex + 1) % state.bgUrls.length;
+            setBackground(newIndex);
+        }
+
+        // 移除背景
+        function removeBackground(index) {
+            if (state.bgUrls.length <= 1) {
+                alert('至少保留一张背景图片');
+                return;
+            }
             
+            state.bgUrls.splice(index, 1);
+            utils.saveToLocalStorage('customBgUrls', state.bgUrls);
+            
+            // 如果删除的是当前使用的背景，切换到第一张
             if (index === state.currentBgIndex) {
-                state.currentBgIndex = 0;
-                document.body.style.backgroundImage = `url('${state.customBgUrls[0]}')`;
+                setBackground(0);
             } else if (index < state.currentBgIndex) {
                 state.currentBgIndex--;
             }
             
-            utils.saveToLocalStorage('currentBgIndex', state.currentBgIndex);
-            updateBgList();
+            renderBgList();
         }
 
-        function updateBgList() {
-            elements.bgListContainer.innerHTML = '';
-            
-            state.customBgUrls.forEach((url, index) => {
-                const item = utils.createBgItem(url, index);
-                elements.bgListContainer.appendChild(item);
-            });
+        // 删除链接
+        function deleteLink(link, category) {
+            const index = linkData[category].findIndex(item => item.name === link.name && item.outer === link.outer);
+            if (index > -1) {
+                linkData[category].splice(index, 1);
+                
+                // 如果是导入分类，同步到本地存储
+                if (category === 'imported') {
+                    state.importedLinks = linkData.imported;
+                    utils.saveToLocalStorage('importedLinks', state.importedLinks);
+                }
+                
+                // 刷新列表
+                filterLinks(category);
+            }
         }
 
+        // 初始化图标选择
         elements.iconButtons.forEach(btn => {
             btn.addEventListener('click', function() {
-                elements.iconButtons.forEach(b => b.classList.remove('ring-2', 'ring-primary'));
-                this.classList.add('ring-2', 'ring-primary');
+                elements.iconButtons.forEach(b => b.classList.remove('bg-primary/50'));
+                this.classList.add('bg-primary/50');
                 elements.selectedIcon.value = this.dataset.icon;
             });
         });
 
+        // 初始化颜色选择
         elements.iconColorButtons.forEach(btn => {
             btn.addEventListener('click', function() {
                 elements.iconColorButtons.forEach(b => b.classList.remove('ring-2', 'ring-white'));
@@ -943,68 +836,133 @@
             });
         });
 
-        function checkSavedAuthentication() {
-            const savedAuth = localStorage.getItem('techDigitalAuthenticated');
-            if (savedAuth) {
+        // 初始化拖放导入
+        elements.dropArea.addEventListener('click', () => elements.fileInput.click());
+        elements.dropArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            elements.dropArea.classList.add('border-primary');
+        });
+        elements.dropArea.addEventListener('dragleave', () => {
+            elements.dropArea.classList.remove('border-primary');
+        });
+        elements.dropArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            elements.dropArea.classList.remove('border-primary');
+            if (e.dataTransfer.files.length) {
+                handleFileUpload(e.dataTransfer.files[0]);
+            }
+        });
+        elements.fileInput.addEventListener('change', () => {
+            if (elements.fileInput.files.length) {
+                handleFileUpload(elements.fileInput.files[0]);
+            }
+        });
+
+        // 处理文件上传
+        function handleFileUpload(file) {
+            if (!file.name.endsWith('.html') && !file.name.endsWith('.htm')) {
+                alert('请上传HTML格式的书签文件');
+                return;
+            }
+            
+            elements.importStatus.classList.remove('hidden');
+            elements.importProgress.style.width = '20%';
+            elements.importMessage.textContent = '正在解析文件...';
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                elements.importProgress.style.width = '50%';
+                elements.importMessage.textContent = '正在提取书签...';
+                
                 try {
-                    const authData = JSON.parse(savedAuth);
-                    if (authData.authenticated && authData.expiry > new Date().getTime()) {
-                        state.isTechDigitalAuthenticated = true;
-                    } else {
-                        localStorage.removeItem('techDigitalAuthenticated');
-                    }
-                } catch (e) {
-                    console.error('Failed to parse authentication data:', e);
-                    localStorage.removeItem('techDigitalAuthenticated');
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(e.target.result, 'text/html');
+                    const links = doc.querySelectorAll('a');
+                    const importedLinks = [];
+                    
+                    links.forEach((link, index) => {
+                        const href = link.getAttribute('href');
+                        const name = link.textContent.trim() || '未命名链接';
+                        
+                        if (href && !href.startsWith('javascript')) {
+                            importedLinks.push({
+                                name: name,
+                                icon: utils.detectLinkIcon(href),
+                                color: 'fa-blue',
+                                outer: href,
+                                inner: href
+                            });
+                            
+                            // 更新进度
+                            const progress = 50 + (index / links.length) * 40;
+                            elements.importProgress.style.width = `${progress}%`;
+                        }
+                    });
+                    
+                    // 添加到导入分类
+                    state.importedLinks = [...state.importedLinks, ...importedLinks];
+                    linkData.imported = state.importedLinks;
+                    utils.saveToLocalStorage('importedLinks', state.importedLinks);
+                    
+                    elements.importProgress.style.width = '100%';
+                    elements.importMessage.textContent = `成功导入 ${importedLinks.length} 个书签`;
+                    
+                    // 3秒后关闭弹窗
+                    setTimeout(() => {
+                        closeImportModal();
+                        filterLinks('imported');
+                    }, 2000);
+                    
+                } catch (error) {
+                    console.error('导入失败:', error);
+                    elements.importMessage.textContent = '导入失败：' + error.message;
                 }
+            };
+            
+            reader.readAsText(file);
+        }
+
+        // 检查登录状态
+        function checkAuthStatus() {
+            const authData = JSON.parse(localStorage.getItem('techDigitalAuth'));
+            if (authData && authData.authenticated && authData.expireTime > Date.now()) {
+                state.isTechDigitalAuthenticated = true;
+            } else {
+                state.isTechDigitalAuthenticated = false;
+                localStorage.removeItem('techDigitalAuth');
             }
         }
 
-        function preventDebugging() {
-            const threshold = 160;
+        // 初始化页面
+        function initPage() {
+            // 检查认证状态
+            checkAuthStatus();
             
-            function detectDebug() {
-                if (window.outerWidth - window.innerWidth > threshold || 
-                    window.outerHeight - window.innerHeight > threshold) {
+            // 设置背景
+            const savedIndex = parseInt(localStorage.getItem('currentBgIndex')) || 0;
+            state.currentBgIndex = savedIndex < state.bgUrls.length ? savedIndex : 0;
+            document.body.style.backgroundImage = `url(${state.bgUrls[state.currentBgIndex]})`;
+            
+            // 初始化显示所有链接
+            filterLinks('all');
+            
+            // 高亮默认图标和颜色按钮
+            Array.from(elements.iconButtons).find(btn => btn.dataset.icon === 'fa-link').classList.add('bg-primary/50');
+            Array.from(elements.iconColorButtons).find(btn => btn.dataset.color === 'fa-blue').classList.add('ring-2', 'ring-white');
+            
+            // 阻止调试
+            window.addEventListener('devtoolschange', function(e) {
+                if (e.detail.open) {
                     elements.debugWarning.classList.remove('hidden');
-                } else {
-                    elements.debugWarning.classList.add('hidden');
-                }
-            }
-            
-            window.addEventListener('resize', detectDebug);
-            setInterval(detectDebug, 1000);
-            
-            document.addEventListener('contextmenu', e => e.preventDefault());
-            
-            document.addEventListener('keydown', e => {
-                if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && 
-                    (e.key === 'I' || e.key === 'J' || e.key === 'C'))) {
-                    e.preventDefault();
-                    elements.debugWarning.classList.remove('hidden');
+                    setTimeout(() => {
+                        elements.debugWarning.classList.add('hidden');
+                    }, 3000);
                 }
             });
         }
 
-        function initApp() {
-            preventDebugging();
-            checkSavedAuthentication();
-            populateLinks();
-            filterLinks('all');
-            // 初始化背景
-            const savedIndex = utils.getFromLocalStorage('currentBgIndex');
-            if (savedIndex !== null && state.customBgUrls.length > savedIndex) {
-                state.currentBgIndex = savedIndex;
-            }
-            document.body.style.backgroundImage = `url('${state.customBgUrls[state.currentBgIndex]}')`;
-            // 绑定文件上传事件
-            elements.fileInput.addEventListener('change', handleFileSelect);
-            // 绑定外网/内网切换事件
-            elements.outerNetBtn.addEventListener('click', switchToOuterNet);
-            elements.innerNetBtn.addEventListener('click', switchToInnerNet);
-        }
-
-        document.addEventListener('DOMContentLoaded', initApp);
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', initPage);
     </script>
 </body>
-</html>    
+</html>
